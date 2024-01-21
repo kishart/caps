@@ -1,13 +1,34 @@
-@extends('layouts.welcome')
+<style>
 
+.container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .column {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+        }
+        img{
+           width: 75%;
+           height: 90%;
+           margin-right: 22%;
+           margin-top: 10%;
+           border-radius: 15px; 
+        }
+</style>
+@extends('layouts.welcome')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <div class="column">
+        <img src="{{ asset('images/Logo.png') }}" alt="logo">
 
-                <div class="card-body">
+    </div>
+
+                <div class="column">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -57,9 +78,6 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 @endsection
