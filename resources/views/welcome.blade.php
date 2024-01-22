@@ -13,10 +13,10 @@
             margin: 10px;
         }
         img{
-           width: 75%;
-           height: 90%;
-           margin-right: 22%;
-           margin-top: 10%;
+           width: 55%;
+           height: 75%;
+           margin-left: 12%;
+           margin-top: 20%;
            border-radius: 15px; 
         }
 </style>
