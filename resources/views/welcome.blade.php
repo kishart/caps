@@ -1,3 +1,7 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+
 <style>
 
 .container {
@@ -23,6 +27,7 @@
             margin-left: 20%;
             padding-top: 15%;
             padding-bottom: 5%;
+            font-family: 'DM Serif Display', serif;
         }
 </style>
 @extends('layouts.welcome')
