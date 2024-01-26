@@ -94,11 +94,6 @@
 </div>
 @endsection
 
-
-
-
-
-
 <!--
 tempo
 <!DOCTYPE html>
@@ -114,19 +109,32 @@ tempo
   <div class="form-box">
   <div class="button-box">
     <div id="btn"></div>
-    <button type="button" class="toggle-btn">Log In</button>
-    <button type="button" class="toggle-btn">Register</button>
+    <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+    <button type="button" class="toggle-btn" onclick="register()">Register</button>
     </div>
    
-    <form class="input-group">
+    <form id="login" class="input-group">
       <input type="text" class="input-field" placeholder="User Id" required>
       <input type="text" class="input-field" placeholder="Enter Password" required>
+ 
       <button type="submit" class="submit-btn">Log In</button>
+         </form>
+    
+     <form id="register" class="input-group">
+      <input type="text" class="input-field" placeholder="User Id" required>
+       <input type="text" class="input-field" placeholder="Email Id" required>
+      <input type="text" class="input-field" placeholder="Enter Password" required>
+       
+ 
+      <button type="submit" class="submit-btn">Log In</button>
+         </form>
     </div>
     
     </div>
 </body>
 </html>
+
+
 
 *{
   margin:0;
@@ -147,6 +155,7 @@ tempo
   margin:6% auto;
   background:#fff;
   padding:5px;
+  overflow:hidden;
 }
 .button-box{
   width:220px;
@@ -173,8 +182,56 @@ tempo
   border-radius: 30px;
   transition: .5s;
 }
+.input-group{
+  top:180px;
+  position:absolute;
+  width:280px;
+  transition: .5s;
+}
+.input-field{
+  width:100%;
+  padding:10px 0;
+  margin:5px 0;
+  border-left:0;
+  border-top:0;
+  border-right:0;
+  border-bottom:1px solid #999;
+  outline:none;
+  background:transparent;
+}
 
-link:https://www.youtube.com/watch?v=L5WWrGMsnpw
-9:22
+.submit-btn{
+  width:85%;
+  padding: 10px 30px;
+  cursor:pointer;
+  display:block;
+  margin:auto;
+  background: linear-gradient(to right, #ff105f, #ffad06);
+  border:0;
+  outline:none;
+  border-radius:30px;  
+}
+
+#login{
+  left:50px;
+}
+#register{
+  left:450px;
+}
+
+var  x = document.getElementById("login");
+var  y = document.getElementById("register");
+var  z = document.getElementById("btn");
+
+function register(){
+  x.style.left = "-400px";
+  y.style.left = "50px";
+  z.style.left="110px";
+}
+function login(){
+  x.style.left = "50px";
+  y.style.left = "450px";
+  z.style.left="0";
+}
 
 -->
