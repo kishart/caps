@@ -23,6 +23,5 @@
 <main class="py-4">
     @yield('content')
 </main>
-    <h1>temporary rani</h1>
 </body>
 </html>
