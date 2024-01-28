@@ -33,9 +33,18 @@
         #login{
   left:50px;
 }
-#register{
-  left:350px;
-  bottom:150px;
+#register {
+    left: 450px;
+    display: none;
+  }
+.form-box{
+   width:380px;
+  height:480px;
+  position:relative;
+  margin:6% auto;
+  background:#fff;
+  padding:5px;
+  overflow:hidden;
 }
 .button-box{
   width:220px;
@@ -44,14 +53,17 @@
   box-shadow:0 0 20px 9px #ff61241f;
   border-radius:30px;
 }
-.toggle-btn{
-  padding:10px 30px;
-  cursor:pointer;
-  background:transparent;
-  border:0;
-  outline:none;
-  position:relative;
-}
+
+
+  .toggle-btn {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    transition: background 0.5s ease; /* Add transition effect */
+  }
 #btn{
   top:0;
   left:0;
@@ -135,6 +147,13 @@
 
                     <form id="register" method="POST" class="input-group" action="{{ route('register') }}">
                         @csrf
+                        <h1>Husnie Photography</h1>
+
+                        <div class="button-box">
+                            <div id="btn"></div>
+                            <button type="button" class="toggle-btn" onclick="login()">Log In</button>
+                            <button type="button" class="toggle-btn" onclick="register()">Register</button>
+                            </div>
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
@@ -212,20 +231,40 @@
 </div>
 
 <script>
-    var  x = document.getElementById("login");
-var  y = document.getElementById("register");
-var  z = document.getElementById("btn");
+  var x = document.getElementById("login");
+  var y = document.getElementById("register");
+  var loginBtn = document.getElementById("login-btn");
+  var registerBtn = document.getElementById("register-btn");
 
-function register(){
-  x.style.left = "-400px";
-  y.style.left = "50px";
-  z.style.left="110px";
-}
-function login(){
-  x.style.left = "50px";
-  y.style.left = "450px";
-  z.style.left="0";
-}
+  function register() {
+    x.style.left = "-400px";
+    y.style.left = "50px";
+
+    // Show the register form
+    y.style.display = "block";
+
+    // Hide the login form
+    x.style.display = "none";
+
+    // Update button styles
+    registerBtn.style.background = "linear-gradient(to right, #ff105f, #ffad06)";
+    loginBtn.style.background = "transparent";
+  }
+
+  function login() {
+    x.style.left = "50px";
+    y.style.left = "450px";
+
+    // Show the login form
+    x.style.display = "block";
+
+    // Hide the register form
+    y.style.display = "none";
+
+    // Update button styles
+    loginBtn.style.background = "linear-gradient(to right, #ff105f, #ffad06)";
+    registerBtn.style.background = "transparent";
+  }
 </script>
 @endsection
 
