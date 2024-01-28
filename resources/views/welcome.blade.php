@@ -34,7 +34,8 @@
   left:50px;
 }
 #register{
-  left:450px;
+  left:350px;
+  bottom:150px;
 }
 .button-box{
   width:220px;
