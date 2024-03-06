@@ -17,7 +17,11 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-
+<style>
+    body{
+        background-color: #E48F45;
+    }
+</style>
 
 <body>
 <main class="py-4">
