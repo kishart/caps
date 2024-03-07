@@ -1,320 +1,245 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
 <style>
-/* Google Font Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins" , sans-serif;
+    
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
+* {
+	box-sizing: border-box;
 }
-body{
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #7d2ae8;
-  padding: 30px;
+
+body {
+	background: #ffcc99;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font-family: 'Montserrat', sans-serif;
+	height: 100vh;
+	margin: -20px 0 50px;
 }
-.container{
-  position: relative;
-  max-width: 850px;
-  width: 100%;
-  background: #fff;
-  padding: 40px 30px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  perspective: 2700px;
+
+h1 {
+	font-weight: bold;
+	margin: 0;
 }
-.container .cover{
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100%;
-  width: 50%;
-  z-index: 98;
-  transition: all 1s ease;
-  transform-origin: left;
-  transform-style: preserve-3d;
+
+h2 {
+    color: #532E1C;
+	text-align: center;
 }
-.container #flip:checked ~ .cover{
-  transform: rotateY(-180deg);
+
+p {
+	font-size: 14px;
+	font-weight: 100;
+	line-height: 20px;
+	letter-spacing: 0.5px;
+	margin: 20px 0 30px;
 }
- .container .cover .front,
- .container .cover .back{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+
+span {
+	font-size: 12px;
 }
-.cover .back{
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
+
+a {
+	color: #333;
+	font-size: 14px;
+	text-decoration: none;
+	margin: 15px 0;
 }
-.container .cover::before,
-.container .cover::after{
-  content: '';
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: #7d2ae8;
-  opacity: 0.5;
-  z-index: 12;
+
+button {
+	border-radius: 20px;
+	border: 1px solid #663300;
+	background-color: #663300;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
 }
-.container .cover::after{
-  opacity: 0.3;
-  transform: rotateY(180deg);
-  backface-visibility: hidden;
+
+button:active {
+	transform: scale(0.95);
 }
-.container .cover img{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  z-index: 10;
+
+button:focus {
+	outline: none;
 }
-.container .cover .text{
-  position: absolute;
-  z-index: 130;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
 }
-.cover .text .text-1,
-.cover .text .text-2{
-  font-size: 26px;
-  font-weight: 600;
-  color: #fff;
-  text-align: center;
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
 }
-.cover .text .text-2{
-  font-size: 15px;
-  font-weight: 500;
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
 }
-.container .forms{
-  height: 100%;
-  width: 100%;
-  background: #fff;
+
+.container {
+	background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+	position: relative;
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
 }
-.container .form-content{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+.form-container {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	transition: all 0.6s ease-in-out;
 }
-.form-content .login-form,
-.form-content .signup-form{
-  width: calc(100% / 2 - 25px);
+
+.sign-in-container {
+	left: 0;
+	width: 50%;
+	z-index: 2;
 }
-.forms .form-content .title{
-  position: relative;
-  font-size: 24px;
-  font-weight: 500;
-  color: #333;
+
+.container.right-panel-active .sign-in-container {
+	transform: translateX(100%);
 }
-.forms .form-content .title:before{
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 25px;
-  background: #7d2ae8;
+
+.sign-up-container {
+	left: 0;
+	width: 50%;
+	opacity: 0;
+	z-index: 1;
 }
-.forms .signup-form  .title:before{
-  width: 20px;
+
+.container.right-panel-active .sign-up-container {
+	transform: translateX(100%);
+	opacity: 1;
+	z-index: 5;
+	animation: show 0.6s;
 }
-.forms .form-content .input-boxes{
-  margin-top: 30px;
+
+@keyframes show {
+	0%, 49.99% {
+		opacity: 0;
+		z-index: 1;
+	}
+	
+	50%, 100% {
+		opacity: 1;
+		z-index: 5;
+	}
 }
-.forms .form-content .input-box{
-  display: flex;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  margin: 10px 0;
-  position: relative;
+
+.overlay-container {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	transition: transform 0.6s ease-in-out;
+	z-index: 100;
 }
-.form-content .input-box input{
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: none;
-  padding: 0 30px;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 2px solid rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
+
+.container.right-panel-active .overlay-container{
+	transform: translateX(-100%);
 }
-.form-content .input-box input:focus,
-.form-content .input-box input:valid{
-  border-color: #7d2ae8;
+
+.overlay {
+	background: #532E1C;
+	background: -webkit-linear-gradient(to right, #532E1C, #C5A880);
+	background: linear-gradient(to right, #532E1C, #C5A880);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	position: relative;
+	left: -100%;
+	height: 100%;
+	width: 200%;
+  	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
 }
-.form-content .input-box i{
-  position: absolute;
-  color: #7d2ae8;
-  font-size: 17px;
+
+.container.right-panel-active .overlay {
+  	transform: translateX(50%);
 }
-.forms .form-content .text{
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+
+.overlay-panel {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	text-align: center;
+	top: 0;
+	height: 100%;
+	width: 50%;
+	transform: translateX(0);
+	transition: transform 0.6s ease-in-out;
 }
-.forms .form-content .text a{
-  text-decoration: none;
+
+.overlay-left {
+	transform: translateX(-20%);
 }
-.forms .form-content .text a:hover{
-  text-decoration: underline;
+
+.container.right-panel-active .overlay-left {
+	transform: translateX(0);
 }
-.forms .form-content .button{
-  color: #fff;
-  margin-top: 40px;
+
+.overlay-right {
+	right: 0;
+	transform: translateX(0);
 }
-.forms .form-content .button input{
-  color: #fff;
-  background: #7d2ae8;
-  border-radius: 6px;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.4s ease;
+
+.container.right-panel-active .overlay-right {
+	transform: translateX(20%);
 }
-.forms .form-content .button input:hover{
-  background: #5b13b9;
-}
-.forms .form-content label{
-  color: #5b13b9;
-  cursor: pointer;
-}
-.forms .form-content label:hover{
-  text-decoration: underline;
-}
-.forms .form-content .login-text,
-.forms .form-content .sign-up-text{
-  text-align: center;
-  margin-top: 25px;
-}
-.container #flip{
-  display: none;
-}
-@media (max-width: 730px) {
-  .container .cover{
-    display: none;
-  }
-  .form-content .login-form,
-  .form-content .signup-form{
-    width: 100%;
-  }
-  .form-content .signup-form{
-    display: none;
-  }
-  .container #flip:checked ~ .forms .signup-form{
-    display: block;
-  }
-  .container #flip:checked ~ .forms .login-form{
-    display: none;
-  }
-}
+
 
 </style>
 
-
-@extends('layouts.welcome')
-@section('content')
-
-<body>
-  <div class="container">
-    <input type="checkbox" id="flip">
-    <div class="cover">
-      <div class="front">
-        <img src="https://i.pinimg.com/564x/17/4c/33/174c33ded3a41c23c144ab0ed1185946.jpg" alt="">
-        <div class="text">
-          <span class="text-1">Every new friend is a <br> new adventure</span>
-          <span class="text-2">Let's get connected</span>
-        </div>
-      </div>
-      <div class="back">
-        <!--<img class="backImg" src="images/backImg.jpg" alt="">-->
-        <div class="text">
-          <span class="text-1">Complete miles of journey <br> with one step</span>
-          <span class="text-2">Let's get started</span>
-        </div>
-      </div>
-    </div>
-    <div class="forms">
-        <div class="form-content">
-          <div class="login-form">
-            <div class="title">Login</div>
-            <form id="login" class="input-group" method="POST" action="{{ route('login') }}">
-                @csrf
-
-                <div class="row mb-3">
-                    <div class="input-box">
-                        <i class="fas fa-envelope"></i>
-                <input id="username" type="username"
-                class="form-control @error('username') is-invalid @enderror @error('email') is-invalid @enderror
-        "
-                name="username" value="{{ old('username') }}" required autocomplete="username"
-                autofocus>
-
-
-            @error('username')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-              </div>
-              
-                <div class="input-box">
-                    <i class="fas fa-lock"></i>
-                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password" required
-                                    autocomplete="current-password">
-
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-              </div>
-
-              <div class="button input-box">
-                <input  type="submit"  value="Sumbit">
-              </div>
-              <div class="text sign-up-text">Don't have an account? <label for="flip">Sigup now</label></div>
-            </div>
-        </form>
-      </div>
-        <div class="signup-form">
-          <div class="title">Signup</div>
-
-
-          <form id="register" class="input-group" method="POST" action="{{ route('register') }}">
+<h2>Husnie Photography</h2>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
-
+            <h1>Create Account</h1>
+			
+			<span>or use your username for registration
+            </span>
             <div class="row mb-3">
-                <div class="input-box">
-                    <i class="fas fa-duotone fa-user"></i>
-                    <input id="name" type="text"
-                        class="form-control @error('name') is-invalid @enderror" name="name"
-                        value="{{ old('name') }}" required autocomplete="name" autofocus>
+                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                     @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -325,11 +250,10 @@ body{
             </div>
 
             <div class="row mb-3">
-                <div class="input-box">
-                    <i class="fas fa-envelope"></i>
-                    <input id="email" type="email"
-                        class="form-control @error('email') is-invalid @enderror" name="email"
-                        value="{{ old('email') }}" required autocomplete="email">
+                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -340,11 +264,10 @@ body{
             </div>
 
             <div class="row mb-3">
-                <div class="input-box">
-                    <i class="fas fa-user"></i>
-                    <input id="username" type="username"
-                        class="form-control @error('username') is-invalid @enderror" name="username"
-                        value="{{ old('username') }}" required autocomplete="username">
+                <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
+
+                <div class="col-md-6">
+                    <input id="username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
 
                     @error('username')
                         <span class="invalid-feedback" role="alert">
@@ -355,11 +278,10 @@ body{
             </div>
 
             <div class="row mb-3">
-                <div class="input-box">
-                    <i class="fas fa-user-lock"></i>
-                    <input id="password" type="password"
-                        class="form-control @error('password') is-invalid @enderror" name="password" required
-                        autocomplete="new-password">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -369,42 +291,95 @@ body{
                 </div>
             </div>
 
-           
+            <div class="row mb-3">
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
-          
+                <div class="col-md-6">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
+            </div>
 
-            <div class="button input-box">
-                <input  type="submit"  value="Sumbit">
-              </div>
-
-              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+            <div class="row mb-0">
+                <div class="col-md-6 offset-md-4">
+                    <button type="submit" class="btn btn-primary">
+                        {{ __('Register') }}
+                    </button>
+                </div>
+            </div>
         </form>
-
-
         
-    </div>
-    </div>
-    </div>
-  </div>
-  @endsection
+	</div>
+	<div class="form-container sign-in-container">
+        <form id="login" class="input-group" method="POST" action="{{ route('login') }}">
+            @csrf
+			<h1>Sign in</h1>
+			
+			<span>or use your account</span>
+            <input id="username" type="username"
+            class="form-control @error('username') is-invalid @enderror @error('email') is-invalid @enderror
+    "
+            name="username" value="{{ old('username') }}" required autocomplete="username"
+            autofocus>
+
+
+        @error('username')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+
+
+        @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+			
+        <input id="password" type="password"
+        class="form-control @error('password') is-invalid @enderror" name="password" required
+        autocomplete="current-password">
+
+
+    @error('password')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+
+			<a href="#">Forgot your password?</a>
+			<button  value="Sumbit">Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>const signUpButton = document.getElementById('signUp');
+    const signInButton = document.getElementById('signIn');
+    const container = document.getElementById('container');
+    
+    signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+    });
+    
+    signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+    });</script>
+
+
+    
 </body>
-
-
-
-    <script>
-       var  x = document.getElementById("login");
-var  y = document.getElementById("register");
-var  z = document.getElementById("btn");
-
-function register(){
-  x.style.left = "-400px";
-  y.style.left = "50px";
-  z.style.left="110px";
-}
-function login(){
-  x.style.left = "50px";
-  y.style.left = "450px";
-  z.style.left="0";
-}
-
-    </script>
+</html>
