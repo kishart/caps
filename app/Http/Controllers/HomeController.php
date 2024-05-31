@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +25,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if(Auth::id()){
+            $usertype = Auth()->user()->usertype;
+            \Log::info('User Type: ' . $usertype); // Log the user type for debugging
+    
+            if($usertype == 'user'){
+                return view('home');
+            }
+            elseif($usertype == 'admin'){
+                return view('admin.ahome');
+            }
+            else{
+                return redirect()->back();
+            }
+        }
+    }
+
+    public function uphotos(){
+        return view('admin.uphotos');
     }
 }
