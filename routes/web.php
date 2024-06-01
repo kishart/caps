@@ -24,3 +24,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('admin/ahome', [HomeController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
 
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
+Route::get('booklist', [HomeController::class, 'booklist'])->middleware('auth', 'admin');
+Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
