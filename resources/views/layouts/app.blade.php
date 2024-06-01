@@ -14,7 +14,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Calendar</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="#">Photos</a></li>
             <li><a href="#">Contact</a></li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -30,7 +30,7 @@ class HomeController extends Controller
             \Log::info('User Type: ' . $usertype); // Log the user type for debugging
     
             if($usertype == 'user'){
-                return view('home');
+                return view('user.home');
             }
             elseif($usertype == 'admin'){
                 return view('admin.ahome');
@@ -51,4 +51,7 @@ class HomeController extends Controller
     public function msg(){
         return view('admin.msg');
     }
+
+
+
 }

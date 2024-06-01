@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
+use App\Http\Controllers\CalendarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +28,6 @@ Route::get('admin/ahome', [HomeController::class, 'adminHome'])->name('admin.aho
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
 Route::get('booklist', [HomeController::class, 'booklist'])->middleware('auth', 'admin');
 Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
+
+
+Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
