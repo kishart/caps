@@ -92,13 +92,27 @@
 
 
     <script>
-        $(document).ready(function() {
-            var booking = @json($events);
+ $(document).ready(function() {
+    var booking = @json($events);
 
-            $('#calendar').fullCalendar({
-                events: booking
-            })
-        });
+    // Convert event dates to include only the date portion
+    booking.forEach(function(event) {
+        event.start = event.start.substr(0, 10); // Assuming start date is in YYYY-MM-DD format
+        event.end = event.end.substr(0, 10); // Assuming end date is in YYYY-MM-DD format
+    });
+
+    $('#calendar').fullCalendar({
+        events: booking,
+        eventRender: function(event, element) {
+            element.css('background-color', 'red'); // Change the background color of the event to red
+            
+        }
+    });
+});
+
+
+
+
     </script>
 
     
