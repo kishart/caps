@@ -36,3 +36,5 @@ Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('aut
 Route::get('admin/calendar',[CalendarController::class,'addBooking']);
 
 Route::post('save-booking',[CalendarController::class,'saveBooking']);
+
+Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');

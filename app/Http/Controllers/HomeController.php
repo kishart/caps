@@ -52,6 +52,9 @@ class HomeController extends Controller
         return view('admin.msg');
     }
 
+    public function adminsidebar(){
+        return view('layouts.adminsidebar');
+    }
 
 
 }

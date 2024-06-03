@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.adminsidebar')
 
+@section('content')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,10 +24,50 @@
 </head>
 
 <body>
+    <h3 class="text-center mt-5"> Husnie Appointment Schedule</h3>
     <div class="container">
+    <div class="input">
+        <form method="post" action="{{url('save-booking')}}">
+            @csrf
+            <div class="md-3">
+                <label class="form-label">Title:</label>
+                <input type="text" class="form-control" name="title" 
+                    value="{{old('title')}}">
+                @error('title')
+                <div class="alert alert-danger" role="alert">
+                    {{($message)}}
+                </div>
+                @enderror
+            </div>
+    
+            <div class="md-3">
+                <label class="form-label">Start Date:</label>
+                <input type="date" class="form-control" name="start_date" 
+                    value="{{old('start_date')}}">
+                @error('start_date')
+                <div class="alert alert-danger" role="alert">
+                    {{($message)}}
+                </div>
+                @enderror
+            </div>
+    
+            <div class="md-3">
+                <label class="form-label">End Date:</label>
+                <input type="date" class="form-control" name="end_date" 
+                    value="{{old('end_date')}}">
+                @error('end_date')
+                <div class="alert alert-danger" role="alert">
+                    {{($message)}}
+                </div>
+                @enderror
+            </div>
+            <br>
+            <button type="submit"class="button-18" role="button">Submit</button>
+        </form>
+    </div>
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center mt-5"> Husnie Appointment Schedule</h3>
+              
                 <div class="col-md-11 offset-1 mt-5 mb-5">
 
                     <div id="calendar">
@@ -38,44 +78,7 @@
         </div>
     </div>
 
-    <form method="post" action="{{url('save-booking')}}">
-        @csrf
-        <div class="md-3">
-            <label class="form-label">Title:</label>
-            <input type="text" class="form-control" name="title" 
-                value="{{old('title')}}">
-            @error('title')
-            <div class="alert alert-danger" role="alert">
-                {{($message)}}
-            </div>
-            @enderror
-        </div>
-
-        <div class="md-3">
-            <label class="form-label">Start Date:</label>
-            <input type="date" class="form-control" name="start_date" 
-                value="{{old('start_date')}}">
-            @error('start_date')
-            <div class="alert alert-danger" role="alert">
-                {{($message)}}
-            </div>
-            @enderror
-        </div>
-
-        <div class="md-3">
-            <label class="form-label">End Date:</label>
-            <input type="date" class="form-control" name="end_date" 
-                value="{{old('end_date')}}">
-            @error('end_date')
-            <div class="alert alert-danger" role="alert">
-                {{($message)}}
-            </div>
-            @enderror
-        </div>
-        <br>
-        <button type="submit"class="button-28" role="button">Submit</button>
-    </form>
-
+   
     <script>
         $(document).ready(function() {
             var booking = @json($events);
@@ -96,11 +99,12 @@
                     header.text('Weekdays');
                 },
                 eventRender: function(event, element) {
-                    element.css('background-color', '#AC6F53'); // Change the background color of the event to red
+                    element.css('background-color', '#826C5F'); // Change the background color of the event to red
                 }
             });
         });
     </script>
 </body>
 
-</html>
+
+@endsection
