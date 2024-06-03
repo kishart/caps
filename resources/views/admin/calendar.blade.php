@@ -38,6 +38,59 @@
         </div>
     </div>
 
+
+
+
+      <form method="post" action="{{url('save-booking')}}">
+                    @csrf
+                    <div class="md-3">
+                        <label class="form-label">Title:</label>
+                        <input type="text" class="form-control" name="title" 
+                        value="{{old('title')}}">
+                        @error('title')
+                        <div class="alert alert-danger" role="alert">
+                            {{($message)}}
+                        </div>
+                        @enderror
+                        
+                    </div>
+
+                    <div class="md-3">
+                        <label class="form-label">Start Date:</label>
+                        <input type="date" class="form-control" name="start_date" 
+                        value="{{old('start_date')}}">
+                        @error('start_date')
+                        <div class="alert alert-danger" role="alert">
+                            {{($message)}}
+                        </div>
+                        @enderror
+                        
+                    </div>
+
+                    <div class="md-3">
+                        <label class="form-label">Start Date:</label>
+                        <input type="date" class="form-control" name="end_date" 
+                        value="{{old('end_date')}}">
+                        @error('end_date')
+                        <div class="alert alert-danger" role="alert">
+                            {{($message)}}
+                        </div>
+                        @enderror
+                        
+                    </div>
+                    <br>
+                    <button type="submit"class="button-28" role="button">Submit</button>
+                </form>
+
+
+
+
+
+
+
+
+
+
     <script>
         $(document).ready(function() {
             var booking = @json($events);

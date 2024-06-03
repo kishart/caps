@@ -31,3 +31,8 @@ Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 
 
 Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
+
+
+Route::get('admin/calendar',[CalendarController::class,'addBooking']);
+
+Route::post('save-booking',[CalendarController::class,'saveBooking']);
