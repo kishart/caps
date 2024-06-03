@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center mt-5"> calendar</h3>
+                <h3 class="text-center mt-5"> Husnie Appointment Schedule</h3>
                 <div class="col-md-11 offset-1 mt-5 mb-5">
 
                     <div id="calendar">
@@ -63,7 +63,7 @@
         </div>
 
         <div class="md-3">
-            <label class="form-label">Start Date:</label>
+            <label class="form-label">End Date:</label>
             <input type="date" class="form-control" name="end_date" 
                 value="{{old('end_date')}}">
             @error('end_date')
