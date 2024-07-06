@@ -258,14 +258,14 @@ input {
                 </span>
             @enderror
 			
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+            <input id="password" placeholder="Password"  type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+            <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
         
             <div class="row mb-0">
                 <div class="col-md-6 offset-md-4">
@@ -285,7 +285,7 @@ input {
 			<h1>Sign in</h1>
 			
 			<span>or use your account</span>
-            <input id="username" type="username"
+            <input id="username" placeholder="Username" type="username"
             class="form-control @error('username') is-invalid @enderror @error('email') is-invalid @enderror
     "
             name="username" value="{{ old('username') }}" required autocomplete="username"
@@ -305,7 +305,7 @@ input {
             </span>
         @enderror
 			
-        <input id="password" type="password"
+        <input id="password" placeholder="Password" type="password"
         class="form-control @error('password') is-invalid @enderror" name="password" required
         autocomplete="current-password">
 
