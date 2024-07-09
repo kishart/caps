@@ -79,74 +79,62 @@ body {
     </svg>
     
  </button>
- 
- <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
-       <a href="#ahome" class="flex items-center ps-2.5 mb-5">
-        <img src="{{ asset('images/hplogo.png') }}" class="h-15 w-15 me-3" alt="logo">
-       </a>
-       <ul class="space-y-2 font-medium">
-        
-          <li class="hover-color-custom" >
-             <a href="{{ asset('booklist') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom ">
-                <span class="material-symbols-rounded color-custom  group group-hover-custom" aria-hidden="true">
-                    today
-                </span>
-                <span class="flex-1 ms-3 whitespace-nowrap ">Booking List</span>
-             </a>
-          </li>
-         
-          <li>
-            <a href="{{ asset('uphotos') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
-                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
-                    publish
-                </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Upload Photos</span>
+ <aside id="logo-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " style="background-color: #efe6dd;"
+        aria-label="Sidebar">
+        <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
+            <a href="#ahome" class="flex items-center ps-2.5 mb-5">
+                <img src="{{ asset('images/hplogo.png') }}" class="h-15 w-15 me-3" alt="logo">
             </a>
-          </li>
-          
-          <li>
-            <a href="{{ asset('calendar') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
-                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
-                    calendar_month
-                </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
-             </a>
-          </li>
-          
-          <li>
-            <a href="{{ asset('msg') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
-                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
-                    sms
-                </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
-            </a>
-         </li>
-         
-         <li>
-            <a href="{{ route('logout') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}<span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
-                    logout
-                </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
-            </a>
-         </li>
+            <ul class="space-y-2 font-medium">
+                <li class="hover-color-custom">
+                    <a href="{{ asset('booklist') }}"
+                        class="flex items-center p-2 font-color-custom group group-hover-custom">
+                        <span class="material-symbols-rounded color-custom group group-hover-custom"
+                            aria-hidden="true">today</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ asset('uphotos') }}"
+                        class="flex items-center p-2 font-color-custom group group-hover-custom">
+                        <span class="material-symbols-rounded color-custom group group-hover-custom"
+                            aria-hidden="true">publish</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Upload Photos</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ asset('calendar') }}"
+                        class="flex items-center p-2 font-color-custom group group-hover-custom">
+                        <span class="material-symbols-rounded color-custom group group-hover-custom"
+                            aria-hidden="true">calendar_month</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ asset('msg') }}"
+                        class="flex items-center p-2 font-color-custom group group-hover-custom">
+                        <span class="material-symbols-rounded color-custom group group-hover-custom"
+                            aria-hidden="true">sms</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="flex items-center p-2 font-color-custom group group-hover-custom">
 
-
-
-         <li>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-        </li>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-
-       </ul>
-    </div>
- </aside>
+                        <span class="material-symbols-rounded color-custom group group-hover-custom"
+                            aria-hidden="true">logout</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+                    </a>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </ul>
+        </div>
+</aside>
  
  <div class="p-4 sm:ml-64">
     <h1 class="text-3xl font-bold underline">

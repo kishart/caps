@@ -52,4 +52,21 @@ class CalendarController extends Controller
 
             return redirect()->back()->with('success', 'calendar added successfully');
     }
+
+
+
+    public function ucalen(){
+        $events = array();
+        $calendars = Calendar::all();
+        foreach ($calendars as $calendar){
+            $events[] = [
+                'available' => $calendar->available, // 'available' => 'yes
+                'note' => $calendar->note,
+                'start' => $calendar->start_date,
+                'end' => $calendar->end_date
+            ];
+        }
+        return view('user.ucalen', ['events' => $events]);
+        
+    }
 }

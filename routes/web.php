@@ -38,3 +38,6 @@ Route::get('admin/calendar',[CalendarController::class,'addCalendar']);
 Route::post('save-calendar',[CalendarController::class,'saveCalendar']);
 
 Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');
+
+
+Route::get('ucalen', [CalendarController::class, 'ucalen']);
