@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('calendars', function (Blueprint $table) {
             $table->id();
+            $table->string('available');
+
             $table->string('title');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('calendars');
     }
 };

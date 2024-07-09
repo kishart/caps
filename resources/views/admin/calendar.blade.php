@@ -92,7 +92,7 @@ body {
                 <span class="material-symbols-rounded color-custom  group group-hover-custom" aria-hidden="true">
                     today
                 </span>
-                <span class="flex-1 ms-3 whitespace-nowrap ">Booking List</span>
+                <span class="flex-1 ms-3 whitespace-nowrap ">Calendar</span>
              </a>
           </li>
          
@@ -140,8 +140,21 @@ body {
     <h3 class="text-center mt-5 font-bold text-xl"> Husnie's Appointment Schedule</h3>
     <div class="container">
     <div class="input">
-        <form method="post" action="{{url('save-booking')}}">
+        <form method="post" action="{{url('save-calendar')}}">
             @csrf
+            <div class="md-3">
+                <label class="form-label">Available:</label>
+                <select id="available" name="available">
+                    <option value="Not Available">Not Available</option>
+                    <option value="Holiday">Holiday</option>
+                  </select>
+                @error('available')
+                <div class="alert alert-danger" role="alert">
+                    {{($message)}}
+                </div>
+                @enderror
+            </div>
+
             <div class="md-3">
                 <label class="form-label">Title:</label>
                 <input type="text" class="form-control" name="title" 
@@ -152,6 +165,7 @@ body {
                 </div>
                 @enderror
             </div>
+    
     
             <div class="md-3">
                 <label class="form-label">Start Date:</label>
@@ -194,16 +208,16 @@ body {
    
     <script>
         $(document).ready(function() {
-            var booking = @json($events);
+            var calendar = @json($events);
 
             // Convert event dates to include only the date portion
-            booking.forEach(function(event) {
+            calendar.forEach(function(event) {
                 event.start = event.start.substr(0, 10); // Assuming start date is in YYYY-MM-DD format
                 event.end = event.end.substr(0, 10); // Assuming end date is in YYYY-MM-DD format
             });
 
             $('#calendar').fullCalendar({
-                events: booking,
+                events: calendar,
                 viewRender: function(view, element) {
                     // Get the header element
                     var header = element.find('.fc-toolbar h2');

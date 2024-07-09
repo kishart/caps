@@ -1,6 +1,4 @@
 
-
-
 <!doctype html>
 <html>
 <head>
@@ -9,6 +7,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css"  rel="stylesheet" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+    <title>Document</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
 </head>
 
 <style>
@@ -33,6 +55,19 @@
 body {
   color: #ac6f53;
 }
+/* Define the hover text color class */
+.group-hover-custom:hover {
+    color: #f7f0e8 !important;
+    background-color: #ac6f53;
+}
+/* Define the font color class */
+.font-color-custom {
+    color: #ac6f53;
+}
+.color-custom:hover{
+    color: #f7f0e8;
+
+}
 </style>
 <body>
 
@@ -46,52 +81,69 @@ body {
  </button>
  
  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <div class="bg h-full px-3 py-4 overflow-y-auto  dark:bg-gray-800">
+    <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
        <a href="#ahome" class="flex items-center ps-2.5 mb-5">
-        
         <img src="{{ asset('images/hplogo.png') }}" class="h-15 w-15 me-3" alt="logo">
        </a>
        <ul class="space-y-2 font-medium">
         
-          <li>
-             <a href="{{ asset('booklist') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-              
-                <span class="material-symbols-rounded  text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true">
+          <li class="hover-color-custom" >
+             <a href="{{ asset('booklist') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom ">
+                <span class="material-symbols-rounded color-custom  group group-hover-custom" aria-hidden="true">
                     today
-                    </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Booking List</span> </a>
+                </span>
+                <span class="flex-1 ms-3 whitespace-nowrap ">Booking List</span>
+             </a>
           </li>
          
           <li>
-            <a href="{{ asset('uphotos') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <span class="material-symbols-rounded  text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true">
+            <a href="{{ asset('uphotos') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
+                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
                     publish
-                    </span>
-                <span class="flex-1 ms-3 whitespace-nowrap">Upload Photos</span> </a>
+                </span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Upload Photos</span>
+            </a>
           </li>
+          
           <li>
-            <a href="{{ asset('calendar') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <span class="material-symbols-rounded  text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true">
+            <a href="{{ asset('calendar') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
+                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
                     calendar_month
-                    </span>
+                </span>
                 <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
              </a>
           </li>
+          
           <li>
-            <a href="{{ asset('msg') }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"/>
-               </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span> </a>
-         </li>
-         <li>
-            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-               <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
-               </svg>
-               <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+            <a href="{{ asset('msg') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom">
+                <span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
+                    sms
+                </span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
             </a>
          </li>
+         
+         <li>
+            <a href="{{ route('logout') }}" class="flex items-center p-2 font-color-custom  group group-hover-custom dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                  {{ __('Logout') }}<span class="material-symbols-rounded  color-custom  group group-hover-custom" aria-hidden="true">
+                    logout
+                </span>
+                <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+            </a>
+         </li>
+
+
+
+         <li>
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+        </li>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+
        </ul>
     </div>
  </aside>
