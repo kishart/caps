@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('available');
 
-            $table->string('title');
+            $table->string('note');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

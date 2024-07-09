@@ -14,7 +14,7 @@ class CalendarController extends Controller
         foreach ($calendars as $calendar){
             $events[] = [
                 'available' => $calendar->available, // 'available' => 'yes
-                'title' => $calendar->title,
+                'note' => $calendar->note,
                 'start' => $calendar->start_date,
                 'end' => $calendar->end_date
             ];
@@ -30,7 +30,7 @@ class CalendarController extends Controller
     public function saveCalendar(Request $request){
             $request->validate([
                 'available' => 'required',
-                'title' => 'required',
+                'note' => 'required',
                 'start_date' => 'required',
                 'end_date' => 'required',
 
@@ -38,13 +38,13 @@ class CalendarController extends Controller
             ]);
             $available= $request->available;
 
-            $title= $request->title;
+            $note= $request->note;
             $start_date= $request->start_date;
             $end_date= $request->end_date;
 
             $calen = new Calendar();
             $calen->available = $available;
-            $calen->title = $title;
+            $calen->note = $note;
             $calen->start_date = $start_date;
             $calen->end_date = $end_date;
            
