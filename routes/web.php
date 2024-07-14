@@ -41,3 +41,5 @@ Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware(
 
 
 Route::get('ucalen', [CalendarController::class, 'ucalen']);
+
+Route::get('/setap', [CalendarController::class, 'setap'])->name('setap');

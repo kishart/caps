@@ -72,6 +72,9 @@
     </div>
 </div>
 
+
+
+
 <script>
     $(document).ready(function() {
         var calendar = @json($events);
@@ -85,6 +88,24 @@
         $('#calendar').fullCalendar({
             height: 'parent', // Make calendar take the full height of its parent
             events: calendar,
+          
+
+            customButtons: {
+                myCustomToday: {
+                    text: 'Set Appointment',
+                    click: function() {
+                        window.location.href = '{{ route('setap') }}';
+                    }
+                }
+            },
+
+
+            header: {
+                left: 'title',
+                right: 'prev,next, myCustomToday'
+            },
+
+            
             viewRender: function(view, element) {
                 // Get the header element
                 var header = element.find('.fc-toolbar h2');

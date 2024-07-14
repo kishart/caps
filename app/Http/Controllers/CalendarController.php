@@ -69,4 +69,9 @@ class CalendarController extends Controller
         return view('user.ucalen', ['events' => $events]);
         
     }
+
+    public function setap(){
+        return view('user.setap');
+    }
+
 }
