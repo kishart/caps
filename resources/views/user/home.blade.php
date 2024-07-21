@@ -7,21 +7,9 @@
             <p>“The camera is an instrument that teaches people how to see without a camera.” <br>– Dorothea Lange.</p>
 
             <div class="wrapper">
-                <a href="#demo-modal">Set an Appointment</a>
+                <a  href="{{ asset('setap') }}">Set an Appointment</a>
 
-                <div id="demo-modal" class="modal">
-                    <div class="modal__content">
-                        <h1>Set an Appointment</h1>
-                        <input type="text" placeholder="Name">
-                        <input type="text" placeholder="Email">
-                        <input type="text" placeholder='Phone'>
-                        <input type="date" placeholder="Date">
-                        <input type="text" placeholder="Time">
-                        <input type="text" placeholder="Message">
-                        <button>Submit</button>
-                        <a href="#" class="modal__close">&times;</a>
-                    </div>
-                </div>
+
             </div>
         </div>
 
