@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
 /*
 |--------------------------------------------------------------------------
@@ -42,4 +42,7 @@ Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware(
 
 Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
-Route::get('/setap', [CalendarController::class, 'setap'])->name('setap');
+Route::get('/setap', [AppointmentController::class, 'setap'])->name('setap');
+
+
+Route::post('save-appoint',[AppointmentController::class,'saveAppoint']);

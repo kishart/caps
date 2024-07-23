@@ -70,8 +70,6 @@ class CalendarController extends Controller
         
     }
 
-    public function setap(){
-        return view('user.setap');
-    }
+    
 
 }
