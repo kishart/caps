@@ -6,10 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set An Appointment</title>
     <link rel="stylesheet" href="{{ asset('css/setap.css') }}">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         .modal-content {
             color: black;
+        }
+        .taa{
+            margin: 5px;
+        }
+
+        .wrapper {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: -webkit-linear-gradient(to right, #834d9b, #d04ed6);
+            background: linear-gradient(to right, #834d9b, #d04ed6);
+        }
+
+        .wrapper a {
+            display: inline-block;
+            text-decoration: none;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 3px;
+            text-transform: uppercase;
+            color: #585858;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(77, 77, 77, .7);
+            transition: all .4s;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal__content {
+            border-radius: 4px;
+            position: relative;
+            width: 500px;
+            max-width: 90%;
+            background: #fff;
+            padding: 1em 2em;
+        }
+
+        .modal__footer {
+            text-align: right;
+        }
+
+        .modal__close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #585858;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -80,66 +144,32 @@
             </div>
             @enderror
             <br>
+
             <div class="button-container">
                 <button type="button" class="button-6" role="button" onclick="showModal()">Submit</button>
-            
-                <div id="id01" class="w3-modal">
-                    <div class="w3-modal-content modal-content">
-                        <div class="w3-container">
-                            <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                            <p>These Terms and Conditions govern the agreement between [Your Photography Business Name] ("Photographer") and the client ("Client") for photography services. By booking a photography session or using our services, the Client agrees to the following terms:
-
-                                Booking and Payment
-                                
-                                A non-refundable deposit of [amount] is required to secure the booking. The remaining balance is due on the day of the session.
-                                Payments can be made via [payment methods].
-                                Cancellation and Rescheduling
-                                
-                                If the Client needs to cancel or reschedule the session, they must provide at least [number] days’ notice. Failure to do so will result in the loss of the deposit.
-                                The Photographer reserves the right to reschedule due to unforeseen circumstances such as illness, weather conditions, or equipment failure.
-                                Services Provided
-                                
-                                The Photographer agrees to provide photography services at the agreed time and location.
-                                The Photographer will deliver edited photos within [number] weeks after the session.
-                                Client Responsibilities
-                                
-                                The Client is responsible for ensuring that all parties involved in the photography session comply with these Terms and Conditions.
-                                The Client must arrive on time for the session. Late arrivals may result in a reduced session time or rescheduling.
-                                Image Delivery and Usage
-                                
-                                The Client will receive high-resolution digital images in [format].
-                                The Photographer retains copyright of all images. The Client is granted a personal use license to print and share the images.
-                                The Client agrees not to edit or alter the images without the Photographer's permission.
-                                Model Release
-                                
-                                The Client grants the Photographer the right to use images from the session for promotional purposes, including but not limited to the Photographer’s portfolio, website, social media, and marketing materials.
-                                If the Client wishes to opt-out of this clause, they must notify the Photographer in writing before the session.
-                                Liability
-                                
-                                The Photographer is not liable for any injury, loss, or damage to the Client or their property during the session.
-                                The Photographer’s liability for any claims arising from the services is limited to the amount paid by the Client.
-                                Force Majeure
-                                
-                                The Photographer is not liable for any failure to perform due to circumstances beyond their control, including but not limited to natural disasters, acts of terrorism, or government restrictions.
-                                Governing Law
-                                
-                                These Terms and Conditions are governed by the laws of [Your State/Country]. Any disputes will be resolved in the courts of [Your State/Country].
-                                Acceptance of Terms
-                                
-                                By booking a session with the Photographer, the Client acknowledges that they have read, understood, and agreed to these Terms and Conditions.
-                            </p>
-                            <input type="checkbox" id="termsCheckbox" onclick="toggleSubmitButton()"> I Agree</input>
-                            <button id="modalSubmitButton" onclick="acceptTerms()" disabled>Submit</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </form>
+
+        <div id="demo-modal" class="modal">
+            <div class="modal__content">
+                <h1>Terms and Conditions</h1>
+                <p>These Terms and Conditions govern the agreement between [Your Photography Business Name] ("Photographer") and the client ("Client") for photography services. By booking a photography session or using our services, the Client agrees to the following terms:
+                    <!-- Terms content here -->
+                </p>
+                <input type="checkbox" id="termsCheckbox" onclick="toggleSubmitButton()"> I Agree</input>
+                <button id="modalSubmitButton" onclick="acceptTerms()" disabled>Submit</button>
+                <span class="modal__close" onclick="closeModal()">&times;</span>
+            </div>
+        </div>
     </div>
 
     <script>
         function showModal() {
-            document.getElementById('id01').style.display = 'block';
+            document.getElementById('demo-modal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('demo-modal').classList.remove('show');
         }
 
         function toggleSubmitButton() {
