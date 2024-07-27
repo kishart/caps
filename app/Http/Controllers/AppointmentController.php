@@ -36,6 +36,12 @@ class AppointmentController extends Controller
 
         return redirect()->back()->with('success', 'Booking added successfully');
     }
-
+    public function saveAppointment(Request $request) {
+        // Validate and save the appointment...
+    
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'You have successfully set an appointment');
+    }
+    
     
 }
