@@ -43,6 +43,4 @@ Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware(
 Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
 Route::get('/setap', [AppointmentController::class, 'setap'])->name('setap');
-
-
-Route::post('save-appoint',[AppointmentController::class,'saveAppoint']);
+Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
