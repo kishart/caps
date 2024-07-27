@@ -36,4 +36,6 @@ class AppointmentController extends Controller
 
         return redirect()->back()->with('success', 'Booking added successfully');
     }
+
+    
 }
