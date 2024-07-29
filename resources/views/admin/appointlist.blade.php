@@ -8,9 +8,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2>List of Appointments</h2>
-                <div style="margin-right:10%; float:right">
-                    <a href="{{url('user/add-booking')}}" class="btn btn-primary">Add Booking</a>
-                </div>
+               
                 @if(Session::has('success'))
                 <div class="alert alert-success" role="alert">
                     {{Session::get('success')}}

@@ -36,4 +36,5 @@ Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
 Route::get('/appointlist', [AppointmentController::class, 'appointlist']);
 
 
-Route::get('admin/editappoint/{id}',[AppointmentController::class,'editAppointment']);
+Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment']);
+Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment']);
