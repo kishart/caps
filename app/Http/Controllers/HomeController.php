@@ -45,8 +45,8 @@ class HomeController extends Controller
         return view('admin.uphotos');
     }
 
-    public function booklist(){
-        return view('admin.booklist');
+    public function appointlist(){
+        return view('admin.appointlist');
     }
     public function msg(){
         return view('admin.msg');

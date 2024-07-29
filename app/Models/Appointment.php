@@ -20,3 +20,5 @@ class Appointment extends Model
         'user_id',
     ];
 }
+
+

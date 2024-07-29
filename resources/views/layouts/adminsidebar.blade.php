@@ -29,7 +29,7 @@
             </li>
 
             <li>
-               <a href="#"><span class="material-symbols-outlined">today</span>Calendar</a>
+               <a href="{{ asset('appointlist') }}"><span class="material-symbols-outlined">today</span>Calendar</a>
             </li>
             <li><a href="#"><span class="material-symbols-outlined">
                photo_library

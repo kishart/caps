@@ -88,7 +88,7 @@ body {
             </a>
             <ul class="space-y-2 font-medium">
                 <li class="hover-color-custom">
-                    <a href="{{ asset('booklist') }}"
+                    <a href="{{ asset('appointlist') }}"
                         class="flex items-center p-2 font-color-custom group group-hover-custom">
                         <span class="material-symbols-rounded color-custom group group-hover-custom"
                             aria-hidden="true">today</span>

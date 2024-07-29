@@ -36,12 +36,47 @@ class AppointmentController extends Controller
 
         return redirect()->back()->with('success', 'Booking added successfully');
     }
-    public function saveAppointment(Request $request) {
-        // Validate and save the appointment...
-    
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'You have successfully set an appointment');
+
+    public function appointlist()
+    {
+        $appointments = Appointment::all();
+        return view('admin.appointlist', compact('appointments'));
     }
+
+
+    public function editAppointment($id){
+        $data = Appointment::where('id','=',$id)->first();
+        return view('admin/editappoint', compact('data'));
+   }
     
-    
+
+
+
+   public function updateBooking(Request $request){
+    $request->validate([
+           'fname' => 'required',
+           'email' => 'required|email',
+           'phone' => 'required',
+           'date' => 'required',
+           'time'=> 'required',
+           'detail'=> 'required'    
+       ]);
+       $id= $request->id ;
+       $name= $request->fname;
+       $email= $request->email;
+       $phone= $request->phone;
+       $date= $request->date;
+       $time= $request->time;
+       $detail= $request->detail;
+
+       Booking::where('id', '=', $id)->update([
+           'name'=>$fname,
+           'email'=>$email,
+           'phone'=>$phone,
+           'date'=>$date,
+           'time'=>$time,
+           'message'=>$detail
+       ]);
+       return redirect()->back()->with('success', 'booking updated successfully');
+}
 }
