@@ -62,7 +62,11 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #AC6F53;
+    background-color: #AC6F53;
+    color: #fff;
+    height: 20px;
+    padding: 8px;
+    border-radius: 10px;
 }
 /* Place your form-specific CSS here */
 .container {
