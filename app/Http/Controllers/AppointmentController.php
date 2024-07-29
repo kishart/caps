@@ -77,4 +77,44 @@ class AppointmentController extends Controller
     
         return redirect()->back()->with('success', 'Booking updated successfully');
     }
-}    
+    
+    public function deleteAppointment($id){
+        Appointment::where('id', '=', $id)->delete();
+         return redirect()->back()->with('success', 'booking deleted successfully');
+   
+   }
+   public function profile(){
+       if(Auth::id()){
+           $userid=Auth::user()->id;
+           $book=Appointment::where('user_id', $userid)->get();
+       return view('user.profile', compact('book'));
+       }
+       else{
+           return redirect()->back();
+       }
+       
+   }
+   public function cancel_booking($id){
+       $data=booking::find($id);
+       $data->delete();
+       return redirect()->back();
+
+   }
+
+
+
+   public function accepted($id){
+    $data = Appointment::find($id);
+    $data->status = "Approved";
+    $data->save();
+    return redirect()->back()->with('success', 'Appointment approved successfully.');
+}
+
+public function declined($id){
+    $data = Appointment::find($id);
+    $data->status = "Declined";
+    $data->save();
+    return redirect()->back()->with('success', 'Appointment declined successfully.');
+}
+
+}

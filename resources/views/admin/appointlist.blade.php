@@ -25,8 +25,6 @@
                             <th>Time</th>
                             <th>Details</th>
                             <th>Status</th>
-                            <th>Approved</th>
-                            <th>Canceled</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -44,26 +42,22 @@
 							<td>{{$appointment->time}}</td>
 							<td>{{$appointment->details}}</td>
 							<td>{{$appointment->status}}</td>
-							<td>
-								@if($appointment->approved == 1)
-								<span class="text-success">Approved</span>
-								@else
-								<span class="text-danger">Not Approved</span>
-								@endif
-							</td>
-							<td>
-								@if($appointment->canceled == 1)
-								<span class="text-danger">Canceled</span>
-								@else
-								<span class="text-success">Not Canceled</span>
-								@endif
-							</td>
-							<td>
-								<a href="{{url('admin/editappoint/'.$appointment->id)}}" class="btn btn-primary">Edit</a>
-								<a href="{{url('user/delete-booking/'.$appointment->id)}}" class="btn btn-danger">Delete</a>
-							</td>
-						</tr>
-						@endforeach
+						
+                            <td>
+                                @if($appointment->canceled == 1)
+                                <span class="text-danger">Canceled</span>
+                                @else
+                                <span class="text-success">Not Canceled</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ url('admin/editappoint/'.$appointment->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('admin/delete-appointment/'.$appointment->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('admin/accepted/'.$appointment->id) }}" class="btn btn-success">Approve</a>
+                                <a href="{{ url('admin/declined/'.$appointment->id) }}" class="btn btn-warning">Decline</a>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

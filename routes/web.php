@@ -38,3 +38,8 @@ Route::get('/appointlist', [AppointmentController::class, 'appointlist']);
 
 Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment']);
 Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment']);
+
+Route::get('admin/delete-appointment/{id}',[AppointmentController::class,'deleteAppointment']);
+
+Route::get('admin/accepted/{id}', [AppointmentController::class, 'accepted']);
+Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
