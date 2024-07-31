@@ -27,10 +27,7 @@ Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
 
 
-Route::get('/setap', [AppointmentController::class, 'setap'])->name('setap');
 
-
-Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
 
 
 Route::get('/appointlist', [AppointmentController::class, 'appointlist']);
@@ -43,3 +40,16 @@ Route::get('admin/delete-appointment/{id}',[AppointmentController::class,'delete
 
 Route::get('admin/accepted/{id}', [AppointmentController::class, 'accepted']);
 Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
+
+
+
+
+// Route to show the form
+
+Route::get('setap', [AppointmentController::class, 'setap'])->name('setap');
+
+// Route to handle form submission
+Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
+
+// Route to show the user's appointments
+Route::get('myappoint', [AppointmentController::class, 'myappoint'])->name('appointments.myappoint');

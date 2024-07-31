@@ -18,7 +18,10 @@ return new class extends Migration
             $table->time('time');
             $table->string('details');
             $table->string('status')->nullable();
-            $table->string('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable(); // User ID column
+
+            // Foreign key constraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

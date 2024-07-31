@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
 
 class AppointmentController extends Controller
 {
@@ -14,25 +15,21 @@ class AppointmentController extends Controller
 
     public function saveAppoint(Request $request)
     {
-        $request->validate([
-            'fname' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'date' => 'required|date',
-            'time' => 'required',
-            'details' => 'required'
-        ]);
-
-        Appointment::create([
-            'fname' => $request->fname,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'date' => $request->date,
-            'time' => $request->time,
-            'details' => $request->details,
-            'status' => 'In progress',
-            'user_id' => $request->user_id // Make sure to handle this field if necessary
-        ]);
+        $data = new appointment;
+        $data->fname = $request->fname;
+        $data->email = $request->email;
+        $data->phone = $request->phone;
+        $data->date = $request->date;
+        $data->time = $request->time;
+        $data->details = $request->details;
+        $data->status = 'In Progress';
+        if(Auth::id()){
+            $data->user_id = Auth::user()->id;
+        }
+        else{
+            $data->user_id = 0;
+        }
+        $data->save();
 
         return redirect()->back()->with('success', 'Booking added successfully');
     }
@@ -117,4 +114,50 @@ public function declined($id){
     return redirect()->back()->with('success', 'Appointment declined successfully.');
 }
 
+
+
+
+
+
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'fname' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:255',
+            'date' => 'required|date',
+            'time' => 'required',
+            'details' => 'required|string',
+        ]);
+
+        $appointment = new Appointment;
+        $appointment->fname = $request->fname;
+        $appointment->email = $request->email;
+        $appointment->phone = $request->phone;
+        $appointment->date = $request->date;
+        $appointment->time = $request->time;
+        $appointment->details = $request->details;
+        $appointment->status = 'Pending';
+        $appointment->user_id = Auth::id(); // Associate appointment with the logged-in user
+
+        $appointment->save();
+
+        return redirect()->back()->with('success', 'Appointment has been successfully created.');
+    }
+
+    // Display user's appointments
+    public function myappoint()
+    {
+        if (Auth::check()) {
+            $userid = Auth::id();
+            $appointments = Appointment::where('user_id', $userid)->get();
+            return view('user.myappoint', compact('appointments'));
+        } else {
+            return redirect()->route('login')->with('error', 'You need to log in to view your appointments.');
+        }
+
+    }
+
+    
 }

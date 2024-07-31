@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar Example</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,7 +83,7 @@
                 <span class="material-symbols-outlined">account_circle</span>
                 <div class="dropdown-content">
                   <a href="#">Profile</a>
-                  <a href="#">My Appointments</a>
+                  <a href="{{ asset('myappoint') }}">My Appointments</a>
                   <a href="#" onclick="logout()">Logout</a>
                 </div>
               </div>

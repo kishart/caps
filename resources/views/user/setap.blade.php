@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set An Appointment</title>
     <link rel="stylesheet" href="{{ asset('css/setap.css') }}">
-
 </head>
 
 <body @if(session('success')) class="success-background" @endif>
@@ -130,7 +129,9 @@
 
     <script>
         function showModal() {
-            document.getElementById('demo-modal').classList.add('show');
+            if (validateForm()) {
+                document.getElementById('demo-modal').classList.add('show');
+            }
         }
 
         function closeModal() {
@@ -148,6 +149,23 @@
             if (checkbox.checked) {
                 document.getElementById('appointmentForm').submit();
             }
+        }
+
+        function validateForm() {
+            var fname = document.getElementById('fname').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var phone = document.getElementById('phone').value.trim();
+            var date = document.getElementById('date').value.trim();
+            var time = document.getElementById('time').value.trim();
+            var details = document.getElementById('details').value.trim();
+
+            if (!fname || !email || !phone || !date || !time || !details) {
+                alert('Please fill in all required fields.');
+                return false;
+            }
+
+           
+            return true;
         }
     </script>
 </body>
