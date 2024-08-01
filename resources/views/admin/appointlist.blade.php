@@ -1,10 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.adminsidebar')
 
 @section('content')
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
-    <div class="container" style="margin-top:20px">
+<style>
+    .containera{
+        margin-top: 30px;
+        margin-left: 25%;
+        margin-right: 25px;
+
+    }
+
+</style>
+    <div class="containera" >
         <div class="row">
             <div class="col-md-12">
                 <h2>List of Appointments</h2>
@@ -43,18 +51,20 @@
 							<td>{{$appointment->details}}</td>
 							<td>{{$appointment->status}}</td>
 						
+                         
                             <td>
-                                @if($appointment->canceled == 1)
-                                <span class="text-danger">Canceled</span>
-                                @else
-                                <span class="text-success">Not Canceled</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ url('admin/editappoint/'.$appointment->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url('admin/delete-appointment/'.$appointment->id) }}" class="btn btn-danger">Delete</a>
                                 <a href="{{ url('admin/accepted/'.$appointment->id) }}" class="btn btn-success">Approve</a>
                                 <a href="{{ url('admin/declined/'.$appointment->id) }}" class="btn btn-warning">Decline</a>
+                                
+                                <a href="{{ url('admin/editappoint/'.$appointment->id) }}">
+                                    
+                                    <span class="material-symbols-outlined">edit_note</span>
+                                </a>
+                                
+                                <a href="{{ url('admin/delete-appointment/'.$appointment->id) }}"><span class="material-symbols-outlined">
+                                    delete
+                                    </span></a>
+                              
                             </td>
                         </tr>
                         @endforeach
@@ -63,4 +73,5 @@
             </div>
         </div>
     </div>
+
 @endsection

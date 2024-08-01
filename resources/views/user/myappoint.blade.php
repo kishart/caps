@@ -37,6 +37,7 @@
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
+            <th>Downpayment</th>
         </tr>
 
         @foreach($appointments as $appointment)
