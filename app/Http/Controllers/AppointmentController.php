@@ -158,6 +158,9 @@ public function declined($id){
         }
 
     }
-
+    public function payment()
+    {
+        return view('user.payment');
+    }
     
 }

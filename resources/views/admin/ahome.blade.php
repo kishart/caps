@@ -92,7 +92,7 @@ body {
                         class="flex items-center p-2 font-color-custom group group-hover-custom">
                         <span class="material-symbols-rounded color-custom group group-hover-custom"
                             aria-hidden="true">today</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
+                        <span class="flex-1 ms-3 whitespace-nowrap">Appointment List</span>
                     </a>
                 </li>
                 <li>

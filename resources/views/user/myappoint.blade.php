@@ -9,20 +9,16 @@
     tr {
         background-color: #854836;
     }
-  
-
     th {
         padding: 10px;
         font-size: 20px;
         color: white;
     }
-
     td {
         padding: 10px;
         background-color: #dba594;
         color: black;
     }
-
     /* Increase table width */
     table {
         width: 80%; /* Adjust the width as needed */
@@ -37,7 +33,6 @@
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
-            <th>Downpayment</th>
         </tr>
 
         @foreach($appointments as $appointment)
@@ -45,12 +40,18 @@
             <td>{{ $appointment->details }}</td>
             <td>{{ $appointment->date }}</td>
             <td>{{ $appointment->time }}</td>
-            <td>{{ $appointment->status }}</td>
+            <td>
+                @if(strtolower($appointment->status) == 'approved')
+                    <a href="{{ url('payment') }}" style="color: green; font-weight:bold; text-decoration: underline;">
+                        {{ ucfirst($appointment->status) }}
+                    </a>
+                @else
+                    {{ ucfirst($appointment->status) }}
+                @endif
+            </td>
+            
         </tr>
         @endforeach
-       
-    
-
     </table>
 </div>
 

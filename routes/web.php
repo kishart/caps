@@ -46,7 +46,10 @@ Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
 
 // Route to show the form
 
-Route::get('setap', [AppointmentController::class, 'setap'])->name('setap');
+Route::middleware(['auth'])->get('setap', [AppointmentController::class, 'setap'])->name('setap');
+Route::middleware(['auth'])->get('payment', [AppointmentController::class, 'payment'])->name('payment');
+
+
 
 // Route to handle form submission
 Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
