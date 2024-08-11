@@ -75,7 +75,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="{{ asset('ucalen') }}">Calendar</a></li>
-            <li><a href="#">Photos</a></li>
+            <li><a href="{{ asset('photos') }}">Photos</a></li>
             <li><a href="#">Contact</a></li>
             
 
@@ -105,5 +105,6 @@
         }
       </script>
 </body>
+
 
 </html>

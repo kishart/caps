@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\CompanyCRUDController;
+use App\Http\Controllers\PostController;
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -12,6 +14,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/photos', [PostController::class, 'photos'])->name('photos');
 
 Route::get('admin/ahome', [HomeController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
 
@@ -56,3 +60,13 @@ Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
 
 // Route to show the user's appointments
 Route::get('myappoint', [AppointmentController::class, 'myappoint'])->name('appointments.myappoint');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/show_post', [PostController::class, 'show_post']);
+});
+
+
+Route::post('add_photo', [PostController::class, 'add_photo'])->name('add_photo');
+Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
+Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
+Route::post('/update_post/{id}', [PostController::class, 'update_post'])->name('update_post');
