@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-    /* geist-sans-latin-600-normal */
+    /* Font and basic styling as before */
     @font-face {
         font-family: "Geist Sans";
         font-style: normal;
@@ -14,7 +14,6 @@
             format("woff");
     }
 
-    /* geist-sans-latin-400-normal */
     @font-face {
         font-family: "Geist Sans";
         font-style: normal;
@@ -36,7 +35,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 80vh; /* Adjust as needed */
+        flex-direction: column;
+        margin-bottom: 2rem;
     }
 
     .carousel {
@@ -107,38 +107,40 @@
     }
 </style>
 
-<div class="carousel-container">
-    <div id="carousel"></div>
+<div id="carousels-wrapper">
+    <!-- Carousels will be appended here -->
 </div>
 
 <script>
-    function renderCarousel(element, slides, showSlideCounter = true) {
+    function renderCarousel(slides, showSlideCounter = true) {
+        const carouselContainer = document.createElement("div");
+        carouselContainer.classList.add("carousel-container");
+
+        const carouselElement = document.createElement("div");
+        carouselElement.classList.add("carousel");
+        carouselContainer.appendChild(carouselElement);
+
         const slideCounter = document.createElement("span");
         slideCounter.classList.add("carousel__slide-counter");
-        element.appendChild(slideCounter);
+        carouselElement.appendChild(slideCounter);
 
         const slidesContainer = document.createElement("div");
         slidesContainer.classList.add("carousel__slides-container");
-        element.appendChild(slidesContainer);
+        carouselElement.appendChild(slidesContainer);
 
         const nextButton = document.createElement("button");
         nextButton.innerHTML = ">";
         nextButton.classList.add("carousel__btn--next", "carousel__btn");
         nextButton.addEventListener("click", () => changeSlide("next"));
-        element.appendChild(nextButton);
+        carouselElement.appendChild(nextButton);
 
         const prevButton = document.createElement("button");
         prevButton.textContent = "<";
         prevButton.classList.add("carousel__btn--prev", "carousel__btn");
         prevButton.addEventListener("click", () => changeSlide("prev"));
-        element.appendChild(prevButton);
+        carouselElement.appendChild(prevButton);
 
         let currentSlide = 0;
-        let startX = 0;
-        let endX = 0;
-        let isDragging = false;
-
-        element.classList.add("carousel");
 
         function filterCurrentSlide() {
             return slides.filter((_, index) => index === currentSlide);
@@ -170,38 +172,21 @@
             showSlideCounter && renderSlideCounter();
         }
 
-        function handleMouseDown(event) {
-            startX = event.clientX;
-            isDragging = true;
-        }
-
-        function handleMouseMove(event) {
-            if (!isDragging) return;
-            endX = event.clientX;
-        }
-
-        function handleMouseUp() {
-            if (!isDragging) return;
-            isDragging = false;
-            if (startX > endX + 50) {
-                changeSlide("next");
-            } else if (startX < endX - 50) {
-                changeSlide("prev");
-            }
-        }
-
-        slidesContainer.addEventListener("mousedown", handleMouseDown);
-        slidesContainer.addEventListener("mousemove", handleMouseMove);
-        slidesContainer.addEventListener("mouseup", handleMouseUp);
+        document.getElementById("carousels-wrapper").appendChild(carouselContainer);
     }
 
-    const slides = [
-        @foreach($posts as $post)
-        `<img src='/postimage1/{{$post->image1}}' alt='Image 1'>`,
-        `<img src='/postimage2/{{$post->image2}}' alt='Image 2'>`,
-        @endforeach
-    ];
+    function addNewCarousel(images) {
+        const slides = images.map(imageUrl => `<img src='${imageUrl}' alt='Carousel Image'>`);
 
-    renderCarousel(document.querySelector("#carousel"), slides, true);
+        renderCarousel(slides, true);
+    }
+
+    // Generate carousels for each post
+    @foreach($posts as $post)
+    addNewCarousel([
+        '/postimage1/{{ $post->image1 }}',
+        '/postimage2/{{ $post->image2 }}'
+    ]);
+    @endforeach
 </script>
 @endsection
