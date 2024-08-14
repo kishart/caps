@@ -73,7 +73,7 @@
     <nav>
         <a href="#" style="font-size: 22px">Husnie Photography</a>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="{{ asset('home') }}">Home</a></li>
             <li><a href="{{ asset('ucalen') }}">Calendar</a></li>
             <li><a href="{{ asset('photos') }}">Photos</a></li>
             <li><a href="#">Contact</a></li>
