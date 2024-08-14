@@ -89,5 +89,10 @@ class PostController extends Controller
         $posts = Post::all();
         return view('user.photos', compact('posts'));
     }
+   
     
+
+
+    
+
 }
