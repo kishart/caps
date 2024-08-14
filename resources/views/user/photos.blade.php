@@ -36,17 +36,21 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-bottom: 2rem;
+        margin-bottom: 5rem;
+        margin-top: 2rem;
+        
     }
 
     .carousel {
-        width: 300px;
-        height: 300px;
-        border: solid 1px #27272a;
-        position: relative;
-        border-radius: 0.75rem;
-        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    }
+    width: 500px;  /* Match the new image width */
+    height: 300px; /* Adjust height if necessary */
+    border: solid 1px #27272a;
+    position: relative;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
+    
 
     .carousel__slide-counter {
         position: absolute;
@@ -95,7 +99,7 @@
     .carousel__slide img {
         object-fit: cover;
         border-radius: 0.75rem;
-        width: 300px;
+        width: 500px;
         height: 300px;
         pointer-events: none;
     }
@@ -108,13 +112,17 @@
 </style>
 
 <div id="carousels-wrapper">
-    <!-- Carousels will be appended here -->
 </div>
 
 <script>
-    function renderCarousel(slides, showSlideCounter = true) {
+    function renderCarousel(title, slides, showSlideCounter = true) {
         const carouselContainer = document.createElement("div");
         carouselContainer.classList.add("carousel-container");
+
+        const titleElement = document.createElement("h4");
+        titleElement.classList.add("text-center");
+        titleElement.textContent = title;
+        carouselContainer.appendChild(titleElement);
 
         const carouselElement = document.createElement("div");
         carouselElement.classList.add("carousel");
@@ -175,18 +183,20 @@
         document.getElementById("carousels-wrapper").appendChild(carouselContainer);
     }
 
-    function addNewCarousel(images) {
+    function addNewCarousel(title, images) {
         const slides = images.map(imageUrl => `<img src='${imageUrl}' alt='Carousel Image'>`);
-
-        renderCarousel(slides, true);
+        renderCarousel(title, slides, true);
     }
 
+    // Pass the posts data from Blade to JavaScript
+    const posts = @json($posts);
+
     // Generate carousels for each post
-    @foreach($posts as $post)
-    addNewCarousel([
-        '/postimage1/{{ $post->image1 }}',
-        '/postimage2/{{ $post->image2 }}'
-    ]);
-    @endforeach
+    posts.forEach(post => {
+        addNewCarousel(
+            post.title,
+            [`/postimage1/${post.image1}`, `/postimage2/${post.image2}`]
+        );
+    });
 </script>
 @endsection
