@@ -29,6 +29,7 @@
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+       
     }
 
     .carousel-container {
@@ -65,7 +66,9 @@
         height: 100%;
         overflow: hidden;
     }
-
+body {
+    background-color: #efe6dd;
+}
     .carousel__btn {
         position: absolute;
         border: solid 1px #27272a;
