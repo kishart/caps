@@ -44,12 +44,11 @@ class PostController extends Controller
 
  
 
-
-    public function show_post() {
-        $posts = Post::all();  
-        return view('admin.show_post', compact('posts')); 
+    public function showPosts()
+    {
+        $posts = Post::latest()->get(); // Retrieves posts ordered by the most recent first
+        return view('your_view_name', compact('posts'));
     }
-    
 
 
     public function delete_post($id){

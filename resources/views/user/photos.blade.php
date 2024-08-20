@@ -114,8 +114,9 @@ body {
     }
 </style>
 
-<div id="carousels-wrapper">
-</div>
+
+
+<div id="carousels-wrapper"></div>
 
 <script>
     function renderCarousel(title, slides, showSlideCounter = true) {
@@ -183,7 +184,7 @@ body {
             showSlideCounter && renderSlideCounter();
         }
 
-        document.getElementById("carousels-wrapper").appendChild(carouselContainer);
+        document.getElementById("carousels-wrapper").prepend(carouselContainer);
     }
 
     function addNewCarousel(title, images) {
