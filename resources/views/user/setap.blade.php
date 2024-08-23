@@ -26,12 +26,9 @@
             @csrf
 
             <label for="fname">Full Name</label>
-            <input type="text" id="fname" name="fname" placeholder="Full Name" value="{{ old('fname') }}">
-            @error('fname')
-                <div class="alert alert-danger" role="alert">
-                    {{ $message }}
-                </div>
-            @enderror
+            <input type="text" id="fname" name="fname" placeholder="Full Name" value="{{ auth()->user()->name }}" readonly>
+            
+        
 
             <div class="row">
                 <div>

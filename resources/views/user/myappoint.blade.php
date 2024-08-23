@@ -55,7 +55,7 @@
                     @if(!$appointment->feedback_given)
                         <a href="{{ route('feedback.form', $appointment->id) }}" class="btn btn-success">Give Feedback</a>
                     @else
-                        <span>Feedback already given</span>
+                        <span>Done send feedback</span>
                     @endif
                 @else
                     <span>Feedback not requested</span>

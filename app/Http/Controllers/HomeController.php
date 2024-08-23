@@ -57,7 +57,9 @@ class HomeController extends Controller
     }
 
 
-  
+    public function listappoint(){
+        return view('admin.listappoint');
+    }
     
 
 

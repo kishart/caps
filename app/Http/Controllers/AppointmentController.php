@@ -132,7 +132,7 @@ public function declined($id){
         ]);
 
         $appointment = new Appointment;
-        $appointment->fname = $request->fname;
+        $appointment->fname = auth()->user()->name;
         $appointment->email = $request->email;
         $appointment->phone = $request->phone;
         $appointment->date = $request->date;
@@ -179,30 +179,15 @@ public function showFeedbackForm($id)
     return view('user.feedback_form', compact('appointment'));
 }
 
-public function showFeedbacks()
-{
-    $appointments = Appointment::with('feedbacks')->get();
-    return view('admin.feedbacks', compact('appointments'));
-}
-
 
 public function submitFeedback(Request $request, $id)
 {
-    $request->validate([
-        'feedback' => 'required|string|max:1000',
-    ]);
-
-    $appointment = Appointment::findOrFail($id);
-
+    $appointment = Appointment::find($id);
     $appointment->feedback = $request->feedback;
-    $appointment->feedback_given = true; // Mark feedback as given
     $appointment->save();
 
-    return redirect()->back()->with('success', 'Thank you for your feedback!');
+    return redirect()->route('user.myappoint')->with('success', 'Thank you for your feedback!');
 }
 
-
-
-
-
+    
 }
