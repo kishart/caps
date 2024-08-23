@@ -181,7 +181,8 @@
                 <tr>
                     <th><input type="checkbox" id="selectAll"></th>
                     <th>Name</th>
-                    <th>Date/Time</th>
+                    <th>Date</th>
+                    <th>Time</th>
                     <th>Status</th>
                     <th>Feedback</th>
                     <th>Action</th>
@@ -210,7 +211,8 @@
                             </div>
                         </div>
 
-                        <td>{{ $appointment->date }} {{ $appointment->time }}</td>
+                        <td>{{ $appointment->date }}</td>
+                        <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
 
                         <td>
                             <select id="actionSelect" class="custom-select" onchange="handleSelectChange(this)">
