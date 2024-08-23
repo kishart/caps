@@ -81,3 +81,5 @@ Route::post('/submit-feedback/{id}', [AppointmentController::class, 'submitFeedb
 
 
 Route::get('listappoint', [HomeController::class, 'listappoint'])->middleware('auth', 'admin');
+
+

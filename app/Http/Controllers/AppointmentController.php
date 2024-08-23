@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Log;
 
 class AppointmentController extends Controller
 {
@@ -189,5 +190,4 @@ public function submitFeedback(Request $request, $id)
     return redirect()->route('user.myappoint')->with('success', 'Thank you for your feedback!');
 }
 
-    
 }
