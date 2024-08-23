@@ -33,6 +33,7 @@
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
+            <th>Feedback</th>
         </tr>
 
         @foreach($appointments as $appointment)
@@ -47,6 +48,17 @@
                     </a>
                 @else
                     {{ ucfirst($appointment->status) }}
+                @endif
+            </td>
+            <td>
+                @if($appointment->feedback_requested)
+                    @if(!$appointment->feedback_given)
+                        <a href="{{ route('feedback.form', $appointment->id) }}" class="btn btn-success">Give Feedback</a>
+                    @else
+                        <span>Feedback already given</span>
+                    @endif
+                @else
+                    <span>Feedback not requested</span>
                 @endif
             </td>
             

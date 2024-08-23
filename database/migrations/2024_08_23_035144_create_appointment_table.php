@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('details');
+            $table->boolean('feedback_requested')->default(false);
+            $table->boolean('feedback_given')->default(false);
             $table->string('status')->nullable();
             $table->unsignedBigInteger('user_id')->nullable(); // User ID column
 

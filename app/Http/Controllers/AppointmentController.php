@@ -30,7 +30,7 @@ class AppointmentController extends Controller
             $data->user_id = 0;
         }
         $data->save();
-
+        $data->feedback = $request->feedback;
         return redirect()->back()->with('success', 'Booking added successfully');
     }
 
@@ -162,5 +162,47 @@ public function declined($id){
     {
         return view('user.payment');
     }
-    
+
+
+    public function requestFeedback($id)
+{
+    $appointment = Appointment::find($id);
+    $appointment->feedback_requested = true;
+    $appointment->save();
+
+    return redirect()->back()->with('success', 'Feedback request sent successfully.');
+}
+
+public function showFeedbackForm($id)
+{
+    $appointment = Appointment::find($id);
+    return view('user.feedback_form', compact('appointment'));
+}
+
+public function showFeedbacks()
+{
+    $appointments = Appointment::with('feedbacks')->get();
+    return view('admin.feedbacks', compact('appointments'));
+}
+
+
+public function submitFeedback(Request $request, $id)
+{
+    $request->validate([
+        'feedback' => 'required|string|max:1000',
+    ]);
+
+    $appointment = Appointment::findOrFail($id);
+
+    $appointment->feedback = $request->feedback;
+    $appointment->feedback_given = true; // Mark feedback as given
+    $appointment->save();
+
+    return redirect()->back()->with('success', 'Thank you for your feedback!');
+}
+
+
+
+
+
 }

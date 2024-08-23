@@ -35,6 +35,7 @@
                             <th>Time</th>
                             <th>Details</th>
                             <th>Status</th>
+                            <th>Feedback</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -57,6 +58,15 @@
                                         <option value="{{ url('admin/declined/' . $appointment->id) }}">Decline</option>
                                     </select>
                                 </td>
+                                <td>
+                                    <form action="{{ route('request.feedback', $appointment->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary">Request Feedback</button>
+                                    </form>
+                                </td>
+                                
+                                
+                                
                                 <td style="white-space: nowrap;">
                                     <a href="{{ url('admin/editappoint/' . $appointment->id) }}" style="margin-right: 10px;">
                                         <span class="material-symbols-outlined" style="color: #ac6f53;">edit_note</span>

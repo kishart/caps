@@ -31,7 +31,7 @@
     </div>
     @endif
 
-    <h1 class="post_title">Upload Photos</h1>
+    <h1 class="post_title">Photos</h1>
 
     <div>
         <form action="{{ url('add_photo') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">

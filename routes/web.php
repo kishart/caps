@@ -70,3 +70,10 @@ Route::post('add_photo', [PostController::class, 'add_photo'])->name('add_photo'
 Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
 Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
 Route::post('/update_post/{id}', [PostController::class, 'update_post'])->name('update_post');
+
+
+Route::post('/request-feedback/{id}', [AppointmentController::class, 'requestFeedback'])->name('request.feedback');
+Route::get('/feedback-form/{id}', [AppointmentController::class, 'showFeedbackForm'])->name('feedback.form');
+Route::post('/submit-feedback/{id}', [AppointmentController::class, 'submitFeedback'])->name('submit.feedback');
+
+Route::get('/admin/feedbacks', [AppointmentController::class, 'showFeedbacks'])->name('admin.feedbacks');

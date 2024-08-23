@@ -76,7 +76,7 @@
             <li><a href="{{ asset('home') }}">Home</a></li>
             <li><a href="{{ asset('ucalen') }}">Calendar</a></li>
             <li><a href="{{ asset('photos') }}">Photos</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Message</a></li>
             
 
             <div class="dropdown">
