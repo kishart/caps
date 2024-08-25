@@ -33,7 +33,8 @@
             <div class="row">
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                    <input type="email" id="email" name="email" placeholder="Email" value="{{ auth()->user()->email }}" readonly>
+            
                     @error('email')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}
@@ -42,7 +43,7 @@
                 </div>
                 <div>
                     <label for="phone">Phone Number</label>
-                    <input type="text" id="phone" name="phone" placeholder="Phone Number" value="{{ old('phone') }}">
+                    <input type="text" id="phone" name="phone" placeholder="Phone Number" value="{{ auth()->user()->phone }}" readonly>
                     @error('phone')
                         <div class="alert alert-danger" role="alert">
                             {{ $message }}

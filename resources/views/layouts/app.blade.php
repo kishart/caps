@@ -82,7 +82,7 @@
             <div class="dropdown">
                 <span class="material-symbols-outlined">account_circle</span>
                 <div class="dropdown-content">
-                  <a href="#">Profile</a>
+                  <a href="{{ asset('profile') }}">Profile</a>
                   <a href="{{ asset('myappoint') }}">My Appointments</a>
                   <a href="#" onclick="logout()">Logout</a>
                 </div>

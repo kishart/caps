@@ -61,8 +61,34 @@ class HomeController extends Controller
         return view('admin.listappoint');
     }
     
-
-
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('user.profile', compact('user'));
+    }
+    
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+    
+        // Validate the input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
+            'phone' => 'nullable|string|max:15',
+        ]);
+    
+        // Update the user's information
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->phone = $request->phone; 
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Profile updated successfully.');
+    }
+    
 
     
 }

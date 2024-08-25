@@ -85,3 +85,8 @@ Route::get('listappoint', [HomeController::class, 'listappoint'])->middleware('a
 
 Route::get('/admin/get-feedback/{id}', [AppointmentController::class, 'getFeedback'])->name('get.feedback');
 Route::get('/myappointments', [AppointmentController::class, 'myAppointments'])->name('user.myappoint');
+
+
+// web.php
+Route::get('/profile', [HomeController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
