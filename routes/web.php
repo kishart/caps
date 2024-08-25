@@ -83,3 +83,5 @@ Route::post('/submit-feedback/{id}', [AppointmentController::class, 'submitFeedb
 Route::get('listappoint', [HomeController::class, 'listappoint'])->middleware('auth', 'admin');
 
 
+Route::get('/admin/get-feedback/{id}', [AppointmentController::class, 'getFeedback'])->name('get.feedback');
+Route::get('/myappointments', [AppointmentController::class, 'myAppointments'])->name('user.myappoint');

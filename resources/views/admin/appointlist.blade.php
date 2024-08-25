@@ -1,7 +1,7 @@
 @extends('layouts.adminsidebar')
 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 @section('content')
 <style>
     .containera {
@@ -172,6 +172,10 @@
     th {
         border-bottom: 1px solid #000; /* Apply a strong border to the bottom of the thead */
     }
+    #actionSelect option {
+        text-align: left;
+    }
+
 </style>
 
 
@@ -215,19 +219,47 @@
                         <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
 
                         <td>
-                            <select id="actionSelect" class="custom-select" onchange="handleSelectChange(this)">
+                            <select id="actionSelect" class="custom-select" onchange="handleSelectChange(this)" style="height: 42.5px; width: 130px; border-radius: 15px; background-color: rgb(235, 229, 229); padding: 10px 15px; font-size: 16px; border: none; text-align: right;">
                                 <option class="option" value="" disabled selected>{{ ucfirst($appointment->status) }}</option>
                                 <option class="option" value="{{ url('admin/accepted/' . $appointment->id) }}">Approved</option>
                                 <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}">Declined</option>
                             </select>
+                            
+                            
                         </td>
 
                         <td>
-                            <form action="{{ route('request.feedback', $appointment->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-primary">Request Feedback</button>
-                            </form>
+                            @if ($appointment->feedback_requested)
+                                <!-- View Feedback Button -->
+                                <button type="button" class="btn btn-success open-feedback-modal" data-id="{{ $appointment->id }}" style=" width: 100px;border-radius: 15px; color:black; background-color: rgb(106, 233, 106); border: none; display: flex; align-items: center; justify-content: center; padding: 10px;">
+                                    <span class="material-symbols-outlined" style="font-size: 21px; margin-right: 18px;">
+                                        visibility
+                                    </span>
+                                    View
+                                </button>
+                                
+                                <!-- Modal Structure -->
+                                <div id="feedback-modal-{{ $appointment->id }}" class="w3-modal">
+                                    <div class="w3-modal-content">
+                                        <div class="w3-container">
+                                            <span class="close-feedback-modal w3-button w3-display-topright"
+                                                  data-modal-id="feedback-modal-{{ $appointment->id }}">&times;</span>
+                                            <h1>This is feedback from customer</h1>
+                                            <p id="feedback-content-{{ $appointment->id }}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                <form action="{{ route('request.feedback', $appointment->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-primary" style="width: 100px;border-radius: 15px; color:black; background-color: rgb(235, 229, 229); border: none; display: flex; align-items: center; justify-content: center; padding: 10px;"> 
+                                        <span class="material-symbols-outlined" style="font-size: 21px; margin-right: 8px;">
+                                        today
+                                    </span>Request </button>
+                                </form>
+                            @endif
                         </td>
+                        
 
                         <td>
                             <div class="dropdown">
@@ -328,8 +360,51 @@
         });
 
 
+//modal sa feedback
+        document.addEventListener('DOMContentLoaded', function() {
+        // Open feedback modal
+        document.querySelectorAll('.open-feedback-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                var id = this.getAttribute('data-id');
+                var modal = document.getElementById(`feedback-modal-${id}`);
 
+                // Fetch feedback via AJAX
+                fetch(`{{ url('/admin/get-feedback/') }}/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.feedback) {
+                            document.getElementById(`feedback-content-${id}`).textContent = data.feedback;
+                        }
+                    });
 
+                // Show the modal
+                if (modal) {
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Close feedback modal
+        document.querySelectorAll('.close-feedback-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                var modalId = this.getAttribute('data-modal-id');
+                var modal = document.getElementById(modalId);
+
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Close modal when clicking outside of modal content
+        window.addEventListener('click', function(event) {
+            document.querySelectorAll('.w3-modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    });
 
     </script>
 @endsection

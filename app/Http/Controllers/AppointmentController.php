@@ -159,6 +159,8 @@ public function declined($id){
         }
 
     }
+
+    
     public function payment()
     {
         return view('user.payment');
@@ -174,6 +176,8 @@ public function declined($id){
     return redirect()->back()->with('success', 'Feedback request sent successfully.');
 }
 
+
+
 public function showFeedbackForm($id)
 {
     $appointment = Appointment::find($id);
@@ -184,10 +188,28 @@ public function showFeedbackForm($id)
 public function submitFeedback(Request $request, $id)
 {
     $appointment = Appointment::find($id);
+
+    if (!$appointment) {
+        return redirect()->back()->with('error', 'Appointment not found.');
+    }
+
     $appointment->feedback = $request->feedback;
     $appointment->save();
 
-    return redirect()->route('user.myappoint')->with('success', 'Thank you for your feedback!');
+    return redirect()->back()->with('success', 'Thank you for your feedback.');
+}
+
+public function getFeedback($id)
+{
+    $appointment = Appointment::find($id);
+    if (!$appointment) {
+        return response()->json(['error' => 'Appointment not found'], 404);
+    }
+
+    // Assuming feedback is stored in a field called `feedback`
+    $feedback = $appointment->feedback ?? 'No feedback provided yet.';
+
+    return response()->json(['feedback' => $feedback]);
 }
 
 }
