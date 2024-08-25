@@ -17,10 +17,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('/photos', [PostController::class, 'photos'])->name('photos');
 
-Route::get('admin/ahome', [HomeController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
+Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
 
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
-Route::get('appointlist', [HomeController::class, 'appointlist'])->middleware('auth', 'admin');
+Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
 Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 
 Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
@@ -34,7 +34,6 @@ Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
 
 
-Route::get('/appointlist', [AppointmentController::class, 'appointlist']);
 
 
 Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment']);

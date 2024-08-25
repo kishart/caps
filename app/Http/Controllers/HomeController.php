@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class HomeController extends Controller
@@ -25,17 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::id()){
+        if (Auth::id()) {
             $usertype = Auth()->user()->usertype;
             \Log::info('User Type: ' . $usertype); // Log the user type for debugging
-    
-            if($usertype == 'user'){
+
+            if ($usertype == 'user') {
                 return view('user.home');
-            }
-            elseif($usertype == 'admin'){
-                return view('admin.ahome');
-            }
-            else{
+            } elseif ($usertype == 'admin') {
+                // Fetch all appointments for admin users
+                $appointments = Appointment::all();
+                return view('admin.ahome', compact('appointments'));
+            } else {
                 return redirect()->back();
             }
         }
@@ -45,9 +46,7 @@ class HomeController extends Controller
         return view('admin.uphotos');
     }
 
-    public function appointlist(){
-        return view('admin.appointlist');
-    }
+   
     public function msg(){
         return view('admin.msg');
     }
@@ -57,9 +56,6 @@ class HomeController extends Controller
     }
 
 
-    public function listappoint(){
-        return view('admin.listappoint');
-    }
     
     public function editProfile()
     {
@@ -89,6 +85,7 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
     
+
 
     
 }
