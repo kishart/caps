@@ -90,26 +90,14 @@
             <div class="modal__content">
                 <h1>Husnie Photography Services Terms and Conditions</h1>
                 <p style="padding:20px; color:#826c5f;">
-                    <b>1. Booking Deposit and Payment:</b> The client shall make a booking fee as per contract to retain the
-                    studio to perform the services specified in the contract.
-                    <br><b>2. Cancellation:</b> If the client cancels this agreement more than six (6) calendar days before the photo
-                    shooting day, any booking fee paid to the photographer shall be refunded in full if the photographer
-                    is able to rebook the same date. If the photographer is not able to secure another client for the
-                    date, or if the cancellation occurs less than six (6) calendar days before the portrait date, the
-                    client forfeits the booking fee.
-                    <br><b>3. Photographic Materials and Copyright:</b> All photographic materials, such as original negatives,
-                    photos, or slides, shall be the exclusive property of the photographer. The photographer shall own
-                    the copyright to all images created and may use the work for samples, contests, exhibitions,
-                    advertising, and self-promotion. Usage outside the bounds of this agreement will require the
-                    client’s consent.
-                    <br><b>4. Client’s Usage:</b> The client is obtaining prints for personal use only and shall not sell said prints
-                    or authorize any reproductions thereof by parties other than the photographer.
-                    <br><b>5. Social Media:</b> This clause applies to all social media, including Facebook and blogs. When published
-                    online, it is required that a citation of the photographer be made. The client agrees that they will
-                    under no circumstances alter any photographs that are placed in public on the internet. The client
-                    agrees to be responsible for any family member or friend who posts our photographs online and agrees
-                    that they cannot be cropped (with the exception of the forced cropping for Facebook’s timeline),
-                    altered in color, or edited in any way.
+                    1. All transactions with Husnie Photography require full payment in advance before any goods or services are rendered.
+                    <br> <br>2. A non-refundable down payment of 50% is required for all transactions. This down payment must be made upon booking or before the commencement of services.
+                    <br> <br>3. Full payment, inclusive of the downpayment and any applicable transportation costs, can be received before or after the scheduled commencement of services.
+                    <br> <br>4. Failure to adhere to the payment terms may result in the cancellation or delay of the transaction.
+
+                    <br>  <br>5. Clients are responsible for covering or reimbursing Husnie Photography for any transportation costs associated with the delivery or provision of goods/services outside Ozamiz City. The transportation cost details will be communicated and agreed upon before finalizing the transaction.
+                    <br>     <br>6. Husnie Photography operates on a <strong>"First Booking, First Serve"</strong>  basis. This means that service availability or product allocation is prioritized based on the order in which bookings are confirmed and payments are received.
+
                 </p>
                 <div class="inpuch">
                     <input type="checkbox" id="termsCheckbox" onclick="toggleSubmitButton()"> I Agree</input>
