@@ -40,7 +40,7 @@
         <tr align="center">
             <td>{{ $appointment->details }}</td>
             <td>{{ $appointment->date }}</td>
-            <td>{{ $appointment->time }}</td>
+            <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
             <td>
                 @if(strtolower($appointment->status) == 'approved')
                     <a href="{{ url('payment') }}" style="color: green; font-weight:bold; text-decoration: underline;">

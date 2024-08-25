@@ -30,7 +30,7 @@
         aria-label="Sidebar">
         <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
             <a href="#ahome" class="flex items-center ps-2.5 mb-5">
-                <img src="{{ asset('images/hplogo.png') }}" class="h-15 w-15 me-3" alt="logo">
+                <img src="{{ asset('images/hplogo.jpg') }}" class="h-15 w-15 me-3" alt="logo">
             </a>
             <ul class="space-y-2 font-medium">
                 <li class="hover-color-custom">
