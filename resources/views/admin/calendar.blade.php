@@ -34,7 +34,7 @@
             </a>
             <ul class="space-y-2 font-medium">
                 <li class="hover-color-custom">
-                    <a href="{{ asset('ahome') }}"
+                    <a href="{{ asset('home') }}"
                         class="flex items-center p-2 font-color-custom group group-hover-custom">
                         <span class="material-symbols-rounded color-custom group group-hover-custom"
                             aria-hidden="true">today</span>

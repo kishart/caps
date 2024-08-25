@@ -73,7 +73,7 @@
                     </div>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="{{url('ahome')}}" class="btn btn-danger">Back</a>
+                    <a href="{{url('home')}}" class="btn btn-danger">Back</a>
                 </form>
             </div>
         </div>
