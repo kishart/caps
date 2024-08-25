@@ -184,13 +184,17 @@ public function showFeedbackForm($id)
     return view('user.feedback_form', compact('appointment'));
 }
 
-
 public function submitFeedback(Request $request, $id)
 {
     $appointment = Appointment::find($id);
 
     if (!$appointment) {
         return redirect()->back()->with('error', 'Appointment not found.');
+    }
+
+    // Check if feedback already exists
+    if ($appointment->feedback) {
+        return redirect()->back()->with('error', 'You have already submitted feedback for this appointment.');
     }
 
     $appointment->feedback = $request->feedback;
