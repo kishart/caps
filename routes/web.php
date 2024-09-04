@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\FileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,11 +28,6 @@ Route::get('admin/calendar', [CalendarController::class, 'addCalendar']);
 Route::post('save-calendar', [CalendarController::class, 'saveCalendar']);
 Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');
 Route::get('ucalen', [CalendarController::class, 'ucalen']);
-
-
-
-
-
 
 
 
@@ -85,7 +80,9 @@ Route::get('listappoint', [HomeController::class, 'listappoint'])->middleware('a
 Route::get('/admin/get-feedback/{id}', [AppointmentController::class, 'getFeedback'])->name('get.feedback');
 Route::get('/myappointments', [AppointmentController::class, 'myAppointments'])->name('user.myappoint');
 
-
-// web.php
 Route::get('/profile', [HomeController::class, 'editProfile'])->name('profile.edit');
 Route::put('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
+
+
+Route::get('storage', [HomeController::class, 'storage'])->middleware('auth', 'admin');
+Route::resource('files', FileController::class);

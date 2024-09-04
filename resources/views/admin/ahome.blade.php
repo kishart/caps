@@ -262,16 +262,17 @@
                         
 
                         <td>
-                            <div class="dropdown">
+                            <div class="dropdown" >
                                 <span style="display: inline-block; padding: 3px; border: 1px solid rgb(8, 8, 10); border-radius: 10px; cursor: pointer;" class="material-symbols-outlined" onclick="toggleMenu(this)">
                                     more_horiz
                                 </span>
-                                <div class="dropdown-menu" style="display: none; position: absolute; background-color: white; box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); border-radius: 5px; z-index: 1;">
-                                    <a href="{{ url('admin/editappoint/' . $appointment->id) }}" class="action edit" style="padding: 10px; display: block; color: #000; text-decoration: none;">
-                                        <span class="material-symbols-outlined" style="color: #ac6f53;">edit_note</span>
+                                <div class="dropdown-menu" style="display: none; position: absolute; background-color: white;  border-radius: 10px; z-index: 1;border-color: black;">
+                                    <a href="{{ url('admin/editappoint/' . $appointment->id) }}" class="action edit" style="padding: 10px; display: block; background-color:white; color: #000; text-decoration: none;">
+                                        <span class="material-symbols-outlined">edit_note</span>
                                         Edit
                                     </a>
-                                    <a href="{{ url('admin/delete-appointment/' . $appointment->id) }}" class="action delete" style="padding: 10px; display: block; color: red; text-decoration: none;">
+                                    <hr>
+                                    <a href="{{ url('admin/delete-appointment/' . $appointment->id) }}" class="action delete" style="padding: 10px; display: block; background-color:white; color: #000; text-decoration: none;">
                                         <span class="material-symbols-outlined">delete</span> Delete
                                     </a>
                                 </div>
