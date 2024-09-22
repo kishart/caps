@@ -86,7 +86,7 @@
             font-size: 22px; /* Maintain font size */
         }
       .home{
-          margin-left: 60%;
+          margin-left: 58%;
         }
     </style>
 </head>
