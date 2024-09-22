@@ -23,7 +23,6 @@ class PostController extends Controller
 
         $post = new Post;
         $post->title = $request->title;
-        $post->post_status = 'active';
 
         if ($request->hasFile('image1')) {
             $imagename1 = time().'_1.'.$request->image1->getClientOriginalExtension();

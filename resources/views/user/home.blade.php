@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.unavbar')
 
 @section('content')
-<h1>im home page</h1>
+    <h1>Home Page</h1>
+    <p>Welcome to Husnie Photography!</p>
 @endsection
