@@ -36,6 +36,7 @@
             align-items: center;
             width: 100vw;
             height: 100vh;
+            margin-top: 5%;
         }
 
         .calendar-container {
