@@ -211,6 +211,14 @@
                                     <p>Email: <span id="modal-email">{{ $appointment->email }}</span></p>
                                     <p>Phone: <span id="modal-phone">{{ $appointment->phone }}</span></p>
                                     <p>Details: <span id="modal-details">{{ $appointment->details }}</span></p>
+
+                                    <a href="{{ asset('msg') }}"
+                                    class="flex items-center p-2 font-color-custom group group-hover-custom">
+                                    <span class="material-symbols-rounded color-custom group group-hover-custom"
+                                        aria-hidden="true">sms</span>
+                                    <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
+                                </a>
+                                
                                 </div>
                             </div>
                         </div>

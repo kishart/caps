@@ -92,8 +92,13 @@
     </div>
 </aside>
 
-    <!-- Content section placeholder -->
-    @yield('content')
+
+
+<div class="flex  justify-center">
+        @yield('content')
+</div>
+
+
 
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

@@ -86,3 +86,5 @@ Route::put('/profile', [HomeController::class, 'updateProfile'])->name('profile.
 
 Route::get('storage', [HomeController::class, 'storage'])->middleware('auth', 'admin');
 Route::resource('files', FileController::class);
+
+

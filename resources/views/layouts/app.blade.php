@@ -74,16 +74,16 @@
             padding-top: 80px; /* Adjust based on navbar height */
         }
         #hamburger {
-            position: absolute; /* Make it absolute */
+            position: absolute;
             top: 20px; /* Adjust vertical position */
             right: 10%; /* Adjust horizontal position */
             margin-left: auto; /* Align to the right */
         }
         .brand-link {
-            position: absolute; /* Keep it in a fixed position */
-            top: 20px; /* Adjust vertical position */
-            left: 10%; /* Adjust horizontal position */
-            font-size: 22px; /* Maintain font size */
+            position: absolute; 
+            top: 20px; 
+            left: 10%; 
+            font-size: 22px;
         }
       .home{
           margin-left: 58%;
@@ -132,8 +132,9 @@
       
     </nav>
 
-    <!-- Content section placeholder -->
-    @yield('content')
+    <div class="container mx-auto py-12">
+        @yield('content')
+    </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
