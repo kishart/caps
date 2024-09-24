@@ -211,17 +211,32 @@
                                     <p>Email: <span id="modal-email">{{ $appointment->email }}</span></p>
                                     <p>Phone: <span id="modal-phone">{{ $appointment->phone }}</span></p>
                                     <p>Details: <span id="modal-details">{{ $appointment->details }}</span></p>
-
-                                    <a href="{{ asset('msg') }}"
-                                    class="flex items-center p-2 font-color-custom group group-hover-custom">
-                                    <span class="material-symbols-rounded color-custom group group-hover-custom"
-                                        aria-hidden="true">sms</span>
-                                    <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
-                                </a>
-                                
+                        
+                                    <!-- Button to open the message modal -->
+                                    <button class="w3-button w3-blue open-msg-modal" data-id="{{ $appointment->id }}">Send Message</button>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Message Modal -->
+                       <!-- Message Modal in ahome.blade.php (Admin Side) -->
+<div id="msg-modal-{{ $appointment->id }}" class="w3-modal">
+    <div class="w3-modal-content">
+        <div class="w3-container">
+            <span class="close-msg-modal w3-button w3-display-topright" data-modal-id="msg-modal-{{ $appointment->id }}">&times;</span>
+            <h5>Send Message to {{ $appointment->fname }}</h5>
+
+            <!-- Message Form -->
+            <form action="{{ route('send.message', $appointment->id) }}" method="POST">
+                @csrf
+                <textarea name="message" rows="4" class="w3-input" placeholder="Type your message here"></textarea>
+                <button type="submit" class="w3-button w3-green w3-margin-top">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+                        
 
                         <td>{{ $appointment->date }}</td>
                         <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
@@ -414,6 +429,40 @@
             });
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Open message modal
+    document.querySelectorAll('.open-msg-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            var modal = document.getElementById(`msg-modal-${id}`);
+            if (modal) {
+                modal.style.display = 'block';
+            }
+        });
+    });
+
+    // Close message modal
+    document.querySelectorAll('.close-msg-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            var modalId = this.getAttribute('data-modal-id');
+            var modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+    // Close modal when clicking outside modal content
+    window.addEventListener('click', function(event) {
+        document.querySelectorAll('.w3-modal').forEach(modal => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+});
+
 
     </script>
 @endsection

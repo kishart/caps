@@ -88,3 +88,14 @@ Route::get('storage', [HomeController::class, 'storage'])->middleware('auth', 'a
 Route::resource('files', FileController::class);
 
 
+
+Route::get('umsg', [HomeController::class, 'umsg'])->middleware('auth');
+
+Route::get('contact', [HomeController::class, 'contact'])->middleware('auth');
+
+
+// Route to display messages for a specific appointment
+Route::get('/appointment/{id}/messages', [AppointmentController::class, 'showMessages'])->name('show.messages');
+
+// Route to send a message for a specific appointment
+Route::post('/appointment/{id}/messages', [AppointmentController::class, 'sendMessage'])->name('send.message');

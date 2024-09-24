@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fname', 'email', 'phone', 'date', 'time', 'details', 'feedback_requested', 'feedback_given', 'status', 'user_id'];
+    protected $fillable = ['fname', 'email', 'phone', 'date', 'time', 'details', 'feedback_requested', 'feedback_given', 'status', 'user_id', 'appointment_id', 'message'];
 
     // Define the relationship with Feedback
     public function feedbacks()
@@ -20,6 +20,23 @@ class Appointment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+
+    public function messages()
+{
+    return $this->hasMany(Message::class);
+}
+
+public function message()
+{
+    return $this->hasOne(Message::class);
+}
+
 }
 
 

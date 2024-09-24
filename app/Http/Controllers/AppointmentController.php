@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
+
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Log;
@@ -215,5 +217,63 @@ public function getFeedback($id)
 
     return response()->json(['feedback' => $feedback]);
 }
+
+
+
+
+public function sendMessage(Request $request, $appointmentId)
+{
+    // Validate the request
+    $request->validate([
+        'message' => 'required|string|max:255',
+    ]);
+
+    // Find the appointment
+    $appointment = Appointment::find($appointmentId);
+
+    if ($appointment) {
+        // Create a new message linked to the appointment
+        $message = new Message();
+        $message->appointment_id = $appointment->id;
+        $message->message = $request->input('message'); 
+        $message->save();
+
+        return redirect()->back()->with('success', 'Message sent successfully.');
+    } else {
+        return redirect()->back()->with('error', 'Appointment not found.');
+    }
+}
+
+
+    // Method to retrieve messages for a specific appointment
+    public function getMessages($id)
+    {
+        $appointment = Appointment::find($id);
+
+        if (!$appointment) {
+            return response()->json(['error' => 'Appointment not found'], 404);
+        }
+
+        $messages = $appointment->messages; // Retrieve associated messages
+
+        return view('user.messages', compact('appointment', 'messages')); // Display in a view
+    }
+
+    public function showMessages($appointment_id)
+    {
+        // Fetch the appointment by ID
+        $appointment = Appointment::find($appointment_id);
+    
+        if (!$appointment) {
+            return redirect()->back()->with('error', 'Appointment not found.');
+        }
+    
+        // Get all messages associated with the appointment
+        $messages = $appointment->messages;
+    
+        // Return the view and pass the appointment and its messages
+        return view('user.messages', compact('appointment', 'messages'));
+    }
+    
 
 }

@@ -90,6 +90,14 @@ class HomeController extends Controller
         return view('admin.storage');
     }
 
+ 
+    public function umsg(){
+        return view('user.umsg');
+    }
+    public function contact(){
+        return view('user.contact');
+    }
+
 
  
 }

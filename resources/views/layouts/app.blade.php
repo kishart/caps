@@ -99,7 +99,7 @@
                 <li><a class="home" href="{{ asset('home') }}">Home</a></li>
                 <li><a href="{{ asset('ucalen') }}">Calendar</a></li>
                 <li><a href="{{ asset('photos') }}">Photos</a></li>
-                <li><a href="#">Message</a></li>
+                <li><a href="{{ asset('contact') }}">Contact</a></li>
                 <div class="dropdown">
                     <span class="material-symbols-outlined">account_circle</span>
                     <div class="dropdown-content">
