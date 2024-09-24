@@ -27,10 +27,7 @@ class Appointment extends Model
         return $this->belongsTo(Appointment::class);
     }
 
-    public function messages()
-{
-    return $this->hasMany(Message::class);
-}
+ 
 
 public function message()
 {
