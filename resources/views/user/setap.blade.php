@@ -1,4 +1,4 @@
-@extends('layouts.unavbar')
+@extends('layouts.app')
 
 @section('content')
 
