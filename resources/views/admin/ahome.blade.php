@@ -189,7 +189,7 @@
                     <th>Time</th>
                     <th>Status</th>
                     <th>Feedback</th>
-                    <th>Action</th>
+                    <th>More</th>
                 </tr>
             </thead>
             <tbody>
@@ -230,7 +230,10 @@
             <form action="{{ route('send.message', $appointment->id) }}" method="POST">
                 @csrf
                 <textarea name="message" rows="4" class="w3-input" placeholder="Type your message here"></textarea>
-                <button type="submit" class="w3-button w3-green w3-margin-top">Send</button>
+                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                    <button type="submit" class="w3-button w3-green">Send</button>
+                </div>
+                
             </form>
         </div>
     </div>

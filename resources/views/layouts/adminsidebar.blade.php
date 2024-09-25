@@ -36,7 +36,7 @@
 
 <body>
     <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " style="background-color: #efe6dd;"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " style="background-color: #a36361;"
     aria-label="Sidebar">
     <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
         <a href="#ahome" class="flex items-center ps-2.5 mb-5">
