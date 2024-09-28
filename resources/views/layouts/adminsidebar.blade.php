@@ -32,6 +32,7 @@
             'GRAD' 0,
             'opsz' 40
     }
+   
 </style>
 
 <body>
@@ -101,6 +102,7 @@
 
 
     <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 
 </html>
