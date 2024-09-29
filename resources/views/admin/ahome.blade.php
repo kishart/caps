@@ -89,14 +89,66 @@
 
         .appointment-table th:first-child,
         .appointment-table td:first-child {
-            border-top-left-radius: 22px; /* Top left corner */
-            border-bottom-left-radius: 22px; /* Bottom left corner */
+            border-top-left-radius: 22px;
+            /* Top left corner */
+            border-bottom-left-radius: 22px;
+            /* Bottom left corner */
         }
 
         .appointment-table th:last-child,
         .appointment-table td:last-child {
-            border-top-right-radius: 22px; /* Top right corner */
-            border-bottom-right-radius: 22px; /* Bottom right corner */
+            border-top-right-radius: 22px;
+            /* Top right corner */
+            border-bottom-right-radius: 22px;
+            /* Bottom right corner */
+        }
+
+        .status,
+        .feedback,
+        .action {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .status.in-progress {
+            background-color: #ccc;
+        }
+
+        .status.completed {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #actionSelect {
+            border-radius: 15px;
+            padding-left: 15px;
+            padding-right: 45px;
+            background-color: rgb(235, 229, 229);
+        }
+
+        #actionSelect option {
+            border-radius: 15px;
+            padding: 10px;
+            background-color: #ffffff;
+            color: #333;
+            text-align: left;
+        }
+
+        .custom-select {
+            height: 42.5px;
+            width: 130px;
+            border-radius: 15px;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            text-align: right;
+            /* Align text to the right */
+            appearance: none;
+            /* Remove default select styling */
+            background-color: rgb(235, 229, 229);
+            /* Default background for select */
         }
     </style>
 
@@ -126,18 +178,34 @@
                     <th>More</th>
                 </tr>
             </thead>
-            
+
             <tbody>
                 @foreach ($appointments as $appointment)
-                <tr>
-                    <td>{{ $appointment->fname }}</td>
-                    <td>{{ $appointment->date }}</td>
-                    <td>{{ $appointment->time }}</td>
-                    <td>{{ $appointment->status }}</td>
-                    <td>{{ $appointment->message }}</td>
-                    <td>{{ $appointment->feedback }}</td>
-                    <td><a href="#">More</a></td>
-                </tr>
+                    <tr>
+                        <td>{{ $appointment->fname }}</td>
+                        <td>{{ $appointment->date }}</td>
+                        <td>{{ $appointment->time }}</td>
+                        <td>
+                            <label for="actionSelect" style="border-radius: 30%; " class="sr-only">Action</label>
+                            <select id="actionSelect" class="custom-select" onchange="handleSelectChange(this)"
+                                style="height: 42.5px; width: 130px; padding: 10px 15px;  font-size: 16px; border: none; text-align: right; background-color: rgb(235, 229, 229);">
+                                <option class="option" value="" disabled selected
+                                    style="background-color: rgb(235, 229, 229); border-radius: 10%;">
+                                    {{ ucfirst($appointment->status) }}</option>
+                                <option class="option" value="{{ url('admin/accepted/' . $appointment->id) }}"
+                                    style="background-color: green; color: white; border-radius: 10%;">Approved</option>
+                                <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}"
+                                    style="background-color: red; color: white; border-radius: 10%;">Declined</option>
+                            </select>
+
+                        </td>
+
+                        <td>
+                            <p><b><a href="default.asp" target="_blank">Send a Message</a></b></p>
+                        </td>
+                        <td>{{ $appointment->feedback }}</td>
+                        <td><a href="#">More</a></td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
@@ -171,6 +239,21 @@
                         rows[i].style.display = "none"; // Hide row
                     }
                 }
+            }
+        }
+
+
+        function handleSelectChange(selectElement) {
+            var selectedOption = selectElement.options[selectElement.selectedIndex];
+            var selectedValue = selectedOption.value;
+
+            if (selectedValue) {
+                // Update the text of the selected option
+                selectElement.options[0].text = selectedOption.text;
+                selectElement.options[0].disabled = false;
+
+                // Redirect to the selected URL
+                window.location.href = selectedValue;
             }
         }
     </script>
