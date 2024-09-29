@@ -57,7 +57,7 @@ li.logout {
         img {
             width: 160px;
             height: 175px;
-            margin-top: 15%;
+            margin-top: 5%;
         }
 
         ul li a:hover {
@@ -66,7 +66,7 @@ li.logout {
     </style>
 </head>
 
-<body>
+<body class="bg-white">
 
     <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
         type="button"
@@ -149,8 +149,7 @@ li.logout {
 
         </div>
     </aside>
-
-    <div class="flex  justify-center">
+    <div class="p-4 sm:ml-60">
         @yield('content')
     </div>
 
