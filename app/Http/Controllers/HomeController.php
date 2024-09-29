@@ -98,10 +98,6 @@ class HomeController extends Controller
         return view('user.contact');
     }
 
-    public function asidebartesting(){
-        return view('layouts.asidebartesting');
-    }
-
-
+ 
  
 }

@@ -1,6 +1,6 @@
-<!doctype html>
-<html>
+@extends('layouts.adminsidebar')
 
+@section('content')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,62 +25,7 @@
 </head>
 
 <body>
-    <aside id="logo-sidebar"
-        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 " style="background-color: #efe6dd;"
-        aria-label="Sidebar">
-        <div class="bg h-full px-3 py-4 overflow-y-auto dark:bg-gray-800">
-            <a href="#ahome" class="flex items-center ps-2.5 mb-5">
-                <img src="{{ asset('images/hplogo.jpg') }}" class="h-15 w-15 me-3" alt="logo">
-            </a>
-            <ul class="space-y-2 font-medium">
-                <li class="hover-color-custom">
-                    <a href="{{ asset('home') }}"
-                        class="flex items-center p-2 font-color-custom group group-hover-custom">
-                        <span class="material-symbols-rounded color-custom group group-hover-custom"
-                            aria-hidden="true">today</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Appointment List</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ asset('uphotos') }}"
-                        class="flex items-center p-2 font-color-custom group group-hover-custom">
-                        <span class="material-symbols-rounded color-custom group group-hover-custom"
-                            aria-hidden="true">publish</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Photos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ asset('calendar') }}"
-                        class="flex items-center p-2 font-color-custom group group-hover-custom">
-                        <span class="material-symbols-rounded color-custom group group-hover-custom"
-                            aria-hidden="true">calendar_month</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ asset('msg') }}"
-                        class="flex items-center p-2 font-color-custom group group-hover-custom">
-                        <span class="material-symbols-rounded color-custom group group-hover-custom"
-                            aria-hidden="true">sms</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="flex items-center p-2 font-color-custom group group-hover-custom">
 
-                        <span class="material-symbols-rounded color-custom group group-hover-custom"
-                            aria-hidden="true">logout</span>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
-                    </a>
-                </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </ul>
-        </div>
-    </aside>
 
 
     <div class="p-4 sm:ml-64">
@@ -202,4 +147,6 @@
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </body>
 
-</html>
+
+
+@endsection
