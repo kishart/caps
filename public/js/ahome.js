@@ -112,33 +112,6 @@ for (var i = 0; i < dropdowns.length; i++) {
 };
 
 
-function showMessageModal(appointmentId) {
-    const modal = document.getElementById(`message-modal-${appointmentId}`);
-    modal.classList.remove('hidden');
-}
-
-function hideMessageModal(appointmentId) {
-    const modal = document.getElementById(`message-modal-${appointmentId}`);
-    modal.classList.add('hidden');
-}
-function showDetailsModal(appointmentId) {
-    const modal = document.getElementById(`details-modal-${appointmentId}`);
-    modal.classList.remove('hidden'); // Show the modal
-    modal.classList.add('flex'); // Ensure modal is displayed as flex for centering
-
-    // Optional: Prevent scrolling of the background content
-    document.body.style.overflow = 'hidden';
-}
-
-function hideDetailsModal(appointmentId) {
-    const modal = document.getElementById(`details-modal-${appointmentId}`);
-    modal.classList.add('hidden'); // Hide the modal
-    modal.classList.remove('flex'); // Reset flex display
-
-    // Optional: Restore scrolling of the background content
-    document.body.style.overflow = 'auto';
-}
-
 function toggleMenu(element) {
     // Hide any open dropdown menus
     const allDropdowns = document.querySelectorAll('.dropdown-menu');
