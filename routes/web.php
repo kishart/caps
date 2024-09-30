@@ -99,6 +99,7 @@ Route::get('/appointment/{id}/messages', [AppointmentController::class, 'showMes
 
 // Route to send a message for a specific appointment
 Route::post('/appointment/{id}/messages', [AppointmentController::class, 'sendMessage'])->name('send.message');
+Route::post('/send-message/{id}', [AppointmentController::class, 'sendMessage'])->name('send.message');
 
 
 Route::get('calendartest', [HomeController::class, 'calendartest'])->middleware('auth');

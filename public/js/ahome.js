@@ -110,3 +110,14 @@ for (var i = 0; i < dropdowns.length; i++) {
 }
 }
 };
+
+
+function showMessageModal(appointmentId) {
+    const modal = document.getElementById(`message-modal-${appointmentId}`);
+    modal.classList.remove('hidden');
+}
+
+function hideMessageModal(appointmentId) {
+    const modal = document.getElementById(`message-modal-${appointmentId}`);
+    modal.classList.add('hidden');
+}
