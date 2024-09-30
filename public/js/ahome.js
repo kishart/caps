@@ -121,3 +121,47 @@ function hideMessageModal(appointmentId) {
     const modal = document.getElementById(`message-modal-${appointmentId}`);
     modal.classList.add('hidden');
 }
+function showDetailsModal(appointmentId) {
+    const modal = document.getElementById(`details-modal-${appointmentId}`);
+    modal.classList.remove('hidden'); // Show the modal
+    modal.classList.add('flex'); // Ensure modal is displayed as flex for centering
+
+    // Optional: Prevent scrolling of the background content
+    document.body.style.overflow = 'hidden';
+}
+
+function hideDetailsModal(appointmentId) {
+    const modal = document.getElementById(`details-modal-${appointmentId}`);
+    modal.classList.add('hidden'); // Hide the modal
+    modal.classList.remove('flex'); // Reset flex display
+
+    // Optional: Restore scrolling of the background content
+    document.body.style.overflow = 'auto';
+}
+
+function toggleMenu(element) {
+    // Hide any open dropdown menus
+    const allDropdowns = document.querySelectorAll('.dropdown-menu');
+    allDropdowns.forEach((dropdown) => {
+        if (dropdown !== element.nextElementSibling) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    // Toggle the current dropdown
+    const dropdownMenu = element.nextElementSibling;
+    dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Call this function when clicking outside the dropdown to close it
+document.addEventListener('click', function(event) {
+    const dropdowns = document.querySelectorAll('.dropdown-menu');
+    dropdowns.forEach((dropdown) => {
+        const toggleButton = dropdown.previousElementSibling;
+        if (!toggleButton.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+});
+
+

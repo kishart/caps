@@ -273,6 +273,9 @@ public function sendMessage(Request $request, $appointmentId)
     
         // Return the view and pass the appointment and its messages
         return view('user.messages', compact('appointment', 'messages'));
+
+        $appointments = Appointment::with('message')->get();
+
     }
     
 
