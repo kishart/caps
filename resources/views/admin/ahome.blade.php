@@ -3,7 +3,7 @@
 @section('content')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
+
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -42,50 +42,72 @@
                 @foreach ($appointments as $appointment)
                     <tr>
                         <td>
-                            <a href="#" class="open-modal" data-id="{{ $appointment->id }}">{{ $appointment->fname }}</a>
+                            <a href="#" class="open-modal"
+                                data-id="{{ $appointment->id }}">{{ $appointment->fname }}</a>
                         </td>
                         <div id="modal-{{ $appointment->id }}" class="w3-modal">
-                            <div class="w3-modal-content">
+                            <div class="w3-modal-content" style="border-radius:20px; padding:20px; width:40%;">
                                 <div class="w3-container">
                                     <span class="close-modal w3-button w3-display-topright"
                                         data-modal-id="modal-{{ $appointment->id }}">&times;</span>
-                                    <h5>Appointment Details</h5>
-                                    <p>Name: <span id="modal-fname">{{ $appointment->fname }}</span></p>
-                                    <p>Email: <span id="modal-email">{{ $appointment->email }}</span></p>
-                                    <p>Phone: <span id="modal-phone">{{ $appointment->phone }}</span></p>
-                                    <p>Details: <span id="modal-details">{{ $appointment->details }}</span></p>
-                        
-                                    <!-- Button to open the message modal -->
-                                    <button class="w3-button w3-blue open-msg-modal" data-id="{{ $appointment->id }}">Send Message</button>
+                                    <h1 class="text-center font-bold">Appointment Details</h1>
+                                    <p style="display: flex; align-items: center;padding-block: 10px;">
+                                        <ion-icon name="person-circle"
+                                            style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
+                                        <input id="modal-fname" type="text" value="{{ $appointment->fname }}" readonly
+                                            style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%;" />
+                                    </p>
+
+                                    <p style="display: flex; align-items: center; padding-block: 10px;">
+                                        <ion-icon name="mail"
+                                            style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
+                                        <input id="modal-fname" type="text" value="{{ $appointment->email }}" readonly
+                                            style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%;" />
+                                    </p>
+                                    <p style="display: flex; align-items: center; padding-block: 10px;">
+                                        <ion-icon name="call"
+                                            style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
+                                        <input id="modal-fname" type="text" value="{{ $appointment->phone }}" readonly
+                                            style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%;" />
+                                    </p>
+                                    <p style="display: flex; align-items: center;padding-block: 10px; ">
+                                        <ion-icon name="newspaper"
+                                            style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
+                                        <input id="modal-fname" type="text" value="{{ $appointment->details }}" readonly
+                                            style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%;" />
+                                    </p>
+
+
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Message Modal -->
-                       <!-- Message Modal in ahome.blade.php (Admin Side) -->
-<div id="msg-modal-{{ $appointment->id }}" class="w3-modal">
-    <div class="w3-modal-content">
-        <div class="w3-container">
-            <span class="close-msg-modal w3-button w3-display-topright" data-modal-id="msg-modal-{{ $appointment->id }}">&times;</span>
-            <h5>Send Message to {{ $appointment->fname }}</h5>
+                        <!-- Message Modal in ahome.blade.php (Admin Side) -->
+                        <div id="msg-modal-{{ $appointment->id }}" class="w3-modal">
+                            <div class="w3-modal-content">
+                                <div class="w3-container">
+                                    <span class="close-msg-modal w3-button w3-display-topright"
+                                        data-modal-id="msg-modal-{{ $appointment->id }}">&times;</span>
+                                    <h5>Send Message to {{ $appointment->fname }}</h5>
 
-            <!-- Message Form -->
-            <form action="{{ route('send.message', $appointment->id) }}" method="POST">
-                @csrf
-                <textarea name="message" rows="4" class="w3-input" placeholder="Type your message here"></textarea>
-                <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
-                    <button type="submit" class="w3-button w3-green">Send</button>
-                </div>
-                
-            </form>
-        </div>
-    </div>
-</div>
+                                    <!-- Message Form -->
+                                    <form action="{{ route('send.message', $appointment->id) }}" method="POST">
+                                        @csrf
+                                        <textarea name="message" rows="4" class="w3-input" placeholder="Type your message here"></textarea>
+                                        <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
+                                            <button type="submit" class="w3-button w3-green">Send</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
 
 
 
 
-                        
+
                         <td>{{ $appointment->date }}</td>
                         <td>{{ \Carbon\Carbon::parse($appointment->time)->format('g:i A') }}</td>
 
@@ -124,11 +146,13 @@
                                             <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                                 Send a Message to {{ $appointment->fname }}
                                             </h3>
-                                            <button type="button" data-modal-target="message-modal-{{ $appointment->id }}"
+                                            <button type="button"
+                                                data-modal-target="message-modal-{{ $appointment->id }}"
                                                 data-modal-toggle="message-modal-{{ $appointment->id }}"
                                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 14 14">
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 14 14">
                                                     <path stroke="currentColor" stroke-linecap="round"
                                                         stroke-linejoin="round" stroke-width="2"
                                                         d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -139,8 +163,8 @@
 
                                         <!-- Modal body -->
                                         <div class="p-4 md:p-5">
-                                            <form class="space-y-4" action="{{ route('send.message', $appointment->id) }}"
-                                                method="POST">
+                                            <form class="space-y-4"
+                                                action="{{ route('send.message', $appointment->id) }}" method="POST">
                                                 @csrf
                                                 <div>
                                                     <label for="message"
@@ -244,22 +268,22 @@
                                     more_horiz
                                 </span>
                                 <div class="dropdown-menu" style="display: none; position: absolute; z-index: 1;">
-                                    
-                                      
-                                   
+
+
+
                                     <!-- Edit Link with Blue Background -->
                                     <a href="{{ url('admin/editappoint/' . $appointment->id) }}" class="action-edit">
                                         <ion-icon name="create"></ion-icon> Edit
                                     </a>
 
-                                    
-                        
+
+
                                     <!-- Delete Link with Red Background -->
-                                    <a href="{{ url('admin/delete-appointment/' . $appointment->id) }}" class="action-delete">
+                                    <a href="{{ url('admin/delete-appointment/' . $appointment->id) }}"
+                                        class="action-delete">
                                         <ion-icon name="trash"></ion-icon> Delete
                                     </a>
                                 </div>
-                        
                 @endforeach
             </tbody>
         </table>
@@ -273,7 +297,7 @@
             const menu = element.nextElementSibling;
             menu.style.display = menu.style.display === "block" ? "none" : "block";
         }
-        
+
         document.addEventListener('DOMContentLoaded', function() {
             // Open modal
             document.querySelectorAll('.open-modal').forEach(link => {
@@ -310,7 +334,5 @@
                 });
             });
         });
-
-        
     </script>
 @endsection
