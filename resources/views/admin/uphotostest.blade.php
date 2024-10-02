@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="drop-section">
                 <div class="col">
                     <div class="cloud-icon">
-                        <img src="icons/cloud.png" alt="cloud">
+                        <img src="{{ asset('images/icons/cloud.png') }}" alt="logo">
                     </div>
                     <span>Drag & Drop your files here</span>
                     <span>OR</span>
