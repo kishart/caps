@@ -3,164 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    public function token()
+    
+   public function create()
     {
-        $client_id = \Config('services.google.client_id');
-        $client_secret = \Config('services.google.client_secret');
-        $refresh_token = \Config('services.google.refresh_token');
-        $folder_id = \Config('services.google.folder_id');
-
-        $response = Http::post('https://oauth2.googleapis.com/token', [
-
-            'client_id' => $client_id,
-            'client_secret' => $client_secret,
-            'refresh_token' => $refresh_token,
-            'grant_type' => 'refresh_token',
-
-        ]);
-        //dd($response);
-        $responseBody = (string) $response->getBody();
-
-        $decodedResponse = json_decode($responseBody, true);
-        
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            // Handle JSON decoding error
-            dd('JSON decoding error: ' . json_last_error_msg());
-        }
-        
-        if (!isset($decodedResponse['access_token'])) {
-            // Handle missing access_token key
-            dd('Access token not found in the response: ', $decodedResponse);
-        }
-        
-        $accessToken = $decodedResponse['access_token'];
-        
+        $users = User::all();
+        return view('admin.uphotostest', compact('users'));
     }
 
-   
     public function saveUphotos(Request $request)
     {
-        $data = new File;
-        $data->filename = $request->filename;
-        $data->description = $request->description;
-        $data->category = $request->category;
-        $data->username = $request->username;
-        
-        $data->save();
-        $data->feedback = $request->feedback;
-        return redirect()->back()->with('success', 'Upload photos successfully');
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $files = File::all();
-
-        return view('create', compact('files'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $validation = $request->validate([
-            'file' => 'file|required',
-            'file_name' => 'required',
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'description' => 'required',
+            'filename' => 'required|file|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $accessToken = $this->token();
-        //dd($accessToken);
-        $name = $request->file->getClientOriginalName();
-        //$mime=$request->file->getClientMimeType();
+        $data = new File;
+        $data->user_id = $request->user_id;
 
-        $path=$request->file->getRealPath();
+        if ($request->hasFile('filename')) {
+            $file = $request->file('filename');
+            $fileName = time() . '_' . $file->getClientOriginalName();
 
-
-
-
-        $response=Http::withToken($accessToken)
-        ->attach('data',file_get_contents($path),$name)
-        ->post('https://www.googleapis.com/upload/drive/v3/files',
-            [
-                'name'=>$name
-            ],
-            [
-                'Content-Type'=>'application/octet-stream',
-            ]
-            );
-
-            //dd($response);
-
-
-
-            if ($response->successful()) {
-                $file_id = json_decode($response->body())->id;
-                //dd($name);
-                $uploadedfile = new File;
-                $uploadedfile->file_name = $request->file_name;
-                $uploadedfile->name=$name;
-                $uploadedfile->fileid = $file_id;
-                $uploadedfile->save();
-
-                return response('File Uploaded to Google Drive');
+            // Check if uploads directory exists, if not create it
+            $uploadPath = public_path('uploads');
+            if (!file_exists($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
             }
 
-
-        return response('Failed to Upload to Google Drive');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(File $file)
-    {
-        $ext=pathinfo($file->name,PATHINFO_EXTENSION);
-        $accessToken=$this->token();
-
-        $response=Http::withHeaders([
-            'Authorization'=> 'Bearer '.$accessToken,
-        ])->get("https://www.googleapis.com/drive/v3/files/{$file->fileid}?alt=media");
-
-        if($response->successful()){
-            $filePath='/downloads/'.$file->file_name.'.'.$ext;
-
-            Storage::put($filePath,$response->body());
-
-            return Storage::download($filePath);
+            $file->move($uploadPath, $fileName);
+            $data->filename = $fileName;
         }
+
+        $data->description = $request->description;
+        $data->category = $request->category ?? null;
+
+        $data->save();
+
+        return redirect()->back()->with('success', 'Upload successful');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

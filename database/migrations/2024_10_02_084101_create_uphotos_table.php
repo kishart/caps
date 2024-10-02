@@ -13,18 +13,21 @@ return new class extends Migration
      */
 
 
-    public function up()
-    {
-        Schema::create('files', function (Blueprint $table) {
-            $table->id();
-            $table->string('filename'); // Make sure this matches your model
-            $table->string('description')->nullable();
-            $table->string('category')->nullable();
-            $table->string('username')->nullable();
-            $table->string('fileid')->nullable(); // If you have this field
-            $table->timestamps();
-        });
-    }
+     public function up()
+     {
+         Schema::dropIfExists('files');  // Drop the table if it already exists
+     
+         Schema::create('files', function (Blueprint $table) {
+             $table->id();
+             $table->string('filename');
+             $table->string('description')->nullable();
+             $table->string('category')->nullable();
+             $table->foreignId('user_id')->constrained('users');  // Connect file to user
+             $table->string('fileid')->nullable(); // If you have this field
+             $table->timestamps();
+         });
+     }
+     
     /**
      * Reverse the migrations.
      *
@@ -32,6 +35,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uphotos');
+        // Schema::dropIfExists('uphotos');
+        Schema::dropIfExists('files');
+
     }
 };

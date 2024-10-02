@@ -38,9 +38,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="{{ asset('css/uphotostest.css') }}">
 </head>
 
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <body>
     <div class="container">
-        <form method="post"  action="{{ url('save-uphotos') }}"> enctype="multipart/form-data"> <!-- Added enctype -->
+        <form method="post" enctype="multipart/form-data" action="{{ route('save-uphotos') }}">
             @csrf
             <div class="header-section">
                 <h1>Upload Files</h1>
@@ -81,13 +98,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="text" id="display-selected-category" placeholder="Selected Category" readonly>
             
 
+    {{-- <div>
+        <h1>Description</h1>
+        <input type="text" name="description">
+       
+        <h1>Choose username that only can comment to the photos:</h1>
+        <input type="text" placeholder="Enter user name" name="username" required>
+    </div> --}}
     <div>
         <h1>Description</h1>
         <input type="text" name="description">
-        <h1>Comment</h1>
-        <input type="text" placeholder="Enter user name" name="username" required>
     </div>
+        <div>
+            <div>
+                <h1>Choose a username:</h1>
+                <select name="user_id" required>
+                    <option value="" disabled selected>Select a username</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->username }}</option>
+                    @endforeach
+                </select>
+                
+            </div>
+            
+        
+            
+        </div>
 
+
+        
+
+        
+    
 
             <div class="button-container">
                 <button type="submit" class="button-6" role="button">Submit</button>
