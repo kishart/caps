@@ -104,3 +104,11 @@ Route::post('/send-message/{id}', [AppointmentController::class, 'sendMessage'])
 
 Route::get('calendartest', [HomeController::class, 'calendartest'])->middleware('auth');
 
+Route::get('uphotostest', [HomeController::class, 'uphotostest'])->middleware('auth');
+
+
+
+
+
+
+Route::post('save-uphotos', [FileController::class, 'saveUphotos']);

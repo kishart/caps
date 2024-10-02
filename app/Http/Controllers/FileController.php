@@ -43,10 +43,20 @@ class FileController extends Controller
         
     }
 
-    public function index()
+   
+    public function saveUphotos(Request $request)
     {
-        //
+        $data = new File;
+        $data->filename = $request->filename;
+        $data->description = $request->description;
+        $data->category = $request->category;
+        $data->username = $request->username;
+        
+        $data->save();
+        $data->feedback = $request->feedback;
+        return redirect()->back()->with('success', 'Upload photos successfully');
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -93,4 +93,26 @@ class PostController extends Controller
 
     
 
+
+
+    public function storeCategory(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'category' => 'required|string|max:255',
+        ]);
+
+        // Create a new record in the uphotos table
+        Uphoto::create([
+            'category' => $request->category,
+            // Add any other fields that are required in the uphotos table, e.g.:
+            // 'photo_url' => $photoUrl, // Example if you're uploading a photo
+        ]);
+
+        // Redirect back or to a success page
+        return redirect()->back()->with('success', 'Category has been saved successfully!');
+    }
+
+
+
 }

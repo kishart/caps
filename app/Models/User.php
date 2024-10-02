@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -23,6 +22,7 @@ class User extends Authenticatable
         'username',
         'password',
         'phone',
+        'usertype', // Include usertype as it was in your migration
     ];
 
     /**
@@ -43,8 +43,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Define the relationship with appointments.
+     */
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    /**
+     * Define the relationship with uploaded photos.
+     */
+    public function uphotos()
+    {
+        return $this->hasMany(Uphoto::class);
     }
 }
