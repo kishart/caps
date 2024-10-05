@@ -6,6 +6,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -111,5 +112,6 @@ Route::get('/create-uphotos', [FileController::class, 'create'])->name('create-u
 Route::post('/save-uphotos', [FileController::class, 'saveUphotos'])->name('save-uphotos');
 
 
+Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])->name('view-photos');
 
-
+Route::get('files/{id}/delete', [FileController::class, 'destroy'])->name('delete-file');

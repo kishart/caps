@@ -57,85 +57,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="container">
-        <form method="post" enctype="multipart/form-data" action="{{ route('save-uphotos') }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('save-uphotos') }}">
             @csrf
-            <div class="header-section">
-                <h1>Upload Files</h1>
-                <p>Upload files you want to share with your team members.</p>
-                <p>PDF, Images & Videos are allowed.</p>
-            </div>
-            <div class="drop-section">
-                <div class="col">
-                    <div class="cloud-icon">
-                        <img src="{{ asset('images/icons/cloud.png') }}" alt="logo">
-                    </div>
-                    <span>Drag & Drop your files here</span>
-                    <span>OR</span>
-                    <button class="file-selector">Browse Files</button>
-                    <input type="file" name="filename" class="file-selector-input" multiple>
-                </div>
-                <div class="col">
-                    <div class="drop-here">Drop Here</div>
-                </div>
-            </div>
-            <div class="list-section">
-                <div class="list-title">Uploaded Files</div>
-                <div class="list"></div>
-            </div>
-            
-
-            <h1 class="font-bold">Categories</h1>
-            <div class="category-container">
-                <div class="category-list">
-                    <a href="#" class="category-item" data-category="Wedding">Wedding</a>
-                    <a href="#" class="category-item" data-category="Birthday">Birthday</a>
-                    <!-- Other categories -->
-                </div>
-            </div>
-            
-            <!-- Hidden input field to hold the selected category -->
+            <h1>Upload Files</h1>
+        
+            <!-- File input for multiple files -->
+            <input type="file" name="filename[]" multiple>
+        
+            <!-- Description field -->
+            <h1>Description</h1>
+            <input type="text" name="description">
+        
+            <!-- Username selection dropdown -->
+            <h1>Choose a username:</h1>
+            <select name="user_id" required>
+                <option value="" disabled selected>Select a username</option>
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}">{{ $user->username }}</option>
+                @endforeach
+            </select>
+        
+            <!-- Category selection -->
             <input type="hidden" id="selected-category" name="category">
             <input type="text" id="display-selected-category" placeholder="Selected Category" readonly>
-            
-
-    {{-- <div>
-        <h1>Description</h1>
-        <input type="text" name="description">
-       
-        <h1>Choose username that only can comment to the photos:</h1>
-        <input type="text" placeholder="Enter user name" name="username" required>
-    </div> --}}
-    <div>
-        <h1>Description</h1>
-        <input type="text" name="description">
-    </div>
-        <div>
-            <div>
-                <h1>Choose a username:</h1>
-                <select name="user_id" required>
-                    <option value="" disabled selected>Select a username</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->username }}</option>
-                    @endforeach
-                </select>
-                
-            </div>
-            
         
-            
-        </div>
-
-
-        
-
-        
-    
-
-            <div class="button-container">
-                <button type="submit" class="button-6" role="button">Submit</button>
-            </div>
+            <!-- Submit button -->
+            <button type="submit">Submit</button>
         </form>
-    </div>
+        
+
+
+
 
   <script src="{{ asset('js/uphotostest.js') }}"></script>
 </body>
