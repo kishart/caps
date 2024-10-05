@@ -43,7 +43,7 @@ class FileController extends Controller
             'user_id' => 'required|exists:users,id',
             'description' => 'required',
             'filename' => 'required',  // Ensure at least one file is uploaded
-            'filename.*' => 'file|mimes:jpeg,png,jpg,gif,svg|max:2048',
+           'filename.*' => 'file|mimes:jpg,png|max:2048',
         ]);
     
         if ($request->hasFile('filename')) {
