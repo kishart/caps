@@ -48,15 +48,36 @@
             @endif
         </div>
     </div>
-    @foreach($files as $file)
-    <div class="file">
-        <img src="{{ asset('uploads/' . $file->filename) }}" alt="{{ $file->description }}">
-        <p>Description: {{ $file->description }}</p>
-        <p>Uploaded by: {{ $file->user->username }}</p>
-        <a href="{{ route('delete-file', $file->id) }}" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
-    </div>
-@endforeach
 
+    <!-- Display file details and comments -->
+    @foreach($files as $file)
+        <div class="file">
+            <img src="{{ asset('uploads/' . $file->filename) }}" alt="{{ $file->description }}">
+            <p>Description: {{ $file->description }}</p>
+            <p>Uploaded by: {{ $file->user->username }}</p>
+
+            <!-- Display all comments for the file -->
+            <h3>Comments:</h3>
+            @if($file->comments->isEmpty())
+                <p>No comments yet.</p>
+            @else
+                @foreach($file->comments as $comment)
+                    <p><strong>{{ $comment->user->username }}:</strong> {{ $comment->comment }}</p>
+                @endforeach
+            @endif
+
+            <!-- Check if the authenticated user is allowed to comment -->
+            @if(Auth::check() && Auth::id() == $file->user_id)
+                <form action="{{ route('post-comment', $file->id) }}" method="POST">
+                    @csrf
+                    <textarea name="comment" placeholder="Write your comment..."></textarea>
+                    <button type="submit">Submit Comment</button>
+                </form>
+            @else
+                <p><strong>Only {{ $file->user->username }} can comment on this photo.</strong></p>
+            @endif
+        </div>
+    @endforeach
 
     <script src="{{ asset('js/viewp.js') }}"></script>
 </body>

@@ -115,3 +115,4 @@ Route::post('/save-uphotos', [FileController::class, 'saveUphotos'])->name('save
 Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])->name('view-photos');
 
 Route::get('files/{id}/delete', [FileController::class, 'destroy'])->name('delete-file');
+Route::post('/post-comment/{file}', [FileController::class, 'postComment'])->name('post-comment');

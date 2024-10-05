@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class Comment extends Model
 {
     use HasFactory;
 
-    // If you want to define the inverse relationship to User
+
+    public function file()
+    {
+        return $this->belongsTo(File::class);
+    }
+    
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function comments()
-{
-    return $this->hasMany(Comment::class);
 }
-}
+

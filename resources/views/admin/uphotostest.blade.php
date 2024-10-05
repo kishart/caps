@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" id="selected-category" name="category">
             <input type="text" id="display-selected-category" placeholder="Selected Category" readonly>
         
+            
             <!-- Submit button -->
             <button type="submit">Submit</button>
         </form>
