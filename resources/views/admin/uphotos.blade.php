@@ -153,23 +153,25 @@
 
                 <div class="description text-black mt-3 ">
 
-                    <h1>Choose a username:</h1>
-                    <select name="user_id" required>
-                        <option value="" disabled selected>Select a username</option>
+                    <h1 class="text-start font-bold" style="margin-bottom: 20px;">Choose a username: </h1>
+                    <select name="user_id" style="width: 300px; border-radius: 10px;" required>
+                        <option  value="" disabled selected>Select a username</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}">{{ $user->username }}</option>
                         @endforeach
                     </select>
 
+                    <div style="margin-top:30px;">
+
                     <label for="message"
-                        class="block mb-2 text-sm text-left font-bold text-black dark:text-white">Description</label>
+                        class="block pb-4 text-sm text-left font-bold text-black dark:text-white">Description: </label>
                     <textarea id="message" rows="10" name="description"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                         placeholder="Write your thoughts here..."></textarea>
-
+                    </div>
                 </div>
                 <!-- HTML !-->
-                <button class="buttonsub" role="button">Submit</button>
+                <button style="margin-top:30px;" class="buttonsub" role="button">Submit</button>
 
             </div>
 
