@@ -2,496 +2,180 @@
 
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/uphotos.css') }}">
     <title>Upload Photos</title>
-    <style>
-        .toggleContainer {
-            position: relative;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            width: fit-content;
-            border-radius: 20px;
-            background: #E8B298;
-            font-weight: bold;
-            color: #343434;
-            cursor: pointer;
-            margin-top: 30px;
-            padding: 5px 10px;
-        }
-
-        .toggleContainer::before {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 100%;
-            left: 0%;
-            border-radius: 20px;
-            background: #A36361;
-            transition: all 0.3s;
-        }
-
-        .toggleCheckbox:checked+.toggleContainer::before {
-            left: 50%;
-        }
-
-        .toggleContainer div {
-            padding: 6px;
-            text-align: center;
-            z-index: 1;
-            font-size: 16px;
-            background-color: transparent;
-        }
-
-        .toggleCheckbox {
-            display: none;
-        }
-
-        /* Default state: Edit Photos selected */
-        .toggleCheckbox+.toggleContainer div:first-child {
-            color: white;
-        }
-
-        .toggleCheckbox+.toggleContainer div:last-child {
-            color: black;
-        }
-
-        /* When "View Photos" is selected */
-        .toggleCheckbox:checked+.toggleContainer div:first-child {
-            color: black;
-        }
-
-        .toggleCheckbox:checked+.toggleContainer div:last-child {
-            color: white;
-        }
-
-        .container {
-            display: flex;
-            justify-content: space-between;
-            /* Left and right horizontally aligned */
-            align-items: flex-start;
-            padding: 20px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-        }
-
-        .left {
-            background-color: white;
-            padding: 20px;
-            color: white;
-            flex: 0 0 20%;
-            /* Left takes 20% width */
-            margin-right: 10px;
-            height: 80vh;
-        }
-
-        .right {
-            background-color: #E8B298;
-            padding: 20px;
-            color: #343434;
-            flex: 0 0 80%;
-            /* Right takes 80% width */
-            text-align: center;
-            height: 80vh;
-        }
-
-        .category-container {
-            margin-top: 20px;
-        }
-
-        .category-list {
-            display: flex;
-            flex-direction: column;
-            /* Stack the categories vertically */
-            gap: 15px;
-        }
-
-        .category-list a {
-            background-color: #EECC8C;
-            color: black;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-
-            text-decoration: none;
-            color: #000;
-            /* Default color */
-        }
 
 
-        .category-list a.active {
-            font-weight: bold;
-            /* Example style for active link */
-            color: white;
-            /* Change color for active link */
-
-            background-color: #A36361;
-        }
-
-        .category-list a:hover {
-            background-color: #E8B298;
-            color: white;
-        }
-
-
-
-        .drop-section {
-            min-height: 250px;
-            border: 1px dashed #A8B3E3;
-            background-image: linear-gradient(180deg, white, #F1F6FF);
-            margin: 5px 35px 35px 35px;
-            border-radius: 12px;
-            position: relative;
-        }
-
-        .drop-section div.col:first-child {
-            opacity: 1;
-            visibility: visible;
-            transition-duration: 0.2s;
-            transform: scale(1);
-            width: 200px;
-            margin: auto;
-        }
-
-        .drop-section div.col:last-child {
-            font-size: 40px;
-            font-weight: 700;
-            color: #c0cae1;
-            position: absolute;
-            top: 0px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            margin: auto;
-            width: 200px;
-            height: 55px;
-            pointer-events: none;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.6);
-            transition-duration: 0.2s;
-        }
-
-        /* we will use "drag-over-effect" class in js */
-        .drag-over-effect div.col:first-child {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transform: scale(1.1);
-        }
-
-        .drag-over-effect div.col:last-child {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
-        }
-
-        .drop-section .cloud-icon {
-            margin-top: 25px;
-            margin-bottom: 20px;
-        }
-
-        .drop-section span,
-        .drop-section button {
-            display: block;
-            margin: auto;
-            color: #707EA0;
-            margin-bottom: 10px;
-        }
-
-        .drop-section button {
-            color: white;
-            background-color: #5874C6;
-            border: none;
-            outline: none;
-            padding: 7px 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            cursor: pointer;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-        }
-
-        .drop-section input {
-            display: none;
-        }
-
-        .list-section {
-            display: none;
-            text-align: left;
-            margin: 0px 35px;
-            padding-bottom: 20px;
-        }
-
-        .list-section .list-title {
-            font-size: 0.95rem;
-            color: #707EA0;
-        }
-
-        .list-section li {
-            display: flex;
-            margin: 15px 0px;
-            padding-top: 4px;
-            padding-bottom: 2px;
-            border-radius: 8px;
-            transition-duration: 0.2s;
-        }
-
-        .list-section li:hover {
-            box-shadow: #E3EAF9 0px 0px 4px 0px, #E3EAF9 0px 12px 16px 0px;
-        }
-
-        .list-section li .col {
-            flex: .1;
-        }
-
-        .list-section li .col:nth-child(1) {
-            flex: .15;
-            text-align: center;
-        }
-
-        .list-section li .col:nth-child(2) {
-            flex: .75;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #3e4046;
-            padding: 8px 10px;
-        }
-
-        .list-section li .col:nth-child(2) div.name {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            max-width: 250px;
-            display: inline-block;
-        }
-
-        .list-section li .col .file-name span {
-            color: #707EA0;
-            float: right;
-        }
-
-        .list-section li .file-progress {
-            width: 100%;
-            height: 5px;
-            margin-top: 8px;
-            border-radius: 8px;
-            background-color: #dee6fd;
-        }
-
-        .list-section li .file-progress span {
-            display: block;
-            width: 0%;
-            height: 100%;
-            border-radius: 8px;
-            background-image: linear-gradient(120deg, #6b99fd, #9385ff);
-            transition-duration: 0.4s;
-        }
-
-        .list-section li .col .file-size {
-            font-size: 0.75rem;
-            margin-top: 3px;
-            color: #707EA0;
-        }
-
-        .list-section li .col svg.cross,
-        .list-section li .col svg.tick {
-            fill: #8694d2;
-            background-color: #dee6fd;
-            position: relative;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-        }
-
-        .list-section li .col svg.tick {
-            fill: #50a156;
-            background-color: transparent;
-        }
-
-        .list-section li.complete span,
-        .list-section li.complete .file-progress,
-        .list-section li.complete svg.cross {
-            display: none;
-        }
-
-        .list-section li.in-prog .file-size,
-        .list-section li.in-prog svg.tick {
-            display: none;
-        }
-
-        /* For the dropdown category */
-        .dropbtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Arrow styling */
-.arrow {
-    margin-left: 10px;
-    font-size: 14px;
-}
-
-/* Dropdown container */
-.dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color of links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Add active class styling */
-.dropdown-content a.active {
-    font-weight: bold;
-    background-color: #4CAF50;
-    color: white;
-}
-    </style>
-    </head>
-
-    <body>
+    <div class="toggle-container">
         <input type="checkbox" id="toggle" class="toggleCheckbox" />
         <label for="toggle" class='toggleContainer'>
-            <div>Edit Photos</div>
-            <div>View Photos</div>
+            <div id="uploadPhotos" class="toggle-label active">Upload Photos</div>
+            <div id="viewPhotos" class="toggle-label">View Photos</div>
         </label>
 
-        <div class="container">
-            <div class="left text-center">
-                <div class="description text-black">
-                    
-                    <h1>User who can only comment</h1>
-                    <input type="text">
 
-                   
-                    
-<label for="message" class="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white">Description</label>
-<textarea id="message" rows="10" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500" placeholder="Write your thoughts here..."></textarea>
+    </div>
 
-                </div>
-                <div class="dropdown">
-                    <h1>Category</h1>
-                    <button class="dropbtn" style="border-radius: 30px; padding: 10px 20px; width: auto;">
-                        Select Category 
-                        <ion-icon name="caret-down-circle-outline"></ion-icon>
-                    </button>
-                    <div class="dropdown-content" style="border-radius: 30px; padding: 10px 20px;">
-                        <a href="#" class="dropdown-item">Wedding</a>
-                        <a href="#" class="dropdown-item">Birthday</a>
-                        <a href="#" class="dropdown-item">Debut</a>
-                        <a href="#" class="dropdown-item">Graduation</a>
-                        <a href="#" class="dropdown-item">Prom</a>
-                        <a href="#" class="dropdown-item">Others</a>
+    <form action="{{ route('save-photos') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+    <div id="display" class="display container mt-3">
+            
+            <div class="left">
+
+                <!-- file upload modal -->
+                <article aria-label="File Upload Modal" class="relative h-full flex flex-col bg-white shadow-xl rounded-md"
+                    ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" ondragleave="dragLeaveHandler(event);"
+                    ondragenter="dragEnterHandler(event);">
+                    <!-- overlay -->
+                    <div id="overlay"
+                        class="w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">
+                        <i>
+                            <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z" />
+                            </svg>
+                        </i>
+                        <p class="text-lg text-blue-700">Drop files to upload</p>
                     </div>
-                </div>
-                
 
-             
+                    <!-- scroll area -->
+                    <section class=" overflow-auto p-8 w-full h-full flex flex-col">
+                        <header
+                            class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center"
+                            name="filename[]">
+                            <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                                <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
+                            </p>
+                            <input name="filename[]" id="hidden-input" type="file" multiple class="hidden" />
+                            <button id="button" style="background-color: #A36361; "
+                                onmouseover="this.style.backgroundColor='#A36361';"
+                                onmouseout="this.style.backgroundColor='#E8B298'; "
+                                class="mt-2 rounded-sm px-3 py-1 text-white hover:bg-gray-300 focus:shadow-outline focus:outline-none">
+                                Upload a file
+                            </button>
+                        </header>
+
+                        <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                            To Upload
+                        </h1>
+
+                        <ul id="gallery" class="flex flex-1 flex-wrap -m-1">
+                            <li id="empty" class="h-full w-full text-center flex flex-col justify-center items-center">
+                                <img class="mx-auto w-32"
+                                    src="https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png"
+                                    alt="no data" />
+                                <span class="text-small text-gray-500">No files selected</span>
+                            </li>
+                        </ul>
+                    </section>
+
+
+                </article>
+                <!-- using two similar templates for simplicity in js code -->
+                <template id="file-template">
+                    <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+                        <article tabindex="0"
+                            class="group w-full h-full rounded-md focus:outline-none focus:shadow-outline elative bg-gray-100 cursor-pointer relative shadow-sm">
+                            <img alt="upload preview"
+                                class="img-preview hidden w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+                            <section
+                                class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                                <h1 class="flex-1 group-hover:text-blue-800"></h1>
+                                <div class="flex">
+                                    <span class="p-1 text-blue-800">
+                                        <i>
+                                            <svg class="fill-current w-4 h-4 ml-auto pt-1"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24">
+                                                <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
+                                            </svg>
+                                        </i>
+                                    </span>
+                                    <p class="p-1 size text-xs text-gray-700"></p>
+                                    <button
+                                        class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
+                                        <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24">
+                                            <path class="pointer-events-none"
+                                                d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </section>
+                        </article>
+                    </li>
+                </template>
+
+                <template id="image-template">
+                    <li class="block p-1 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-1/8 h-24">
+                        <article tabindex="0"
+                            class="group hasImage w-full h-full rounded-md focus:outline-none focus:shadow-outline bg-gray-100 cursor-pointer relative text-transparent hover:text-white shadow-sm">
+                            <img alt="upload preview"
+                                class="img-preview w-full h-full sticky object-cover rounded-md bg-fixed" />
+
+                            <section
+                                class="flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3">
+                                <h1 class="flex-1"></h1>
+                                <div class="flex">
+                                    <span class="p-1">
+                                        <i>
+                                            <svg class="fill-current w-4 h-4 ml-auto pt-" xmlns="http://www.w3.org/2000/svg"
+                                                width="24" height="24" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M5 8.5c0-.828.672-1.5 1.5-1.5s1.5.672 1.5 1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5zm9 .5l-2.519 4-2.481-1.96-4 5.96h14l-5-8zm8-4v14h-20v-14h20zm2-2h-24v18h24v-18z" />
+                                            </svg>
+                                        </i>
+                                    </span>
+
+                                    <p class="p-1 size text-xs"></p>
+                                    <button class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md">
+                                        <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24">
+                                            <path class="pointer-events-none"
+                                                d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </section>
+                        </article>
+                    </li>
+                </template>
+
+
             </div>
+
 
             <div class="right">
-                <div class="drop-section">
-                    <div class="col">
-                        <div class="cloud-icon">
-                            <img src="{{ asset('images/icons/cloud.png') }}" alt="logo">
-                        </div>
-                        <span>Drag & Drop your files here</span>
-                        <span>OR</span>
-                        <button class="file-selector">Browse Files</button>
-                        <input type="file" name="filename" class="file-selector-input" multiple>
-                    </div>
-                    <div class="col">
-                        <div class="drop-here">Drop Here</div>
 
-                    </div>
+                <div class="description text-black mt-3 ">
+
+                    <h1>Choose a username:</h1>
+                    <select name="user_id" required>
+                        <option value="" disabled selected>Select a username</option>
+                        @foreach ($users as $user)
+                            <option value="{{ $user->id }}">{{ $user->username }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for="message"
+                        class="block mb-2 text-sm text-left font-bold text-black dark:text-white">Description</label>
+                    <textarea id="message" rows="10" name="description"
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                        placeholder="Write your thoughts here..."></textarea>
+
                 </div>
+                <!-- HTML !-->
+                <button class="buttonsub" role="button">Submit</button>
 
-                <div class="list-section">
-                    <div class="list-title">Uploaded Files</div>
-                    <div class="list"></div>
-                </div>
-
-
-             
             </div>
-        </div>
 
 
+    </div>
+    </form>
 
-
-
-
-
-
-        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const categoryLinks = document.querySelectorAll('.category-list a');
-
-                categoryLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        // Remove 'active' class from all links
-                        categoryLinks.forEach(link => link.classList.remove('active'));
-
-                        // Add 'active' class to the clicked link
-                        this.classList.add('active');
-                    });
-                });
-            });
-//for the dropdown category
-
-document.addEventListener('DOMContentLoaded', function () {
-    const categoryLinks = document.querySelectorAll('.dropdown-content a');
-    const dropdownButton = document.querySelector('.dropbtn');
-
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            // Remove 'active' class from all links
-            categoryLinks.forEach(link => link.classList.remove('active'));
-            
-            // Add 'active' class to the clicked link
-            this.classList.add('active');
-            
-            // Update dropdown button text with selected category
-            dropdownButton.firstChild.textContent = this.textContent;
-        });
-    });
-});
-
-            
-        </script>
-        <script src="{{ asset('js/uphotostest.js') }}"></script>
-
-    </body>
+    <script src="{{ asset('js/uphotos.js') }}"></script>
 @endsection

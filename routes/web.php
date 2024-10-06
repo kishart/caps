@@ -116,3 +116,14 @@ Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])
 
 Route::get('files/{id}/delete', [FileController::class, 'destroy'])->name('delete-file');
 Route::post('/post-comment/{file}', [FileController::class, 'postComment'])->name('post-comment');
+
+
+
+
+
+
+Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
+
+Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
+Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
+

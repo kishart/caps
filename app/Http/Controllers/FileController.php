@@ -29,11 +29,23 @@ class FileController extends Controller
     }
 
 
-    public function uphotos()
+    public function cphotos()
     {
     $users = User::all();
     $files = File::with('user', 'comments')->get(); // Eager load users and comments
     return view('admin.uphotos', compact('users', 'files'));
+}
+public function pcreate()
+{
+    $users = User::all();
+    return view('admin.uphotos', compact('users'));
+}
+
+public function photos()
+{
+$users = User::all();
+$files = File::with('user', 'comments')->get(); // Eager load users and comments
+return view('admin.uphotos', compact('users', 'files'));
 }
 
     
@@ -89,6 +101,38 @@ class FileController extends Controller
         return redirect()->back()->with('success', 'Comment posted successfully');
     }
         
+
+    public function savePhotos(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'description' => 'required',
+            'filename' => 'required',  // Ensure at least one file is uploaded
+           'filename.*' => 'file|mimes:jpg,png|max:2048',
+        ]);
+    
+        if ($request->hasFile('filename')) {
+            foreach ($request->file('filename') as $file) {
+                $data = new File;
+                $data->user_id = $request->user_id;  // Store the user allowed to comment
+                $data->description = $request->description;
+                $data->category = $request->category ?? null;
+    
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $uploadPath = public_path('uploads');
+                if (!file_exists($uploadPath)) {
+                    mkdir($uploadPath, 0777, true);
+                }
+                $file->move($uploadPath, $fileName);
+                $data->filename = $fileName;
+                $data->save();
+            }
+        }
+    
+        return redirect()->back()->with('success', 'Files uploaded successfully');
+    }
+    
+
 
 
 
