@@ -132,7 +132,7 @@
       
     </nav>
 
-    <div class="container mx-auto py-12">
+    <div class=" mx-auto py-12 mb-10">
         @yield('content')
     </div>
 

@@ -71,10 +71,8 @@ nav ul li a:hover {
 /* Place your form-specific CSS here */
 .container {
     max-width: 800px;
-    background: #fff;
-    width: 800px;
+    width: 600px;
     padding: 25px 40px 10px 40px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
 }
 
 /* ... (rest of the form CSS) ... */

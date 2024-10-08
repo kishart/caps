@@ -9,21 +9,28 @@
     <link rel="stylesheet" href="{{ asset('css/setap.css') }}">
 </head>
 
-<body @if(session('success')) class="success-background" @endif>
+<body>
     @if(session('success'))
-    <div class="alert">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-        <strong>{{ session('success') }}</strong> 
+    <div class="alert alert-success alert-dismissible fade show mx-auto text-center" role="alert" style="margin-top: 50px; background-color: rgb(174, 234, 174); max-width: 500px;">
+        <strong>{{ session('success') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     @endif
+    
+   
+   
 
     <div class="containera">
+       
         <div class="left-column">
             <h1 class="set">Set An <br>Appointment</h1>
         </div>
 
         <form class="right-column" id="appointmentForm" method="post" action="{{ url('save-appoint') }}">
             @csrf
+         
 
             <label for="fname">Full Name</label>
             <input type="text" id="fname" name="fname" placeholder="Full Name" value="{{ auth()->user()->name }}" readonly>
@@ -40,6 +47,7 @@
                             {{ $message }}
                         </div>
                     @enderror
+                    
                 </div>
                 <div>
                     <label for="phone">Phone Number</label>
@@ -71,20 +79,24 @@
                         </div>
                     @enderror
                 </div>
+                
             </div>
-
+            <div>
             <label for="details">Details</label>
-            <textarea class="form-control" id="details" name="details" placeholder="Details">{{ old('details') }}</textarea>
+            <textarea  class="form-control" id="details" style="width: 100%;" name="details" placeholder="Details">{{ old('details') }}</textarea>
             @error('details')
                 <div class="alert alert-danger" role="alert">
                     {{ $message }}
                 </div>
             @enderror
             <br>
+            </div>
+           
 
             <div class="button-container">
                 <button type="button" class="button-6" role="button" onclick="showModal()">Submit</button>
             </div>
+      
         </form>
 
         <div id="demo-modal" class="modal">
@@ -112,6 +124,9 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 
     <script>
         function showModal() {

@@ -30,11 +30,18 @@ body {
 input[type="text"],
 input[type="email"],
 input[type="date"],
-input[type="time"] {
+input[type="time"]  {
     width: 100%;
     color: black;
     padding: 12px 20px;
     margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+textarea {
+    color: black;
+
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -116,7 +123,7 @@ label {
     width: 70%;
     margin: auto;
     margin-top: 60px;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     border: 1px solid;
     box-shadow: 15px 20px #826c5f;
 }
@@ -288,12 +295,7 @@ h1{
 }
 
 
-.alert {
-    padding: 20px;
-    background-color: #7dc980; /* Green background */
-    color: white;
-    text-align: center;
-}
+
 
 .closebtn {
     margin-left: 15px;
