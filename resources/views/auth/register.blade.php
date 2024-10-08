@@ -57,12 +57,12 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="username">
+                                <input id="phone" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="username"   pattern="^09\d{9}$" 
+                                title="Phone number must start with 09 and be followed by 9 digits" >
 
+                                <div id="phone-error" style="color:red; display:none;">Phone number must start with 09 and be followed by 9 digits.</div>
                                 @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>

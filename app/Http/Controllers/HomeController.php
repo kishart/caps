@@ -72,7 +72,11 @@ class HomeController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'phone' => 'nullable|string|max:15',
+           
+                'phone' => ['required', 'regex:/^09\d{9}$/', 'string'],
+        
+      
+            
         ]);
     
         // Update the user's information

@@ -40,12 +40,32 @@
 
         <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="text" name="phone" id="phone" class="form-control" value="{{ Auth::user()->phone }}"required>
+            <input type="text" name="phone" id="phone" class="form-control" value="{{ Auth::user()->phone }}" 
+                pattern="^09\d{9}$" 
+                title="Phone number must start with 09 and be followed by 9 digits" 
+                required>
+            <div id="phone-error" style="color:red; display:none;">Phone number must start with 09 and be followed by 9 digits.</div>
             @error('phone')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
+        
+        
         <button type="submit" class="btn btn-primary mt-3">Update Profile</button>
     </form>
 </div>
 @endsection
+
+<script>
+     document.getElementById('phone').addEventListener('input', function() {
+        const phoneInput = this;
+        const phoneError = document.getElementById('phone-error');
+        
+        const phonePattern = /^09\d{9}$/; // 09 followed by 9 digits
+        if (!phonePattern.test(phoneInput.value)) {
+            phoneError.style.display = 'block';
+        } else {
+            phoneError.style.display = 'none';
+        }
+    });
+</script>
