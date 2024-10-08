@@ -70,7 +70,7 @@ class HomeController extends Controller
         // Validate the input
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            'email' => ['required', 'email', 'string'], 
             'username' => 'required|string|max:255|unique:users,username,' . $user->id,
            
                 'phone' => ['required', 'regex:/^09\d{9}$/', 'string'],

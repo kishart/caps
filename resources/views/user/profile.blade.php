@@ -16,7 +16,11 @@
         
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ Auth::user()->name }}" required>
+            <input type="text" name="name" id="name" class="form-control" value="{{ Auth::user()->name }}" 
+            value="{{ old('name') }}" 
+			pattern="^[a-zA-Z\s]+$" 
+			title="Name should only contain letters and spaces" 
+			required autocomplete="name" autofocus>
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -24,10 +28,15 @@
         
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ Auth::user()->email }}" required>
-            @error('email')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
+    <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" 
+        value="{{ Auth::user()->email }}" 
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+        title="Please enter a valid email address (e.g., user@example.com)." 
+        required autocomplete="email" autofocus>
+
+    @error('email')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
         </div>
 
         <div class="form-group">

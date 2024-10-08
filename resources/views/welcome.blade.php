@@ -268,7 +268,7 @@ input {
 			</span>
 		@enderror
 
-			 <input type="text" name="phone" id="phone" class="form-control" value="{{ Auth::user()->phone }}" 
+			 <input type="text" placeholder="Phone Number"  name="phone" id="phone" class="form-control" value="{{ old('phone') }}" 
                 pattern="^09\d{9}$" 
                 title="Phone number must start with 09 and be followed by 9 digits" 
                 required>
