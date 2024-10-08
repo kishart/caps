@@ -32,12 +32,20 @@
 
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" class="form-control" value="{{ Auth::user()->username }}" required>
+            <input id="username" placeholder="Username" type="text" class="form-control @error('username') is-invalid @enderror" 
+                name="username" 
+                value="{{ Auth::user()->username }}" 
+                pattern="^[a-zA-Z0-9_]+$" 
+                title="Username should only contain letters, numbers, or underscores. No spaces or special characters allowed." 
+                required autocomplete="username" autofocus>
+            
             @error('username')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
         </div>
-
+        
         <div class="form-group">
             <label for="phone">Phone</label>
             <input type="text" name="phone" id="phone" class="form-control" value="{{ Auth::user()->phone }}" 

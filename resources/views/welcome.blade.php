@@ -234,13 +234,18 @@ input {
             <h1>Create Account</h1>
             <span>or use your username for registration</span>
             
-            <input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+			<input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" 
+			name="name" 
+			value="{{ old('name') }}" 
+			pattern="^[a-zA-Z\s]+$" 
+			title="Name should only contain letters and spaces" 
+			required autocomplete="name" autofocus>
+	
+		@error('name')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>
+		@enderror
 
             <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -250,22 +255,27 @@ input {
                 </span>
             @enderror
 
-            <input id="username" placeholder="Username" type="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+			<input id="username" placeholder="Username" type="text" class="form-control @error('username') is-invalid @enderror" 
+			name="username" 
+			value="{{ old('username') }}" 
+			pattern="^[a-zA-Z0-9_-]" 
+			title="Username should only contain letters, numbers, underscores, or dashes. No spaces or special characters allowed." 
+			required autocomplete="username" autofocus>
+	
+		@error('username')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>
+		@enderror
 
-            @error('username')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-
-			<input id="phone" placeholder="Phone Number" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="username">
-
+			 <input type="text" name="phone" id="phone" class="form-control" value="{{ Auth::user()->phone }}" 
+                pattern="^09\d{9}$" 
+                title="Phone number must start with 09 and be followed by 9 digits" 
+                required>
+            <div id="phone-error" style="color:red; display:none;">Phone number must start with 09 and be followed by 9 digits.</div>
             @error('phone')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
+                <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-			
 			
             <input id="password" placeholder="Password"  type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 

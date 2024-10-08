@@ -234,13 +234,18 @@ input {
             <h1>Create Account</h1>
             <span>or use your username for registration</span>
             
-            <input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-            @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+			<input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" 
+			name="name" 
+			value="{{ old('name') }}" 
+			pattern="^[a-zA-Z\s]+$" 
+			title="Name should only contain letters and spaces" 
+			required autocomplete="name" autofocus>
+	
+		@error('name')
+			<span class="invalid-feedback" role="alert">
+				<strong>{{ $message }}</strong>
+			</span>
+		@enderror
 
             <input id="email" placeholder="Email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
@@ -258,12 +263,12 @@ input {
                 </span>
             @enderror
 
-			<input id="phone" placeholder="Phone Number" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"    pattern="^09\d{9}$" 
-			title="Phone number must start with 09 and be followed by 9 digits" >
+			<input id="phone" placeholder="Phone Number" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="username">
 
-            <div id="phone-error" style="color:red; display:none;">Phone number must start with 09 and be followed by 9 digits.</div>
             @error('phone')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
             @enderror
 			
 			
