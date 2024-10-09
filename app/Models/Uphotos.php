@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Uphotos extends Model
 {
     use HasFactory;
-    protected $fillable = ['filename', 'description', 'category', 'user_id'];
+    protected $fillable = ['filename','description', 'category', 'user_id'];
 
     public function user()
     {

@@ -20,41 +20,39 @@
             @if($files->isEmpty())
                 <p>No files uploaded yet.</p>
             @else
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>File Name</th>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Uploaded By</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($files as $file)
-                            <tr>
-                                <td>{{ $file->filename }}</td>
-                                <td>{{ $file->category }}</td>
-                                <td>{{ $file->description }}</td>
-                                <td>{{ $file->user->username }}</td>
-                                <td>
-                                    <a href="{{ asset('uploads/' . $file->filename) }}" target="_blank">View</a>
-                                    <a href="{{ route('delete-file', $file->id) }}" onclick="return confirm('Are you sure you want to delete this file?')">Delete</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
+@endif
+
+
+@foreach($files as $file)
+    <div class="file-item">
+        <!-- Display the photo -->
+        <img src="{{ asset('uploads/photos/' . $file->filename) }}" alt="{{ $file->description }}" />
+
+        <!-- Display the description -->
+        <p>{{ $file->description }}</p>
+
+        <!-- Display the user who uploaded the file -->
+        <p>Uploaded by: {{ $file->user->name }}</p>
+
+        <!-- Display the associated post's category (if available) -->
+        @if($file->post)
+            <p>Category: {{ $file->post->category }}</p>
+        @endif
     </div>
+@endforeach
 
     <!-- Display file details and comments -->
-    @foreach($files as $file)
-        <div class="file">
-            <img src="{{ asset('uploads/' . $file->filename) }}" alt="{{ $file->description }}">
-            <p>Description: {{ $file->description }}</p>
-            <p>Uploaded by: {{ $file->user->username }}</p>
+    {{-- @foreach($files as $file) <!-- Loop through files -->
+
+    <div class="file">
+        <p>Uploaded by: {{ $file->user->username }}</p>
+        <p>Description: {{ $file->description }}</p>
+
+        <!-- Loop through JSON-decoded filenames -->
+        @foreach(json_decode($file->filename) as $photo)
+            <img src="{{ asset('uploads/' . $photo) }}" alt="{{ $file->description }}" style="max-width: 100px;">
+        @endforeach
+
 
             <!-- Display all comments for the file -->
             <h3>Comments:</h3>
@@ -77,7 +75,7 @@
                 <p><strong>Only {{ $file->user->username }} can comment on this photo.</strong></p>
             @endif
         </div>
-    @endforeach
+    @endforeach --}}
 
     <script src="{{ asset('js/viewp.js') }}"></script>
 </body>

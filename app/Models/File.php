@@ -9,13 +9,22 @@ class File extends Model
 {
     use HasFactory;
 
-    // If you want to define the inverse relationship to User
+    // Define inverse relationship to User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    // Each file (photo) can have many comments
     public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    // Define the relationship with Post
+    public function post()
+    {
+        return $this->belongsTo(Post::class);  // Each file belongs to a post
+    }
+
 }

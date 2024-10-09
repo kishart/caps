@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
+use App\Models\Uphotos;
 use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -18,10 +19,16 @@ class FileController extends Controller
         return view('admin.uphotostest', compact('users'));
     }
     public function showPhotos()
-{
-    $files = \App\Models\File::with('user')->get();
-    return view('user.viewp', compact('files'));
-}
+    {
+        // Fetch files with associated users and posts
+        $files = \App\Models\File::with(['user', 'post'])->get();
+        
+        // Return the view with the files data
+        return view('user.viewp', compact('files'));
+    }
+    
+
+
     public function index()
     {
         $users = User::all();
@@ -49,35 +56,90 @@ return view('admin.uphotos', compact('users', 'files'));
 }
 
     
-    public function saveUphotos(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'description' => 'required',
-            'filename' => 'required',  // Ensure at least one file is uploaded
-           'filename.*' => 'file|mimes:jpg,png|max:2048',
-        ]);
-    
-        if ($request->hasFile('filename')) {
-            foreach ($request->file('filename') as $file) {
-                $data = new File;
-                $data->user_id = $request->user_id;  // Store the user allowed to comment
-                $data->description = $request->description;
-                $data->category = $request->category ?? null;
-    
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $uploadPath = public_path('uploads');
-                if (!file_exists($uploadPath)) {
-                    mkdir($uploadPath, 0777, true);
-                }
-                $file->move($uploadPath, $fileName);
-                $data->filename = $fileName;
-                $data->save();
-            }
+// public function saveUphotos(Request $request)
+// {
+//     // Validate request inputs
+//     $request->validate([
+//         'user_id' => 'required|exists:users,id',
+//         'description' => 'required',
+//         'filename' => 'required',  // Ensure at least one file is uploaded
+//         'filename.*' => 'file|mimes:jpg,png|max:2048',
+//     ]);
+
+//     $filenames = [];  // Array to store the filenames
+
+//     // Check if the request contains files
+//     if ($request->hasFile('filename')) {
+//         foreach ($request->file('filename') as $file) {
+//             // Generate a unique name for each file
+//             $fileName = time() . '_' . $file->getClientOriginalName();
+
+//             // Set the upload path
+//             $uploadPath = public_path('uploads');
+
+//             // Create the uploads folder if it doesn't exist
+//             if (!file_exists($uploadPath)) {
+//                 mkdir($uploadPath, 0777, true);
+//             }
+
+//             // Move the file to the upload path
+//             $file->move($uploadPath, $fileName);
+
+//             // Add the filename to the array
+//             $filenames[] = $fileName;
+//         }
+
+//         // Save all filenames in one row in the database
+//         $data = new File;
+//         $data->user_id = $request->user_id;
+//         $data->description = $request->description;
+//         $data->category = $request->category ?? null;
+//         $data->filename = json_encode($filenames);  // Save filenames as JSON in the 'filename' column
+//         $data->save();
+//     }
+
+//     return redirect()->back()->with('success', 'Files uploaded successfully');
+// }
+
+public function savePhotos(Request $request)
+{
+    // Validate the request
+    $request->validate([
+        'filename.*' => 'required|mimes:jpg,jpeg,png,bmp|max:2048', // Adjust as necessary
+        'description' => 'required|string',
+        'post_id' => 'required|exists:posts,id', // Ensure that post exists
+    ]);
+
+    // Check if files are present
+    if ($request->hasFile('filename')) {
+        foreach ($request->file('filename') as $file) {
+            // Create a new File instance for each uploaded file
+            $photo = new File(); // Assuming File is your model for photos
+
+            // Set the description and user ID automatically from the authenticated user
+            $photo->description = $request->description;
+            $photo->user_id = auth()->id(); // Automatically assign the logged-in user
+            $photo->post_id = $request->post_id; // Associate the photo with the post
+
+            // Create a unique filename
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/photos'), $filename);
+
+            // Set the filename in the database
+            $photo->filename = $filename;
+
+            // Save the photo
+            $photo->save();
         }
-    
-        return redirect()->back()->with('success', 'Files uploaded successfully');
+    } else {
+        return redirect()->back()->withErrors(['error' => 'No files were uploaded.']);
     }
+
+    // Redirect with a success message
+    return redirect()->back()->with('success', 'Photos uploaded successfully');
+}
+
+
     public function postComment(Request $request, $fileId)
     {
         // Validate the comment
@@ -102,35 +164,35 @@ return view('admin.uphotos', compact('users', 'files'));
     }
         
 
-    public function savePhotos(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'description' => 'required',
-            'filename' => 'required',  // Ensure at least one file is uploaded
-           'filename.*' => 'file|mimes:jpg,png|max:2048',
-        ]);
+    // public function savePhotos(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required|exists:users,id',
+    //         'description' => 'required',
+    //         'filename' => 'required',  // Ensure at least one file is uploaded
+    //        'filename.*' => 'file|mimes:jpg,png|max:2048',
+    //     ]);
     
-        if ($request->hasFile('filename')) {
-            foreach ($request->file('filename') as $file) {
-                $data = new File;
-                $data->user_id = $request->user_id;  // Store the user allowed to comment
-                $data->description = $request->description;
-                $data->category = $request->category ?? null;
+    //     if ($request->hasFile('filename')) {
+    //         foreach ($request->file('filename') as $file) {
+    //             $data = new File;
+    //             $data->user_id = $request->user_id;  // Store the user allowed to comment
+    //             $data->description = $request->description;
+    //             $data->category = $request->category ?? null;
     
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $uploadPath = public_path('uploads');
-                if (!file_exists($uploadPath)) {
-                    mkdir($uploadPath, 0777, true);
-                }
-                $file->move($uploadPath, $fileName);
-                $data->filename = $fileName;
-                $data->save();
-            }
-        }
+    //             $fileName = time() . '_' . $file->getClientOriginalName();
+    //             $uploadPath = public_path('uploads');
+    //             if (!file_exists($uploadPath)) {
+    //                 mkdir($uploadPath, 0777, true);
+    //             }
+    //             $file->move($uploadPath, $fileName);
+    //             $data->filename = $fileName;
+    //             $data->save();
+    //         }
+    //     }
     
-        return redirect()->back()->with('success', 'Files uploaded successfully');
-    }
+    //     return redirect()->back()->with('success', 'Files uploaded successfully');
+    // }
     
 
 

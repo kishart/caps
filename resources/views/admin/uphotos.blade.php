@@ -47,7 +47,10 @@
                             <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
                                 <span>Drag and drop your</span>&nbsp;<span>files anywhere or</span>
                             </p>
+                            
                             <input name="filename[]" id="hidden-input" type="file" multiple class="hidden" />
+
+
                             <button id="button" style="background-color: #A36361; "
                                 onmouseover="this.style.backgroundColor='#A36361';"
                                 onmouseout="this.style.backgroundColor='#E8B298'; "
@@ -163,15 +166,15 @@
 
                     <div style="margin-top:30px;">
 
-                    <label for="message"
+                    <label for="description"
                         class="block pb-4 text-sm text-left font-bold text-black dark:text-white">Description: </label>
-                    <textarea id="message" rows="10" name="description"
+                    <textarea id="description" rows="10" name="description"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
                         placeholder="Write your thoughts here..."></textarea>
                     </div>
                 </div>
                 <!-- HTML !-->
-                <button style="margin-top:30px;" class="buttonsub" role="button">Submit</button>
+                <button type="submit" style="margin-top:30px;" class="buttonsub" role="button">Submit</button>
 
             </div>
 

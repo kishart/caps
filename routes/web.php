@@ -7,6 +7,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestPhotoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -127,3 +128,12 @@ Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
 Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
 Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
 
+
+
+
+Route::get('upload-photos', function () {
+    return view('test_photo');
+});
+
+Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
+Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
