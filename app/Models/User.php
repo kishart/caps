@@ -55,10 +55,14 @@ class User extends Authenticatable
     /**
      * Define the relationship with uploaded photos.
      */
-    public function uphotos()
+    public function photos()
     {
-        return $this->hasMany(Uphoto::class);
+        return $this->hasMany(Photos::class);
     }
+
+    /**
+     * Define the relationship with files.
+     */
     public function files()
     {
         return $this->hasMany(File::class);

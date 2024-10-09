@@ -13,14 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testphotos', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');  // Foreign key for the user
-            $table->json('photo_paths');            // This will store an array of paths
-            $table->timestamps();
+           
+            $table->json('photo_paths'); 
+            $table->foreignId('user_id')->constrained('users');           // This will store an array of paths
+            $table->text('description')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
+          
+
+            $table->timestamps();
         });
     }
 

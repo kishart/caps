@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TestPhoto;
+use App\Models\Photos;
+
+use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 
 class TestPhotoController extends Controller
@@ -13,6 +16,8 @@ class TestPhotoController extends Controller
         // Validate the photos input
         $request->validate([
             'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'required|string',
+            
         ]);
 
         $filePaths = [];
@@ -23,13 +28,18 @@ class TestPhotoController extends Controller
                 // Store each photo in the 'photos' directory in the public disk
                 $filePath = $photo->store('photos', 'public');
                 $filePaths[] = $filePath; // Collect all file paths
+                $photo->description = $request->description;
+            $photo->user_id = auth()->id(); // Automatically assign the logged-in user
+            $photo->post_id = $request->post_id; 
             }
         }
 
         // Save file paths to the database
-        TestPhoto::create([
+        Photos::create([
             'user_id' => auth()->id(),
             'photo_paths' => json_encode($filePaths),
+            'description' => $request->description,
+            'post_id' => 'required|exists:posts,id',
         ]);
 
         // Redirect back with success message
@@ -48,5 +58,13 @@ public function showUploadedPhotos()
     return view('show-photos', compact('photoUploads'));
 }
 
+public function showForm()
+    {
+        // Fetch users from the database
+        $users = User::all();
+
+        // Pass the $users variable to the view
+        return view('admin.upload-photos', compact('users'));
+    }
     
 }

@@ -132,8 +132,11 @@ Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-p
 
 
 Route::get('upload-photos', function () {
-    return view('test_photo');
+    return view('/admin/upload-photos');
 });
+
 
 Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
 Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
+
+Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');

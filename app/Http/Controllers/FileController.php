@@ -55,51 +55,6 @@ $files = File::with('user', 'comments')->get(); // Eager load users and comments
 return view('admin.uphotos', compact('users', 'files'));
 }
 
-    
-// public function saveUphotos(Request $request)
-// {
-//     // Validate request inputs
-//     $request->validate([
-//         'user_id' => 'required|exists:users,id',
-//         'description' => 'required',
-//         'filename' => 'required',  // Ensure at least one file is uploaded
-//         'filename.*' => 'file|mimes:jpg,png|max:2048',
-//     ]);
-
-//     $filenames = [];  // Array to store the filenames
-
-//     // Check if the request contains files
-//     if ($request->hasFile('filename')) {
-//         foreach ($request->file('filename') as $file) {
-//             // Generate a unique name for each file
-//             $fileName = time() . '_' . $file->getClientOriginalName();
-
-//             // Set the upload path
-//             $uploadPath = public_path('uploads');
-
-//             // Create the uploads folder if it doesn't exist
-//             if (!file_exists($uploadPath)) {
-//                 mkdir($uploadPath, 0777, true);
-//             }
-
-//             // Move the file to the upload path
-//             $file->move($uploadPath, $fileName);
-
-//             // Add the filename to the array
-//             $filenames[] = $fileName;
-//         }
-
-//         // Save all filenames in one row in the database
-//         $data = new File;
-//         $data->user_id = $request->user_id;
-//         $data->description = $request->description;
-//         $data->category = $request->category ?? null;
-//         $data->filename = json_encode($filenames);  // Save filenames as JSON in the 'filename' column
-//         $data->save();
-//     }
-
-//     return redirect()->back()->with('success', 'Files uploaded successfully');
-// }
 
 public function savePhotos(Request $request)
 {
@@ -162,38 +117,7 @@ public function savePhotos(Request $request)
     
         return redirect()->back()->with('success', 'Comment posted successfully');
     }
-        
-
-    // public function savePhotos(Request $request)
-    // {
-    //     $request->validate([
-    //         'user_id' => 'required|exists:users,id',
-    //         'description' => 'required',
-    //         'filename' => 'required',  // Ensure at least one file is uploaded
-    //        'filename.*' => 'file|mimes:jpg,png|max:2048',
-    //     ]);
-    
-    //     if ($request->hasFile('filename')) {
-    //         foreach ($request->file('filename') as $file) {
-    //             $data = new File;
-    //             $data->user_id = $request->user_id;  // Store the user allowed to comment
-    //             $data->description = $request->description;
-    //             $data->category = $request->category ?? null;
-    
-    //             $fileName = time() . '_' . $file->getClientOriginalName();
-    //             $uploadPath = public_path('uploads');
-    //             if (!file_exists($uploadPath)) {
-    //                 mkdir($uploadPath, 0777, true);
-    //             }
-    //             $file->move($uploadPath, $fileName);
-    //             $data->filename = $fileName;
-    //             $data->save();
-    //         }
-    //     }
-    
-    //     return redirect()->back()->with('success', 'Files uploaded successfully');
-    // }
-    
+      
 
 
 
