@@ -50,12 +50,12 @@ class TestPhotoController extends Controller
 public function showUploadedPhotos()
 {
     // Fetch the uploaded photos for the logged-in user
-    $photoUploads = TestPhoto::where('user_id', auth()->id())
+    $photoUploads = Photos::with('user') // Assuming 'user' is the relationship in the Photo model
         ->orderBy('created_at', 'desc')
         ->get();
 
     // Pass the photoUploads variable to the view
-    return view('show-photos', compact('photoUploads'));
+    return view('user.show-photos', compact('photoUploads'));
 }
 
 public function showForm()
@@ -68,3 +68,4 @@ public function showForm()
     }
     
 }
+

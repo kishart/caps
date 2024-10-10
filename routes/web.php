@@ -106,6 +106,28 @@ Route::post('/send-message/{id}', [AppointmentController::class, 'sendMessage'])
 
 Route::get('calendartest', [HomeController::class, 'calendartest'])->middleware('auth');
 
+
+
+Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])->name('view-photos');
+
+
+
+
+
+
+Route::get('upload-photos', function () {
+    return view('/admin/upload-photos');
+});
+
+
+Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
+Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
+
+Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');
+
+
+
+
 Route::get('/uphotostest', [FileController::class, 'create'])->middleware('auth');
 
 // web.php (Routes)
@@ -127,16 +149,3 @@ Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
 
 Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
 Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
-
-
-
-
-Route::get('upload-photos', function () {
-    return view('/admin/upload-photos');
-});
-
-
-Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
-Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
-
-Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');
