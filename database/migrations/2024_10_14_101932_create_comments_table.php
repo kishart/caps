@@ -13,22 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('photos', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
-           
-            $table->json('photo_paths'); 
-            $table->foreignId('user_id')->constrained('users');           // This will store an array of paths
-            $table->text('description')->nullable();
-
-                $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
-            
-
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('photo_id')->constrained('photos')->onDelete('cascade'); // Corrected from 'file_id' to 'photo_id'
+            $table->text('comment');
             $table->timestamps();
         });
     }
-
-
-
+    
     /**
      * Reverse the migrations.
      *
@@ -36,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testphotos');
+        Schema::dropIfExists('comments');
     }
 };

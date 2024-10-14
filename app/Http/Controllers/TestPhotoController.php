@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Auth;
+
 class TestPhotoController extends Controller
 {
     public function upload(Request $request)
@@ -17,34 +19,32 @@ class TestPhotoController extends Controller
         $request->validate([
             'photos.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required|string',
-            
+            'user_id' => 'required|exists:users,id', // Validate the selected user ID
         ]);
-
+    
         $filePaths = [];
-
+    
         // Check if photos were uploaded
         if ($request->hasFile('photos')) {
             foreach ($request->file('photos') as $photo) {
                 // Store each photo in the 'photos' directory in the public disk
                 $filePath = $photo->store('photos', 'public');
                 $filePaths[] = $filePath; // Collect all file paths
-                $photo->description = $request->description;
-            $photo->user_id = auth()->id(); // Automatically assign the logged-in user
-            $photo->post_id = $request->post_id; 
             }
         }
-
-        // Save file paths to the database
+    
+        // Save file paths and the selected user to the database
         Photos::create([
-            'user_id' => auth()->id(),
+            'user_id' => $request->user_id, // Save the selected user ID
             'photo_paths' => json_encode($filePaths),
             'description' => $request->description,
-            'post_id' => 'required|exists:posts,id',
         ]);
-
+    
         // Redirect back with success message
         return back()->with('success', 'Photos uploaded successfully!');
     }
+    
+    
 
 
 public function showUploadedPhotos()
@@ -66,6 +66,47 @@ public function showForm()
         // Pass the $users variable to the view
         return view('admin.upload-photos', compact('users'));
     }
-    
-}
 
+
+    public function postComment(Request $request, $photoId)
+    {
+        // Validate the comment input
+        $request->validate([
+            'comment' => 'required|string',
+        ]);
+
+        // Fetch the photo by ID and check if the authenticated user can comment
+        $photo = Photos::findOrFail($photoId);
+        if (Auth::id() !== $photo->user_id) {
+            return redirect()->back()->withErrors(['error' => 'You are not allowed to comment on this file.']);
+        }
+
+        // Create a new comment and save it to the database
+        $comment = new Comment;
+        $comment->user_id = Auth::id();
+        $comment->photo_id = $photoId;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Comment posted successfully');
+    }
+
+    public function deletePhoto($id)
+    {
+        // Find the photo by ID
+        $photo = Photos::findOrFail($id);
+
+        // Delete the photo files from storage
+        $photoPaths = json_decode($photo->photo_paths, true);
+        foreach ($photoPaths as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        // Delete the photo record from the database
+        $photo->delete();
+
+        // Redirect back with a success message
+        return back()->with('success', 'Photo deleted successfully!');
+    }
+}

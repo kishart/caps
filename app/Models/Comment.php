@@ -10,9 +10,9 @@ class Comment extends Model
     use HasFactory;
 
 
-    public function file()
+    public function photo()
     {
-        return $this->belongsTo(File::class);
+        return $this->belongsTo(Photos::class, 'photo_id'); 
     }
     
     public function user()
@@ -20,4 +20,3 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 }
-

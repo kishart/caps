@@ -149,3 +149,7 @@ Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
 
 Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
 Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
+
+
+
+Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');

@@ -55,16 +55,40 @@
                     <p>No photos available for this upload.</p>
                 @endif
 
-                <!-- Display the description -->
-                <p>{{ $photo->description }}</p>
+               <!-- Display the description associated with the uploaded photos -->
+               <p>{{ $photo->description }}</p>
 
-                <!-- Display the user who uploaded the file -->
-                <p>Uploaded by: {{ $photo->user->name }}</p>
-            @endforeach
-        @endif
-    </div>
+               
 
-    <!-- Include Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+               <!-- Comments Section -->
+               <h3>Comments:</h3>
+               <!-- Check if there are any comments associated with the photo -->
+               @if ($photo->comments->where('photo_id', $photo->id)->isEmpty())
+               <p>No comments yet.</p>
+           @else
+               <!-- Display each comment -->
+               @foreach ($photo->comments as $comment)
+                   <p><strong>{{ $comment->user->username }}:</strong> {{ $comment->comment }}</p>
+               @endforeach
+           @endif
+           
+           <!-- Allow commenting if the authenticated user's ID matches the selected user_id for the photo -->
+           @if (Auth::check() && Auth::id() == $photo->user_id)
+               <form action="{{ route('post-comment', $photo->id) }}" method="POST">
+                   @csrf
+                   <textarea name="comment" placeholder="Write your comment..."></textarea>
+                   <button type="submit">Submit Comment</button>
+               </form>
+           @else
+               <!-- If the authenticated user is not the selected user, display a message -->
+               <p><strong>Only {{ $photo->user->username }} can comment on this photo.</strong></p>
+           @endif
+           
+           @endforeach
+       @endif
+   </div>
+
+   <!-- Include Bootstrap JS and dependencies -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
