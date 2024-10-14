@@ -1,16 +1,24 @@
-<!-- resources/views/view_photos.blade.php -->
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
+
+@section('content')
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Uploaded Photos</title>
+    <title>View Photos</title>
     <!-- Add Bootstrap for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
+<style>
+   .main{
+         background-color: #f8f9fa;
+         padding: 20px;
+         border-radius: 10px;
+   } 
+</style>
+
 <body>
-    <div class="container mt-5">
-        <h2>Your Uploaded Photos</h2>
+    <div class="main">
 
         <!-- Display Success Message -->
         @if (session('success'))
@@ -37,8 +45,8 @@
                         <div class="carousel-inner">
                             <!-- Iterate through each photo path for the current session -->
                             @foreach ($photoPaths as $index => $photoPath)
-                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" alt="Uploaded Photo">
+                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}"  >
+                                    <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" alt="Uploaded Photo" style="height:350px; height:300px;">
                                 </div>
                             @endforeach
                         </div>
@@ -91,4 +99,4 @@
    <!-- Include Bootstrap JS and dependencies -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+@endsection

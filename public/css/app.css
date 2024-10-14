@@ -62,10 +62,10 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: #AC6F53;
+    text-decoration: underline #EECC8C;
+    text-decoration-thickness: 3px;
     color: #fff;
     height: 20px;
-    padding: 8px;
     border-radius: 10px;
 }
 /* Place your form-specific CSS here */
@@ -162,3 +162,109 @@ text-decoration: none;
 }
 
 
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 600, 'GRAD' 0, 'opsz' 48;
+    font-size: 40px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-left: -70px;
+    /* Adjust as needed */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.material-symbols-outlined {
+    cursor: pointer;
+}
+
+/* Ensure navbar stays on top */
+nav {
+    position: fixed;
+    /* Fixed position */
+    top: 0;
+    /* Stay at the top */
+    left: 0;
+    /* Align with the left */
+    right: 0;
+    /* Align with the right */
+    z-index: 1000;
+    /* High z-index to stay on top */
+    background-color: #A36361;
+    /* Background color */
+    color: white;
+    /* Text color */
+    font-family: "Jost", sans-serif;
+}
+
+body {
+    padding-top: 80px;
+    /* Adjust based on navbar height */
+
+}
+
+#hamburger {
+    position: absolute;
+    top: 20px;
+    /* Adjust vertical position */
+    right: 10%;
+    /* Adjust horizontal position */
+    margin-left: auto;
+    /* Align to the right */
+}
+
+.brand-link {
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    font-size: 22px;
+    background-color: #A36361;
+    color: white;
+}
+
+.home {
+    margin-left: 58%;
+}
+
+li a,
+body {
+    background-color: #A36361;
+    font-family: "Jost", sans-serif;
+
+}
+
+li {
+    margin-top: 23px;
+
+
+}
+
+.icon {
+    font-size: 50px;
+    color: #EECC8C;
+    margin-top: 13px;
+}
