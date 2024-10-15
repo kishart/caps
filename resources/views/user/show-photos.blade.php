@@ -93,14 +93,13 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
+                            <button style=" margin-left: 130px;" class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="prev">
+                                <ion-icon name="caret-back-outline" style="font-size: 2rem; background-color: #A36361;"></ion-icon>
                             </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
+                            <button style=" margin-right: 130px;" class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="next">
+                                <ion-icon name="caret-forward-outline" style="font-size: 2rem; background-color: #A36361;"></ion-icon>
                             </button>
+                            
                         </div>
                         @else
                             <p>No photos available for this upload.</p>
@@ -110,8 +109,8 @@
                     </div>
 
                     <!-- Right Column: Comments (30%) -->
-                    <div class="col-md-4">
-                        <div class="comment">
+                    <div class="col-md-4" style=" display: flex; justify-content: center; align-items: center;">
+                        <div class="comment" style="width: 80%; background-color: #EECC8C; padding: 10px; border-radius: 8px; text-align: center; margin-bottom:70px; height:240px;">
                             <!-- Check if there are any comments associated with the photo -->
                             @if ($photo->comments->where('photo_id', $photo->id)->isEmpty())
                                 <p>No comments yet.</p>
@@ -121,7 +120,7 @@
                                     <p><strong>{{ $comment->user->username }}:</strong> {{ $comment->comment }}</p>
                                 @endforeach
                             @endif
-
+                    
                             <!-- Allow commenting if the authenticated user's ID matches the selected user_id for the photo -->
                             @if (Auth::check() && Auth::id() == $photo->user_id)
                                 <form action="{{ route('post-comment', $photo->id) }}" method="POST">
@@ -135,6 +134,7 @@
                             @endif
                         </div>
                     </div>
+                    
                 </div>
             @endforeach
         @endif
