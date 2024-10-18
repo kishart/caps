@@ -11,12 +11,14 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
     <title>Document</title>
     <style>
         body {
             background-image: url("/images/home.jpg");
-        
+
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -70,10 +72,10 @@
             padding-left: 40px;
             margin: 0;
             line-height: 1;
-          
+
         }
 
-        .phot{
+        .phot {
             font-family: "Montserrat", sans-serif;
             letter-spacing: 10px;
             padding-left: 40px;
@@ -87,51 +89,68 @@
         .text {
             padding: 0;
             color: white;
-            margin-top: 35px;
+            margin-top: 45px;
         }
-        .quote{
-           font-size: 14px; 
-           font-style:italic;
-           padding-left: 50px;
-           font-family: "Montserrat", sans-serif;
-           margin-right: 8px;
+
+        .quote {
+            font-size: 14px;
+            font-style: italic;
+            padding-left: 50px;
+            font-family: "Montserrat", sans-serif;
+            margin-right: 8px;
         }
+
+        .set,
+        .blur-button {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 12px;
+
+        }
+
+        .set ion-icon {
+            padding-right: 10px;
+            font-size: 25px;
+        }
+
+        .blur-button ion-icon {
+            padding-right: 10px;
+            font-size: 25px;
+        }
+
         .set {
-    display: flex;                  
-    align-items: center;          
-    padding: 10px 12px;            
-    background-color: white;      
-    color: black;                   
-    border: none;                   
-    border-radius: 15px;            
-    cursor: pointer;   
-    font-weight: 700;    
-    font-size:15px;       
-}
+            background-color: white;
+            color: black;
+        }
 
-.set ion-icon {
-    padding-right: 10px;    
-    font-size: 25px;        
-}
+        .blur-button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.blur-button {
-    background-color: transparent;  
-    color: white;    
-    padding: 10px 20px;           
-    border-radius: 15px;             
-    font-size:15px;                  
-    cursor: pointer;               
-    backdrop-filter: blur(5px);     
-    transition: background-color 0.3s ease, color 0.3s ease; 
-    border: none;      
-    color: rgba(255, 255, 255, 1); 
-}
+        .blur-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            /* Slightly change background on hover */
 
-.blur-button:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Slightly change background on hover */
-   
-}
+        }
 
+
+        .infophotog {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 10px;
+            width: 540px;
+            border-radius: 20px;
+        }
     </style>
 </head>
 
@@ -154,12 +173,21 @@
             <h1>HUSNIE</h1>
             <p class="phot"> PHOTOGRAPHY</p>
             <p class="quote">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
-                 omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
-                  tenetur nam delectus fugiat eligendi </p>
+                omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
+                tenetur nam delectus fugiat eligendi </p>
         </div>
-        <div class="button">
-            <button class="set"><ion-icon name="arrow-forward-circle" ></ion-icon>Set Appointment</button> 
-            <button class="blur-button">Calendar</button>
+        <div class="button" style="
+    display:flex; gap:20px;  padding-left: 50px; margin-top:40px;">
+            <button class="set"><ion-icon name="arrow-forward-circle"></ion-icon>Set Appointment</button>
+            <button class="blur-button"><ion-icon name="calendar-clear-outline"></ion-icon>Check Calendar</button>
+
+        </div>
+
+        <div class="infophotog" style="display:flex;">
+            <p>The Photographer <br> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
+                omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
+                tenetur nam delectus fugiat eligendi</p>
+                <img src="{{ asset('images/husnie.png') }}" alt="logo" class="logo" style="">
 
         </div>
 
