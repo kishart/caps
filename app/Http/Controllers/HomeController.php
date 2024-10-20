@@ -55,6 +55,9 @@ class HomeController extends Controller
         return view('layouts.adminsidebar');
     }
 
+    public function navbar(){
+        return view('layouts.nav');
+    }
 
     
     public function editProfile()

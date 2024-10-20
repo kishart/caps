@@ -153,3 +153,7 @@ Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-p
 
 
 Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
+
+
+
+Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
