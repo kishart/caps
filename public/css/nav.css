@@ -37,6 +37,25 @@ nav ul li a:hover {
     color: #f9f9f9;
     transition: 0.3s;
 }
+        /* Default link color for all links */
+        .navbar a {
+            color: #E8B298;
+            text-decoration: none;
+        }
+
+        /* Active link styling */
+        .navbar a.active-link {
+            color: white ;
+            text-decoration: underline;
+            text-decoration-color: #EECC8C;
+            text-decoration-thickness: 2px;
+        }
+
+        .header.bg-brown {
+            background-color: #A36361; 
+            color:black;
+            margin:0;
+        }
 .dropdown-content {
     display: none;
     position: absolute;

@@ -13,27 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
     @stack('styles') <!-- Allow additional styles to be added from child views -->
     <title>@yield('title', 'Husnie Photography')</title>
-    <style>
-        /* Default link color for all links */
-        .navbar a {
-            color: #E8B298;
-            text-decoration: none;
-        }
-
-        /* Active link styling */
-        .navbar a.active-link {
-            color: white ;
-            text-decoration: underline;
-            text-decoration-color: #EECC8C;
-            text-decoration-thickness: 2px;
-        }
-
-        .header.bg-brown {
-            background-color: #A36361; 
-            color:black;
-            margin:0;
-        }
-    </style>
+ 
 </head>
 <body>
     <div class="header  {{ Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint')  ? 'bg-brown' : '' }} ">

@@ -19,11 +19,11 @@
         margin-top: 10px;
     }
     .images{
-        height: 400px; /* Adjust the height as needed */
-    max-width: 70%; /* Set max-width as a percentage of the parent container */
-    object-fit: cover; /* Ensures the image covers the set height without stretching */
+        height: 450px; 
+    max-width: 90%;
+    object-fit: cover; 
     border-radius: 10px;
-    margin: 0 auto; /* Center the image horizontally */
+    margin: 0 auto; 
     }
     
     .carousel-control-prev,

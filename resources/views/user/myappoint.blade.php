@@ -26,9 +26,9 @@
     }
 </style>
 
-<div align="center" style="padding: 70px;">
-    <table>
-        <tr align="center">
+<div style="padding: 70px; text-align: center;">
+    <table style="margin: 0 auto;">
+        <tr style="text-align: center;">
             <th>Details</th>
             <th>Date</th>
             <th>Time</th>
@@ -39,7 +39,7 @@
         </tr>
 
         @foreach($appointments as $appointment)
-        <tr align="center">
+        <tr style="text-align: center;">
             <td>{{ $appointment->details }}</td>
             <td>{{ $appointment->date }}</td>
             <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>

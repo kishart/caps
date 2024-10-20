@@ -82,11 +82,16 @@ h1 {
     font-size: 25px;
 }
 
-.set {
+/* .set {
     background-color: transparent;
     border: none;
     color: black;
+} */
+.set {
+    background-color: white;
+    color: black;
 }
+
 
 .blur-button {
     background-color: transparent;
@@ -109,10 +114,6 @@ h1 {
     font-size: 25px;
 }
 
-.set {
-    background-color: white;
-    color: black;
-}
 
 .blur-button {
     background-color: rgba(255, 255, 255, 0.2);
