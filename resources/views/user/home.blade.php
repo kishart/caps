@@ -15,143 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
         rel="stylesheet">
     <title>Document</title>
-    <style>
-        body {
-            background-image: url("/images/home.jpg");
-
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            margin: 0;
-            height: 100vh;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .navbar {
-            display: flex;
-            align-items: center;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-            font-family: "Jost", sans-serif;
-            color: white;
-            padding-left: 30px;
-            margin-bottom: 10px;
-        }
-
-        .icon-size {
-            font-size: 40px;
-            color: #fff;
-        }
-
-        .logo {
-            width: 100px;
-            height: 110px;
-            margin-left: 30px;
-        }
-
-        h1 {
-            font-family: "Jost", serif;
-            font-size: 9rem;
-            letter-spacing: 10px;
-            padding-left: 40px;
-            margin: 0;
-            line-height: 1;
-
-        }
-
-        .phot {
-            font-family: "Montserrat", sans-serif;
-            letter-spacing: 10px;
-            padding-left: 40px;
-            margin: 0;
-            font-size: 62px;
-            font-weight: bold;
-            line-height: 1;
-            margin-left: 6px;
-        }
-
-        .text {
-            padding: 0;
-            color: white;
-            margin-top: 45px;
-        }
-
-        .quote {
-            font-size: 14px;
-            font-style: italic;
-            padding-left: 50px;
-            font-family: "Montserrat", sans-serif;
-            margin-right: 8px;
-        }
-
-        .set,
-        .blur-button {
-            display: flex;
-            align-items: center;
-            font-weight: 700;
-            font-size: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            border: none;
-            padding: 10px 12px;
-
-        }
-
-        .set ion-icon {
-            padding-right: 10px;
-            font-size: 25px;
-        }
-
-        .blur-button ion-icon {
-            padding-right: 10px;
-            font-size: 25px;
-        }
-
-        .set {
-            background-color: white;
-            color: black;
-        }
-
-        .blur-button {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .blur-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            /* Slightly change background on hover */
-
-        }
-
-
-        .infophotog {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            transition: background-color 0.3s ease, color 0.3s ease;
-            padding: 10px;
-            width: 540px;
-            border-radius: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 </head>
 
 <body>
@@ -160,11 +24,23 @@
             <img src="{{ asset('images/hplogo.jpg') }}" alt="logo" class="logo">
             <nav class="navbar">
                 <ul>
-                    <li>Home</li>
-                    <li>Calendar</li>
-                    <li>Photos</li>
-                    <li>Message</li>
-                    <li><ion-icon name="person-circle-outline" class="icon-size"></ion-icon></li>
+                    <li><a class="home" href="{{ asset('home') }}" style="color:white;">Home</a></li>
+                    <li><a href="{{ asset('ucalen') }}" style="color:rgb(135, 135, 135);">Calendar</a></li>
+                    <li><a href="{{ asset('show-photos') }}" style="color:rgb(135, 135, 135);">Photos</a></li>
+                    <li><a href="{{ asset('contact') }}" style="color:rgb(135, 135, 135);">Contact</a></li>
+                    <div class="dropdown">
+                        <ion-icon name="person-circle-outline" class="icon"></ion-icon>
+                        <div class="dropdown-content">
+                            <a href="{{ asset('profile') }}">Profile</a>
+                            <a href="{{ asset('myappoint') }}">My Appointments</a>
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        </div>
+                    </div>
+                </ul>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                
                 </ul>
             </nav>
         </div>
@@ -176,20 +52,38 @@
                 omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
                 tenetur nam delectus fugiat eligendi </p>
         </div>
-        <div class="button" style="
-    display:flex; gap:20px;  padding-left: 50px; margin-top:40px;">
-            <button class="set"><ion-icon name="arrow-forward-circle"></ion-icon>Set Appointment</button>
-            <button class="blur-button"><ion-icon name="calendar-clear-outline"></ion-icon>Check Calendar</button>
-
+        <div class="button">
+            <button class="set">
+                <ion-icon name="arrow-forward-circle"></ion-icon>
+                <a href="{{ asset('setap') }}" style="color: black;">Set Appointment</a>
+            </button>
+            <button class="blur-button">
+                <ion-icon name="calendar-clear-outline"></ion-icon>
+                <a href="{{ asset('ucalen') }}" style="color: white;">Check Calendar</a>
+            </button>
         </div>
 
-        <div class="infophotog" style="display:flex;">
-            <p>The Photographer <br> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
+
+        <div class="infophotog">
+            <p> <span>The Photographer</span> <br><br>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
                 omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
                 tenetur nam delectus fugiat eligendi</p>
-                <img src="{{ asset('images/husnie.png') }}" alt="logo" class="logo" style="">
 
         </div>
+        <img src="{{ asset('images/husnie.png') }}" alt="husnie" class="husnie">
+
+
+        <div class="apps">
+            <a href="https://www.facebook.com/HusniePhotography" target="_blank">
+                <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+            <ion-icon name="logo-instagram"><a href=""></a></ion-icon>
+            <a href="mailto:itshusnie@gmail.com">
+                <ion-icon name="mail"></ion-icon>
+            </a>
+        </div>
+
 
     </div>
 </body>

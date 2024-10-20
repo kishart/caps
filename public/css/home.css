@@ -1,0 +1,244 @@
+body {
+    background-image: url("/images/home.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    height: 100vh;
+    font-family: "Montserrat", sans-serif;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+nav ul li {
+    margin-top: 5px;
+}
+nav ul li a {
+    margin-right: 35px;
+    font-family: "Jost", sans-serif;
+    color: white;
+    padding-left: 30px;
+    text-decoration: none;
+    margin-bottom: 100px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    margin-left: -70px;
+    /* Adjust as needed */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.material-symbols-outlined {
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 45px;
+    color: white;
+    margin-top: 13px;
+    margin-right: 30px;
+}
+
+.icon-size {
+    font-size: 40px;
+    color: #fff;
+}
+
+.logo {
+    width: 100px;
+    height: 110px;
+    margin-left: 30px;
+}
+
+h1 {
+    font-family: "Jost", serif;
+    font-size: 9rem;
+    letter-spacing: 10px;
+    padding-left: 40px;
+    margin: 0;
+    line-height: 1;
+}
+
+.phot {
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 10px;
+    padding-left: 40px;
+    margin: 0;
+    font-size: 62px;
+    font-weight: bold;
+    line-height: 1;
+    margin-left: 6px;
+}
+
+.text {
+    padding: 0;
+    color: white;
+    margin-top: 35px;
+}
+
+.quote {
+    font-size: 14px;
+    font-style: italic;
+    padding-left: 50px;
+    font-family: "Montserrat", sans-serif;
+    margin-right: 8px;
+}
+
+.set,
+.blur-button {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    border: none;
+    padding: 10px 12px;
+}
+.button a {
+    text-decoration: none;
+}
+
+.set ion-icon {
+    padding-right: 10px;
+    font-size: 25px;
+}
+
+.set {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+.blur-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+}
+
+.button button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.blur-button ion-icon {
+    padding-right: 10px;
+    font-size: 25px;
+}
+
+.set {
+    background-color: white;
+    color: black;
+}
+
+.blur-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.blur-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Slightly change background on hover */
+}
+.button {
+    display: flex;
+    gap: 20px;
+    padding-left: 50px;
+    margin-top: 30px;
+}
+
+.infophotog {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 10px 30px;
+    width: 500px;
+    border-radius: 20px;
+    gap: 15px;
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+.infophotog p {
+    margin-right: 150px; /* Adjust this value as needed */
+}
+
+span {
+    font-weight: bold;
+}
+.husnie {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    right: 40px;
+    bottom: 20px;
+    height: 170px;
+    width: 200px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+.apps {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 175px;
+    padding-left: 50px;
+    font-size: 30px;
+    color: white;
+    gap: 30px;
+}
+
+a ion-icon {
+    color: white;
+}
