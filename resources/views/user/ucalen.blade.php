@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.nav')
+@section('title', 'Calendar')
 
 @section('content')
 
@@ -18,25 +19,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <title>Calendar</title>
 
     <style>
         html, body {
             width: 100%;
-            height: 100%;
             margin: 0;
             padding: 0;
             background-color: #EFE6DD;
+
+            
         }
 
         .contain {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100vw;
-            height: 100vh;
-            margin-top: 5%;
+            height: 70vh;
         }
 
         .calendar-container {
@@ -59,40 +59,46 @@
 
         /* Custom styles for FullCalendar */
         .fc td, .fc th {
-            border-color: #ecb176 !important; /* Change grid lines to white */
+            border-color: #ecb176 !important;
         }
 
         .fc-day, .fc-widget-content {
-            background-color: #fdead6 !important; /* Change day background color to white */
+            background-color: #fdead6 !important;
+        }
+
+
+        .set-appointment-button {
+            background-color: #fdead6;
+            color: #826C5F;
+            border: 1px solid #826C5F;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <div class="contain">
     <div class="calendar-container">
-        <h3 class="text-center mt-5 font-bold text-xl">Husnie's Appointment Schedule</h3>
+        <h3 class="text-center font-bold text-xl">Husnie's Appointment Schedule</h3>
         <div id="calendar"></div>
     </div>
 </div>
 
-
-
-
 <script>
     $(document).ready(function() {
-        var calendar = @json($events);
+        var calendarEvents = @json($events);
 
-        // Convert event dates to include only the date portion
-        calendar.forEach(function(event) {
-            event.start = event.start.substr(0, 10); // Assuming start date is in YYYY-MM-DD format
-            event.end = event.end.substr(0, 10); // Assuming end date is in YYYY-MM-DD format
+        // Process event dates
+        calendarEvents.forEach(function(event) {
+            event.start = event.start.substr(0, 10);
+            event.end = event.end.substr(0, 10);
         });
 
         $('#calendar').fullCalendar({
-            height: 'parent', // Make calendar take the full height of its parent
-            events: calendar,
-          
-
+            height: 'parent',
+            events: calendarEvents,
             customButtons: {
                 myCustomToday: {
                     text: 'Set Appointment',
@@ -101,31 +107,31 @@
                     }
                 }
             },
-
-
             header: {
-                left: 'title',
-                right: 'prev,next, myCustomToday'
+                left: 'prev,next today',
+                center: 'title',
+                right: 'myCustomToday'
             },
-
-            
             viewRender: function(view, element) {
-                // Get the header element
                 var header = element.find('.fc-toolbar h2');
-
-                // Replace the header text with weekdays
                 header.text('Weekdays');
             },
             eventRender: function(event, element) {
-                element.css('background-color', '#826C5F'); // Change the background color of the event to brown
-                // Display the note in the event's title
+                element.css('background-color', '#826C5F');
                 if (event.available) {
                     element.find('.fc-title').append(event.available);
                 }
-            },
+            }
         });
+
+        // Apply custom class to the custom button
+        var customButton = $('.fc-myCustomToday-button');
+        if (customButton) {
+            customButton.addClass('set-appointment-button');
+        }
     });
 </script>
+
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 @endsection

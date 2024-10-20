@@ -1,12 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('content')
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
     <title>View Photos</title>
-    <!-- Add Bootstrap for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
@@ -20,11 +18,11 @@
         width: 100%;
         margin-top: 10px;
     }
-    img{
+    .images{
         height: 400px; /* Adjust the height as needed */
     max-width: 70%; /* Set max-width as a percentage of the parent container */
     object-fit: cover; /* Ensures the image covers the set height without stretching */
-    border-radius: 10px; /* Keep the border-radius */
+    border-radius: 10px;
     margin: 0 auto; /* Center the image horizontally */
     }
     
@@ -89,7 +87,7 @@
                                 <!-- Iterate through each photo path for the current session -->
                                 @foreach ($photoPaths as $index => $photoPath)
                                     <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                        <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100" alt="Uploaded Photo">
+                                        <img src="{{ asset('storage/' . $photoPath) }}" class="d-block w-100 images" alt="Uploaded Photo">
                                     </div>
                                 @endforeach
                             </div>
