@@ -1,0 +1,51 @@
+.pdetail{
+    text-align: center;
+    font-size: 20px;
+    padding: 50px 0;
+}
+.pmethod {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.pmethod a {
+    min-height: 350px; 
+    width: 500px;
+}
+.glogo{
+    width: 300px;
+    height: 250px;
+   margin-left: 20px;
+margin-bottom:20px;
+} 
+.pperson{
+    width: 300px;
+    height: 250px;
+    margin-left: 20px;
+    margin-bottom:20px;
+}
+.qr-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.qrsample {
+    width: auto;
+    height: 250px;
+}
+.file{
+    background-color: #A36361;
+}
+.dt{
+    margin-top: 20px;    
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.details{
+    margin-bottom: 20px;
+}
+
