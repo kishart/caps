@@ -292,47 +292,5 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="{{ asset('js/ahome.js') }}"></script>
-    <script>
-        function toggleMenu(element) {
-            const menu = element.nextElementSibling;
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // Open modal
-            document.querySelectorAll('.open-modal').forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default link behavior
-                    var id = this.getAttribute('data-id');
-                    var modal = document.getElementById(`modal-${id}`);
-
-                    // Show the modal
-                    if (modal) {
-                        modal.style.display = 'block';
-                    }
-                });
-            });
-
-            // Close modal when clicking on the 'X' icon
-            document.querySelectorAll('.close-modal').forEach(button => {
-                button.addEventListener('click', function() {
-                    var modalId = this.getAttribute('data-modal-id');
-                    var modal = document.getElementById(modalId);
-
-                    if (modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
-
-            // Close modal when clicking outside of modal content
-            window.addEventListener('click', function(event) {
-                document.querySelectorAll('.w3-modal').forEach(modal => {
-                    if (event.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+    
 @endsection
