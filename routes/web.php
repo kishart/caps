@@ -157,3 +157,4 @@ Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])
 
 
 Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
+Route::get('/payment/{id}', [AppointmentController::class, 'showPaymentPage'])->name('payment.show');

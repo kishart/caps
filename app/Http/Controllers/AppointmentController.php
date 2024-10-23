@@ -103,12 +103,42 @@ class AppointmentController extends Controller
 
 
 
-   public function accepted($id){
-    $data = Appointment::find($id);
-    $data->status = "Approved";
-    $data->save();
-    return redirect()->back()->with('success', 'Appointment approved successfully.');
-}
+   public function accepted(Request $request, $id)
+   {
+       // Validate the downpayment input
+       $request->validate([
+           'downpayment' => 'required|numeric|min:0',
+       ]);
+   
+       // Find the appointment by its ID
+       $appointment = Appointment::find($id);
+   
+       if ($appointment) {
+           // Save the downpayment and change the status to 'approved'
+           $appointment->downpayment = $request->input('downpayment');
+           $appointment->status = 'approved';
+           $appointment->save();
+   
+           // Redirect to some success page or show success message
+           return redirect()->back()->with('success', 'Appointment approved and downpayment saved.');
+       }
+   
+       return redirect()->back()->with('error', 'Appointment not found.');
+   }
+   
+   public function showPaymentPage($id)
+   {
+       $appointment = Appointment::find($id);
+   
+       if ($appointment) {
+           // Pass the downpayment amount to the view
+           return view('user.payment', ['downpaymentAmount' => $appointment->downpayment]);
+       }
+   
+       return redirect()->back()->with('error', 'Appointment not found.');
+   }
+   
+   
 
 public function declined($id) {
     $data = Appointment::find($id);

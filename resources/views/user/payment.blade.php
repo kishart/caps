@@ -14,8 +14,8 @@
 
 <body>
     <div class="pdetail">
-    <p>Good day! Client your downpayment is -----.</p>
-      <p>  Please choose what method that you prefer to pay.</p>
+        <p>Good day! Client, your downpayment is <strong>₱{{ number_format($downpaymentAmount ?? 0, 2) }}</strong>.</p>
+        <p>Please choose your preferred payment method.</p>
     </div>
     <div class="pmethod">
         <a href="#" data-modal-target="default-modal" data-modal-toggle="default-modal" 

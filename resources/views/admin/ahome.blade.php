@@ -178,29 +178,28 @@
 
 
 
-                            <!-- Approve Modal -->
-                            <div id="confirmApprovalModal-{{ $appointment->id }}" class="modal" style="display:none;">
-                                <div class="modal-content">
-
-                                    <span class="close"
-                                        onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">&times;</span>
-     
+                           <!-- Approve Modal -->
+                           <div id="confirmApprovalModal-{{ $appointment->id }}" class="modal" style="display:none;">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">&times;</span>
+                        
+                                <!-- Form to approve the appointment -->
+                                <form action="{{ route('appointments.accepted', $appointment->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="appointment_id" value="{{ $appointment->id }}">
                                     <label for="amount">Downpayment (PHP):</label>
                                     <div>
                                         <span>₱</span>
-                                        <input type="text" id="amount" placeholder="0.00" onkeyup="formatCurrency(this)">
+                                        <input type="text" id="amount" name="downpayment" placeholder="0.00" onkeyup="formatCurrency(this)" required>
                                     </div>
-                                    
-
-                                    <!-- Form to approve the appointment -->
-                                    <form action="{{ route('appointments.accepted', $appointment->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn-confirm">Confirm Approval</button>
-                                        <button type="button" class="btn-cancel"
-                                            onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">Cancel</button>
-                                    </form>
-                                </div>
+                        
+                                    <button type="submit" class="btn-confirm">Confirm Approval</button>
+                                    <button type="button" class="btn-cancel" onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">Cancel</button>
+                                </form>
                             </div>
+                        </div>
+                        
+
 
                             <!-- Decline Modal -->
                             <div id="confirmDeclineModal-{{ $appointment->id }}" class="modal" style="display:none;">

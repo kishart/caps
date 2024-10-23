@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['fname', 'email', 'phone', 'date', 'time', 'details', 'feedback_requested', 'feedback_given', 'status', 'user_id', 'appointment_id', 'message'];
+    protected $fillable = ['fname', 'email', 'phone', 'date', 'time', 'details', 'feedback_requested', 'feedback_given', 'status', 'user_id', 'appointment_id', 'message', 'downpayment'];
 
     // Define the relationship with Feedback
     public function feedbacks()

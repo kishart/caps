@@ -45,15 +45,14 @@
             <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
             <td>
                 @if(strtolower($appointment->status) == 'approved')
-                    <a href="{{ url('payment') }}" style="color: green; font-weight:bold; text-decoration: underline;">
+                    <a href="{{ route('payment.show', $appointment->id) }}" style="color: green; font-weight:bold; text-decoration: underline;">
                         {{ ucfirst($appointment->status) }}
                     </a>
                 @else
                     {{ ucfirst($appointment->status) }}
                 @endif
-        
-                
             </td>
+            
 
             <td>
                 @if($appointment->message)
