@@ -72,10 +72,11 @@
                                             style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 5px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%;" />
                                     </p>
                                     <p style="display: flex; align-items: center; padding-block: 10px;">
-    <ion-icon name="newspaper" style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
-    <textarea id="modal-details" readonly
-        style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%; height: 150px; resize: none;">{{ $appointment->details }}</textarea>
-</p>
+                                        <ion-icon name="newspaper"
+                                            style="width: 40px; height: 50px; flex-shrink: 0;"></ion-icon>
+                                        <textarea id="modal-details" readonly
+                                            style="flex-grow: 1; font-size: 20px; margin-left: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #f9f9f9; cursor: default; width: 100%; height: 150px; resize: none;">{{ $appointment->details }}</textarea>
+                                    </p>
 
 
                                 </div>
@@ -113,16 +114,69 @@
 
                         <td>
                             <label for="actionSelect" style="border-radius: 30%; " class="sr-only">Action</label>
-                            <select id="actionSelect" class="custom-select" onchange="handleSelectChange(this)"
+                            <select id="actionSelect" class="custom-select"
+                                onchange="handleAction(this, '{{ $appointment->id }}')"
                                 style="height: 42.5px; width: 130px; padding: 10px 15px;  font-size: 16px; border: none; text-align: right; background-color: rgb(235, 229, 229);">
                                 <option class="option" value="" disabled selected
                                     style="background-color: rgb(235, 229, 229); border-radius: 10%;">
                                     {{ ucfirst($appointment->status) }}</option>
-                                <option class="option" value="{{ url('admin/accepted/' . $appointment->id) }}"
+                                <option class="option" value="approve"
                                     style="background-color: green; color: white; border-radius: 10%;">Approved</option>
-                                <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}"
+                                <option class="option" value="decline"
                                     style="background-color: red; color: white; border-radius: 10%;">Declined</option>
                             </select>
+
+
+
+
+                            <!-- Approve Modal -->
+                            <div id="confirmApprovalModal-{{ $appointment->id }}" class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <p>Downpayment</p>
+                                    <input type="text">
+                                    <span class="close"
+                                        onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">&times;</span>
+                                    <p>Are you sure you want to approve this appointment?</p>
+
+                                    <!-- Form to approve the appointment -->
+                                    <form action="{{ route('appointments.accepted', $appointment->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn-confirm">Confirm Approval</button>
+                                        <button type="button" class="btn-cancel"
+                                            onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Decline Modal -->
+                            <div id="confirmDeclineModal-{{ $appointment->id }}" class="modal" style="display:none;">
+                                <div class="modal-content">
+                                    <span class="close"
+                                        onclick="closeModal('confirmDeclineModal-{{ $appointment->id }}')">&times;</span>
+                                    <p>Are you sure you want to decline this appointment?</p>
+
+                                    <!-- Form to decline the appointment -->
+                                    <form action="{{ url('admin/declined/' . $appointment->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn-confirm" style="background-color: red;">Confirm
+                                            Decline</button>
+                                        <button type="button" class="btn-cancel"
+                                            onclick="closeModal('confirmDeclineModal-{{ $appointment->id }}')">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
                         </td>
 
@@ -292,5 +346,4 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="{{ asset('js/ahome.js') }}"></script>
-    
 @endsection

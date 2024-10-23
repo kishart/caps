@@ -223,3 +223,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+//accepted
+
+function handleAction(select, id) {
+    if (select.value === 'approve') {
+        document.getElementById('confirmApprovalModal-' + id).style.display = 'block';
+    } else if (select.value === 'decline') {
+        document.getElementById('confirmDeclineModal-' + id).style.display = 'block';
+    }
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}

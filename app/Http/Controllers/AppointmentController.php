@@ -110,10 +110,11 @@ class AppointmentController extends Controller
     return redirect()->back()->with('success', 'Appointment approved successfully.');
 }
 
-public function declined($id){
+public function declined($id) {
     $data = Appointment::find($id);
     $data->status = "Declined";
     $data->save();
+
     return redirect()->back()->with('success', 'Appointment declined successfully.');
 }
 
