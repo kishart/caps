@@ -238,3 +238,22 @@ function handleAction(select, id) {
 function closeModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
 }
+
+
+//input money for downpayment
+    function formatCurrency(input) {
+        // Remove any non-digit characters, except for period (.)
+        let value = input.value.replace(/[^0-9.]/g, '');
+
+        // Split the input value into whole number and decimal parts
+        let parts = value.split('.');
+
+        // Format the whole number part with commas
+        let wholePart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        // If there's a decimal part, limit it to two decimal places
+        let decimalPart = parts[1] ? parts[1].substring(0, 2) : '';
+
+        // Combine the whole part and decimal part (if any)
+        input.value = decimalPart ? wholePart + '.' + decimalPart : wholePart;
+    }

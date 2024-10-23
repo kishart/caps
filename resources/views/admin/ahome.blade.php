@@ -10,7 +10,56 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="{{ asset('css/ahome.css') }}">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
 
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn-confirm {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 
     <div class="appointy">
         <p class="text-left text-3xl text-black font-bold">Appointment List</p>
@@ -132,11 +181,16 @@
                             <!-- Approve Modal -->
                             <div id="confirmApprovalModal-{{ $appointment->id }}" class="modal" style="display:none;">
                                 <div class="modal-content">
-                                    <p>Downpayment</p>
-                                    <input type="text">
+
                                     <span class="close"
                                         onclick="closeModal('confirmApprovalModal-{{ $appointment->id }}')">&times;</span>
-                                    <p>Are you sure you want to approve this appointment?</p>
+     
+                                    <label for="amount">Downpayment (PHP):</label>
+                                    <div>
+                                        <span>₱</span>
+                                        <input type="text" id="amount" placeholder="0.00" onkeyup="formatCurrency(this)">
+                                    </div>
+                                    
 
                                     <!-- Form to approve the appointment -->
                                     <form action="{{ route('appointments.accepted', $appointment->id) }}" method="POST">
