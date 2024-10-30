@@ -2,10 +2,13 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    
 }
 body{
-background-color: #EFE6DD;
+
+overflow: hidden; 
 }
+
 
 /* Navbar styles */
 nav {
@@ -151,4 +154,39 @@ top: 10px;
 right: 10px;
 color: #585858;
 text-decoration: none;
+}
+
+.logout{
+    margin-top: 50%;
+}
+
+
+:root {
+    --primary: #A36361;
+}
+
+#default-sidebar {
+    border-top-right-radius: 2%;
+    border-bottom-right-radius: 2%;
+    height: 100vh; /* Ensure it fits the full viewport height */
+    display: flex;
+    flex-direction: column; /* Ensure the content stacks vertically */
+    overflow-y: hidden; /* Prevents vertical scroll within sidebar */
+
+}
+
+.sidey {
+margin-bottom: auto; /* Ensure the content above can grow */
+}
+
+
+
+img {
+    width: 160px;
+    height: 175px;
+    margin-top: 5%;
+}
+
+ul li a:hover {
+color: #A36361 !important; /* Force color change on hover */
 }
