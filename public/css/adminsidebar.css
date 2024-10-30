@@ -166,6 +166,7 @@ text-decoration: none;
 }
 
 #default-sidebar {
+    background-color: #A36361;
     border-top-right-radius: 2%;
     border-bottom-right-radius: 2%;
     height: 100vh; /* Ensure it fits the full viewport height */
