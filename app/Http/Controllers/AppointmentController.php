@@ -33,6 +33,7 @@ class AppointmentController extends Controller
             $data->user_id = 0;
         }
         $data->save();
+        $data->feedback = $request->feedback;
         return redirect()->back()->with('success', 'Booking added successfully');
     }
 
@@ -101,30 +102,20 @@ class AppointmentController extends Controller
    }
 
 
+   public function accepted($id){
+    $data = Appointment::find($id);
+    $data->status = "Approved";
+    $data->save();
+    return redirect()->back()->with('success', 'Appointment approved successfully.');
+}
 
-   public function accepted(Request $request, $id)
-   {
-       // Validate the downpayment input
-       $request->validate([
-           'downpayment' => 'required|numeric|min:0',
-       ]);
-   
-       // Find the appointment by its ID
-       $appointment = Appointment::find($id);
-   
-       if ($appointment) {
-           // Save the downpayment and change the status to 'approved'
-           $appointment->downpayment = $request->input('downpayment');
-           $appointment->status = 'approved';
-           $appointment->save();
-   
-           // Redirect to some success page or show success message
-           return redirect()->back()->with('success', 'Appointment approved and downpayment saved.');
-       }
-   
-       return redirect()->back()->with('error', 'Appointment not found.');
-   }
-   
+public function declined($id){
+    $data = Appointment::find($id);
+    $data->status = "Declined";
+    $data->save();
+    return redirect()->back()->with('success', 'Appointment declined successfully.');
+}
+
    public function showPaymentPage($id)
    {
        $appointment = Appointment::find($id);
@@ -139,13 +130,6 @@ class AppointmentController extends Controller
    
    
 
-public function declined($id) {
-    $data = Appointment::find($id);
-    $data->status = "Declined";
-    $data->save();
-
-    return redirect()->back()->with('success', 'Appointment declined successfully.');
-}
 
 
 
@@ -197,6 +181,57 @@ public function declined($id) {
     {
         return view('user.payment');
     }
+
+
+    public function requestFeedback($id)
+{
+    $appointment = Appointment::find($id);
+    $appointment->feedback_requested = true;
+    $appointment->save();
+
+    return redirect()->back()->with('success', 'Feedback request sent successfully.');
+}
+
+
+
+public function showFeedbackForm($id)
+{
+    $appointment = Appointment::find($id);
+    return view('user.feedback_form', compact('appointment'));
+}
+
+public function submitFeedback(Request $request, $id)
+{
+    $appointment = Appointment::find($id);
+
+    if (!$appointment) {
+        return redirect()->back()->with('error', 'Appointment not found.');
+    }
+
+    // Check if feedback already exists
+    if ($appointment->feedback) {
+        return redirect()->back()->with('error', 'You have already submitted feedback for this appointment.');
+    }
+
+    $appointment->feedback = $request->feedback;
+    $appointment->save();
+
+    return redirect()->back()->with('success', 'Thank you for your feedback.');
+}
+
+public function getFeedback($id)
+{
+    $appointment = Appointment::find($id);
+    if (!$appointment) {
+        return response()->json(['error' => 'Appointment not found'], 404);
+    }
+
+    // Assuming feedback is stored in a field called `feedback`
+    $feedback = $appointment->feedback ?? 'No feedback provided yet.';
+
+    return response()->json(['feedback' => $feedback]);
+}
+
 
 
 

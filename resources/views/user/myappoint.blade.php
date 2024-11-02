@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+@extends('layouts.app')
 
 @section('content')
 
@@ -26,32 +26,33 @@
     }
 </style>
 
-<div style="padding: 70px; text-align: center;">
-    <table style="margin: 0 auto;">
-        <tr style="text-align: center;">
+<div align="center" style="padding: 70px;">
+    <table>
+        <tr align="center">
             <th>Details</th>
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
             <th>Message</th>
-        
+            
         </tr>
 
         @foreach($appointments as $appointment)
-        <tr style="text-align: center;">
+        <tr align="center">
             <td>{{ $appointment->details }}</td>
             <td>{{ $appointment->date }}</td>
             <td>{{ \Carbon\Carbon::parse($appointment->time)->format('h:i A') }}</td>
             <td>
                 @if(strtolower($appointment->status) == 'approved')
-                    <a href="{{ route('payment.show', $appointment->id) }}" style="color: green; font-weight:bold; text-decoration: underline;">
+                    <a href="{{ url('payment') }}" style="color: green; font-weight:bold; text-decoration: underline;">
                         {{ ucfirst($appointment->status) }}
                     </a>
                 @else
                     {{ ucfirst($appointment->status) }}
                 @endif
+        
+                
             </td>
-            
 
             <td>
                 @if($appointment->message)
@@ -66,7 +67,39 @@
                 @endif
             </td>
             
+          <!-- Main modal -->
+<div id="message-modal-{{ $appointment->id }}" tabindex="-1" aria-hidden="true" 
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-[5rem] right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+   <div class="relative w-full max-w-2xl max-h-full" style="margin-top: 150px;">
+       <!-- Modal content -->
+       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+           <!-- Modal header -->
+           <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+               <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Message</h3>
+               <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" 
+                       onclick="hideMessageModal({{ $appointment->id }})">
+                   <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                   </svg>
+                   <span class="sr-only">Close modal</span>
+               </button>
+           </div>
+
+           <!-- Modal body with message -->
+           <div class="p-6 space-y-6">
+               @if($appointment->message)
+                   <p>{{ $appointment->message->message }}</p>
+               @else
+                   <p>No messages available</p>
+               @endif
+           </div>
+       </div>
+   </div>
+</div>
+
+               
            
+          
             
         </tr>
         @endforeach

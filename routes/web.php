@@ -38,8 +38,11 @@ Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointme
 
 Route::get('admin/delete-appointment/{id}',[AppointmentController::class,'deleteAppointment']);
 
-Route::post('/appointments/accepted/{id}', [AppointmentController::class, 'accepted'])->name('appointments.accepted');
-Route::post('/admin/declined/{id}', [AppointmentController::class, 'declined'])->name('appointments.declined');
+// Route::post('/appointments/accepted/{id}', [AppointmentController::class, 'accepted'])->name('appointments.accepted');
+// Route::post('/admin/declined/{id}', [AppointmentController::class, 'declined'])->name('appointments.declined');
+
+Route::get('admin/accepted/{id}', [AppointmentController::class, 'accepted']);
+Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
 
 
 
