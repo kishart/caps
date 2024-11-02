@@ -69,7 +69,7 @@
                             </a>
                         </li>
                         <li>
-                             <a href="{{ asset('uphotos') }}"
+                             <a href="{{ asset('upload-photos') }}"
                                 class=" font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="images" style="font-size: 30px;"></ion-icon>
                                 <span class="flex-1 ms-3 whitespace-nowrap">Photos</span>
