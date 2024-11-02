@@ -33,7 +33,6 @@ class AppointmentController extends Controller
             $data->user_id = 0;
         }
         $data->save();
-        $data->feedback = $request->feedback;
         return redirect()->back()->with('success', 'Booking added successfully');
     }
 
@@ -198,57 +197,6 @@ public function declined($id) {
     {
         return view('user.payment');
     }
-
-
-    public function requestFeedback($id)
-{
-    $appointment = Appointment::find($id);
-    $appointment->feedback_requested = true;
-    $appointment->save();
-
-    return redirect()->back()->with('success', 'Feedback request sent successfully.');
-}
-
-
-
-public function showFeedbackForm($id)
-{
-    $appointment = Appointment::find($id);
-    return view('user.feedback_form', compact('appointment'));
-}
-
-public function submitFeedback(Request $request, $id)
-{
-    $appointment = Appointment::find($id);
-
-    if (!$appointment) {
-        return redirect()->back()->with('error', 'Appointment not found.');
-    }
-
-    // Check if feedback already exists
-    if ($appointment->feedback) {
-        return redirect()->back()->with('error', 'You have already submitted feedback for this appointment.');
-    }
-
-    $appointment->feedback = $request->feedback;
-    $appointment->save();
-
-    return redirect()->back()->with('success', 'Thank you for your feedback.');
-}
-
-public function getFeedback($id)
-{
-    $appointment = Appointment::find($id);
-    if (!$appointment) {
-        return response()->json(['error' => 'Appointment not found'], 404);
-    }
-
-    // Assuming feedback is stored in a field called `feedback`
-    $feedback = $appointment->feedback ?? 'No feedback provided yet.';
-
-    return response()->json(['feedback' => $feedback]);
-}
-
 
 
 
