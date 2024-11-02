@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('calendars', function (Blueprint $table) {
             $table->id();
             $table->string('available');
-
             $table->string('note');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->dateTime('start_time')->nullable();
+            $table->dateTime('end_time')->nullable();  
             $table->timestamps();
         });
     }

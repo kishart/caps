@@ -81,7 +81,7 @@
 
 <div class="contain">
     <div class="calendar-container">
-        <h3 class="text-center font-bold text-xl">Husnie's Appointment Schedule</h3>
+        
         <div id="calendar"></div>
     </div>
 </div>
