@@ -3,14 +3,12 @@ function filterTable() {
     const filter = searchInput.value.toLowerCase().trim();
     const table = document.getElementById('appointmentTable');
     const rows = table.getElementsByTagName('tr');
+    let hasVisibleRow = false; // Flag to track if any rows are visible
 
-    // Clear existing row visibility
+    // Clear existing row visibility and reset the visible row flag
     for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header
         rows[i].style.display = ""; // Reset all rows
     }
-
-    // If the search input is empty, return
-    if (!filter) return;
 
     for (let i = 1; i < rows.length; i++) { // Start from 1 to skip header
         const cells = rows[i].getElementsByTagName('td');
@@ -21,10 +19,20 @@ function filterTable() {
             // Show row if name matches the search input
             if (nameValue.toLowerCase().includes(filter)) {
                 rows[i].style.display = ""; // Show row
+                hasVisibleRow = true; // At least one row is visible
             } else {
                 rows[i].style.display = "none"; // Hide row
             }
         }
+    }
+
+    // Display "No results found" message if no rows are visible
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (!hasVisibleRow) {
+        noResultsMessage.textContent = "No results found";
+        noResultsMessage.style.display = "block";
+    } else {
+        noResultsMessage.style.display = "none";
     }
 }
 
