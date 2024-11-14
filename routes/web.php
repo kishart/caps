@@ -16,12 +16,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
 
 Route::get('/photos', [PostController::class, 'photos'])->name('photos');
 
-Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
-
-Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
+Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
 Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 
@@ -33,18 +32,24 @@ Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
 
 
-Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment']);
-Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment']);
+// Edit appointment routes
+Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment'])->name('admin.edit');
+Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment'])->name('admin.update');
 
-Route::get('admin/delete-appointment/{id}',[AppointmentController::class,'deleteAppointment']);
+// Delete appointment route
+Route::get('admin/delete-appointment/{id}', [AppointmentController::class, 'deleteAppointment'])->name('admin.delete');
 
-// Route::post('/appointments/accepted/{id}', [AppointmentController::class, 'accepted'])->name('appointments.accepted');
-// Route::post('/admin/declined/{id}', [AppointmentController::class, 'declined'])->name('appointments.declined');
+// Show appointment details route
+Route::get('admin/accepted/{id}', [AppointmentController::class, 'showAppointment'])->name('admin.accepted.show');
 
-Route::get('admin/accepted/{id}', [AppointmentController::class, 'accepted']);
-Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
+// Accept appointment route with down payment
+Route::post('admin/accepted/{id}', [AppointmentController::class, 'acceptAppointment'])->name('admin.accepted.accept');
 
+// Decline appointment route
+Route::get('admin/declined/{id}', [AppointmentController::class, 'declined'])->name('admin.declined');
 
+// User payment display route
+Route::get('user/payment/{id}', [AppointmentController::class, 'showDownpayment'])->name('user.payment');
 
 
 // Route to show the form

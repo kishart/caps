@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointment;
-
 use App\Models\Message;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AppointmentController extends Controller
@@ -18,7 +17,7 @@ class AppointmentController extends Controller
 
     public function saveAppoint(Request $request)
     {
-        $data = new appointment;
+        $data = new Appointment;
         $data->fname = $request->fname;
         $data->email = $request->email;
         $data->phone = $request->phone;
@@ -26,14 +25,13 @@ class AppointmentController extends Controller
         $data->time = $request->time;
         $data->details = $request->details;
         $data->status = 'In Progress';
-        if(Auth::id()){
+        if (Auth::id()) {
             $data->user_id = Auth::user()->id;
-        }
-        else{
+        } else {
             $data->user_id = 0;
         }
         $data->save();
-        $data->feedback = $request->feedback;
+
         return redirect()->back()->with('success', 'Booking added successfully');
     }
 
@@ -43,12 +41,14 @@ class AppointmentController extends Controller
         return view('admin.appointlist', compact('appointments'));
     }
 
-    public function editAppointment($id){
-        $data = Appointment::where('id','=',$id)->first();
+    public function editAppointment($id)
+    {
+        $data = Appointment::where('id', '=', $id)->first();
         return view('admin/editappoint', compact('data'));
     }
-    
-    public function updateAppointment(Request $request){
+
+    public function updateAppointment(Request $request)
+    {
         $request->validate([
             'fname' => 'required',
             'email' => 'required|email',
@@ -57,7 +57,7 @@ class AppointmentController extends Controller
             'time' => 'required',
             'details' => 'required'
         ]);
-    
+
         $id = $request->id;
         $fname = $request->fname;
         $email = $request->email;
@@ -65,7 +65,7 @@ class AppointmentController extends Controller
         $date = $request->date;
         $time = $request->time;
         $details = $request->details;
-    
+
         Appointment::where('id', '=', $id)->update([
             'fname' => $fname,
             'email' => $email,
@@ -74,68 +74,60 @@ class AppointmentController extends Controller
             'time' => $time,
             'details' => $details
         ]);
-    
+
         return redirect()->back()->with('success', 'Booking updated successfully');
     }
-    
-    public function deleteAppointment($id){
+
+    public function deleteAppointment($id)
+    {
         Appointment::where('id', '=', $id)->delete();
-         return redirect()->back()->with('success', 'booking deleted successfully');
-   
-   }
-   public function profile(){
-       if(Auth::id()){
-           $userid=Auth::user()->id;
-           $book=Appointment::where('user_id', $userid)->get();
-       return view('user.profile', compact('book'));
-       }
-       else{
-           return redirect()->back();
-       }
-       
-   }
-   public function cancel_booking($id){
-       $data=booking::find($id);
-       $data->delete();
-       return redirect()->back();
+        return redirect()->back()->with('success', 'Booking deleted successfully');
+    }
 
-   }
+    public function profile()
+    {
+        if (Auth::id()) {
+            $userid = Auth::user()->id;
+            $book = Appointment::where('user_id', $userid)->get();
+            return view('user.profile', compact('book'));
+        } else {
+            return redirect()->back();
+        }
+    }
 
+    public function cancel_booking($id)
+    {
+        $data = Appointment::find($id); // Corrected to Appointment model
+        $data->delete();
+        return redirect()->back();
+    }
+    public function acceptAppointment(Request $request, $id)
+{
+    $appointment = Appointment::findOrFail($id);
 
-   public function accepted($id){
-    $data = Appointment::find($id);
-    $data->status = "Approved";
-    $data->save();
-    return redirect()->back()->with('success', 'Appointment approved successfully.');
+    // Update the downpayment amount
+    $appointment->downpayment = $request->input('downpayment');
+    $appointment->status = 'Accepted';
+    $appointment->save();
+
+    return redirect()->route('admin.accepted.show', $id)->with('success', 'Downpayment set successfully!');
 }
 
-public function declined($id){
-    $data = Appointment::find($id);
-    $data->status = "Declined";
-    $data->save();
-    return redirect()->back()->with('success', 'Appointment declined successfully.');
-}
-
-   public function showPaymentPage($id)
-   {
-       $appointment = Appointment::find($id);
-   
-       if ($appointment) {
-           // Pass the downpayment amount to the view
-           return view('user.payment', ['downpaymentAmount' => $appointment->downpayment]);
-       }
-   
-       return redirect()->back()->with('error', 'Appointment not found.');
-   }
-   
-   
 
 
+    public function declined($id)
+    {
+        $data = Appointment::find($id);
+        $data->status = "Declined";
+        $data->save();
+        return redirect()->back()->with('success', 'Appointment declined successfully.');
+    }
 
-
-
-
-
+    public function showDownpayment($id)
+    {
+        $appointment = Appointment::findOrFail($id);  // Fetch specific appointment
+    return view('user.payment', compact('appointment'));
+    }
 
     public function store(Request $request)
     {
@@ -156,7 +148,7 @@ public function declined($id){
         $appointment->time = $request->time;
         $appointment->details = $request->details;
         $appointment->status = 'Pending';
-        $appointment->user_id = Auth::id(); // Associate appointment with the logged-in user
+        $appointment->user_id = Auth::id();
 
         $appointment->save();
 
@@ -173,91 +165,83 @@ public function declined($id){
         } else {
             return redirect()->route('login')->with('error', 'You need to log in to view your appointments.');
         }
-
     }
 
-    
     public function payment()
     {
         return view('user.payment');
     }
-
+    
 
     public function requestFeedback($id)
-{
-    $appointment = Appointment::find($id);
-    $appointment->feedback_requested = true;
-    $appointment->save();
+    {
+        $appointment = Appointment::find($id);
+        $appointment->feedback_requested = true;
+        $appointment->save();
 
-    return redirect()->back()->with('success', 'Feedback request sent successfully.');
-}
-
-
-
-public function showFeedbackForm($id)
-{
-    $appointment = Appointment::find($id);
-    return view('user.feedback_form', compact('appointment'));
-}
-
-public function submitFeedback(Request $request, $id)
-{
-    $appointment = Appointment::find($id);
-
-    if (!$appointment) {
-        return redirect()->back()->with('error', 'Appointment not found.');
+        return redirect()->back()->with('success', 'Feedback request sent successfully.');
     }
 
-    // Check if feedback already exists
-    if ($appointment->feedback) {
-        return redirect()->back()->with('error', 'You have already submitted feedback for this appointment.');
+    public function showFeedbackForm($id)
+    {
+        $appointment = Appointment::find($id);
+        return view('user.feedback_form', compact('appointment'));
     }
 
-    $appointment->feedback = $request->feedback;
-    $appointment->save();
+    public function submitFeedback(Request $request, $id)
+    {
+        $appointment = Appointment::find($id);
 
-    return redirect()->back()->with('success', 'Thank you for your feedback.');
-}
+        if (!$appointment) {
+            return redirect()->back()->with('error', 'Appointment not found.');
+        }
 
-public function getFeedback($id)
-{
-    $appointment = Appointment::find($id);
-    if (!$appointment) {
-        return response()->json(['error' => 'Appointment not found'], 404);
+        // Check if feedback already exists
+        if ($appointment->feedback) {
+            return redirect()->back()->with('error', 'You have already submitted feedback for this appointment.');
+        }
+
+        $appointment->feedback = $request->feedback;
+        $appointment->save();
+
+        return redirect()->back()->with('success', 'Thank you for your feedback.');
     }
 
-    // Assuming feedback is stored in a field called `feedback`
-    $feedback = $appointment->feedback ?? 'No feedback provided yet.';
+    public function getFeedback($id)
+    {
+        $appointment = Appointment::find($id);
+        if (!$appointment) {
+            return response()->json(['error' => 'Appointment not found'], 404);
+        }
 
-    return response()->json(['feedback' => $feedback]);
-}
+        // Assuming feedback is stored in a field called `feedback`
+        $feedback = $appointment->feedback ?? 'No feedback provided yet.';
 
-
-
-
-public function sendMessage(Request $request, $appointmentId)
-{
-    // Validate the request
-    $request->validate([
-        'message' => 'required|string|max:255',
-    ]);
-
-    // Find the appointment
-    $appointment = Appointment::find($appointmentId);
-
-    if ($appointment) {
-        // Create a new message linked to the appointment
-        $message = new Message();
-        $message->appointment_id = $appointment->id;
-        $message->message = $request->input('message'); 
-        $message->save();
-
-        return redirect()->back()->with('success', 'Message sent successfully.');
-    } else {
-        return redirect()->back()->with('error', 'Appointment not found.');
+        return response()->json(['feedback' => $feedback]);
     }
-}
 
+    public function sendMessage(Request $request, $appointmentId)
+    {
+        // Validate the request
+        $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        // Find the appointment
+        $appointment = Appointment::find($appointmentId);
+
+        if ($appointment) {
+            // Create a new message linked to the appointment
+            $message = new Message();
+            $message->appointment_id = $appointment->id;
+            $message->message = $request->input('message');
+            $message->save();
+
+            return redirect()->back()->with('success', 'Message sent successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Appointment not found.');
+        }
+    }
 
     // Method to retrieve messages for a specific appointment
     public function getMessages($id)
@@ -277,20 +261,20 @@ public function sendMessage(Request $request, $appointmentId)
     {
         // Fetch the appointment by ID
         $appointment = Appointment::find($appointment_id);
-    
-        if (!$appointment) {
-            return redirect()->back()->with('error', 'Appointment not found.');
+
+        if ($appointment) {
+            // Show the messages for this appointment
+            return view('user.messages', compact('appointment'));
         }
-    
-        // Get all messages associated with the appointment
-        $messages = $appointment->messages;
-    
-        // Return the view and pass the appointment and its messages
-        return view('user.messages', compact('appointment', 'messages'));
 
-        $appointments = Appointment::with('message')->get();
-
+        return redirect()->back()->with('error', 'Appointment not found.');
     }
-    
+    public function adminHome()
+    {
+        // Fetch all appointments or other data needed for the admin
+        $appointments = Appointment::all();
 
+        // Return the admin's home page view with data
+        return view('admin.home', compact('appointments'));  // Adjust the view path as needed
+    }
 }
