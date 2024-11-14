@@ -101,19 +101,24 @@ class AppointmentController extends Controller
         $data->delete();
         return redirect()->back();
     }
-    public function acceptAppointment(Request $request, $id)
-{
-    $appointment = Appointment::findOrFail($id);
-
-    // Update the downpayment amount
-    $appointment->downpayment = $request->input('downpayment');
-    $appointment->status = 'Accepted';
-    $appointment->save();
-
-    return redirect()->route('admin.accepted.show', $id)->with('success', 'Downpayment set successfully!');
-}
-
-
+    
+    public function accepted(Request $request, $id)
+    {
+        // Validate the input
+        $request->validate([
+            'downpayment' => 'required|numeric|min:0',
+        ]);
+    
+        // Find the appointment and save the downpayment amount
+        $appointment = Appointment::findOrFail($id);
+        $appointment->downpayment = $request->downpayment;
+        $appointment->status = 'Approved';
+        $appointment->save();
+    
+        return redirect()->back()->with('message', 'Appointment approved and down payment set.');
+    }
+    
+   
 
     public function declined($id)
     {
@@ -127,6 +132,12 @@ class AppointmentController extends Controller
     {
         $appointment = Appointment::findOrFail($id);  // Fetch specific appointment
     return view('user.payment', compact('appointment'));
+    }
+
+    public function  showUserDownpayment($id)
+    {
+        $appointment = Appointment::findOrFail($id);  // Fetch specific appointment
+        return view('user.payment', compact('appointment'));
     }
 
     public function store(Request $request)

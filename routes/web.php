@@ -40,10 +40,16 @@ Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointme
 Route::get('admin/delete-appointment/{id}', [AppointmentController::class, 'deleteAppointment'])->name('admin.delete');
 
 // Show appointment details route
-Route::get('admin/accepted/{id}', [AppointmentController::class, 'showAppointment'])->name('admin.accepted.show');
+Route::get('admin/accepted/{id}', [AppointmentController::class, 'showDownpayment'])->name('admin.accepted.show');
+
+
+// Show appointment details route
+Route::get('user/payment/{id}', [AppointmentController::class, 'showUserDownpayment'])->name('user.downpayment.show');
+
+
 
 // Accept appointment route with down payment
-Route::post('admin/accepted/{id}', [AppointmentController::class, 'acceptAppointment'])->name('admin.accepted.accept');
+Route::post('admin/accepted/{id}', [AppointmentController::class, 'accepted'])->name('admin.accepted.accept');
 
 // Decline appointment route
 Route::get('admin/declined/{id}', [AppointmentController::class, 'declined'])->name('admin.declined');
@@ -166,3 +172,5 @@ Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])
 
 Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 Route::get('/payment/{id}', [AppointmentController::class, 'showPaymentPage'])->name('payment.show');
+
+

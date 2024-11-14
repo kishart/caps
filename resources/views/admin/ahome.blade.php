@@ -144,22 +144,26 @@
                         
                                         <!-- Modal body -->
                                         <div class="p-4 md:p-5">
-                                            <form id="downPaymentForm{{ $appointment->id }}" action="{{ url('admin/accepted/' . $appointment->id) }}" method="POST">
-                                                @csrf
-                                                <div class="mb-4">
-                                                    <label for="downpayment{{ $appointment->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                                        Down Payment Amount:
-                                                    </label>
-                                                    <input type="number" id="downpayment{{ $appointment->id }}" name="downpayment" required
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                                        placeholder="Enter amount">
-                                                </div>
-                                                <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                                                    Submit
-                                                </button>
-                                            </form>
-                                        </div>
-                                        
+    <form id="downPaymentForm{{ $appointment->id }}" action="{{ url('admin/accepted/' . $appointment->id) }}" method="POST">
+        @csrf
+        <div class="mb-4">
+            <label for="downpayment{{ $appointment->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Down Payment Amount:
+            </label>
+            <input type="number" id="downpayment{{ $appointment->id }}" name="downpayment" required
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Enter amount" 
+                value="{{ old('downpayment', $appointment->downpayment ?? '') }}" 
+                autofocus>
+        </div>
+
+        <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            Submit
+        </button>
+    </form>
+</div>
+
+                                    </div>
                                 </div>
                             </div>
                         
