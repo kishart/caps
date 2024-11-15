@@ -121,8 +121,10 @@
                     
                             <!-- Allow commenting if the authenticated user's ID matches the selected user_id for the photo -->
                             @if (Auth::check() && Auth::id() == $photo->user_id)
-                                <form action="{{ route('post-comment', $photo->id) }}" method="POST">
-                                    @csrf
+                               
+                            
+                            <form action="{{ route('post-comment', $photo->id) }}" method="POST">
+                                @csrf
                                     <textarea name="comment" placeholder="Write your comment..." rows="4" class="form-control"></textarea>
                                     <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
                                 </form>

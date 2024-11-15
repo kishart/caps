@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
@@ -19,7 +18,7 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
 
-Route::get('/photos', [PostController::class, 'photos'])->name('photos');
+
 
 Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
@@ -137,11 +136,11 @@ Route::get('upload-photos', function () {
 
 Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
 Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
-
 Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');
 
+// Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
-
+Route::post('/comment/{photoId}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
 Route::get('/uphotostest', [FileController::class, 'create'])->middleware('auth');
 
@@ -165,9 +164,6 @@ Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
 Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
 Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
 
-
-
-Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
 
 

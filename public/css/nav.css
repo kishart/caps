@@ -4,11 +4,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
-    
     font-family: "Jost", sans-serif;
     margin: 0;
+    position: fixed; /* Fixes the header to the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensures the header spans the entire width */
+    z-index: 1000; /* Keeps it above other elements */
 }
-
 .navbar {
     display: flex;
     align-items: center;
