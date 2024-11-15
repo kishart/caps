@@ -34,7 +34,7 @@
                     <th>Time</th>
                     <th>Status</th>
                     <th>Message</th>
-                    <th>Feedback</th>
+                    <th>Payment</th>
                     <th>More</th>
                 </tr>
             </thead>
@@ -147,14 +147,26 @@
     <form id="downPaymentForm{{ $appointment->id }}" action="{{ url('admin/accepted/' . $appointment->id) }}" method="POST">
         @csrf
         <div class="mb-4">
-            <label for="downpayment{{ $appointment->id }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                Down Payment Amount:
-            </label>
-            <input type="number" id="downpayment{{ $appointment->id }}" name="downpayment" required
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                placeholder="Enter amount" 
-                value="{{ old('downpayment', $appointment->downpayment ?? '') }}" 
-                autofocus>
+            
+            <div class="flex items-center">
+                <!-- Peso Symbol -->
+                <span class="text-gray-900 font-bold text-lg mr-2">₱</span>
+                
+                <!-- Input Field -->
+                <input 
+                    type="number" 
+                    id="downpayment{{ $appointment->id }}" 
+                    name="downpayment" 
+                    required
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Enter amount" 
+                    value="{{ old('downpayment', $appointment->downpayment ?? '') }}" 
+                    min="0"
+                    step="0.01" 
+                    autofocus
+                >
+            </div>
+            
         </div>
 
         <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
@@ -233,8 +245,7 @@
 
 
                         <td>
-                            @if ($appointment->feedback_requested)
-                                <!-- View Feedback Button -->
+                           
                                 <button data-modal-target="feedback-modal-{{ $appointment->id }}"
                                     data-modal-toggle="feedback-modal-{{ $appointment->id }}"
                                     style="background-color: #4DA167; color:white; width: 100px;border-radius: 15px;  border: none; display: flex; align-items: center; justify-content: center; padding: 10px; "
@@ -245,7 +256,7 @@
                                     View
                                 </button>
 
-                                <!-- Feedback Modal Structure -->
+                                <!-- Downpayment Modal Structure -->
                                 <div id="feedback-modal-{{ $appointment->id }}" tabindex="-1" aria-hidden="true"
                                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div class="relative p-4 w-full max-w-2xl max-h-full">
@@ -254,33 +265,11 @@
                                             <!-- Modal header -->
                                             <div
                                                 class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                                                    Feedback from {{ $appointment->fname }}
-                                                </h3>
-                                                <button type="button"
-                                                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                    data-modal-hide="feedback-modal-{{ $appointment->id }}">
-                                                    <svg class="w-3 h-3" aria-hidden="true"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round"
-                                                            stroke-linejoin="round" stroke-width="2"
-                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                    </svg>
-                                                    <span class="sr-only">Close modal</span>
-                                                </button>
+                                               <p>Payment</p>
                                             </div>
                                             <!-- Modal body -->
                                             <div class="p-4 md:p-5 space-y-4">
-                                                @if ($appointment->feedback)
-                                                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                        {{ $appointment->feedback }}
-                                                    </p>
-                                                @else
-                                                    <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                                                        No feedback provided yet.
-                                                    </p>
-                                                @endif
+                                               <h1>payment</h1>
                                             </div>
                                             <!-- Modal footer -->
                                             <div
@@ -292,20 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @else
-                                <!-- Request Feedback Form -->
-                                <form action="{{ route('request.feedback', $appointment->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary"
-                                        style="width: 100px;border-radius: 15px; color:black; background-color: rgb(235, 229, 229); border: none; display: flex; align-items: center; justify-content: center; padding: 10px;">
-                                        <span class="material-symbols-outlined"
-                                            style="font-size: 21px; margin-right: 8px;">
-                                            today
-                                        </span>
-                                        Request
-                                    </button>
-                                </form>
-                            @endif
+                          
                         </td>
                         <td>
                             <div class="dropdown" style="position: relative;">
@@ -339,100 +315,5 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="{{ asset('js/ahome.js') }}"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Toggle menu for actions dropdown
-    function toggleMenu(element) {
-        const menu = element.nextElementSibling;
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
-    }
-
-    // Open modal on click of specific links
-    document.querySelectorAll('.open-modal').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const id = this.getAttribute('data-id');
-            const modal = document.getElementById(`modal-${id}`);
-
-            if (modal) {
-                modal.style.display = 'block';
-                document.getElementById('modalBackdrop').style.display = 'block';
-            }
-        });
-    });
-
-    // Close modal when clicking on the 'X' icon
-    document.querySelectorAll('.close-modal').forEach(button => {
-        button.addEventListener('click', function() {
-            const modalId = this.getAttribute('data-modal-id');
-            const modal = document.getElementById(modalId);
-
-            if (modal) {
-                modal.style.display = 'none';
-                document.getElementById('modalBackdrop').style.display = 'none';
-            }
-        });
-    });
-
-    // Close modal when clicking outside of modal content
-    window.addEventListener('click', function(event) {
-        document.querySelectorAll('.modal').forEach(modal => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-                document.getElementById('modalBackdrop').style.display = 'none';
-            }
-        });
-    });
-});
-
-// Handle selection changes in dropdown menu
-function handleSelectChange(selectElement) {
-    const selectedValue = selectElement.value;
-
-    // If 'Approved' option is selected, show the modal for down payment
-    if (selectedValue.includes('accepted')) {
-        openModal();
-    } else if (selectedValue.includes('declined')) {
-        window.location.href = selectedValue;
-    }
-}
-    function handleSelectChange(selectElement) {
-        const selectedValue = selectElement.value;
-
-        // If 'Approved' option is selected, show the modal for down payment
-        if (selectedValue.includes('accepted')) {
-            openModal();
-        } else if (selectedValue.includes('declined')) {
-            window.location.href = selectedValue;
-        }
-    }
-
-  
-    // Close modal when clicking outside of modal content
-    window.addEventListener('click', function(event) {
-        const modal = document.getElementById('downPaymentModal');
-        const backdrop = document.getElementById('modalBackdrop');
-        if (event.target === backdrop) {
-            closeModal();
-        }
-    });
-
-    function handleSelectChange(select, appointmentId) {
-        if (select.value === 'approved') {
-            openModal(appointmentId);
-        } else if (select.value) {
-            window.location.href = select.value;
-        }
-    }
-
-    function openModal(appointmentId) {
-        document.getElementById('downPaymentModal' + appointmentId).style.display = 'flex';
-        document.getElementById('modalBackdrop' + appointmentId).style.display = 'block';
-    }
-
-    function closeModal(appointmentId) {
-        document.getElementById('downPaymentModal' + appointmentId).style.display = 'none';
-        document.getElementById('modalBackdrop' + appointmentId).style.display = 'none';
-    }
-    </script>
 @endsection
+ 

@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -174,3 +175,4 @@ Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 Route::get('/payment/{id}', [AppointmentController::class, 'showPaymentPage'])->name('payment.show');
 
 
+Route::post('/payment/store/{appointmentId}', [PaymentController::class, 'store'])->name('payment.store');

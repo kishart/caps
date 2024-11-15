@@ -47,6 +47,20 @@ class AppointmentController extends Controller
         return view('admin/editappoint', compact('data'));
     }
 
+    public function updatePaymentMethod(Request $request, $appointmentId)
+{
+    $request->validate([
+        'payment_method' => 'required|in:gcash,in_person',
+    ]);
+
+    $appointment = Appointment::findOrFail($appointmentId);
+    $appointment->payment_method = $request->payment_method;
+    $appointment->save();
+
+    return redirect()->route('viewpayment', ['appointmentId' => $appointmentId])
+                     ->with('success', 'Payment method updated successfully!');
+}
+
     public function updateAppointment(Request $request)
     {
         $request->validate([

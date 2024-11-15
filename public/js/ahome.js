@@ -257,3 +257,99 @@ function closeModal(modalId) {
         // Combine the whole part and decimal part (if any)
         input.value = decimalPart ? wholePart + '.' + decimalPart : wholePart;
     }
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Toggle menu for actions dropdown
+        function toggleMenu(element) {
+            const menu = element.nextElementSibling;
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+    
+        // Open modal on click of specific links
+        document.querySelectorAll('.open-modal').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const id = this.getAttribute('data-id');
+                const modal = document.getElementById(`modal-${id}`);
+    
+                if (modal) {
+                    modal.style.display = 'block';
+                    document.getElementById('modalBackdrop').style.display = 'block';
+                }
+            });
+        });
+    
+        // Close modal when clicking on the 'X' icon
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal-id');
+                const modal = document.getElementById(modalId);
+    
+                if (modal) {
+                    modal.style.display = 'none';
+                    document.getElementById('modalBackdrop').style.display = 'none';
+                }
+            });
+        });
+    
+        // Close modal when clicking outside of modal content
+        window.addEventListener('click', function(event) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    document.getElementById('modalBackdrop').style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // Handle selection changes in dropdown menu
+    function handleSelectChange(selectElement) {
+        const selectedValue = selectElement.value;
+    
+        // If 'Approved' option is selected, show the modal for down payment
+        if (selectedValue.includes('accepted')) {
+            openModal();
+        } else if (selectedValue.includes('declined')) {
+            window.location.href = selectedValue;
+        }
+    }
+        function handleSelectChange(selectElement) {
+            const selectedValue = selectElement.value;
+    
+            // If 'Approved' option is selected, show the modal for down payment
+            if (selectedValue.includes('accepted')) {
+                openModal();
+            } else if (selectedValue.includes('declined')) {
+                window.location.href = selectedValue;
+            }
+        }
+    
+      
+        // Close modal when clicking outside of modal content
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('downPaymentModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            if (event.target === backdrop) {
+                closeModal();
+            }
+        });
+    
+        function handleSelectChange(select, appointmentId) {
+            if (select.value === 'approved') {
+                openModal(appointmentId);
+            } else if (select.value) {
+                window.location.href = select.value;
+            }
+        }
+    
+        function openModal(appointmentId) {
+            document.getElementById('downPaymentModal' + appointmentId).style.display = 'flex';
+            document.getElementById('modalBackdrop' + appointmentId).style.display = 'block';
+        }
+    
+        function closeModal(appointmentId) {
+            document.getElementById('downPaymentModal' + appointmentId).style.display = 'none';
+            document.getElementById('modalBackdrop' + appointmentId).style.display = 'none';
+        }

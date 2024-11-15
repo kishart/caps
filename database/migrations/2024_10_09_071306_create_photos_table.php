@@ -15,16 +15,12 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-           
-            $table->json('photo_paths'); 
-            $table->foreignId('user_id')->constrained('users');           // This will store an array of paths
+            $table->json('photo_paths'); // This will store an array of paths
             $table->text('description')->nullable();
-
-                $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
-            
-
+            $table->unsignedBigInteger('user_id'); // Use this if you still want to store the user ID without the foreign key constraint.
             $table->timestamps();
         });
+        
     }
 
 
