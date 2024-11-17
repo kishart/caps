@@ -69,28 +69,32 @@ public function showForm()
 
 
     public function postComment(Request $request, $photoId)
-    {
-        // Validate the comment input
-        $request->validate([
-            'comment' => 'required|string',
-        ]);
+{
+    // Validate the comment input
+    $request->validate([
+        'comment' => 'required|string',
+    ]);
 
-        // Fetch the photo by ID and check if the authenticated user can comment
-        $photo = Photos::findOrFail($photoId);
-        if (Auth::id() !== $photo->user_id) {
-            return redirect()->back()->withErrors(['error' => 'You are not allowed to comment on this file.']);
-        }
+    // Fetch the photo by ID and check if it exists
+    $photo = Photos::findOrFail($photoId);
 
+    // Allow comments for any authenticated user, not just the photo uploader
+    if (Auth::check()) {
         // Create a new comment and save it to the database
-        $comment = new Comment;
-        $comment->user_id = Auth::id();
-        $comment->photo_id = $photoId;
+        $comment = new Comment();
+        $comment->user_id = Auth::id(); // The authenticated user's ID
+        $comment->photo_id = $photoId; // The ID of the photo being commented on
         $comment->comment = $request->comment;
         $comment->save();
 
         // Redirect back with a success message
         return redirect()->back()->with('success', 'Comment posted successfully');
     }
+
+    // If user is not authenticated, redirect with an error
+    return redirect()->back()->withErrors(['error' => 'You must be logged in to comment.']);
+}
+
 
     public function deletePhoto($id)
     {

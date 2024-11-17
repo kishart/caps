@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('photo_id')->constrained('photos')->onDelete('cascade'); // Corrected from 'file_id' to 'photo_id'
+            $table->unsignedBigInteger('user_id'); // Stores the user ID without a foreign key constraint
+            $table->unsignedBigInteger('photo_id'); // Stores the photo ID without a foreign key constraint
             $table->text('comment');
             $table->timestamps();
         });
+        
     }
     
     /**

@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,12 +16,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::get('/photos', [PostController::class, 'photos'])->name('photos');
-
-Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome')->middleware('is_admin');
-
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
+
+
+
+Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
 Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 
@@ -33,18 +32,30 @@ Route::get('ucalen', [CalendarController::class, 'ucalen']);
 
 
 
-Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment']);
-Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment']);
+// Edit appointment routes
+Route::get('admin/editappoint/{id}', [AppointmentController::class, 'editAppointment'])->name('admin.edit');
+Route::post('admin/editappoint', [AppointmentController::class, 'updateAppointment'])->name('admin.update');
 
-Route::get('admin/delete-appointment/{id}',[AppointmentController::class,'deleteAppointment']);
+// Delete appointment route
+Route::get('admin/delete-appointment/{id}', [AppointmentController::class, 'deleteAppointment'])->name('admin.delete');
 
-// Route::post('/appointments/accepted/{id}', [AppointmentController::class, 'accepted'])->name('appointments.accepted');
-// Route::post('/admin/declined/{id}', [AppointmentController::class, 'declined'])->name('appointments.declined');
-
-Route::get('admin/accepted/{id}', [AppointmentController::class, 'accepted']);
-Route::get('admin/declined/{id}', [AppointmentController::class, 'declined']);
+// Show appointment details route
+Route::get('admin/accepted/{id}', [AppointmentController::class, 'showDownpayment'])->name('admin.accepted.show');
 
 
+// Show appointment details route
+Route::get('user/payment/{id}', [AppointmentController::class, 'showUserDownpayment'])->name('user.downpayment.show');
+
+
+
+// Accept appointment route with down payment
+Route::post('admin/accepted/{id}', [AppointmentController::class, 'accepted'])->name('admin.accepted.accept');
+
+// Decline appointment route
+Route::get('admin/declined/{id}', [AppointmentController::class, 'declined'])->name('admin.declined');
+
+// User payment display route
+Route::get('user/payment/{id}', [AppointmentController::class, 'showDownpayment'])->name('user.payment');
 
 
 // Route to show the form
@@ -125,11 +136,11 @@ Route::get('upload-photos', function () {
 
 Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
 Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
-
 Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');
 
+// Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
-
+Route::post('/comment/{photoId}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
 Route::get('/uphotostest', [FileController::class, 'create'])->middleware('auth');
 
@@ -155,9 +166,9 @@ Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-p
 
 
 
-Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
-
-
 
 Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 Route::get('/payment/{id}', [AppointmentController::class, 'showPaymentPage'])->name('payment.show');
+
+
+Route::post('/payment/store/{appointmentId}', [PaymentController::class, 'store'])->name('payment.store');

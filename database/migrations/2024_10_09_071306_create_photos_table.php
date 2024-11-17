@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
            
             $table->json('photo_paths'); 
-            $table->foreignId('user_id')->constrained('users');           // This will store an array of paths
+            $table->foreignId('user_id')->constrained('users'); 
             $table->text('description')->nullable();
-
-                $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); 
             
 
             $table->timestamps();

@@ -28,5 +28,6 @@ public function comments()
     return $this->hasMany(Comment::class, 'photo_id'); 
 }
 
-}
 
+
+}

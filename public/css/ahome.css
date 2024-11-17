@@ -79,11 +79,11 @@ button.appoint-btn {
 }
 
 .appointment-table tbody tr:nth-child(odd) {
-    background-color: #EECC8C;
+    background-color: #d4cbc6;
 }
 
 .appointment-table tbody tr:nth-child(even) {
-    background-color: #E8B298;
+    background-color: #e4bfad;
 }
 
 .appointment-table th:first-child,
