@@ -27,7 +27,7 @@
             width: 100%;
             margin: 0;
             padding: 0;
-            background-color: #EFE6DD;
+            background-color: white;
 
             
         }

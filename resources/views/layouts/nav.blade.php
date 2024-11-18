@@ -47,7 +47,7 @@
         </form>
     </div>
 
-    <main class="container mx-auto py-12" style="margin-bottom: 50p">
+    <main class="container" style="padding-top: 120px;" >
         @yield('content')
     </main>
 

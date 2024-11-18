@@ -177,3 +177,14 @@ Route::get('/payment/view/{appointmentId}', [PaymentController::class, 'payment'
 Route::get('/viewpayments', [PaymentController::class, 'viewPayments'])->name('');
 
 Route::get('/viewpayments', [PaymentController::class, 'viewP'])->name('');
+
+
+
+
+// web.php
+
+Route::get('/photo/edit/{id}', [TestPhotoController::class, 'edit'])->name('photo.edit');
+Route::put('/photo/update/{id}', [TestPhotoController::class, 'update'])->name('photo.update');
+Route::delete('/photo/delete/{id}', [TestPhotoController::class, 'destroy'])->name('photo.delete');
+
+Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('photo.list');

@@ -96,21 +96,49 @@ public function showForm()
 }
 
 
-    public function deletePhoto($id)
+    // public function deletePhoto($id)
+    // {
+    //     // Find the photo by ID
+    //     $photo = Photos::findOrFail($id);
+
+    //     // Delete the photo files from storage
+    //     $photoPaths = json_decode($photo->photo_paths, true);
+    //     foreach ($photoPaths as $path) {
+    //         Storage::disk('public')->delete($path);
+    //     }
+
+    //     // Delete the photo record from the database
+    //     $photo->delete();
+
+    //     // Redirect back with a success message
+    //     return back()->with('success', 'Photo deleted successfully!');
+    // }
+
+    public function list()
     {
-        // Find the photo by ID
+        // Fetch all photo uploads from the database
+        $photoUploads = Photos::with('comments.user')->get(); // Include related comments and users for display
+
+        // Return the view with the photo uploads
+        return view('photo_list', compact('photoUploads'));
+    }
+    public function edit($id) {
         $photo = Photos::findOrFail($id);
-
-        // Delete the photo files from storage
-        $photoPaths = json_decode($photo->photo_paths, true);
-        foreach ($photoPaths as $path) {
-            Storage::disk('public')->delete($path);
-        }
-
-        // Delete the photo record from the database
+        return view('admin.photo_edit', compact('photo'));
+    }
+    
+    public function update(Request $request, $id) {
+        $photo = Photos::findOrFail($id);
+        $photo->description = $request->input('description');
+        $photo->save();
+    
+        return redirect()->route('photo.list')->with('success', 'Photo updated successfully!');
+    }
+    
+    public function destroy($id) {
+        $photo = Photos::findOrFail($id);
         $photo->delete();
-
-        // Redirect back with a success message
-        return back()->with('success', 'Photo deleted successfully!');
+    
+        return redirect()->route('photo.list')->with('success', 'Photo deleted successfully!');
     }
 }
