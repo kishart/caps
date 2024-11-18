@@ -122,7 +122,7 @@ Route::get('calendartest', [HomeController::class, 'calendartest'])->middleware(
 
 
 
-Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])->name('view-photos');
+// Removed duplicate route definition
 
 
 
@@ -149,7 +149,7 @@ Route::get('/create-uphotos', [FileController::class, 'create'])->name('create-u
 Route::post('/save-uphotos', [FileController::class, 'saveUphotos'])->name('save-uphotos');
 
 
-Route::get('/viewp', [App\Http\Controllers\FileController::class, 'showPhotos'])->name('view-photos');
+Route::get('/viewp', [FileController::class, 'showPhotos'])->name('view-photos');
 
 Route::get('files/{id}/delete', [FileController::class, 'destroy'])->name('delete-file');
 Route::post('/post-comment/{file}', [FileController::class, 'postComment'])->name('post-comment');
@@ -159,7 +159,7 @@ Route::post('/post-comment/{file}', [FileController::class, 'postComment'])->nam
 
 
 
-Route::get('/uphotos', [FileController::class, 'cphotos'])->middleware('auth');
+// Removed duplicate route definition
 
 Route::get('/create-photos', [FileController::class, 'cphotos'])->name('create-photos');
 Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-photos');
@@ -168,7 +168,6 @@ Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-p
 
 
 Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
-Route::get('/payment/{id}', [AppointmentController::class, 'showPaymentPage'])->name('payment.show');
-
 
 Route::post('/payment/store/{appointmentId}', [PaymentController::class, 'store'])->name('payment.store');
+Route::get('/payment/view/{appointmentId}', [PaymentController::class, 'payment'])->name('payments.ahome');

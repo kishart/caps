@@ -15,28 +15,19 @@ class PaymentController extends Controller
             'payment_time' => 'nullable|date_format:H:i',
             'payment_details' => 'nullable|string|max:255',
         ]);
-
-        // Initialize image path for later assignment
+    
         $imagePath = null;
-
-        // Store Gcash payment
-        if ($request->payment_method == 'gcash') {
-            if ($request->hasFile('gcash_image')) {
-                // Store the uploaded image
-                $imagePath = $request->file('gcash_image')->store('gcash_images', 'public');
-            }
-
-            // Store the payment record
+    
+        if ($request->payment_method == 'gcash' && $request->hasFile('gcash_image')) {
+            $imagePath = $request->file('gcash_image')->store('gcash_images', 'public');
             Payment::create([
                 'appointment_id' => $appointmentId,
                 'payment_method' => 'gcash',
-                'gcash_image' => $imagePath,  // This will be null if no image was uploaded
+                'gcash_image' => $imagePath,
             ]);
         }
-
-        // Store Payment in Person
+    
         if ($request->payment_method == 'in_person') {
-            // Validate the in-person payment details
             Payment::create([
                 'appointment_id' => $appointmentId,
                 'payment_method' => 'in_person',
@@ -45,8 +36,17 @@ class PaymentController extends Controller
                 'payment_details' => $request->payment_details,
             ]);
         }
-
-        // Redirect with success message
+    
         return redirect()->back()->with('success', 'Payment information has been saved.');
     }
+    
+
+    public function payment($appointmentId)
+    {
+        $payments = Payment::where('appointment_id', $appointmentId)->get();
+        return view('admin.ahome', compact('payments'));
+    }
+    
+    
+
 }
