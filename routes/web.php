@@ -171,3 +171,9 @@ Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 
 Route::post('/payment/store/{appointmentId}', [PaymentController::class, 'store'])->name('payment.store');
 Route::get('/payment/view/{appointmentId}', [PaymentController::class, 'payment'])->name('payments.ahome');
+
+
+
+Route::get('/viewpayments', [PaymentController::class, 'viewPayments'])->name('');
+
+Route::get('/viewpayments', [PaymentController::class, 'viewP'])->name('');

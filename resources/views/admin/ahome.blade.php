@@ -273,9 +273,7 @@
                                             <!-- Modal body -->
                                             <div class="p-4 md:p-5 space-y-4">   
                                                 <h1>Payment</h1>
-                                                @foreach($payments as $payment)
-                                                    <p>{{ $payment->payment_method }}</p>
-                                                @endforeach
+                                            
                                             </div>
                                             
                                             

@@ -34,7 +34,10 @@ public function message()
     return $this->hasOne(Message::class);
 }
 
-
+public function payments()
+{
+    return $this->hasMany(Payment::class);
+}
 }
 
 

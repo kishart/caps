@@ -23,6 +23,8 @@ nav ul {
     margin: 0;
     display: flex;
     align-items: center;
+    
+    margin-right:35px;
 }
 nav ul li {
     margin-top: 5px;
@@ -55,7 +57,8 @@ nav ul li a:hover {
         }
 
         .header.bg-brown {
-            background-color: #A36361; 
+            background-color: black;
+            opacity: 0.5;
             color:black;
             margin:0;
         }
@@ -106,3 +109,5 @@ nav ul li a:hover {
     height: 110px;
     margin-left: 30px;
 }
+
+

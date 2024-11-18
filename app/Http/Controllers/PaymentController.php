@@ -41,11 +41,24 @@ class PaymentController extends Controller
     }
     
 
-    public function payment($appointmentId)
+    // public function payment($appointmentId)
+    // {
+    //     $payments = Payment::where('appointment_id', $appointmentId)->get();
+    //     return view('admin.ahome', compact('payments'));
+    // }
+    public function viewPayments()
     {
-        $payments = Payment::where('appointment_id', $appointmentId)->get();
-        return view('admin.ahome', compact('payments'));
+        $payments = Payment::with('appointment')->get(); // Fetch payments with their appointments
+        return view('/admin/viewpayments', compact('payments'));
     }
+    public function viewP()
+    {
+        $payments = Payment::with('appointment')->get(); // Fetch payments with their appointments
+        return view('/admin/viewpayments', compact('payments'));
+    }
+    
+
+ 
     
     
 

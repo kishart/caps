@@ -47,7 +47,7 @@
         </form>
     </div>
 
-    <main class="container mx-auto py-12 mb-10">
+    <main class="container mx-auto py-12" style="margin-bottom: 50p">
         @yield('content')
     </main>
 
