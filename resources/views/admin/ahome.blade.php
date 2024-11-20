@@ -86,7 +86,6 @@
                             </div>
                         </div>
 
-                        <!-- Message Modal -->
                         <!-- Message Modal in ahome.blade.php (Admin Side) -->
                         <div id="msg-modal-{{ $appointment->id }}" class="w3-modal">
                             <div class="w3-modal-content">
@@ -107,10 +106,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
 
                         <td>{{ $appointment->date }}</td>
                         <td>{{ \Carbon\Carbon::parse($appointment->time)->format('g:i A') }}</td>
@@ -274,6 +269,12 @@
                                             <div class="p-4 md:p-5 space-y-4">   
                                                 <h1>Payment</h1>
                                             
+                                              
+                                                 <p>Payment Method: </p>   {{ $appointment->payment_method }}
+                                                 <p>Proof of Payment: </p>   {{ $appointment->gcash_image }}
+                                                 <p>Details: </p>   {{ $appointment->payment_details }}
+                                              
+                                                
                                             </div>
                                             
                                             

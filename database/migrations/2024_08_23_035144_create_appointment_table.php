@@ -11,15 +11,22 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->timestamps(); // This creates created_at and updated_at columns
-            $table->string('fname');
-            $table->string('email');
-            $table->string('phone');
-            $table->date('date');
-            $table->time('time');
-            $table->string('details');
+            $table->string('fname')->nullable(); 
+            $table->string('email')->nullable(); 
+            $table->string('phone')->nullable(); 
+            $table->date('date')->nullable(); 
+            $table->time('time')->nullable(); 
+            $table->string('details')->nullable(); 
             $table->boolean('feedback_requested')->default(false);
             $table->boolean('feedback_given')->default(false);
             $table->string('status')->nullable();
+            $table->decimal('downpayment', 10, 2)->nullable(); 
+            $table->decimal('payments', 10, 2)->nullable(); // Payment amount
+            $table->enum('payment_method', ['gcash', 'in_person'])->nullable(); // Payment method
+            $table->string('gcash_image')->nullable(); // GCash image
+            $table->date('payment_date')->nullable(); // Payment date
+            $table->time('payment_time')->nullable(); // Payment time
+            $table->text('payment_details')->nullable(); // Payment details
             $table->unsignedBigInteger('user_id')->nullable(); // User ID column
 
             // Foreign key constraint

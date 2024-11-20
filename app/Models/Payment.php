@@ -26,6 +26,8 @@ class Payment extends Model
         'payment_time',
     ];
 
+
+    
     // Define relationships if necessary
     public function user()
     {
@@ -36,7 +38,6 @@ class Payment extends Model
     {
         return $this->belongsTo(Appointment::class);
     }
-
 
 
  

@@ -7,7 +7,6 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
-use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -122,8 +121,8 @@ Route::get('calendartest', [HomeController::class, 'calendartest'])->middleware(
 
 
 
-// Removed duplicate route definition
-
+Route::post('/admin/store-payment/{appointmentId}', [AppointmentController::class, 'storePayment'])->name('storePayment');
+Route::get('/admin/payments/{appointmentId}', [AppointmentController::class, 'viewPayments'])->name('viewPayments');
 
 
 
@@ -169,18 +168,11 @@ Route::post('/save-photos', [FileController::class, 'savePhotos'])->name('save-p
 
 Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 
-Route::post('/payment/store/{appointmentId}', [PaymentController::class, 'store'])->name('payment.store');
-Route::get('/payment/view/{appointmentId}', [PaymentController::class, 'payment'])->name('payments.ahome');
 
 
 
-Route::get('/viewpayments', [PaymentController::class, 'viewPayments'])->name('');
-
-Route::get('/viewpayments', [PaymentController::class, 'viewP'])->name('');
-
-
-
-
+Route::post('/appointments/store', [AppointmentController::class, 'storeAppointment'])->name('appointments.store');
+Route::get('/admin/ahome/{appointmentId}', [AppointmentController::class, 'viewPayments'])->name('payments.ahome');
 // web.php
 
 Route::get('/photo/edit/{id}', [TestPhotoController::class, 'edit'])->name('photo.edit');
@@ -188,3 +180,8 @@ Route::put('/photo/update/{id}', [TestPhotoController::class, 'update'])->name('
 Route::delete('/photo/delete/{id}', [TestPhotoController::class, 'destroy'])->name('photo.delete');
 
 Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('photo.list');
+
+
+
+
+Route::post('/payment/store/{appointmentId}', [AppointmentController::class, 'storePayment'])->name('payment.store');

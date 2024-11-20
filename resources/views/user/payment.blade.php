@@ -9,7 +9,6 @@
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
-
 </head>
 
 <body>
@@ -40,6 +39,7 @@
     <div id="gcash-modal" class="hidden">
         <form action="{{ route('payment.store', $appointment->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            
             <input type="hidden" name="payment_method" value="gcash">
             <div class="qr-container">
                 <img src="{{ asset('images/qrsample.png') }}" class="qrsample" alt="qrsample">
@@ -58,15 +58,13 @@
         <form action="{{ route('payment.store', $appointment->id) }}" method="POST">
             @csrf
             <input type="hidden" name="payment_method" value="in_person">
-            <div class="dt">
-                <p>Date:</p>
-                <input type="date" name="payment_date" required>
-                <p>Time:</p>
-                <input type="time" name="payment_time" required>
-            </div>
+           
             <div class="details">
                 <p>Details:</p>
                 <input type="text" name="payment_details" placeholder="Enter details" required>
+                
+            
+                
             </div>
             <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
@@ -74,9 +72,6 @@
         </form>
     </div>
 
-    
-  
-    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
     <script>

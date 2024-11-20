@@ -141,4 +141,12 @@ public function showForm()
     
         return redirect()->route('photo.list')->with('success', 'Photo deleted successfully!');
     }
+    public function viewPhotos()
+    {
+        $photoUploads = Photos::with('comments.user')->get();
+        return view('admin.ahome', compact('photoUploads'));
+    }
+
+
+
 }

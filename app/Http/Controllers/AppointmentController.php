@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Message;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -302,4 +303,60 @@ class AppointmentController extends Controller
         // Return the admin's home page view with data
         return view('admin.home', compact('appointments'));  // Adjust the view path as needed
     }
+
+    public function storePayment(Request $request, $appointmentId)
+    {
+        // Validate the input
+        $validated = $request->validate([
+            'payment_method' => 'required|in:gcash,in_person',
+            'gcash_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'payment_details' => 'nullable|string|max:255',
+        ]);
+    
+        // Initialize the image path to null
+        $imagePath = null;
+    
+        // If the GCash image is provided, store it
+        if ($request->hasFile('gcash_image')) {
+            $imagePath = $request->file('gcash_image')->store('gcash_images', 'public');
+        }
+    
+        // Fetch the existing appointment record
+        $appointment = Appointment::findOrFail($appointmentId);
+    
+        // Update the payment details for the existing appointment
+        $appointment->update([
+            'payment_method' => $validated['payment_method'],
+            'gcash_image' => $imagePath,
+            'payment_details' => $validated['payment_details'] ?? null,
+            'status' => 'Paid', // Optional: Update the status to 'Paid'
+        ]);
+    
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Payment updated successfully!');
+    }
+
+    public function viewPayments($appointmentId)
+    {
+        $payments = Appointment::where('appointment_id', $appointmentId)->with('appointment')->get();
+
+        return view('admin.ahome', compact('payments'));
+
+
+
+
+    $payments = Appointment::where('appointment_id', $appointmentId)->with('appointment')->get();
+return view('admin.ahome', compact('payments'));
+
+
+
+    }
+
+
+
+
+
+
+
+
 }

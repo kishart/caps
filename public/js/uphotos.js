@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
             displayDiv.innerHTML = `
                 <!-- Content for viewing uploaded photos -->
                 <div class="view-photos">
-                    <!-- Fetch and display previously uploaded photos here -->
+                   <p>hi</p>
                 </div>
             `;
         }
