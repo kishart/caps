@@ -71,12 +71,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p><strong>Available:</strong> <span id="modal-available"></span></p>
-                <p><strong>Note:</strong> <span id="modal-note"></span></p>
-                <p><strong>Start Date:</strong> <span id="modal-start"></span></p>
-                <p><strong>End Date:</strong> <span id="modal-end"></span></p>
-                <p><strong>Time:</strong> <span id="modal-time"></span></p>
+            <div id="calendarEvents">
+                @foreach($calendars as $calendar)
+                    <div class="calendar-event">
+                        <h4>{{ $calendar->title }}</h4>
+                        <p><strong>Start Date:</strong> {{ $calendar->start_date }}</p>
+                        <p><strong>End Date:</strong> {{ $calendar->end_date }}</p>
+                        <p><strong>Available:</strong> {{ $calendar->available }}</p>
+                        <p><strong>Note:</strong> {{ $calendar->note }}</p>
+                        <p><strong>Time:</strong> {{ $calendar->time }}</p>
+                    </div>
+                @endforeach
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

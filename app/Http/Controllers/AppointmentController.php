@@ -342,14 +342,6 @@ class AppointmentController extends Controller
 
         return view('admin.ahome', compact('payments'));
 
-
-
-
-    $payments = Appointment::where('appointment_id', $appointmentId)->with('appointment')->get();
-return view('admin.ahome', compact('payments'));
-
-
-
     }
 
 

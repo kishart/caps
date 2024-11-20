@@ -55,21 +55,16 @@ class CalendarController extends Controller
 
 
 
-    public function ucalen(){
-        $events = array();
+    public function viewUserCalendar()
+    {
+        // Fetch all calendar events from the database
         $calendars = Calendar::all();
-        foreach ($calendars as $calendar){
-            $events[] = [
-                'available' => $calendar->available, // 'available' => 'yes
-                'note' => $calendar->note,
-                'start' => $calendar->start_date,
-                'end' => $calendar->end_date
-            ];
-        }
-        return view('user.ucalen', ['events' => $events]);
-        
+    
+        // Pass the events to the user view
+        return view('user.ucalen', compact('calendars'));
     }
 
+   
     
 
 }

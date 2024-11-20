@@ -185,3 +185,6 @@ Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('pho
 
 
 Route::post('/payment/store/{appointmentId}', [AppointmentController::class, 'storePayment'])->name('payment.store');
+
+
+Route::get('/ucalen', [CalendarController::class, 'viewUserCalendar'])->name('user.ucalen');

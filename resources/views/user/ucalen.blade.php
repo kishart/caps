@@ -34,18 +34,15 @@
 
         .contain {
             display: flex;
-            justify-content: center;
-            align-items: center;
             height: 70vh;
         }
 
         .calendar-container {
-            width: 100%;
+            width: 80%;
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+          
         }
 
         #calendar {
@@ -76,6 +73,12 @@
             font-weight: bold;
             cursor: pointer;
         }
+
+
+
+        .sched{
+            background-color: pink;
+        }
     </style>
 </head>
 
@@ -84,6 +87,14 @@
         
         <div id="calendar"></div>
     </div>
+
+
+   <div class="sched">
+    <h1>ha</h1>
+    @foreach ($calendars as $calendar)
+    <h5>Send Message to {{ $calendar->start_time }}</h5>
+    @endforeach
+   </div>
 </div>
 
 <script>

@@ -18,7 +18,7 @@
         <div class="search-container">
             <input type="text" id="searchInput" placeholder="Search..." class="search-input">
             <button class="search-btn" onclick="filterTable()">
-               
+
                 <i class="material-icons">search</i>
             </button>
         </div>
@@ -42,8 +42,6 @@
 
             <tbody>
                 @foreach ($appointments as $appointment)
-                
-                    
                     <tr>
                         <td>
                             <a href="#" class="open-modal"
@@ -111,17 +109,22 @@
                         <td>{{ \Carbon\Carbon::parse($appointment->time)->format('g:i A') }}</td>
 
                         <td>
-                            <label for="actionSelect{{ $appointment->id }}" style="border-radius: 30%;" class="sr-only">Action</label>
+                            <label for="actionSelect{{ $appointment->id }}" style="border-radius: 30%;"
+                                class="sr-only">Action</label>
                             <!-- Select dropdown -->
-                            <select id="actionSelect{{ $appointment->id }}" class="custom-select" onchange="handleSelectChange(this, {{ $appointment->id }})"
+                            <select id="actionSelect{{ $appointment->id }}" class="custom-select"
+                                onchange="handleSelectChange(this, {{ $appointment->id }})"
                                 style="height: 42.5px; width: 130px; padding: 10px 15px; font-size: 16px; border: none; text-align: right; background-color: rgb(235, 229, 229);">
-                                <option class="option" value="" disabled selected style="background-color: rgb(235, 229, 229); border-radius: 10%;">
+                                <option class="option" value="" disabled selected
+                                    style="background-color: rgb(235, 229, 229); border-radius: 10%;">
                                     {{ ucfirst($appointment->status) }}
                                 </option>
-                                <option class="option" value="approved" style="background-color: green; color: white; border-radius: 10%;">Approved</option>
-                                <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}" style="background-color: red; color: white; border-radius: 10%;">Declined</option>
+                                <option class="option" value="approved"
+                                    style="background-color: green; color: white; border-radius: 10%;">Approved</option>
+                                <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}"
+                                    style="background-color: red; color: white; border-radius: 10%;">Declined</option>
                             </select>
-                        
+
                             <!-- Modal for Down Payment -->
                             <div id="downPaymentModal{{ $appointment->id }}" tabindex="-1" aria-hidden="true"
                                 style="display: none; overflow-y:auto; overflow-x:hidden; position: fixed; top: 0; right: 0; left: 0; z-index: 50; justify-content: center; align-items: center; width: 100%; height: calc(100% - 1rem); max-height: 100%;">
@@ -129,56 +132,59 @@
                                     <!-- Modal content -->
                                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                         <!-- Modal header -->
-                                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Enter Down Payment</h2>
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Enter Down
+                                                Payment</h2>
                                             <button type="button" onclick="closeModal({{ $appointment->id }})"
                                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                <svg class="w-3 h-3" aria-hidden="true"
+                                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 14 14">
+                                                    <path stroke="currentColor" stroke-linecap="round"
+                                                        stroke-linejoin="round" stroke-width="2"
+                                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                                 </svg>
                                                 <span class="sr-only">Close modal</span>
                                             </button>
                                         </div>
-                        
+
                                         <!-- Modal body -->
                                         <div class="p-4 md:p-5">
-    <form id="downPaymentForm{{ $appointment->id }}" action="{{ url('admin/accepted/' . $appointment->id) }}" method="POST">
-        @csrf
-        <div class="mb-4">
-            
-            <div class="flex items-center">
-                <!-- Peso Symbol -->
-                <span class="text-gray-900 font-bold text-lg mr-2">₱</span>
-                
-                <!-- Input Field -->
-                <input 
-                    type="number" 
-                    id="downpayment{{ $appointment->id }}" 
-                    name="downpayment" 
-                    required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                    placeholder="Enter amount" 
-                    value="{{ old('downpayment', $appointment->downpayment ?? '') }}" 
-                    min="0"
-                    step="0.01" 
-                    autofocus
-                >
-            </div>
-            
-        </div>
+                                            <form id="downPaymentForm{{ $appointment->id }}"
+                                                action="{{ url('admin/accepted/' . $appointment->id) }}" method="POST">
+                                                @csrf
+                                                <div class="mb-4">
 
-        <button type="submit" class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-            Submit
-        </button>
-    </form>
-</div>
+                                                    <div class="flex items-center">
+                                                        <!-- Peso Symbol -->
+                                                        <span class="text-gray-900 font-bold text-lg mr-2">₱</span>
+
+                                                        <!-- Input Field -->
+                                                        <input type="number" id="downpayment{{ $appointment->id }}"
+                                                            name="downpayment" required
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                                            placeholder="Enter amount"
+                                                            value="{{ old('downpayment', $appointment->downpayment ?? '') }}"
+                                                            min="0" step="0.01" autofocus>
+                                                    </div>
+
+                                                </div>
+
+                                                <button type="submit"
+                                                    class="w-full text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                                    Submit
+                                                </button>
+                                            </form>
+                                        </div>
 
                                     </div>
                                 </div>
                             </div>
-                        
+
                             <!-- Modal Background -->
-                            <div id="modalBackdrop{{ $appointment->id }}" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+                            <div id="modalBackdrop{{ $appointment->id }}"
+                                style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
                             </div>
                         </td>
 
@@ -243,41 +249,68 @@
 
 
                         <td>
-                           
-                                <button data-modal-target="feedback-modal-{{ $appointment->id }}"
-                                    data-modal-toggle="feedback-modal-{{ $appointment->id }}"
-                                    style="background-color: #4DA167; color:white; width: 100px;border-radius: 15px;  border: none; display: flex; align-items: center; justify-content: center; padding: 10px; "
-                                    type="button">
-                                    <span class="material-symbols-outlined" style="font-size: 21px; margin-right: 18px;">
-                                        visibility
-                                    </span>
-                                    View
-                                </button>
 
-                                <!-- Downpayment Modal Structure -->
-                                <div id="feedback-modal-{{ $appointment->id }}" tabindex="-1" aria-hidden="true"
-                                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                    <div class="relative p-4 w-full max-w-2xl max-h-full">
-                                        <!-- Modal content -->
-                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                            <!-- Modal header -->
-                                            <div
-                                                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                                               <p>Payment</p>
+                            <button data-modal-target="feedback-modal-{{ $appointment->id }}"
+                                data-modal-toggle="feedback-modal-{{ $appointment->id }}"
+                                style="background-color: #4DA167; color:white; width: 100px;border-radius: 15px;  border: none; display: flex; align-items: center; justify-content: center; padding: 10px; "
+                                type="button">
+                                <span class="material-symbols-outlined" style="font-size: 21px; margin-right: 18px;">
+                                    visibility
+                                </span>
+                                View
+                            </button>
+
+                            <!-- Downpayment Modal Structure -->
+                            <div id="feedback-modal-{{ $appointment->id }}" tabindex="-1" aria-hidden="true"
+                                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                <div class="relative p-4 w-full max-w-2xl max-h-full">
+                                    <!-- Modal content -->
+                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                        <!-- Modal header -->
+                                        <div
+                                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                            <p>Payment</p>
+                                        </div>
+                                        <!-- Modal body -->
+                                        <div class="p-4 md:p-5 space-y-4">
+                                            <h1>Payment</h1>
+
+                                            <p>Proof of Payment:</p>
+                                            @if ($appointment->gcash_image)
+                                                <img src="{{ asset('storage/' . $appointment->gcash_image) }}"
+                                                    alt="Proof of Payment"
+                                                    style="max-width: 800px; max-height: 300px; cursor: pointer; transition: transform 0.3s ease;"
+                                                    onclick="showZoomed(this)">
+                                            @else
+                                                <p>No proof of payment uploaded.</p>
+                                            @endif
+
+                                            <!-- Zoom Modal -->
+                                            <div id="zoom-modal"
+                                                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
+                                                <button onclick="closeZoom()"
+                                                    style="position: absolute; top: 20px; right: 20px; background: red; color: white; border: none; padding: 10px 15px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+                                                    X
+                                                </button>
+                                                <img id="zoomed-image"
+                                                    style="cursor: pointer; max-width: 90%; max-height: 90%; transition: transform 0.3s ease;">
                                             </div>
-                                            <!-- Modal body -->
-                                            <div class="p-4 md:p-5 space-y-4">   
-                                                <h1>Payment</h1>
-                                            
-                                              
-                                                 <p>Payment Method: </p>   {{ $appointment->payment_method }}
-                                                 <p>Proof of Payment: </p>   {{ $appointment->gcash_image }}
-                                                 <p>Details: </p>   {{ $appointment->payment_details }}
-                                              
-                                                
+
+
+                                            <!-- Zoom Modal -->
+                                            <div id="zoom-modal"
+                                                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1000; justify-content: center; align-items: center; flex-direction: column;">
+                                                <button onclick="closeZoom()"
+                                                    style="position: absolute; top: 20px; right: 20px; background: red; color: white; border: none; padding: 10px 15px; font-size: 16px; cursor: pointer; border-radius: 5px;">
+                                                    Exit
+                                                </button>
+                                                <img id="zoomed-image"
+                                                    style="cursor: pointer; max-width: 90%; max-height: 90%; transition: transform 0.3s ease;"
+                                                    onclick="toggleZoom(this)">
                                             </div>
-                                            
-                                            
+
+
+
                                             <!-- Modal footer -->
                                             <div
                                                 class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -288,7 +321,7 @@
                                         </div>
                                     </div>
                                 </div>
-                          
+
                         </td>
                         <td>
                             <div class="dropdown" style="position: relative;">
@@ -314,9 +347,6 @@
                                         <ion-icon name="trash"></ion-icon> Delete
                                     </a>
                                 </div>
-
-
-                         
                 @endforeach
                 <div class="no-results-container"style="margin-top:50px">
                     <p id="noResultsMessage" style="display: none; color: red;">No results found</p>
@@ -328,5 +358,20 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="{{ asset('js/ahome.js') }}"></script>
+    <script>
+        function showZoomed(image) {
+            const modal = document.getElementById("zoom-modal");
+            const zoomedImage = document.getElementById("zoomed-image");
+
+            zoomedImage.src = image.src; // Use the source of the clicked image
+            zoomedImage.style.transform = "scale(5)"; // Automatically zoom the image on load
+
+            modal.style.display = "flex"; // Show the modal
+        }
+
+        function closeZoom() {
+            const modal = document.getElementById("zoom-modal");
+            modal.style.display = "none"; // Hide the modal
+        }
+    </script>
 @endsection
- 
