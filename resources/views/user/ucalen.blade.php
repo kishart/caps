@@ -1,11 +1,11 @@
 @extends('layouts.nav')
-@section('title', 'Calendar')
 
 @section('content')
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -19,26 +19,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <title>Calendar</title>
-
     <style>
         html, body {
             width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            background-color: white;
+            background-color: #EFE6DD;
         }
 
         .contain {
             display: flex;
-            height: 70vh;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
         }
 
         .calendar-container {
-            width: 80%;
+            width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         #calendar {
@@ -52,55 +56,40 @@
 
         /* Custom styles for FullCalendar */
         .fc td, .fc th {
-            border-color: #ecb176 !important;
+            border-color: #ecb176 !important; /* Change grid lines to white */
         }
 
         .fc-day, .fc-widget-content {
-            background-color: #fdead6 !important;
-        }
-
-        .set-appointment-button {
-            background-color: #fdead6;
-            color: #826C5F;
-            border: 1px solid #826C5F;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .sched {
-            background-color: pink;
+            background-color: #fdead6 !important; /* Change day background color to white */
         }
     </style>
 </head>
 
 <div class="contain">
     <div class="calendar-container">
+        <h3 class="text-center mt-5 font-bold text-xl">Husnie's Appointment Schedule</h3>
         <div id="calendar"></div>
-    </div>
-
-    <div class="sched">
-        <h1>ha</h1>
-        @foreach ($events as $event)  <!-- Use $events instead of $calendars -->
-            <h5>Send Message to {{ $event['start'] }}</h5>
-        @endforeach
     </div>
 </div>
 
+
+
+
 <script>
     $(document).ready(function() {
-        var calendarEvents = @json($events);
+        var calendar = @json($events);
 
-        // Process event dates
-        calendarEvents.forEach(function(event) {
-            event.start = event.start.substr(0, 10);
-            event.end = event.end.substr(0, 10);
+        // Convert event dates to include only the date portion
+        calendar.forEach(function(event) {
+            event.start = event.start.substr(0, 10); // Assuming start date is in YYYY-MM-DD format
+            event.end = event.end.substr(0, 10); // Assuming end date is in YYYY-MM-DD format
         });
 
         $('#calendar').fullCalendar({
-            height: 'parent',
-            events: calendarEvents,
+            height: 'parent', // Make calendar take the full height of its parent
+            events: calendar,
+          
+
             customButtons: {
                 myCustomToday: {
                     text: 'Set Appointment',
@@ -109,31 +98,31 @@
                     }
                 }
             },
+
+
             header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'myCustomToday'
+                left: 'title',
+                right: 'prev,next, myCustomToday'
             },
+
+            
             viewRender: function(view, element) {
+                // Get the header element
                 var header = element.find('.fc-toolbar h2');
+
+                // Replace the header text with weekdays
                 header.text('Weekdays');
             },
             eventRender: function(event, element) {
-                element.css('background-color', '#826C5F');
+                element.css('background-color', '#826C5F'); // Change the background color of the event to brown
+                // Display the note in the event's title
                 if (event.available) {
                     element.find('.fc-title').append(event.available);
                 }
-            }
+            },
         });
-
-        // Apply custom class to the custom button
-        var customButton = $('.fc-myCustomToday-button');
-        if (customButton) {
-            customButton.addClass('set-appointment-button');
-        }
     });
 </script>
-
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 @endsection

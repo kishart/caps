@@ -117,7 +117,7 @@
 
         </div>
     </aside>
-    <div class="p-4 sm:ml-60">
+    <div class="mb-10 p-2 sm:ml-60">
         @yield('content')
     </div>
 

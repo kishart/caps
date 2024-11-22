@@ -1,64 +1,80 @@
 <?php
-namespace App\Http\Controllers;
 
+namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\Calendar;
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
-    // Display all calendar events for the admin
-    public function calendar()
-    {
-        $events = Calendar::all()->map(function ($calendar) {
-            return [
-                'available' => $calendar->available,  // 'yes' or 'no'
+    //
+    public function calendar(){
+        $events = array();
+        $calendars = Calendar::all();
+        foreach ($calendars as $calendar){
+            $events[] = [
+                'available' => $calendar->available, // 'available' => 'yes
                 'note' => $calendar->note,
                 'start' => $calendar->start_date,
                 'end' => $calendar->end_date,
+                'start_time' => $calendar->start_time,
+                'end_time' => $calendar->end_time
             ];
-        });
-
-        return view('admin.calendar', compact('events'));
+            
+        }
+        return view('admin.calendar', ['events' => $events]);
+        
     }
 
-    // Show the form to add a new calendar event
-    public function addCalendar()
-    {
-        return view('admin.calendar');
+    public function addCalendar(){
+        return view('admin/calendar');
     }
 
-    // Save a new calendar event
     public function saveCalendar(Request $request)
     {
         $request->validate([
             'available' => 'required',
-            'note' => 'required',
+            'note' => 'required|string|max:255',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date', // Ensure end date is not before start date
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after_or_equal:start_time',
         ]);
-
-        $calen = new Calendar();
-        $calen->available = $request->available;
-        $calen->note = $request->note;
-        $calen->start_date = $request->start_date;
-        $calen->end_date = $request->end_date;
-        $calen->save();
-
+        
+        $calendar = new Calendar();
+        $calendar->available = $request->available;
+        $calendar->note = $request->note;
+        $calendar->start_date = $request->start_date;
+        $calendar->end_date = $request->end_date;
+        $calendar->start_time = $request->start_time;
+        $calendar->end_time = $request->end_time;
+        $calendar->save();
+        
         return redirect()->back()->with('success', 'Calendar event added successfully.');
     }
+    
 
-    // Display all calendar events for the user
-    public function ucalen()
-    {
-        $events = Calendar::all()->map(function ($calendar) {
-            return [
-                'available' => $calendar->available,  // 'yes' or 'no'
+
+
+    public function ucalen(){
+        $events = array();
+        $calendars = Calendar::all();
+        foreach ($calendars as $calendar){
+            $events[] = [
+                'available' => $calendar->available, // 'available' => 'yes
                 'note' => $calendar->note,
                 'start' => $calendar->start_date,
                 'end' => $calendar->end_date,
+                'start_time' => $calendar->start_time,
+                'end_time' => $calendar->end_time
             ];
-        });
-
-        return view('user.ucalen', compact('events'));
+        }
+        return view('user.ucalen', ['events' => $events]);
+        
     }
+
+    public function setap(){
+        return view('user.setap');
+    }
+
 }

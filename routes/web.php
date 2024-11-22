@@ -26,7 +26,9 @@ Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 // Routes for Calendar
 Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
 Route::get('admin/calendar', [CalendarController::class, 'addCalendar'])->middleware('auth', 'admin');
-Route::post('save-calendar', [CalendarController::class, 'saveCalendar'])->middleware('auth', 'admin');
+
+Route::post('save-calendar', [CalendarController::class, 'saveCalendar'])->name('admin.calendar');
+
 Route::get('ucalen', [CalendarController::class, 'ucalen'])->middleware('auth');
 
 Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');
