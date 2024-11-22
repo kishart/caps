@@ -95,8 +95,8 @@
         var calendar = @json($events);
 
         calendar.forEach(function(event) {
-            event.start = event.start.substr(0, 10);
-            event.end = event.end.substr(0, 10);
+            event.startTime = moment(event.start).format('hh:mm A'); // Format the start time (12-hour format with AM/PM)
+            event.endTime = moment(event.end).format('hh:mm A'); // Format the end time (12-hour format with AM/PM)
         });
 
         $('#calendar').fullCalendar({

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Calendar;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class CalendarController extends Controller
 {
@@ -59,18 +60,23 @@ class CalendarController extends Controller
     public function ucalen(){
         $events = array();
         $calendars = Calendar::all();
-        foreach ($calendars as $calendar){
+    
+        foreach ($calendars as $calendar) {
+            // Convert start_time and end_time to 12-hour AM/PM format using Carbon
+            $start_time = Carbon::parse($calendar->start_time)->format('h:i A');
+            $end_time = Carbon::parse($calendar->end_time)->format('h:i A');
+    
             $events[] = [
-                'available' => $calendar->available, // 'available' => 'yes
+                'available' => $calendar->available,  // 'available' => 'yes'
                 'note' => $calendar->note,
                 'start' => $calendar->start_date,
                 'end' => $calendar->end_date,
-                'start_time' => $calendar->start_time,
-                'end_time' => $calendar->end_time
+                'start_time' => $start_time,  // Converted start time
+                'end_time' => $end_time,      // Converted end time
             ];
         }
+    
         return view('user.ucalen', ['events' => $events]);
-        
     }
 
     public function setap(){
