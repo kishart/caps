@@ -5,8 +5,7 @@
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
@@ -28,8 +27,6 @@
             margin: 0;
             padding: 0;
             background-color: white;
-
-            
         }
 
         .contain {
@@ -42,7 +39,6 @@
             height: 100%;
             display: flex;
             flex-direction: column;
-          
         }
 
         #calendar {
@@ -63,7 +59,6 @@
             background-color: #fdead6 !important;
         }
 
-
         .set-appointment-button {
             background-color: #fdead6;
             color: #826C5F;
@@ -74,9 +69,7 @@
             cursor: pointer;
         }
 
-
-
-        .sched{
+        .sched {
             background-color: pink;
         }
     </style>
@@ -84,17 +77,15 @@
 
 <div class="contain">
     <div class="calendar-container">
-        
         <div id="calendar"></div>
     </div>
 
-
-   <div class="sched">
-    <h1>ha</h1>
-    @foreach ($calendars as $calendar)
-    <h5>Send Message to {{ $calendar->start_time }}</h5>
-    @endforeach
-   </div>
+    <div class="sched">
+        <h1>ha</h1>
+        @foreach ($events as $event)  <!-- Use $events instead of $calendars -->
+            <h5>Send Message to {{ $event['start'] }}</h5>
+        @endforeach
+    </div>
 </div>
 
 <script>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('content')
 <head>
@@ -57,13 +57,22 @@
             <input type="hidden" name="payment_method" value="in_person">
            
             <div class="details">
-                <p>Details:</p>
-                <input type="text" name="payment_details" placeholder="Enter details" required>
+                <p>Feel free to contact in any of this social media message to the photographer</p>
+                <div class="apps">
+                    
+                    <a href="https://www.facebook.com/HusniePhotography" target="_blank">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                    <ion-icon name="logo-call"><a href=""></a></ion-icon>
+                    <a href="mailto:itshusnie@gmail.com">
+                        <ion-icon name="mail"></ion-icon>
+                    </a>
+                </div>
+        
+        
               
             </div>
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </div>
+          
         </form>
     </div>
 

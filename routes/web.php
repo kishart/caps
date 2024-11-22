@@ -23,11 +23,14 @@ Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('ad
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
 Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
 
+// Routes for Calendar
 Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
-Route::get('admin/calendar', [CalendarController::class, 'addCalendar']);
-Route::post('save-calendar', [CalendarController::class, 'saveCalendar']);
+Route::get('admin/calendar', [CalendarController::class, 'addCalendar'])->middleware('auth', 'admin');
+Route::post('save-calendar', [CalendarController::class, 'saveCalendar'])->middleware('auth', 'admin');
+Route::get('ucalen', [CalendarController::class, 'ucalen'])->middleware('auth');
+
 Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');
-Route::get('ucalen', [CalendarController::class, 'ucalen']);
+
 
 
 
@@ -185,6 +188,3 @@ Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('pho
 
 
 Route::post('/payment/store/{appointmentId}', [AppointmentController::class, 'storePayment'])->name('payment.store');
-
-
-Route::get('/ucalen', [CalendarController::class, 'viewUserCalendar'])->name('user.ucalen');

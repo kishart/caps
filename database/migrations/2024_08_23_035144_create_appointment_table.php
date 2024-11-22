@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('gcash_image')->nullable(); // GCash image
             $table->date('payment_date')->nullable(); // Payment date
             $table->time('payment_time')->nullable(); // Payment time
-            $table->text('payment_details')->nullable(); // Payment details
-            $table->unsignedBigInteger('user_id')->nullable(); // User ID column
+          $table->unsignedBigInteger('user_id')->nullable(); // User ID column
 
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
