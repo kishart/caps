@@ -32,11 +32,11 @@
         <div class="button">
             <button class="set">
                 <ion-icon name="arrow-forward-circle"></ion-icon>
-                <a href="{{ asset('setap') }}" style="color: black;">Set Appointment</a>
+                <a href="{{ asset('ucalen') }}" style="color: black;">Set Appointment</a>
             </button>
             <button class="blur-button">
-                <ion-icon name="calendar-clear-outline"></ion-icon>
-                <a href="{{ asset('ucalen') }}" style="color: white;">Check Calendar</a>
+                <ion-icon name="image"></ion-icon>
+                <a href="{{ asset('show-photos') }}" style="color: white;">Check Photos</a>
             </button>
         </div>
 
