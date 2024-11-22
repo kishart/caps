@@ -33,6 +33,9 @@ class CalendarController extends Controller
 
     public function saveCalendar(Request $request)
     {
+        $start_time = Carbon::parse($calendar->start_time)->format('h:i A');
+        $end_time = Carbon::parse($calendar->end_time)->format('h:i A');
+
         $request->validate([
             'available' => 'required',
             'note' => 'required|string|max:255',
@@ -79,8 +82,8 @@ class CalendarController extends Controller
         return view('user.ucalen', ['events' => $events]);
     }
 
-    public function setap(){
-        return view('user.setap');
-    }
+    // public function setap(){
+    //     return view('user.setap');
+    // }
 
 }
