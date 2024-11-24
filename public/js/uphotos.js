@@ -163,12 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
             `;
         } else {
-            displayDiv.innerHTML = `
-                <!-- Content for viewing uploaded photos -->
-                <div class="view-photos">
-                   <p>hi</p>
-                </div>
-            `;
+            window.location.href = 'view-photos';
         }
     }
 

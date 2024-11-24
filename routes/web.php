@@ -7,6 +7,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -16,12 +17,14 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'admin');
+//Route::get('/view-photos', [TestPhotoController::class, 'viewPhotos'])->name('view-photos');
 
-
+ Route::get('/view-photos', [TestPhotoController::class, 'viewPhotos']);
 
 Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
-Route::get('msg', [HomeController::class, 'msg'])->middleware('auth', 'admin');
+
+
 
 // Routes for Calendar
 Route::get('calendar', [CalendarController::class, 'calendar'])->middleware('auth', 'admin');
@@ -190,3 +193,11 @@ Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('pho
 
 
 Route::post('/payment/store/{appointmentId}', [AppointmentController::class, 'storePayment'])->name('payment.store');
+
+
+Route::post('/contact', [ContactController::class, 'store'])->middleware('auth')->name('contact.store');
+
+Route::get('/msg', [ContactController::class, 'msgview'])
+    ->middleware(['auth', 'admin']);
+
+// Route::get('/msg', [ContactController::class, 'msgview']);

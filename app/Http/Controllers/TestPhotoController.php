@@ -96,23 +96,7 @@ public function showForm()
 }
 
 
-    // public function deletePhoto($id)
-    // {
-    //     // Find the photo by ID
-    //     $photo = Photos::findOrFail($id);
-
-    //     // Delete the photo files from storage
-    //     $photoPaths = json_decode($photo->photo_paths, true);
-    //     foreach ($photoPaths as $path) {
-    //         Storage::disk('public')->delete($path);
-    //     }
-
-    //     // Delete the photo record from the database
-    //     $photo->delete();
-
-    //     // Redirect back with a success message
-    //     return back()->with('success', 'Photo deleted successfully!');
-    // }
+ 
 
     public function list()
     {
@@ -144,9 +128,14 @@ public function showForm()
     public function viewPhotos()
     {
         $photoUploads = Photos::with('comments.user')->get();
-        return view('admin.ahome', compact('photoUploads'));
+        return view('admin/view-photos', compact('photoUploads'));
     }
 
+    // public function viewPhotos()
+    // {
+    //     return view('admin/view-photos');
+    // }
+    
 
 
 }

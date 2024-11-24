@@ -57,13 +57,14 @@
     color: white;
 }
 
-.container {
+.containera {
     display: flex;
     justify-content: space-between;
     /* Left and right horizontally aligned */
     align-items: flex-start;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
+   margin-right:30px;
 }
 
 .left {

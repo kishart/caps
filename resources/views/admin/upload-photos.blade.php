@@ -19,7 +19,7 @@
         <!-- Upload Form -->
         <form action="{{ route('photos.upload') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div id="display" class="display container mt-3">
+            <div id="display" class="display containera mt-3">
             
                 <div class="left">
                      <!-- Display Success Message -->

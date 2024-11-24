@@ -47,9 +47,6 @@ class HomeController extends Controller
     }
 
    
-    public function msg(){
-        return view('admin.msg');
-    }
 
     public function adminsidebar(){
         return view('layouts.adminsidebar');
@@ -98,9 +95,7 @@ class HomeController extends Controller
     }
 
  
-    public function umsg(){
-        return view('user.umsg');
-    }
+ 
     public function contact(){
         return view('user.contact');
     }
