@@ -9,20 +9,19 @@
     <div class="toggle-container">
         <input type="checkbox" id="toggle" class="toggleCheckbox" />
         <label for="toggle" class='toggleContainer'>
-            <div id="uploadPhotos" class="toggle-label">Upload Photos</div>
-            <div id="viewPhotos" class="toggle-label active">View Photos</div>
+            <div id="uploadPhotos" class="toggle-label active">Upload Photos</div>
+            <div id="viewPhotos" class="toggle-label">View Photos</div>
         </label>
 
 
     </div>
 
-<h1>view photos</h1>
-
+    <h1></h1>
 
     </div>
     </form>
 
-    <script src="{{ asset('js/uphotos.js') }}"></script>
+    <script src="{{ asset('js/vphotos.js') }}"></script>
 @endsection
 
 

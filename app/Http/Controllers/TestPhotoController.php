@@ -131,11 +131,17 @@ public function showForm()
         return view('admin/view-photos', compact('photoUploads'));
     }
 
-    // public function viewPhotos()
-    // {
-    //     return view('admin/view-photos');
-    // }
-    
 
+    
+    public function listPhotos($photosId)
+    {
+        $photos = Photo::with('user') // Load related user data
+            ->where('photos_id', $photosId)
+            ->latest()
+            ->get();
+    
+        return view('admin.upload-photos', compact('photos'));
+    }
+    
 
 }

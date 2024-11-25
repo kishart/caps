@@ -183,12 +183,12 @@ Route::post('/appointments/store', [AppointmentController::class, 'storeAppointm
 Route::get('/admin/ahome/{appointmentId}', [AppointmentController::class, 'viewPayments'])->name('payments.ahome');
 // web.php
 
-Route::get('/photo/edit/{id}', [TestPhotoController::class, 'edit'])->name('photo.edit');
-Route::put('/photo/update/{id}', [TestPhotoController::class, 'update'])->name('photo.update');
-Route::delete('/photo/delete/{id}', [TestPhotoController::class, 'destroy'])->name('photo.delete');
 
-Route::get('/admin/photo_list', [TestPhotoController::class, 'list'])->name('photo.list');
 
+Route::get('/photos', [TestPhotoController::class, 'index'])->name('photos.index');
+Route::get('/photos/{photo}/edit', [TestPhotoController::class, 'edit'])->name('photos.edit');
+Route::put('/photos/{photo}', [TestPhotoController::class, 'update'])->name('photos.update');
+Route::delete('/photos/{photo}', [TestPhotoController::class, 'destroy'])->name('photos.destroy');
 
 
 
@@ -200,4 +200,6 @@ Route::post('/contact', [ContactController::class, 'store'])->middleware('auth')
 Route::get('/msg', [ContactController::class, 'msgview'])
     ->middleware(['auth', 'admin']);
 
-// Route::get('/msg', [ContactController::class, 'msgview']);
+
+ Route::get('/admin/upload-photos/{photosId}', [TestPhotoController::class, 'listPhotos'])->name('admin.upload-photos');
+//  Route::get('/admin/photos/{photosId}', [TestPhotoController::class, 'listPhotos'])->name('admin.photos.index');

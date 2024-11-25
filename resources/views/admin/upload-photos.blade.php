@@ -4,17 +4,18 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/uphotos.css') }}">
     <title>Upload Photos</title>
+  
+  
+<div class="toggle-container">
+    <input type="checkbox" id="toggle" class="toggleCheckbox" />
+    <label for="toggle" class="toggleContainer">
+        <div id="uploadPhotos" class="toggle-label" onclick="showDiv('upload-photos')">Upload Photos</div>
+        <div id="viewPhotos" class="toggle-label" onclick="showDiv('list-photos')">View Photos</div>
+    </label>
+</div>
 
-
-    <div class="toggle-container">
-        <input type="checkbox" id="toggle" class="toggleCheckbox" />
-        <label for="toggle" class='toggleContainer'>
-            <div id="uploadPhotos" class="toggle-label active">Upload Photos</div>
-            <div id="viewPhotos" class="toggle-label">View Photos</div>
-        </label>
-
-
-    </div>
+<!-- Upload Photos Section -->
+<div id="uploadPhotosDiv" class="upload-photos">
 
         <!-- Upload Form -->
         <form action="{{ route('photos.upload') }}" method="POST" enctype="multipart/form-data">
@@ -191,6 +192,69 @@
 
     </div>
     </form>
+
+    </div>
+
+
+    {{-- list-photos --}}
+    <div id="listPhotosDiv" class="list-photos" style="display: none;">
+       
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mt-5">
+                        <div class="card-header">
+                            <h2>View Photos</h2>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Username</th>
+                                    <th>Description</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                                @foreach ($photos as $photo)
+                                    <tr>
+                                        <td><img src="{{ asset('storage/photos/' . $photo->photo) }}" alt=""
+                                                style="width: 100px;"></td>
+                                        <td>{{ $photo->user->username }}</td>
+                                        <td>{{ $photo->description }}</td>
+                                        <td>{{ $photo->created_at->diffForHumans() }}</td>
+                                        <td>
+                                            <a href="{{ route('photos.edit', $photo->id) }}" class="btn btn-info">Edit</a>
+                                            <form action="{{ route('photos.destroy', $photo->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this photo?')">Delete</button>
+                                            </form>
+                                        </td>  
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            function showDiv(side) {
+              const leftDiv = document.querySelector('.upload-photos');
+              const rightDiv = document.querySelector('.list-photos');
+        
+              if (side === 'left') {
+                leftDiv.style.display = 'flex';
+                rightDiv.style.display = 'none';
+              } else if (side === 'list-photos') {
+                leftDiv.style.display = 'none';
+                rightDiv.style.display = 'flex';
+              }
+            }
+          </script>
+
 
     <script src="{{ asset('js/uphotos.js') }}"></script>
 @endsection
