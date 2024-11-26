@@ -193,3 +193,11 @@ Route::get('/msg', [ContactController::class, 'msgview'])
 Route::post('admin/photos/{photoId}/update', [TestPhotoController::class, 'updatePhoto'])->name('admin.update-photo');
 
 Route::delete('admin/delete-photos/{id}', [TestPhotoController::class, 'deletePhotos'])->name('admin.delete-photo');
+
+Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])->name('admin.editphotos');
+
+
+
+
+Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])->name('editphotos.get');
+Route::post('admin/editphotos/{id}', [TestPhotoController::class, 'updatePhotos'])->name('editphotos.update');

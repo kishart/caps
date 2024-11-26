@@ -203,19 +203,8 @@
     {{-- list-photos --}}
     <div id="listPhotosDiv" class="list-photos" style="display: none;">
 
-        {{-- <h2>Uploaded Photos</h2>
-        @foreach ($photos as $photo)
-            <div>
-                <h3>{{ $photo->user->name }}</h3>
-                <p>{{ $photo->description }}</p>
-                @foreach (json_decode($photo->photo_paths, true) as $path)
-                    <img src="{{ asset('storage/' . $path) }}" alt="Photo" width="150">
-                @endforeach
-            </div>
-        @endforeach
+   
         
-        </div> --}}
-
 
 
         <table class="w-full border-collapse border border-gray-300">
@@ -232,11 +221,16 @@
                     <tr>
                         <!-- Display photo (assuming photo_paths contains image paths) -->
                         <td class="border border-gray-300 px-4 py-2">
-                            @foreach (json_decode($photo->photo_paths) as $path)
-                                <img src="{{ asset('storage/' . $path) }}" alt="Photo"
-                                    class="h-16 w-16 object-cover rounded">
-                            @endforeach
+                            @if (!empty($photo->photo_paths) && is_array(json_decode($photo->photo_paths)))
+                                @foreach (json_decode($photo->photo_paths) as $path)
+                                    <img src="{{ asset('storage/' . $path) }}" alt="Photo"
+                                        class="h-16 w-16 object-cover rounded">
+                                @endforeach
+                            @else
+                                <span>No photos available</span>
+                            @endif
                         </td>
+                        
 
                         <!-- Display description -->
                         <td class="border border-gray-300 px-4 py-2">{{ $photo->description }}</td>
@@ -251,6 +245,10 @@
                                 Edit
                             </button>
 
+                            <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="action-edit">
+                                <ion-icon name="create"></ion-icon> Edit
+                            </a>
+
                            <!-- Delete button -->
 <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" style="display:inline-block;">
     @csrf
@@ -260,58 +258,7 @@
 
                         </td>
 
-                        <!-- Edit Photo Modal --><!-- Edit Photo Modal -->
-                        <div id="editPhotoModal" class="hidden fixed z-10 inset-0 overflow-y-auto">
-                            <div class="flex items-center justify-center min-h-screen">
-                                <div class="bg-white rounded-lg shadow-lg w-96 p-6">
-                                    <h2 class="text-lg font-semibold mb-4">Edit Photo</h2>
-                                    <form id="editPhotoForm" action="{{ route('admin.update-photo', ':photoId') }}"
-                                        method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('POST')
-
-                                        <!-- User Dropdown -->
-                                        <div class="mb-4">
-                                            <label for="edit_user_id" class="block text-sm font-medium">Select
-                                                User</label>
-                                            <select name="user_id" id="edit_user_id"
-                                                class="block w-full mt-1 border-gray-300 rounded-md shadow-sm">
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <!-- Description -->
-                                        <div class="mb-4">
-                                            <label for="edit_description"
-                                                class="block text-sm font-medium">Description</label>
-                                            <textarea name="description" id="edit_description" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm"></textarea>
-                                        </div>
-
-                                        <!-- Photo Upload -->
-                                        <div class="mb-4">
-                                            <label for="edit_photos" class="block text-sm font-medium">Add Photos</label>
-                                            <input type="file" name="photos[]" id="edit_photos"
-                                                class="block w-full mt-1 border-gray-300 rounded-md" multiple>
-                                        </div>
-
-                                        <!-- Submit Button -->
-                                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">
-                                            Save Changes
-                                        </button>
-
-                                        <!-- Close Button -->
-                                        <button type="button" onclick="closeEditModal()"
-                                            class="ml-4 text-gray-500 hover:underline">
-                                            Cancel
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
+                    
 
                     </tr>
                 @endforeach

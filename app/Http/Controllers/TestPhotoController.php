@@ -114,46 +114,52 @@ public function showUploadedPhotos()
         $photoUploads = Photos::with('comments.user')->get();
         return view('admin/view-photos', compact('photoUploads'));
     }
-
-
-
-
-public function updatePhoto(Request $request)
-{
-    $request->validate([
-        'description' => 'required|string|max:255',
-        'user_id' => 'required|exists:users,id',
-        'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-    ]);
-
-    $id = $request->id;
-    $description = $request->description;
-    $user_id = $request->user_id;
-    $photos = $request->photos;
-
-    Photos::where('id', '=', $id)->update([
-        'id' => $request->id,
-        'description' => $request->description,
-        'user_id' => $request->user_id,
-        'photo_paths' => json_encode($request->photos),
-    ]);
-
-    return redirect()->back()->with('success', 'photos updated successfully');
-}
+    public function updatePhotos(Request $request, $id)
+    {
+        // Validate input
+        $validatedData = $request->validate([
+            'description' => 'required|string|max:255',
+            'user_id' => 'required|exists:users,id',
+            'photos' => 'nullable|array', // Optional array of files
+            'photos.*' => 'file|mimes:jpeg,png,jpg,gif|max:2048', // Each file must meet requirements
+        ]);
+    
+        // Initialize photo paths
+        $photoPaths = null;
+    
+        // Check if photos are uploaded and process them
+        if ($request->hasFile('photos')) {
+            $photoPaths = []; // Create an array to store paths
+            foreach ($request->file('photos') as $photo) {
+                $photoPaths[] = $photo->store('photos', 'public'); // Save file and add to paths
+            }
+            $photoPaths = json_encode($photoPaths); // Convert paths to JSON for database
+        }
+    
+        // Update the photo record
+        Photos::where('id', $id)->update([
+            'description' => $validatedData['description'],
+            'user_id' => $validatedData['user_id'],
+            'photo_paths' => $photoPaths, // Null if no photos uploaded
+        ]);
+    
+        return redirect()->route('editphotos.get', $id)->with('success', 'Photo updated successfully!');
+    }
+    
+    
 
 public function deletePhotos($id)
 {
     Photos::where('id', '=', $id)->delete();
     return redirect()->back()->with('success', 'Photos deleted successfully');
 }
-
-
+public function editPhotos($id)
+{
+    $data = Photos::findOrFail($id); // Fetch the photo data
+    $users = User::all(); // Fetch all users for the dropdown
+    return view('admin.editphotos', compact('data', 'users'));
 }
-
-
-
-
-
+}
 
 
 
