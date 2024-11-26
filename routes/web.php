@@ -136,16 +136,12 @@ Route::get('/admin/payments/{appointmentId}', [AppointmentController::class, 'vi
 
 
 
-Route::get('upload-photos', function () {
-    return view('/admin/upload-photos');
-});
+Route::match(['get', 'post'], '/admin/upload-photos/{photosId?}', [TestPhotoController::class, 'managePhotos'])->name('admin.upload-photos');
 
 
-Route::post('upload-photos', [TestPhotoController::class, 'upload'])->name('photos.upload');
 Route::get('show-photos', [TestPhotoController::class, 'showUploadedPhotos'])->name('photos.view');
-Route::get('/upload-photos', [TestPhotoController::class, 'showForm'])->name('form.show');
 
-// Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
+Route::post('/post-comment/{file}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
 Route::post('/comment/{photoId}', [TestPhotoController::class, 'postComment'])->name('post-comment');
 
@@ -181,14 +177,8 @@ Route::get('nav', [HomeController::class, 'navbar'])->middleware('auth');
 
 Route::post('/appointments/store', [AppointmentController::class, 'storeAppointment'])->name('appointments.store');
 Route::get('/admin/ahome/{appointmentId}', [AppointmentController::class, 'viewPayments'])->name('payments.ahome');
-// web.php
 
 
-
-Route::get('/photos', [TestPhotoController::class, 'index'])->name('photos.index');
-Route::get('/photos/{photo}/edit', [TestPhotoController::class, 'edit'])->name('photos.edit');
-Route::put('/photos/{photo}', [TestPhotoController::class, 'update'])->name('photos.update');
-Route::delete('/photos/{photo}', [TestPhotoController::class, 'destroy'])->name('photos.destroy');
 
 
 
@@ -199,7 +189,7 @@ Route::post('/contact', [ContactController::class, 'store'])->middleware('auth')
 
 Route::get('/msg', [ContactController::class, 'msgview'])
     ->middleware(['auth', 'admin']);
+    
+Route::post('admin/photos/{photoId}/update', [TestPhotoController::class, 'updatePhoto'])->name('admin.update-photo');
 
-
- Route::get('/admin/upload-photos/{photosId}', [TestPhotoController::class, 'listPhotos'])->name('admin.upload-photos');
-//  Route::get('/admin/photos/{photosId}', [TestPhotoController::class, 'listPhotos'])->name('admin.photos.index');
+Route::delete('admin/delete-photos/{id}', [TestPhotoController::class, 'deletePhotos'])->name('admin.delete-photo');
