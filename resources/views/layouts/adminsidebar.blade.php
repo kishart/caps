@@ -28,6 +28,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
     <title>Document</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
@@ -59,15 +62,17 @@
 
                 <div class="sidey flex-grow">
                     <ul style="margin-top: 60px;">
-                        <li >
+                        <li>
                            <a href="{{ asset('home') }}"
                                 class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="list" style="font-size: 30px;"></ion-icon>
 
                                
-                                <span class="flex-1 ms-3 whitespace-nowrap">Appointment List</span>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Booking List</span>
                             </a>
                         </li>
+
+                         
                         <li>
                             <a href="{{ route('admin.upload-photos') }}"
                                class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Husnie Photography</title>
 </head>
 <body>
 
@@ -17,7 +17,9 @@
 }
 
 body {
-	background: #ffcc99;
+	background-image: url("{{ asset('images/cover.jpg') }}");
+    background-repeat: no-repeat;
+	background-size: cover;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -30,11 +32,15 @@ body {
 h1 {
 	font-weight: bold;
 	margin: 0;
+	color: #ECB176;
 }
 
-h2 {
+.husnie {
     color: #532E1C;
 	text-align: center;
+	font-size: 44px;
+	font-weight: bold;
+
 }
 
 p {
@@ -43,6 +49,7 @@ p {
 	line-height: 20px;
 	letter-spacing: 0.5px;
 	margin: 20px 0 30px;
+	color: #ECB176;
 }
 
 span {
@@ -172,9 +179,9 @@ input {
 }
 
 .overlay {
-	background: #532E1C;
-	background: -webkit-linear-gradient(to right, #532E1C, #C5A880);
-	background: linear-gradient(to right, #532E1C, #C5A880);
+	background: #13161a;
+	background: -webkit-linear-gradient(to right, #13161a, #303641);
+	background: linear-gradient(to right, #13161a, #303641);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -226,7 +233,7 @@ input {
 
 </style>
 
-<h2>Husnie Photography</h2>
+<p class="husnie">Husnie Photography</p>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
         <form method="POST" action="{{ route('register') }}">

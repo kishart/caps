@@ -167,6 +167,7 @@ text-decoration: none;
     border-top-right-radius: 2%;
     border-bottom-right-radius: 2%;
     height: 100vh; /* Ensure it fits the full viewport height */
+    width: 15vw;
     display: flex;
     flex-direction: column; /* Ensure the content stacks vertically */
     overflow-y: hidden; /* Prevents vertical scroll within sidebar */
