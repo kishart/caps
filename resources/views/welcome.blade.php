@@ -238,7 +238,7 @@ input {
 	<div class="form-container sign-up-container">
         <form method="POST" action="{{ route('register') }}">
             @csrf
-            <h1>Create Account</h1>
+            <h1 style="color:#532E1C">Create Account</h1>
             <span>or use your username for registration</span>
             
 			<input id="name" placeholder="Name" type="text" class="form-control @error('name') is-invalid @enderror" 
@@ -308,7 +308,7 @@ input {
 	<div class="form-container sign-in-container">
         <form id="login" class="input-group" method="POST" action="{{ route('login') }}">
             @csrf
-			<h1>Sign in</h1>
+			<h1 style="color: #532E1C">Sign in</h1>
 			
 			<span>or use your account</span>
             <input id="username" placeholder="Username" type="username"

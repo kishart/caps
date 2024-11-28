@@ -18,71 +18,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <style>
-        html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #EFE6DD;
-        }
-
-        .contain {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .calendar-container {
-            width: 70%; /* 70% width for the calendar */
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .details-container {
-            width: 30%; /* 30% width for the details section */
-            height: 100%;
-            padding: 20px;
-            background-color: #f8f8f8;
-            border-left: 1px solid #ddd;
-            box-sizing: border-box;
-        }
-
-        #calendar {
-            width: 100%;
-            height: 90%;
-        }
-
-        .fc-view-container {
-            height: 100%;
-        }
-
-        .fc td, .fc th {
-            border-color: #ecb176 !important;
-        }
-
-        .fc-day, .fc-widget-content {
-            background-color: #fdead6 !important;
-        }
-
-        .schedule-details {
-            margin-top: 20px;
-        }
-    </style>
 </head>
 
 <div class="contain">
     <div class="calendar-container">
-        <h3 class="text-center mt-5 font-bold text-xl">Husnie's Appointment Schedule</h3>
-        <div id="calendar"></div>
+       <div id="calendar"></div>
     </div>
     <div class="details-container">
-        <h4>Schedule Details</h4>
+        <h3 class="text-center mt-5 font-bold text-xl">Husnie's Appointment Schedule</h3>
+       
+        <p style="margin-top: 30px; font-weight:bold;">Schedule Details</p>
         <div class="schedule-details">
             <p><strong>Start Time:</strong> <span id="start-time">N/A</span></p>
             <p><strong>End Time:</strong> <span id="end-time">N/A</span></p>

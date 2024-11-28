@@ -55,7 +55,10 @@
             <a href="https://www.facebook.com/HusniePhotography" target="_blank">
                 <ion-icon name="logo-facebook"></ion-icon>
             </a>
-            <ion-icon name="logo-instagram"><a href=""></a></ion-icon>
+            <a href="https://www.instagram.com/husnie_photography?igsh=NzF0eXQxZG1uOG0=" target="_blank">
+                <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+           
             <a href="mailto:itshusnie@gmail.com">
                 <ion-icon name="mail"></ion-icon>
             </a>

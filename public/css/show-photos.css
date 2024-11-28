@@ -1,0 +1,67 @@
+.main {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.comment textarea {
+    width: 100%;
+    margin-top: 10px;
+}
+.images {
+    height: 450px;
+    max-width: 90%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.description {
+    padding: 10px;
+    border-radius: 5px;
+    height: 70px;
+    width: 650px;
+   margin: 20px auto;
+   background-color: #EECC8C;
+}
+.subbut{
+    background-color: #E8B298;
+    color:black;
+}
+.subbut:hover{
+    background-color: #A36361;
+    color:white;
+    font-weight: bold;
+}
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%; /* Reduce button width */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(
+        0,
+        0,
+        0,
+        0.5
+    ); /* Add background color to icons for better visibility */
+    border-radius: 50%; /* Make the background rounded */
+}
+
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+}
+
+.carousel .carousel-control-prev {
+    left: 15px;
+}
+
+.carousel .carousel-control-next {
+    right: 15px;
+}

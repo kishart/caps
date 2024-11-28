@@ -6,55 +6,10 @@
  
     <title>View Photos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<style>
-    .main {
-        background-color: #f8f9fa;
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    .comment textarea {
-        width: 100%;
-        margin-top: 10px;
-    }
-    .images{
-        height: 450px; 
-    max-width: 90%;
-    object-fit: cover; 
-    border-radius: 10px;
-    margin: 0 auto; 
-    }
     
-    .carousel-control-prev,
-    .carousel-control-next {
-        width: 5%; /* Reduce button width */
-    }
+    <link rel="stylesheet" href="{{ asset('css/show-photos.css') }}">
+</head>
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: rgba(0, 0, 0, 0.5); /* Add background color to icons for better visibility */
-        border-radius: 50%; /* Make the background rounded */
-    }
-
-    .carousel .carousel-control-prev,
-    .carousel .carousel-control-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-    }
-
-    .carousel .carousel-control-prev {
-        left: 15px; /* Position the left button inside the image */
-    }
-
-    .carousel .carousel-control-next {
-        right: 15px; /* Position the right button inside the image */
-    }
-  
-</style>
 
 <body>
     <div class="main" style="background-color:white;">
@@ -91,11 +46,11 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <button style=" margin-left: 130px;" class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="prev">
-                                <ion-icon name="caret-back-outline" style="font-size: 2rem; background-color: #A36361;"></ion-icon>
+                            <button style=" margin-left: -20px;" class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="prev">
+                                <ion-icon name="caret-back-outline" style="font-size: 2rem; color: #000;"></ion-icon>
                             </button>
-                            <button style=" margin-right: 130px;" class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="next">
-                                <ion-icon name="caret-forward-outline" style="font-size: 2rem; background-color: #A36361;"></ion-icon>
+                            <button style=" margin-right: -20px;" class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $photo->id }}" data-bs-slide="next">
+                                <ion-icon name="caret-forward-outline" style="font-size: 2rem; color: #000;"></ion-icon>
                             </button>
                             
                         </div>
@@ -103,7 +58,7 @@
                             <p>No photos available for this upload.</p>
                         @endif
 
-                        <p style="margin-left:140px;margin-right:140px; border-radius:10px; height:70px; margin-top:20px; background-color:#EECC8C " >{{ $photo->description }}</p>
+                        <p class="description" >{{ $photo->description }}</p>
                     </div>
 
                     <!-- Right Column: Comments (30%) -->
@@ -126,7 +81,7 @@
                             <form action="{{ route('post-comment', $photo->id) }}" method="POST">
                                 @csrf
                                     <textarea name="comment" placeholder="Write your comment..." rows="4" class="form-control"></textarea>
-                                    <button type="submit" class="btn btn-primary mt-2">Submit Comment</button>
+                                    <button type="submit" class="subbut btn  mt-2">Submit Comment</button>
                                 </form>
                             @else
                                 <!-- If the authenticated user is not the selected user, display a message -->
