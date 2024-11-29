@@ -12,7 +12,7 @@
 
 
 <body>
-    <div class="main" style="background-color:white;">
+    <div class="mainp" style="background-color:white;">
 
         <!-- Display Success Message -->
         @if (session('success'))
@@ -94,6 +94,30 @@
             @endforeach
         @endif
     </div>
+
+
+    <footer>
+        <p class="footerp">Husnie Photography</p>
+        <p style="color:white; font-size:12px;">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus nam mollitia dolorum amet.
+            <br> Laboriosam exercitationem molestiae sint consectetur facere nobis possimus nam mollitia dolorum amet?
+        </p>
+        <div class="footericon">
+            <a href="https://www.facebook.com/HusniePhotography" target="_blank">
+                <ion-icon name="logo-facebook"></ion-icon>
+            </a>
+            <a href="https://www.instagram.com/husnie_photography?igsh=NzF0eXQxZG1uOG0=" target="_blank">
+                <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+            <a href="mailto:itshusnie@gmail.com">
+                <ion-icon name="mail"></ion-icon>
+            </a>
+        </div>
+        <div class="footerf">
+            <p class="allrights">© 2024 Husnie Photography. All rights reserved.</p>
+        </div>
+    </footer>
+    
 
     <!-- Include Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
