@@ -1,0 +1,105 @@
+
+
+.myAppointment-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.myAppointment-table th,
+.myAppointment-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.myAppointment-table th {
+    background-color: #A36361;
+    color: white;
+}
+
+.myAppointment-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.myAppointment-table tbody tr:nth-child(odd) {
+    background-color: #d4cbc6;
+}
+
+.myAppointment-table tbody tr:nth-child(even) {
+    background-color: #e4bfad;
+}
+
+.myAppointment-table th:first-child,
+.myAppointment-table td:first-child {
+    border-top-left-radius:15px;
+    /* Top left corner */
+    border-bottom-left-radius: 15px;
+    /* Bottom left corner */
+}
+
+.myAppointment-table th:last-child,
+.myAppointment-table td:last-child {
+    border-top-right-radius: 22px;
+    /* Top right corner */
+    border-bottom-right-radius: 22px;
+    /* Bottom right corner */
+}
+
+
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        width: 50%; /* Could be more or less, depending on screen size */
+        position: relative;
+    }
+
+    
+    /* Button to trigger modal */
+    .trigger-btn {
+        padding: 10px 20px;
+        background-color: #EECC8C;
+        color: black;
+        border-radius: 20px;
+        cursor: pointer;
+
+        font-size: 16px;
+    }
+
+    .trigger-btn:hover {
+        background-color: #dba594;
+        color: white;
+    }
+
+    /* Modal Header Styles with No Space */
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        height: 40px; /* Define a fixed height for the header */
+        line-height: 40px; /* Vertically center text within the header */
+        border-bottom: 1px solid #8e3535;
+    }
+
+    .modal-header p {
+        margin: 0; /* Remove margin around the text */
+      font-size: 16px;
+    }
+
+    .modal-header .close {
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        color: white;
+        padding-right: 10px; /* Add space between the close icon and the right edge */
+        background: none;
+        border: none;
+    }
+
+    .modal-header .close:hover {
+        color: #dba594;
+    }

@@ -11,7 +11,13 @@
     left: 0;
     width: 100%; /* Ensures the header spans the entire width */
     z-index: 1000; /* Keeps it above other elements */
+    transition: background-color 0.3s ease-in-out;
 }
+
+.header.scrolled {
+    background-color: #000000; /* Black background */
+}
+
 .navbar {
     display: flex;
     align-items: center;

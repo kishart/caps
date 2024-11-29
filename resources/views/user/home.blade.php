@@ -63,9 +63,76 @@
                 <ion-icon name="mail"></ion-icon>
             </a>
         </div>
-
+<div class="steps">
+        <h1 style="font-size: 30px;text-align:center;">Steps to set an Appointment</h1>
+            
+        <div class="step-container">
+           <div class="left">
+                <img src="{{ asset('images/step1.png') }}" alt="Step 1">
+            </div>
+            <div class="right">
+                <p>Click on the "Set Appointment" button</p>
+            </div>
+        </div>
+        <div class="step-container">
+            <div class="left">
+                 <img src="{{ asset('images/step2.png') }}" alt="Step 1">
+             </div>
+             <div class="right">
+                 <p>View all the appointment details of the photographer to aware of all his schedule and know if your preference date to appointment is available or not.</p>
+             </div>
+         </div>
+         <div class="step-container">
+            <div class="left">
+                 <img src="{{ asset('images/step3.png') }}" alt="Step 1">
+             </div>
+             <div class="right">
+                 <p>Double check if you information is correct such as name, email, and phone number. Then fill up for your chosen date and time. Also include the details for the event that you are having</p>
+             </div>
+         </div>
+         <div class="step-container">
+            <div class="left">
+                 <img src="{{ asset('images/step5.png') }}" alt="Step 1">
+             </div>
+             <div class="right">
+                 <p>After submit your appointment, go to "My Appointment" for your appointment details.</p>
+             </div>
+         </div>
+         <div class="step-container">
+            <div class="left">
+                 <img src="{{ asset('images/step6.png') }}" alt="Step 1">
+             </div>
+             <div class="right">
+                 <p>In the appointment details this will show if your appointment is accepted or decline. </p>
+             </div>
+         </div>
+    </div>     
 
 </div>
+
+<footer>
+    <p class="footerp">Husnie Photography</p>
+    <p style="color:white; font-size:12px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit.  possimus nam mollitia dolorum amet.
+        <br>Laboriosam exercitatione molestiae sint consectetur facere nobis possimus nam mollitia dolorum amet? 
+          </p>
+    <div class="footericon">
+        <a href="https://www.facebook.com/HusniePhotography" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon>
+        </a>
+        <a href="https://www.instagram.com/husnie_photography?igsh=NzF0eXQxZG1uOG0=" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+        </a>
+       
+        <a href="mailto:itshusnie@gmail.com">
+            <ion-icon name="mail"></ion-icon>
+        </a>
+    </div>
+<div class="footerf">
+    <p class="allrights">© 2024 Husnie Photography. All rights reserved.</p>
+</div>
+  
+</footer>
+
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

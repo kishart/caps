@@ -12,13 +12,13 @@
 
 <body>
     @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show mx-auto text-center" role="alert" style="margin-top: 50px; background-color: rgb(174, 234, 174); max-width: 500px;">
-        <strong>{{ session('success') }}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
+    <script>
+        window.onload = function() {
+            alert("{{ session('success') }}");
+        };
+    </script>
+@endif
+
     
    
    

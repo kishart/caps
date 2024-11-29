@@ -16,7 +16,7 @@
  
 </head>
 <body>
-    <div class="header  {{ Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint')  ? 'bg-brown' : '' }} ">
+    <div id="navbar" class="header  {{ Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint')  ? 'bg-brown' : '' }} ">
         <img src="{{ asset('images/hplogo.jpg') }}" alt="logo" class="logo">
         <nav class="navbar">
             <ul>
@@ -53,6 +53,19 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+         document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 0) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+    });
+    </script>
     @stack('scripts') <!-- Allow additional scripts to be added from child views -->
 </body>
 </html>
