@@ -56,6 +56,9 @@ class HomeController extends Controller
         return view('layouts.nav');
     }
 
+    public function footer(){
+        return view('layouts.footer');
+    }
     
     public function editProfile()
     {

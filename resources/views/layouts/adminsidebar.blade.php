@@ -62,7 +62,7 @@
 
                 <div class="sidey flex-grow">
                     <ul style="margin-top: 60px;">
-                        <li>
+                        <li class="{{ Request::is('home') ? 'active-link' : '' }} ">
                            <a href="{{ asset('home') }}"
                                 class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="list" style="font-size: 30px;"></ion-icon>
@@ -73,7 +73,7 @@
                         </li>
 
                          
-                        <li>
+                        <li class="{{ Request::routeIs('admin.upload-photos') ? 'active-link' : '' }}">
                             <a href="{{ route('admin.upload-photos') }}"
                                class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="images" style="font-size: 30px;"></ion-icon>
@@ -81,16 +81,15 @@
                             </a>
                         </li>
                         
-                        <li>
-                        <li>
+                        
+                        <li class="{{ Request::is('calendar') ? 'active-link' : '' }} ">
                           <a href="{{ asset('calendar') }}"
                                 class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="calendar" style="font-size:30px;"></ion-icon>
                                 <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
                             </a>
                         </li>
-                        <li>
-                        <li>
+                        <li class="{{ Request::is('msg') ? 'active-link' : '' }} ">
                             <a href="{{ asset('msg') }}"
                                 class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="mail" style="font-size: 30px;"></ion-icon>

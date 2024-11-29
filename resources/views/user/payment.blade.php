@@ -9,111 +9,122 @@
 </head>
 
 <body>
+    @if(session('success'))
+    <script>
+        window.onload = function() {
+            alert("{{ session('success') }}");
+        };
+    </script>
+@endif
+
+
     <div class="pdetail">
-        <div class="payment-info">
-            <p>Good day! Client, your downpayment is <strong>₱{{ number_format($appointment->downpayment ?? 0, 2) }}</strong>.</p>
-            <p>Please choose your preferred payment method.</p>
+        <p>Good day! Client, your downpayment is <strong>₱{{ number_format($appointment->downpayment ?? 0, 2) }}</strong>.</p>
+        <p>Please choose your preferred payment method.</p>
+    </div>
+   
+    <div class="containera">
+        <div class="column gcash" onclick="openModal('gcash')">
+            <img src="{{ asset('images/glogo.png') }}" alt="logo">
+            GCash
+        </div>
+        <div class="column payment-in-person" onclick="openModal('payment-in-person')">
+            <img src="{{ asset('images/pInperson.png') }}" alt="logo">
+            Payment in Person
         </div>
     </div>
-    
-    <div class="pmethod">
-        <!-- Gcash -->
-        <a href="#" id="gcash-btn" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <img src="{{ asset('images/glogo.png') }}" alt="gcash logo" class="glogo">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Gcash</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">You can easily pay with us through Gcash</p>
-        </a>
-
-        <!-- Payment in Person -->
-        <a href="#" id="in-person-btn" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <img src="https://static.thenounproject.com/png/1530791-200.png" alt="pperson" class="pperson">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">Payment in Person</h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">If you prefer payment in person, you can ask for further details</p>
-        </a>
-    </div>
-
-    <!-- Gcash Modal -->
-    <div id="gcash-modal" class="hidden">
-        <form action="{{ route('payment.store', $appointment->id) }}" method="POST" enctype="multipart/form-data">
-            @csrf
+  
+    <!-- Modal -->
+   <!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <div id="gcash-content" class="hidden">
+            <form action="{{ route('payment.store', $appointment->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateImage()">
+                @csrf
+                <input type="hidden" name="payment_method" value="gcash">
+                <h1>GCash</h1>
+                <p>Make your payment using GCash. Please scan the QR code below or enter the account number.</p>
+                <img src="{{ asset('images/qrsample.png') }}" alt="GCash QR Code" style="width:200px; height:auto;">
+                
+                <input 
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
+                    id="gcash_image" 
+                    name="gcash_image" 
+                    type="file" 
+                    accept=".jpg,.jpeg,.png,.gif,.svg">
+                <p class="mt-1 text-sm text-gray-500">SVG, PNG, JPG, or GIF (MAX. 800x400px).</p>
+                
+                <button type="submit" class="close-btn">Submit</button>
+                <button type="button" class="close-danger" onclick="closeModal()">Close</button>
+            </form>
             
-            <input type="hidden" name="payment_method" value="gcash">
-            <div class="qr-container">
-                <img src="{{ asset('images/qrsample.png') }}" class="qrsample" alt="qrsample">
-            </div>
-            <p class="text-center">Please Upload screenshot for proof of payment of your downpayment</p>
-            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="gcash_image" name="gcash_image" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
-            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Payment in Person Modal -->
-    <div id="in-person-modal" class="hidden">
-        <form action="{{ route('payment.store', $appointment->id) }}" method="POST">
-            @csrf
-            <input type="hidden" name="payment_method" value="in_person">
-           
-            <div class="details">
-                <p>Feel free to contact in any of this social media message to the photographer</p>
+        </div>
+        <div id="payment-in-person-content" class="hidden">
+            <h1>Payment in Person</h1>
+            <form action="{{ route('payment.store', $appointment->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="payment_method" value="in_person">
+                <p>Feel free to contact us through the following methods:</p>
                 <div class="apps">
-                    
                     <a href="https://www.facebook.com/HusniePhotography" target="_blank">
                         <ion-icon name="logo-facebook"></ion-icon>
                     </a>
-                    <ion-icon name="logo-call"><a href=""></a></ion-icon>
-                    <a href="mailto:itshusnie@gmail.com">
-                        <ion-icon name="mail"></ion-icon>
-                    </a>
+                    <a href="tel:+1234567890"><ion-icon name="call"></ion-icon></a>
+                    <a href="mailto:itshusnie@gmail.com"><ion-icon name="mail"></ion-icon></a>
                 </div>
-        
-        
-              
-            </div>
-          
-        </form>
-    </div>
-
-    <footer>
-        <p class="footerp">Husnie Photography</p>
-        <p style="color:white; font-size:12px;">Lorem ipsum dolor, sit amet consectetur adipisicing elit.  possimus nam mollitia dolorum amet.
-            <br>Laboriosam exercitatione molestiae sint consectetur facere nobis possimus nam mollitia dolorum amet? 
-              </p>
-        <div class="footericon">
-            <a href="https://www.facebook.com/HusniePhotography" target="_blank">
-                <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-            <a href="https://www.instagram.com/husnie_photography?igsh=NzF0eXQxZG1uOG0=" target="_blank">
-                <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-           
-            <a href="mailto:itshusnie@gmail.com">
-                <ion-icon name="mail"></ion-icon>
-            </a>
+            </form>
+            <button class="close-danger" onclick="closeModal()">Close</button>
         </div>
-    <div class="footerf">
-        <p class="allrights">© 2024 Husnie Photography. All rights reserved.</p>
     </div>
-      
-    </footer>
+</div>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
 
     <script>
-        // JavaScript to toggle the visibility of the modals
-        document.getElementById("gcash-btn").addEventListener("click", function() {
-            document.getElementById("gcash-modal").classList.remove("hidden");
-            document.getElementById("in-person-modal").classList.add("hidden");
-        });
+       function openModal(type) {
+    const modal = document.getElementById('modal');
+    const gcashContent = document.getElementById('gcash-content');
+    const paymentContent = document.getElementById('payment-in-person-content');
 
-        document.getElementById("in-person-btn").addEventListener("click", function() {
-            document.getElementById("in-person-modal").classList.remove("hidden");
-            document.getElementById("gcash-modal").classList.add("hidden");
-        });
+    // Hide both sections initially
+    gcashContent.classList.add('hidden');
+    paymentContent.classList.add('hidden');
+
+    // Display the relevant content
+    if (type === 'gcash') {
+        gcashContent.classList.remove('hidden');
+    } else if (type === 'payment-in-person') {
+        paymentContent.classList.remove('hidden');
+    }
+
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+function validateImage() {
+        const fileInput = document.getElementById('gcash_image');
+        const filePath = fileInput.value;
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.svg)$/i;
+
+        if (!filePath) {
+            alert("Please select an image file.");
+            return false;
+        }
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert("Invalid file type. Please upload an image (JPG, PNG, GIF, SVG).");
+            fileInput.value = '';
+            return false;
+        }
+
+        return true;
+    }
     </script>
 
+ 
 </body>
 @endsection

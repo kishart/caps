@@ -16,7 +16,7 @@
  
 </head>
 <body>
-    <div id="navbar" class="header  {{ Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint')  ? 'bg-brown' : '' }} ">
+    <div id="navbar" class="header {{ (Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint') || Request::is('user/payment/*')) ? 'bg-brown' : '' }}">
         <img src="{{ asset('images/hplogo.jpg') }}" alt="logo" class="logo">
         <nav class="navbar">
             <ul>

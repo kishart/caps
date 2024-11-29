@@ -137,7 +137,7 @@ button.appoint-btn {
     padding: 10px 15px;
     font-size: 16px;
     border: none;
-    text-align: right;
+    text-align: left;
     /* Align text to the right */
     appearance: none;
     /* Remove default select styling */
@@ -279,4 +279,16 @@ background-color: red;
     border-radius: 10%;
     padding: 8px;
     cursor: pointer;
+    text-align: start;
+}
+
+.no-result-alert {
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    font-size: 16px;
 }

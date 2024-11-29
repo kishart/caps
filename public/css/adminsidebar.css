@@ -189,3 +189,9 @@ img {
 ul li a:hover {
 color: #A36361 !important; /* Force color change on hover */
 }
+
+
+li.active-link {
+   background-color: black;
+   border-radius: 10px;
+}

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 class CalendarController extends Controller
 {
-    //
+    
     public function calendar(){
         $events = array();
         $calendars = Calendar::all();

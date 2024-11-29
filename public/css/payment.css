@@ -1,88 +1,82 @@
-.pdetail{
+body {
+    display: flex; /* Enables flexbox for the body */
+    justify-content: center; /* Centers child elements horizontally */
+    align-items: center; /* Centers child elements vertically */
+    height: 100vh; /* Full height of the viewport */
+    margin-left: 350px;
+    background-color: #f9f9f9; /* Optional background color */
+}
+
+.containera {
+    display: flex; 
+
+    width: 60%; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    overflow: hidden;
+    background-color: #fff; 
+    padding: 20px; 
+}
+
+
+.pdetail {
     text-align: center;
-    font-size: 20px;
-    padding: 50px 0;
-}
-.pmethod {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    height: 100%;
-}
-
-.pmethod a {
-    min-height: 350px; 
-    width: 500px;
-}
-.glogo{
-    width: 300px;
-    height: 250px;
-   margin-left: 20px;
-margin-bottom:20px;
-} 
-.pperson{
-    width: 300px;
-    height: 250px;
-    margin-left: 20px;
-    margin-bottom:20px;
-}
-.qr-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.qrsample {
-    width: auto;
-    height: 250px;
-}
-.file{
-    background-color: #A36361;
-}
-.dt{
-    margin-top: 20px;    
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-.details{
-    margin-bottom: 20px;
+    margin-right: 350px;
+    margin-bottom: 40px;
+    
 }
 
 
-
-
-footer {
-    text-align: center; /* Centers the content inside the footer */
+.column {
+    flex: 1;
     padding: 20px;
-    background-color: #000000; /* Optional: Set your desired background color */
-}
-
-.footerp {
-    font-size: 25px;
-    margin-bottom: 0 10px;/* Adds spacing between the text and icons */
-    color:rgb(238, 204, 140); /* Optional: Adjust text color */
-}
-
-.footericon {
-    display: flex;
-    justify-content: center; /* Centers the icons horizontally */
-    gap: 15px; /* Adds space between the icons */
-}
-
-.footericon a ion-icon {
-    font-size: 24px; /* Adjust icon size */
-    color:rgb(238, 204, 140);
-    text-decoration: none;
-}
-
-.footericon a:hover {
-    color: #0077b5; /* Change icon color on hover */
-}
-
-
-
-.allrights{
     text-align: center;
-    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
+
+.column:hover {
+    background-color: #d9c49d;
+}
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensures modal is above all other elements */
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 10000; /* Higher than the modal backdrop */
+}
+
+.close-btn {
+    margin-top: 20px;
+    background: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close-danger {
+    margin-top: 20px;
+    background: red;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+

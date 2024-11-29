@@ -61,6 +61,11 @@ Route::post('admin/accepted/{id}', [AppointmentController::class, 'accepted'])->
 // Decline appointment route
 Route::get('admin/declined/{id}', [AppointmentController::class, 'declined'])->name('admin.declined');
 
+
+// Paid appointment route
+Route::get('admin/paid/{id}', [AppointmentController::class, 'paid'])->name('admin.paid');
+
+
 // User payment display route
 Route::get('user/payment/{id}', [AppointmentController::class, 'showDownpayment'])->name('user.payment');
 

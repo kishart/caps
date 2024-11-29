@@ -1,81 +1,82 @@
-<body>
-    <div class="container" style="margin-top:20px">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Edit Booking</h2>
-                @if(Session::has('success'))
-                <div class="alert alert-success" role="alert">
-                    {{Session::get('success')}}
-                </div>
-                @endif
-                <form method="post" action="{{url('admin/editappoint')}}">
-                    @csrf
-                    <input type="hidden" name="id" value="{{$data->id}}">
-                    <div class="mb-3">
-                        <label class="form-label">Name:</label>
-                        <input type="text" class="form-control" name="fname" 
-                        placeholder="Enter Name" value="{{$data->fname}}">
-                        @error('fname')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email:</label>
-                        <input type="text" class="form-control" name="email" 
-                        placeholder="Enter Email" value="{{$data->email}}">
-                        @error('email')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone:</label>
-                        <input type="text" class="form-control" name="phone" 
-                        placeholder="Enter Phone Number" value="{{$data->phone}}">
-                        @error('phone')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Date:</label>
-                        <input type="date" class="form-control" name="date" 
-                        placeholder="Enter your chosen date" value="{{$data->date}}">
-                        @error('date')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Time:</label>
-                        <input type="text" class="form-control" name="time" 
-                        placeholder="Enter your chosen time" value="{{$data->time}}">
-                        @error('time')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Message:</label>
-                        <textarea class="form-control" name="details" 
-                        placeholder="Enter your message for another detail">{{$data->details}}</textarea>
-                        @error('details')
-                        <div class="alert alert-danger" role="alert">
-                            {{($message)}}
-                        </div>
-                        @enderror
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <a href="{{url('home')}}" class="btn btn-danger">Back</a>
-                </form>
+@extends('layouts.adminsidebar')
+
+@section('content')
+<head>
+    <link rel="stylesheet" href="{{ asset('css/editappoint.css') }}">
+</head>
+<div class="containerp">
+    <p class="title">Edit Booking</p>
+
+    @if (Session::has('success'))
+        <div class="alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
+    <form method="POST" action="{{ url('admin/editappoint') }}">
+        @csrf
+        <input type="hidden" name="id" value="{{ $data->id }}">
+        
+        <div class="form-group">
+            <label for="fname">Name:</label>
+            <input type="text" id="fname" name="fname" class="form-control" 
+                   placeholder="Enter Name" value="{{ $data->fname }}" required>
+            @error('fname')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" 
+                   placeholder="Enter Email" value="{{ $data->email }}" required>
+            @error('email')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" class="form-control" 
+                   placeholder="Enter Phone Number" value="{{ $data->phone }}" 
+                   pattern="^09\d{9}$" title="Phone number must start with 09 and be followed by 9 digits" required>
+            @error('phone')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group-inline">
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" class="form-control" 
+                       value="{{ $data->date }}" required>
+                @error('date')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+        
+            <div class="form-group">
+                <label for="time">Time:</label>
+                <input type="text" id="time" name="time" class="form-control" 
+                       placeholder="Enter your chosen time" value="{{ $data->time }}" required>
+                @error('time')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
         </div>
-    </div>
-</body>
+        
+
+        <div class="form-group">
+            <label for="details">Message:</label>
+            <textarea id="details" name="details" class="form-control" 
+                      placeholder="Enter your message for another detail" required>{{ $data->details }}</textarea>
+            @error('details')
+                <div class="error-message">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+@endsection

@@ -205,66 +205,47 @@
 
    
         
-
-
-        <table class="w-full border-collapse border border-gray-300">
-            <thead class="bg-gray-200">
-                <tr>
-                    <th class="border border-gray-300 px-4 py-2">Photos</th>
-                    <th class="border border-gray-300 px-4 py-2">Description</th>
-                    <th class="border border-gray-300 px-4 py-2">Username</th>
-                    <th class="border border-gray-300 px-4 py-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($photos as $photo)
+        <div class="table-container">
+            <table class="w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-200">
                     <tr>
-                        <!-- Display photo (assuming photo_paths contains image paths) -->
-                        <td class="border border-gray-300 px-4 py-2">
-                            @if (!empty($photo->photo_paths) && is_array(json_decode($photo->photo_paths)))
-                                @foreach (json_decode($photo->photo_paths) as $path)
-                                    <img src="{{ asset('storage/' . $path) }}" alt="Photo"
-                                        class="h-16 w-16 object-cover rounded">
-                                @endforeach
-                            @else
-                                <span>No photos available</span>
-                            @endif
-                        </td>
-                        
-
-                        <!-- Display description -->
-                        <td class="border border-gray-300 px-4 py-2">{{ $photo->description }}</td>
-
-                        <!-- Display username -->
-                        <td class="border border-gray-300 px-4 py-2">{{ $photo->user->name }}</td>
-
-                        <td class="border border-gray-300 px-4 py-2 text-center">
-                            <!-- Edit button -->
-                            <button class="text-blue-500 hover:underline"
-                                onclick="openEditModal({{ $photo->id }}, '{{ $photo->image_url }}', '{{ $photo->username }}', '{{ $photo->description }}')">
-                                Edit
-                            </button>
-
-                            <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="action-edit">
-                                <ion-icon name="create"></ion-icon> Edit
-                            </a>
-
-                           <!-- Delete button -->
-<form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" style="display:inline-block;">
-    @csrf
-    @method('DELETE') <!-- This makes the form behave as a DELETE request -->
-    <button type="submit" class="text-red-500 hover:underline">Delete</button>
-</form>
-
-                        </td>
-
-                    
-
+                        <th class="border px-4 py-2">Photos</th>
+                        <th class="border px-4 py-2">Description</th>
+                        <th class="border px-4 py-2">Username</th>
+                        <th class="border px-4 py-2">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+                </thead>
+                <tbody>
+                    @foreach ($photos as $photo)
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">
+                                @if (!empty($photo->photo_paths) && is_array(json_decode($photo->photo_paths)))
+                                    @foreach (json_decode($photo->photo_paths) as $path)
+                                        <img src="{{ asset('storage/' . $path) }}" alt="Photo"
+                                            class="h-16 w-16 object-cover rounded">
+                                    @endforeach
+                                @else
+                                    <span>No photos available</span>
+                                @endif
+                            </td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $photo->description }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $photo->user->name }}</td>
+                            <td class="border border-gray-300 px-4 py-2 text-center">
+                                <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="action-edit">
+                                    <ion-icon name="create"></ion-icon> Edit
+                                </a>
+                                <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" style="display:inline-block;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
 
 
         <script>

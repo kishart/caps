@@ -112,10 +112,13 @@ class AppointmentController extends Controller
 
     public function cancel_booking($id)
     {
-        $data = Appointment::find($id); // Corrected to Appointment model
+        $data = Appointment::find($id); 
         $data->delete();
         return redirect()->back();
     }
+    
+  
+    
     
     public function accepted(Request $request, $id)
     {
@@ -133,6 +136,13 @@ class AppointmentController extends Controller
         return redirect()->back()->with('message', 'Appointment approved and down payment set.');
     }
     
+    public function paid($id)
+    {
+        $data = Appointment::find($id);
+        $data->status = "Paid";
+        $data->save();
+        return redirect()->back()->with('success', 'Appointment paid successfully.');
+    }
    
 
     public function declined($id)
@@ -328,12 +338,10 @@ class AppointmentController extends Controller
         $appointment->update([
             'payment_method' => $validated['payment_method'],
             'gcash_image' => $imagePath,
-            'payment_details' => $validated['payment_details'] ?? null,
             'status' => 'Paid', // Optional: Update the status to 'Paid'
         ]);
-    
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'Payment updated successfully!');
+    // Redirect to localhost or success page
+    return redirect()->back()->with('success', 'Payment submitted successfully!');
     }
 
     public function viewPayments($appointmentId)

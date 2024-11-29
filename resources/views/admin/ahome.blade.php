@@ -25,6 +25,11 @@
         <button class="appoint-btn">Set Appointment</button>
     </div>
 
+<!-- Alert message for no results -->
+<div id="noResultAlert" class="no-result-alert" style="display: none;">
+    No results found.
+</div>
+
     <!-- Table outside the loop -->
     <div>
         <table class="appointment-table text-black" id="appointmentTable">
@@ -121,8 +126,10 @@
                                 </option>
                                 <option class="option" value="approved"
                                     style="background-color: green; color: white; border-radius: 10%;">Approved</option>
-                                <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}"
-                                    style="background-color: red; color: white; border-radius: 10%;">Declined</option>
+                                    <option class="option" value="{{ url('admin/declined/' . $appointment->id) }}"
+                                        style="background-color: red; color: white; border-radius: 10%;">Declined</option>
+                                <option class="option" value="{{ url('admin/paid/' . $appointment->id) }}"
+                                    style="background-color: rgb(255, 174, 0); color: white; border-radius: 10%;">Paid</option>
                             </select>
 
                             <!-- Modal for Down Payment -->
@@ -373,5 +380,35 @@
             const modal = document.getElementById("zoom-modal");
             modal.style.display = "none"; // Hide the modal
         }
+
+
+        function filterTable() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const table = document.getElementById('appointmentTable');
+    const rows = table.getElementsByTagName('tr');
+    let found = false;
+
+    // Loop through all table rows (except the header row)
+    for (let i = 1; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let rowMatches = false;
+
+        // Check if any cell in the row matches the search query
+        for (let cell of cells) {
+            if (cell.textContent.toLowerCase().includes(input)) {
+                rowMatches = true;
+                break;
+            }
+        }
+
+        // Show or hide the row based on the search result
+        rows[i].style.display = rowMatches ? '' : 'none';
+        if (rowMatches) found = true;
+    }
+
+    // Show the "No results found" alert if no rows are visible
+    const noResultAlert = document.getElementById('noResultAlert');
+    noResultAlert.style.display = found ? 'none' : 'block';
+}
     </script>
 @endsection
