@@ -1,35 +1,38 @@
 @extends('layouts.adminsidebar')
 
 @section('content')
-<div class="container mt-4">
+<!-- Include the Schedule List specific CSS -->
+<link href="{{ asset('css/schedulelist.css') }}" rel="stylesheet">
+
+{{-- <div class="containera mt-4"> --}}
     <h1 class="text-xl font-bold mb-4">Schedule List</h1>
-    <table class="table-auto w-full border-collapse border border-gray-300">
+    <table class="schedule-table">
         <thead>
-            <tr class="bg-gray-200">
-                <th class="border border-gray-300 px-4 py-2">Availability</th>
-                <th class="border border-gray-300 px-4 py-2">Note</th>
-                <th class="border border-gray-300 px-4 py-2">Start Date</th>
-                <th class="border border-gray-300 px-4 py-2">End Date</th>
-                <th class="border border-gray-300 px-4 py-2">Start Time</th>
-                <th class="border border-gray-300 px-4 py-2">End Time</th>
-                <th class="border border-gray-300 px-4 py-2">Actions</th>
+            <tr>
+                <th>Availability</th>
+                <th>Note</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($events as $event)
             <tr>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['available'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['note'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['start'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['end'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['start_time'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $event['end_time'] }}</td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <a href="{{ route('admin.editcalendar', $event['id']) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('admin.schedules.delete', $event['id']) }}" method="POST" class="inline-block">
+                <td>{{ $event['available'] }}</td>
+                <td>{{ $event['note'] }}</td>
+                <td>{{ $event['start'] }}</td>
+                <td>{{ $event['end'] }}</td>
+                <td>{{ $event['start_time'] }}</td>
+                <td>{{ $event['end_time'] }}</td>
+                <td class="schedule-actions">
+                    <a href="{{ route('admin.editcalendar', $event['id']) }}" class="schedule-btn-edit">Edit</a>
+                    <form action="{{ route('admin.schedules.delete', $event['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" 
+                        <button type="submit" class="schedule-btn-delete" 
                                 onclick="return confirm('Are you sure you want to delete this schedule?');">Delete</button>
                     </form>
                 </td>

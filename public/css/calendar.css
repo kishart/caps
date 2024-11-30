@@ -1,6 +1,6 @@
 
 
-.container{
+.containera{
     display: flex;
 }
 .fc-head{
@@ -111,4 +111,61 @@ html, body {
   background: rgba(0, 0, 0, .08);
   color: rgba(0, 0, 0, .3);
 }
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+  margin-top: 30px;
+}
 
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  background-color: #E8B298;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+}
+
+.btn-edit ion-icon {
+  margin-right: 8px; /* Space between the icon and the text */
+}
+
+/* Hover effects for both buttons */
+.btn-edit:hover {
+  background-color: #A36361;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Form for the edit button (no extra styling needed here) */
+.btn-edit-form {
+  display: inline-block;
+}
+
+/* Style for add new event button */
+.btn-edit {
+  display: inline-flex;
+  align-items: center;
+  background-color: #E8B298;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #A36361;
+  color: white;
+  transform: scale(1.05);
+}
+.fc-month-button {
+  font-weight: bold !important;
+}
