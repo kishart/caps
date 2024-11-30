@@ -34,6 +34,17 @@ Route::post('save-calendar', [CalendarController::class, 'saveCalendar'])->name(
 
 Route::get('ucalen', [CalendarController::class, 'ucalen'])->middleware('auth');
 
+Route::get('schedulelist', [CalendarController::class, 'schedulelist'])->middleware('auth')->name('admin.schedulelist');
+// Schedule routes
+// Route::get('/admin/schedules/{id}/editcalendar', [CalendarController::class, 'edit'])->name('admin.edit');
+
+Route::get('admin/editcalendar/{id}', [CalendarController::class, 'editCalendar'])->name('admin.editcalendar');
+Route::put('/admin/update/{id}', [CalendarController::class, 'updateCalendar'])->name('admin.updatecalendar');
+
+
+Route::delete('/admin/schedules/{id}', [CalendarController::class, 'destroy'])->name('admin.schedules.delete');
+
+
 Route::get('adminsidebar', [HomeController::class, 'adminsidebar'])->middleware('auth', 'admin');
 
 
@@ -82,16 +93,6 @@ Route::post('save-appoint', [AppointmentController::class, 'saveAppoint']);
 
 // Route to show the user's appointments
 Route::get('myappoint', [AppointmentController::class, 'myappoint'])->name('appointments.myappoint');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/show_post', [PostController::class, 'show_post']);
-});
-
-
-Route::post('add_photo', [PostController::class, 'add_photo'])->name('add_photo');
-Route::get('/delete_post/{id}', [PostController::class, 'delete_post'])->name('delete_post');
-Route::get('/edit_post/{id}', [PostController::class, 'edit_post'])->name('edit_post');
-Route::post('/update_post/{id}', [PostController::class, 'update_post'])->name('update_post');
 
 
 Route::post('/request-feedback/{id}', [AppointmentController::class, 'requestFeedback'])->name('request.feedback');

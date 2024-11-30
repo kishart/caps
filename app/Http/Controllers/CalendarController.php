@@ -33,8 +33,9 @@ class CalendarController extends Controller
 
     public function saveCalendar(Request $request)
     {
-        $start_time = Carbon::parse($calendar->start_time)->format('h:i A');
-        $end_time = Carbon::parse($calendar->end_time)->format('h:i A');
+        $calendar = new Calendar();
+        $start_time = Carbon::parse($request->start_time)->format('h:i A');
+        $end_time = Carbon::parse($request->end_time)->format('h:i A');
 
         $request->validate([
             'available' => 'required',
@@ -80,6 +81,60 @@ class CalendarController extends Controller
         }
     
         return view('user.ucalen', ['events' => $events]);
+    }
+    public function schedulelist()
+    {
+        $events = [];
+        $calendars = Calendar::all();
+    
+        foreach ($calendars as $calendar) {
+            $events[] = [
+                'id' => $calendar->id,                 // Add the ID for edit and delete actions
+                'available' => $calendar->available,   // Availability status
+                'note' => $calendar->note,             // Any note or additional information
+                'start' => $calendar->start_date,      // Start date of the event
+                'end' => $calendar->end_date,          // End date of the event
+                'start_time' => Carbon::parse($calendar->start_time)->format('h:i A'), // Start time
+                'end_time' => Carbon::parse($calendar->end_time)->format('h:i A'),     // End time
+            ];
+        }
+    
+        return view('admin.schedulelist', compact('events'));
+    }
+    
+
+
+
+    public function editcalendar($id)
+    {
+        $schedule = Calendar::findOrFail($id);
+        return view('admin.edit-calendar', compact('schedule'));
+    }
+
+    public function updateCalendar(Request $request, $id)
+    {
+        $request->validate([
+            'available' => 'required',
+            'note' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'start_time' => 'required',
+            'end_time' => 'required',
+        ]);
+    
+        $schedule = Calendar::findOrFail($id);
+        $schedule->update($request->all());
+    
+        return redirect()->route('admin.schedulelist')->with('success', 'Schedule updated successfully.');
+    }
+    
+
+    public function destroy($id)
+    {
+        $schedule = Calendar::findOrFail($id);
+        $schedule->delete();
+
+        return redirect()->route('admin.schedulelist')->with('success', 'Schedule deleted successfully.');
     }
 
 }
