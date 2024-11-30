@@ -169,3 +169,55 @@ color: white;
   overflow-x: auto; /* Enable horizontal scrolling for wide tables */
   border: 1px solid #ddd; /* Optional: Add a border around the container */
 }
+
+.action-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+
+.btn-edit {
+  display: inline-block;
+  background-color: #E8B298;
+  color: black;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+}
+
+.btn-edit:hover {
+  background-color: #A36361;
+  color: white;
+  transform: scale(1.05);
+}
+
+.btn-delete-form {
+  display: inline-block;
+}
+
+.btn-delete {
+  display: flex;
+  align-items: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+}
+
+.btn-delete ion-icon {
+  margin-right: 8px; /* Space between the icon and the text */
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+  color: white;
+  transform: scale(1.05);
+}

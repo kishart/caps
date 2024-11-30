@@ -124,24 +124,27 @@ public function showUploadedPhotos()
             'photos.*' => 'file|mimes:jpeg,png,jpg,gif|max:2048', // Each file must meet requirements
         ]);
     
-        // Initialize photo paths
-        $photoPaths = null;
+        // Fetch the existing photo record
+        $photo = Photos::findOrFail($id);
     
-        // Check if photos are uploaded and process them
+        // Process new photo uploads if present
         if ($request->hasFile('photos')) {
-            $photoPaths = []; // Create an array to store paths
-            foreach ($request->file('photos') as $photo) {
-                $photoPaths[] = $photo->store('photos', 'public'); // Save file and add to paths
+            $newPhotoPaths = [];
+            foreach ($request->file('photos') as $photoFile) {
+                $newPhotoPaths[] = $photoFile->store('photos', 'public'); // Save file and add to paths
             }
-            $photoPaths = json_encode($photoPaths); // Convert paths to JSON for database
+    
+            // Merge new photos with existing ones (if any)
+            $existingPhotos = json_decode($photo->photo_paths, true) ?: [];
+            $photo->photo_paths = json_encode(array_merge($existingPhotos, $newPhotoPaths));
         }
     
-        // Update the photo record
-        Photos::where('id', $id)->update([
-            'description' => $validatedData['description'],
-            'user_id' => $validatedData['user_id'],
-            'photo_paths' => $photoPaths, // Null if no photos uploaded
-        ]);
+        // Update description and user_id
+        $photo->description = $validatedData['description'];
+        $photo->user_id = $validatedData['user_id'];
+    
+        // Save the changes
+        $photo->save();
     
         return redirect()->route('editphotos.get', $id)->with('success', 'Photo updated successfully!');
     }

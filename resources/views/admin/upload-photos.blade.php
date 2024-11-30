@@ -231,14 +231,21 @@
                             <td class="border border-gray-300 px-4 py-2">{{ $photo->description }}</td>
                             <td class="border border-gray-300 px-4 py-2">{{ $photo->user->name }}</td>
                             <td class="border border-gray-300 px-4 py-2 text-center">
-                                <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="action-edit">
-                                    <ion-icon name="create"></ion-icon> Edit
-                                </a>
-                                <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                                </form>
+                                <div class="action-buttons">
+                                    <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="btn-edit">
+                                        <ion-icon name="create"></ion-icon> Edit
+                                    </a>
+                                
+                                    <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" class="btn-delete-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
+                                            <ion-icon name="trash-sharp"></ion-icon> Delete
+                                        </button>
+                                    </form>
+                                </div>
+                                
+                                
                             </td>
                         </tr>
                     @endforeach

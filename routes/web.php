@@ -41,6 +41,10 @@ Route::get('schedulelist', [CalendarController::class, 'schedulelist'])->middlew
 Route::get('admin/editcalendar/{id}', [CalendarController::class, 'editCalendar'])->name('admin.editcalendar');
 Route::put('/admin/update/{id}', [CalendarController::class, 'updateCalendar'])->name('admin.updatecalendar');
 
+Route::get('add-calendar', function () {
+    return view('admin.add-calendar-event');
+});
+
 
 Route::delete('/admin/schedules/{id}', [CalendarController::class, 'destroy'])->name('admin.schedules.delete');
 

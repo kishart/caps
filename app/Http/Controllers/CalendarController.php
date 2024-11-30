@@ -32,33 +32,37 @@ class CalendarController extends Controller
     }
 
     public function saveCalendar(Request $request)
-    {
-        $calendar = new Calendar();
-        $start_time = Carbon::parse($request->start_time)->format('h:i A');
-        $end_time = Carbon::parse($request->end_time)->format('h:i A');
+{
+    // Convert the start and end time to 24-hour format (HH:MM:SS) for MySQL compatibility
+    $start_time = Carbon::parse($request->start_time)->format('H:i:s');  // 24-hour format
+    $end_time = Carbon::parse($request->end_time)->format('H:i:s');      // 24-hour format
 
-        $request->validate([
-            'available' => 'required',
-            'note' => 'required|string|max:255',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after_or_equal:start_time',
-        ]);
-        
-        $calendar = new Calendar();
-        $calendar->available = $request->available;
-        $calendar->note = $request->note;
-        $calendar->start_date = $request->start_date;
-        $calendar->end_date = $request->end_date;
-        $calendar->start_time = $request->start_time;
-        $calendar->end_time = $request->end_time;
-        $calendar->save();
-        
-        return redirect()->back()->with('success', 'Calendar event added successfully.');
-    }
-    
+    // Validate the incoming request
+    $request->validate([
+        'available' => 'required',
+        'note' => 'required|string|max:255',
+        'start_date' => 'required|date',
+        'end_date' => 'nullable|date|after_or_equal:start_date', // End date is optional
+        'start_time' => 'required|date_format:H:i', // Adjust the start time validation
+        'end_time' => 'required|date_format:H:i|after_or_equal:start_time', // Adjust the end time validation
+    ]);
 
+    // Create a new Calendar event
+    $calendar = new Calendar();
+    $calendar->available = $request->available;
+    $calendar->note = $request->note;
+    $calendar->start_date = $request->start_date;
+
+    // If no end date is provided, set it to be the same as start date
+    $calendar->end_date = $request->end_date ? $request->end_date : $request->start_date;
+
+    // Store the time values in 24-hour format
+    $calendar->start_time = $start_time;
+    $calendar->end_time = $end_time;
+    $calendar->save();
+
+    return redirect()->back()->with('success', 'Calendar event added successfully.');
+}
 
 
     public function ucalen(){
