@@ -2,21 +2,25 @@
     display: flex;
     padding: 10px;
 }
+body{
+    background-color: #d8d8d8;
+}
 
 .left {
     flex: 3;
     /* 60% width */
-    background: #e8e8e8;
+    background: white;
     padding: 20px;
     height: 95vh;
     overflow-y: auto;
     border-radius: 10px;
+    margin-right: 40px;
 }
 
 .right {
     flex: 2;
     /* 40% width */
-    background: #d8d8d8;
+    background: white;
     padding: 20px;
     height: 95vh;
     overflow-y: auto;
@@ -24,20 +28,27 @@
 }
 
 .list {
-    background-color: black;
+    background-color: #E8B298;
     display: flex;
     padding: 10px;
     border-radius: 10px;
     margin-top: 5px;
-    color: white;
+    color: black;
     cursor: pointer;
     align-items: center;
 }
+.list:hover {
+    background-color: #A36361;
+    color:white;
+}
+
 
 .infomessage {
     padding-left: 10px;
 }
 
-.list:hover {
-    background-color: #333;
+
+
+textarea{
+    height:240px;
 }

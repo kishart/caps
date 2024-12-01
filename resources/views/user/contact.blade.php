@@ -19,6 +19,9 @@
     color: white;
 }
     </style>
+
+
+
     @if(session('success'))
     <div style="color: green; margin-bottom: 15px;">
         {{ session('success') }}
