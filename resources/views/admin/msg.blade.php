@@ -31,6 +31,8 @@
 
         <!-- Right Side (Message List) -->
         <div class="right">
+            <p style=" font-size: 20px;
+    font-weight: bold;">Messages</p>
             @foreach($contacts as $contact)
                 <div class="list" 
                      data-name="{{ $contact->user->name }}" 
