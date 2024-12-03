@@ -1,6 +1,7 @@
 @extends('layouts.nav')
 
 @section('content')
+@section('title', 'Feedback Form')
 <div class="container">
     <h2>Feedback for Appointment on {{ $appointment->date }}</h2>
 

@@ -4,7 +4,7 @@
 <head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Appointment List</title>
+
 
 
     <link rel="stylesheet"
@@ -23,7 +23,9 @@
                 <i class="material-icons">search</i>
             </button>
         </div>
-        <button class="appoint-btn">Set Appointment</button>
+     
+        <button class="appoint-btn">
+            <a href="{{ asset('setap') }}" style="color: white;">Set Appointment</a></button>
     </div>
 
 <!-- Alert message for no results -->
@@ -198,7 +200,7 @@
 
 
                         <td>
-                            <button data-modal-target="message-modal-{{ $appointment->id }}"
+                            <button style="background-color: #A36361;" data-modal-target="message-modal-{{ $appointment->id }}"
                                 data-modal-toggle="message-modal-{{ $appointment->id }}"
                                 class="bg-[#4496c8] text-white font-medium rounded-lg px-5 py-2.5 text-center hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                                 type="button">
@@ -245,8 +247,8 @@
                                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                                         placeholder="Type your message here..." required></textarea>
                                                 </div>
-                                                <button type="submit"
-                                                    class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send
+                                                <button  type="submit"
+                                                    class="submit w-full text-white  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send
                                                     Message</button>
                                             </form>
                                         </div>

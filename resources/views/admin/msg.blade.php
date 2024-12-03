@@ -11,7 +11,7 @@
 
 <body>
     <div class="containera">
-        <!-- Left Side (Form for Message Details or Placeholder Text) -->
+        <!-- Left Side (Message Details) -->
         <div class="left" id="detailsContainer">
             <p id="placeholderText"><strong>Select a message to view details.</strong></p>
             <form id="detailsForm" style="display: none;">
@@ -32,8 +32,7 @@
 
         <!-- Right Side (Message List) -->
         <div class="right">
-            <p style=" font-size: 20px;
-    font-weight: bold;">Messages</p>
+            <p style="font-size: 20px; font-weight: bold;">Messages</p>
             @foreach($contacts as $contact)
                 <div class="list" 
                      data-name="{{ $contact->user->name }}" 

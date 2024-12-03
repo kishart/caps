@@ -2,16 +2,16 @@
     display: flex;
     padding: 10px;
 }
-body{
+
+body {
     background-color: #d8d8d8;
 }
 
 .left {
     flex: 3;
-    /* 60% width */
     background: white;
     padding: 20px;
-    height: 95vh;
+    height: 92vh;
     overflow-y: auto;
     border-radius: 10px;
     margin-right: 40px;
@@ -19,10 +19,9 @@ body{
 
 .right {
     flex: 2;
-    /* 40% width */
     background: white;
     padding: 20px;
-    height: 95vh;
+    height: 92vh;
     overflow-y: auto;
     border-radius: 10px;
 }
@@ -37,18 +36,52 @@ body{
     cursor: pointer;
     align-items: center;
 }
+
 .list:hover {
     background-color: #A36361;
-    color:white;
+    color: white;
 }
-
 
 .infomessage {
     padding-left: 10px;
 }
 
+textarea {
+    height: 240px;
+    resize: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.form-group label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+    .containera {
+        flex-direction: column;
+        padding: 20px;
+    }
 
 
-textarea{
-    height:240px;
+    .left,
+    .right {
+        margin-right: 0;
+        margin-bottom: 20px;
+        
+    }
+    
+   
 }

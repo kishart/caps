@@ -21,7 +21,12 @@
     transition: all 0.3s ease;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
+.submit{
+    background-color: #E8B298;
+}
+.submit:hover{
+    background-color: #A36361;
+}
 .search-input::placeholder {
     color: #A36361;
 }

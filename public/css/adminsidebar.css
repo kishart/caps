@@ -72,6 +72,12 @@ nav ul li a:hover {
     justify-content: space-between;
     background-color: #EFE6DD;
 }
+.content{
+   margin-bottom: 10px;
+   padding: 20px;
+   margin-left: 200px;
+   margin-bottom: 20px;
+}
 
 .text {
     flex: 1;
@@ -186,8 +192,8 @@ li.active-link {
 }
 
 
-/* For responsiveness */
-@media (max-width: 2240px) {
+/* For responsiveness maclab */
+@media (width: 2240px) {
     img {
         width: 250px;
         height: auto;

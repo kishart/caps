@@ -36,11 +36,7 @@ class AppointmentController extends Controller
         return redirect()->back()->with('success', 'Booking added successfully');
     }
 
-    public function appointlist()
-    {
-        $appointments = Appointment::all();
-        return view('admin.appointlist', compact('appointments'));
-    }
+    
 
     public function editAppointment($id)
     {
@@ -196,6 +192,7 @@ class AppointmentController extends Controller
     {
         if (Auth::check()) {
             $userid = Auth::id();
+            
             $appointments = Appointment::where('user_id', $userid)->get();
             return view('user.myappoint', compact('appointments'));
         } else {

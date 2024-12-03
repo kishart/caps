@@ -117,7 +117,7 @@
 
 
     
-    <div class="content mb-10 p-2 sm:ml-60">
+    <div class="content">
         @yield('content')
     </div>
 

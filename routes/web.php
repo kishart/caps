@@ -20,8 +20,8 @@ Route::get('uphotos', [HomeController::class, 'uphotos'])->middleware('auth', 'a
 //Route::get('/view-photos', [TestPhotoController::class, 'viewPhotos'])->name('view-photos');
 
  Route::get('/view-photos', [TestPhotoController::class, 'viewPhotos']);
+ Route::get('/admin/home', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 
-Route::get('admin/ahome', [AppointmentController::class, 'adminHome'])->name('admin.ahome');
 Route::get('appointlist', [AppointmentController::class, 'appointlist'])->middleware('auth', 'admin');
 
 
@@ -117,7 +117,7 @@ Route::get('/profile', [HomeController::class, 'editProfile'])->name('profile.ed
 Route::put('/profile', [HomeController::class, 'updateProfile'])->name('profile.update');
 
 
-Route::get('storage', [HomeController::class, 'storage'])->middleware('auth', 'admin');
+
 Route::resource('files', FileController::class);
 
 

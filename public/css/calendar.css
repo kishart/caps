@@ -1,7 +1,8 @@
 
 
-.containera{
+.mt-5{
     display: flex;
+    justify-content: space-evenly;
 }
 .fc-head{
     background-color: #AC6F53; 
@@ -9,6 +10,7 @@
 }
 .input{
     margin-top:15%;
+    
 }
 
 html, body {
@@ -45,6 +47,14 @@ html, body {
   box-sizing: border-box;
 }
 
+.col-md-8{
+  width: 550px;
+}
+.col-md-4{
+  width: 250px;
+  margin-right: 20px;
+  margin-top: 80px;
+}
 #calendar {
   width: 100%;
   height:20%;
@@ -168,4 +178,29 @@ html, body {
 }
 .fc-month-button {
   font-weight: bold !important;
+}
+
+
+
+/* For responsiveness maclab */
+@media (width: 2240px) {
+  .mt-5{
+    display: flex;
+    justify-content: space-evenly;
+ 
+  }
+  
+.col-md-8{
+  width: 850px;
+  margin-top: 60px;
+}
+.col-md-4{
+  width: 500px;
+  margin-right: 20px;
+  margin-top: 150px;
+}
+#calendar {
+  width: 100%;
+  height:20%;
+}
 }

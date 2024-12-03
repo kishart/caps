@@ -31,7 +31,7 @@
                         
                         <div class="action-buttons">
                             <a href="{{ url('add-calendar') }}" class="btn-edit">
-                                <ion-icon name="add-circle-sharp"></ion-icon> Add New Event
+                                <ion-icon name="add-circle-sharp"></ion-icon> Add Event
                             </a>
                             <form action="{{ route('admin.schedulelist') }}" method="GET" class="btn-edit-form">
                                 <button type="submit" class="btn-edit">

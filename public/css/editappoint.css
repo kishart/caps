@@ -1,70 +1,48 @@
 .containerp {
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 20px;
+    max-width: 450px; /* Decreased width */
+    margin: 20px auto; /* Adjusted margin */
+    padding: 15px; /* Reduced padding */
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title{
-
-   text-align: center;
+.title {
+    text-align: center;
     color: #333;
     font-family: 'Arial', sans-serif;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 15px; /* Reduced margin */
+    font-size: 18px; /* Slightly smaller font size */
     font-weight: bold;
 }
 
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 10px;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-form {
-    font-family: 'Arial', sans-serif;
-}
-
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduced space between fields */
 }
 
 .form-group label {
     font-weight: bold;
     color: #555;
+    font-size: 14px; /* Smaller label font size */
 }
 
 .form-control {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
+    padding: 8px; 
+    margin-top: 3px; /* Reduced margin */
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-.error-message {
-    color: #d9534f;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.phone-error {
-    display: none;
+    font-size: 14px; /* Adjusted input font size */
 }
 
 .btn-primary {
     width: 100%;
     background-color: #E8B298;
     color: black;
-    padding: 10px 15px;
+    padding: 8px; /* Reduced button padding */
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px; /* Slightly smaller button font */
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s, color 0.3s;
@@ -76,27 +54,64 @@ form {
     transform: scale(1.05);
 }
 
-
-
 .form-group-inline {
     display: flex;
     justify-content: space-between;
-    gap: 20px; /* Optional: Add spacing between the fields */
+    gap: 15px; /* Reduced spacing between inline fields */
 }
 
 .form-group-inline .form-group {
-    flex: 1; /* Ensures both inputs take up equal width */
+    flex: 1;
 }
 
-.form-group-inline .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group-inline .form-control {
-    width: 100%; /* Ensures the inputs adjust properly */
-    padding: 10px;
-    border: 1px solid #ccc;
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 8px; /* Reduced padding */
+    font-size: 14px; /* Adjusted font size */
+    border: 1px solid #c3e6cb;
     border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* For responsiveness maclab */
+@media (min-width: 2240px) {
+    .containerp {
+        max-width: 900px; 
+        padding: 30px;
+        margin: 40px auto; 
+    }
+
+    .title {
+        font-size: 28px; 
+        margin-bottom: 25px; 
+    }
+
+    .form-group label {
+        font-size: 18px;
+    }
+
+    .form-control {
+        padding: 20px; 
+        font-size: 16px;
+        margin-top: 8px;
+    }
+
+    .btn-primary {
+        padding: 15px; 
+        font-size: 18px;
+    }
+
+    .alert-success {
+        padding: 15px; 
+        font-size: 16px;
+        margin-bottom: 20px; 
+    }
+
+    .form-group-inline {
+        gap: 30px;
+    }
 }
