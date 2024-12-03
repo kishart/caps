@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	
-		<link rel="icon" href="{{ asset('images/hplogo.jpg') }}" type="image/x-icon">
-		<title>Husnie Photography</title>
+    <link rel="icon" type="image/jpg" href="{{ asset('images/logotitle.png') }}">
+    <title>Husnie Photography</title>
 	
 </head>
 <body>
@@ -233,6 +232,12 @@ input {
 	transform: translateX(20%);
 }
 
+
+@media (width: 2240px) {
+    .container {
+        width: 50%;
+    }
+}
 
 </style>
 
