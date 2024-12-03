@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/nav.css') }}">
+    
+    <link rel="icon" type="image/jpg" href="{{ asset('images/logotitle.png') }}">
     @stack('styles') <!-- Allow additional styles to be added from child views -->
     <title>@yield('title', 'Husnie Photography')</title>
  

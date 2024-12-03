@@ -1,6 +1,9 @@
 @extends('layouts.adminsidebar')
 
 @section('content')
+<head>
+    @section('title', 'Edit Schedule')
+</head>
 <div class="container mt-5">
     <h3 class="text-center mb-4">Edit Schedule</h3>
     

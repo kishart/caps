@@ -3,6 +3,7 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{ asset('css/editphotos.css') }}">
+    @section('title', 'Edit Photos')
 </head>
 <div class="containerp">
     <p class="title">Edit Photos</p>

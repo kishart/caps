@@ -1,9 +1,10 @@
 @extends('layouts.adminsidebar')
 
 @section('content')
+@section('title', 'Calendar')
 <head>
-<link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
-<title>Appointment Schedule</title>
+
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
 </head>
 
 <body>

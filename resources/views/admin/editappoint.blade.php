@@ -3,6 +3,7 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{ asset('css/editappoint.css') }}">
+    @section('title', 'Edit Apppointment')
 </head>
 <div class="containerp">
     <p class="title">Edit Booking</p>

@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-
+@section('title', 'Payment')
 @section('content')
 <head>
     <title>Payment</title>

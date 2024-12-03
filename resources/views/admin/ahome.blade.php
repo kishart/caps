@@ -1,6 +1,7 @@
 @extends('layouts.adminsidebar')
 
 @section('content')
+<head>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Appointment List</title>
@@ -10,8 +11,8 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <link rel="stylesheet" href="{{ asset('css/ahome.css') }}">
-
-
+    @section('title', 'Appointment List')
+</head>
     <div class="appointy">
         <p class="text-left text-3xl text-black font-bold">Appointment List</p>
 

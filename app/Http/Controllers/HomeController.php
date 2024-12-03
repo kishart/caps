@@ -92,12 +92,7 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Profile updated successfully.');
     }
     
- 
-    public function storage(){
-        return view('admin.storage');
-    }
 
- 
  
     public function contact(){
         return view('user.contact');

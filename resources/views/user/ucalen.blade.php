@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-
+@section('title', 'Calendar')
 @section('content')
 
 <head>

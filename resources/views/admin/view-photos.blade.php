@@ -3,7 +3,7 @@
 @section('content')
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/uphotos.css') }}">
-    <title>Upload Photos</title>
+    @section('title', 'View Photos')
 
 
     <div class="toggle-container">

@@ -3,7 +3,7 @@
 @section('content')
 <!-- Include the Schedule List specific CSS -->
 <link href="{{ asset('css/schedulelist.css') }}" rel="stylesheet">
-
+@section('title', 'Schedule List')
 {{-- <div class="containera mt-4"> --}}
     <h1 class="text-xl font-bold mb-4">Schedule List</h1>
     <table class="schedule-table">

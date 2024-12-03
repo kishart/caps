@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-
+@section('title', 'Profile')
 @section('content')
 <head>
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">

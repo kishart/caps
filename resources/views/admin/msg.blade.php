@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Message</title>
+    
     <link rel="stylesheet" href="{{ asset('css/msg.css') }}">
+    @section('title', 'Messages')
 </head>
 
 <body>
