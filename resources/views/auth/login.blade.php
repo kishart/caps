@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Husnie Photography</title>
+	
+		<link rel="icon" href="{{ asset('images/hplogo.jpg') }}" type="image/x-icon">
+		<title>Husnie Photography</title>
+	
 </head>
 <body>
 

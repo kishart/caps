@@ -83,17 +83,6 @@ nav ul li a:hover {
     padding: 20px;
 }
 
-/* For responsiveness */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .text,
-    .image {
-        flex: none;
-    }
-}
 
 
 
@@ -194,4 +183,44 @@ color: #A36361 !important; /* Force color change on hover */
 li.active-link {
    background-color: black;
    border-radius: 10px;
+}
+
+
+/* For responsiveness */
+@media (max-width: 2240px) {
+    img {
+        width: 250px;
+        height: auto;
+        margin-top: 15%;
+    }
+    
+    .sidey {
+        margin-left: 20px;
+        font-size: 25px;
+        }
+    
+    .sidey ul li{
+        margin-top: 30px;
+    }
+     
+    .logout{
+            margin-top: 50%;
+            margin-left: 20px;
+            
+       font-size: 25px;
+        }
+
+    .sidey ul li a {
+       margin-top: 30px;
+    }
+    .sidey{
+        padding-top: 70px;
+     }
+
+    .content{
+        margin-left:25rem;
+        margin-right: 5rem;
+        margin-top: 40px;
+    }
+        
 }
