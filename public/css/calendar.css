@@ -38,8 +38,7 @@ html, body {
 }
 
 .details-container {
-  width: 30%; /* 30% width for the details section */
-
+  width: 30%;
   margin-left: 40px;
   padding: 20px;
   background-color: #f8f8f8;
