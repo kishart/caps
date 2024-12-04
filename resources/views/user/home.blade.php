@@ -23,7 +23,7 @@
 <body>
   
         <div class="text">
-            <h1>HUSNIE</h1>
+            <h1 class="hus">HUSNIE</h1>
             <p class="phot"> PHOTOGRAPHY</p>
             <p class="quote">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
                 omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
@@ -42,7 +42,7 @@
 
 
         <div class="infophotog">
-            <p> <span>The Photographer</span> <br><br>
+            <p class="thephotog"> <span>The Photographer</span> <br><br>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, eveniet dolorem <br>
                 omnis repellat quisquam voluptatum delectus aperiam corporis ipsam! Odit hic <br>
                 tenetur nam delectus fugiat eligendi</p>
