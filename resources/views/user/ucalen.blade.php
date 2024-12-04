@@ -35,6 +35,7 @@
     </div>
 </div>
 
+
 <script>
     $(document).ready(function() {
         var calendar = @json($events);

@@ -66,3 +66,10 @@
     right: 15px;
 }
 
+
+/* For responsiveness maclab */
+@media (width: 2240px) {
+ .main{
+    margin-top:140px;
+ }
+}

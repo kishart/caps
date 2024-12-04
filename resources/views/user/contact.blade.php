@@ -11,6 +11,34 @@
         .allrights {
             text-align: center;
             color: white;
+       
+        }
+        .contain {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 20vh;
+        }
+        .contact-form {
+        max-width: 520px;
+        align-content: center;
+        justify-content: center;
+    }
+    .contact-info{
+        height: 64vh;
+    }
+
+        /* For responsiveness maclab */
+        @media (width: 2240px) {
+            .contact-form {
+        max-width: 820px;
+        align-content: center;
+        justify-content: center;
+    }
+    .contact-info{
+        height: 34vh;
+    }
+
         }
     </style>
 
@@ -22,9 +50,9 @@
         </div>
     @endif
 
-    <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 70vh; ">
-        <div
-            style="display: flex; width: 80%; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;">
+    <div class="contain" style="display: flex; justify-content: center; align-items: center; min-height: 70vh; ">
+        {{-- <div
+            style="display: flex; width: 80%; background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: hidden;"> --}}
             <!-- Left Side: Contact Form -->
             <div class="contact-form" style="flex: 3; padding: 20px; background: #fafafa;">
                 <h2 style="margin-bottom: 20px; color: #333;">Contact Us</h2>
@@ -66,8 +94,8 @@
 
 
             </div>
-
-        </div>
+{{-- 
+        </div> --}}
     </div>
 
     @include('layouts.footer')
