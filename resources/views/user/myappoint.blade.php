@@ -11,8 +11,8 @@
 
 <body>
     
-<div align="center" style="padding: 70px;">
-    <div>
+<div class="table" align="center" style="padding: 70px;">
+    <div >
         <table class="myAppointment-table text-black" id="appointmentTable">
         <tr align="center">
             <th>Details</th>
