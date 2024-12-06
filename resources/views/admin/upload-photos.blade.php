@@ -1,11 +1,10 @@
 @extends('layouts.adminsidebar')
 
 @section('content')
-<head>
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/uphotos.css') }}">
-    @section('title', 'Upload Photos')
-</head>
+    <title>Upload Photos</title>
+
 
     <div class="toggle-container">
         <input type="checkbox" id="toggle" class="toggleCheckbox" />
@@ -109,20 +108,15 @@
                                             </i>
                                         </span>
                                         <p class="p-1 size text-xs text-gray-700"></p>
-                                        <form method="POST" action="/delete-item" onsubmit="return confirmDelete(event)">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
-                                                <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24">
-                                                    <path class="pointer-events-none"
-                                                        d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
-                                                </svg>
-                                            </button>
-                                        </form>
-                                        
+                                        <button
+                                            class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
+                                            <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24">
+                                                <path class="pointer-events-none"
+                                                    d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                                            </svg>
+                                        </button>
                                     </div>
                                 </section>
                             </article>
@@ -209,8 +203,8 @@
     {{-- list-photos --}}
     <div id="listPhotosDiv" class="list-photos" style="display: none;">
 
-   
-        
+
+
         <div class="table-container">
             <table class="w-full border-collapse border border-gray-300">
                 <thead class="bg-gray-200">
@@ -241,22 +235,25 @@
                                     <a href="{{ url('admin/editphotos/' . $photo->id) }}" class="btn-edit">
                                         <ion-icon name="create"></ion-icon> Edit
                                     </a>
-                                
-                               
-                                        <button type="submit" class="delete  btn-delete">
+
+                                    <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST"
+                                        class="btn-delete-form" onsubmit="return confirmDelete()">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete">
                                             <ion-icon name="trash-sharp"></ion-icon> Delete
                                         </button>
-                                  
+                                    </form>
                                 </div>
-                                
-                                
+
+
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-        
+
 
 
         <script>
@@ -291,19 +288,10 @@
                 // Close the modal
                 document.getElementById('editPhotoModal').classList.add('hidden');
             }
-            document.addEventListener("DOMContentLoaded", () => {
-    const deleteButtons = document.querySelectorAll(".delete");
 
-    deleteButtons.forEach(button => {
-        button.onclick = event => {
-            const isConfirmed = confirm("Are you sure you want to delete this item?");
-            if (!isConfirmed) {
-                event.preventDefault();
+            function confirmDelete() {
+                return confirm("Are you sure you want to delete this photo?");
             }
-        };
-    });
-});
-
         </script>
 
 
