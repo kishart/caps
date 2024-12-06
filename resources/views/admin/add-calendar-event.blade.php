@@ -38,7 +38,7 @@
         <div class="form-group-inline">
             <div class="form-group">
                 <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" class="form-control" value="{{ old('start_date') }}" required>
+                <input type="date" min="<?= date('Y-m-d') ?>" id="start_date" name="start_date" class="form-control" value="{{ old('start_date') }}" required>
                 @error('start_date')
                     <div class="error-message">{{ $message }}</div>
                 @enderror
@@ -46,7 +46,7 @@
         
             <div class="form-group">
                 <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                <input type="date" min="<?= date('Y-m-d') ?>" id="end_date" name="end_date" class="form-control" value="{{ old('end_date') }}">
             </div>
         </div>
 

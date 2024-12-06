@@ -2,11 +2,6 @@
 @section('title', 'Contact Us')
 @section('content')
     <style>
-        div {
-
-            font-family: "Jost", sans-serif;
-            margin-bottom: 30px;
-        }
 
         .allrights {
             text-align: center;
