@@ -3,7 +3,7 @@
 @section('content')
 <!-- Include the Schedule List specific CSS -->
 <link href="{{ asset('css/schedulelist.css') }}" rel="stylesheet">
-@section('title', 'Schedule List')
+
 {{-- <div class="containera mt-4"> --}}
     <h1 class="text-xl font-bold mb-4">Schedule List</h1>
     <table class="schedule-table">
@@ -29,6 +29,7 @@
                 <td>{{ $event['end_time'] }}</td>
                 <td class="schedule-actions">
                     <a href="{{ route('admin.editcalendar', $event['id']) }}" class="schedule-btn-edit">Edit</a>
+                  
                     <form action="{{ route('admin.schedules.delete', $event['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')

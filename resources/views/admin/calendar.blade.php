@@ -28,7 +28,7 @@
                         <p><strong>End Date:</strong> <span id="modal-end"></span></p>
                         <p><strong>Start Time:</strong> <span id="modal-start-time"></span></p>
                         <p><strong>End Time:</strong> <span id="modal-end-time"></span></p>
-                        
+                       
                         <div class="action-buttons">
                             <a href="{{ url('add-calendar') }}" class="btn-edit">
                                 <ion-icon name="add-circle-sharp"></ion-icon> Add Event
@@ -38,6 +38,7 @@
                                     <ion-icon name="images"></ion-icon> Edit
                                 </button>
                             </form>
+                        
                         
                            
                         </div>
@@ -54,6 +55,7 @@
     
             $('#calendar').fullCalendar({
                 events: calendarEvents,
+                displayEventTime: false,
                 eventRender: function(event, element) {
                     element.css('background-color', '#826C5F');
                     if (event.available) {

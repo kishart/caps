@@ -70,6 +70,7 @@
 </div>
 
 
+</body>
 
 <script>
     // Get all buttons and modals

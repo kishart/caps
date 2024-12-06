@@ -1,7 +1,7 @@
 .containerp {
-    max-width: 450px; /* Decreased width */
-    margin: 20px auto; /* Adjusted margin */
-    padding: 15px; /* Reduced padding */
+    max-width: 450px;
+    margin: 20px auto;
+    padding: 15px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -11,38 +11,38 @@
     text-align: center;
     color: #333;
     font-family: 'Arial', sans-serif;
-    margin-bottom: 15px; /* Reduced margin */
-    font-size: 18px; /* Slightly smaller font size */
+    margin-bottom: 15px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .form-group {
-    margin-bottom: 10px; /* Reduced space between fields */
+    margin-bottom: 10px;
 }
 
 .form-group label {
     font-weight: bold;
     color: #555;
-    font-size: 14px; /* Smaller label font size */
+    font-size: 14px;
 }
 
 .form-control {
     width: 100%;
-    padding: 8px; 
-    margin-top: 3px; /* Reduced margin */
+    padding: 8px;
+    margin-top: 3px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px; /* Adjusted input font size */
+    font-size: 14px;
 }
 
 .btn-primary {
     width: 100%;
     background-color: #E8B298;
     color: black;
-    padding: 8px; /* Reduced button padding */
+    padding: 8px;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Slightly smaller button font */
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s, color 0.3s;
@@ -57,7 +57,7 @@
 .form-group-inline {
     display: flex;
     justify-content: space-between;
-    gap: 15px; /* Reduced spacing between inline fields */
+    gap: 15px;
 }
 
 .form-group-inline .form-group {
@@ -67,27 +67,24 @@
 .alert-success {
     background-color: #d4edda;
     color: #155724;
-    padding: 8px; /* Reduced padding */
-    font-size: 14px; /* Adjusted font size */
+    padding: 8px;
+    font-size: 14px;
     border: 1px solid #c3e6cb;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-
-
-
 /* For responsiveness maclab */
 @media (min-width: 2240px) {
     .containerp {
-        max-width: 900px; 
+        max-width: 900px;
         padding: 30px;
-        margin: 40px auto; 
+        margin: 40px auto;
     }
 
     .title {
-        font-size: 28px; 
-        margin-bottom: 25px; 
+        font-size: 28px;
+        margin-bottom: 25px;
     }
 
     .form-group label {
@@ -95,20 +92,20 @@
     }
 
     .form-control {
-        padding: 20px; 
+        padding: 20px;
         font-size: 16px;
         margin-top: 8px;
     }
 
     .btn-primary {
-        padding: 15px; 
+        padding: 15px;
         font-size: 18px;
     }
 
     .alert-success {
-        padding: 15px; 
+        padding: 15px;
         font-size: 16px;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .form-group-inline {

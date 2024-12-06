@@ -20,7 +20,7 @@
     
         <form method="POST" action="{{ route('send.message', $appointment->id) }}">
             @csrf
-            <textarea name="message" placeholder="Write your message here..." required></textarea>
+            <textarea name="message" style="resize:none;" placeholder="Write your message here..." required></textarea>
             <button type="submit">Send Message</button>
         </form>
     </div>

@@ -80,7 +80,7 @@
                             
                             <form action="{{ route('post-comment', $photo->id) }}" method="POST">
                                 @csrf
-                                    <textarea name="comment" placeholder="Write your comment..." rows="4" class="form-control"></textarea>
+                                    <textarea name="comment" style="resize:none;" placeholder="Write your comment..." rows="4" class="form-control"></textarea>
                                     <button type="submit" class="subbut btn  mt-2">Submit Comment</button>
                                 </form>
                             @else

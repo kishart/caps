@@ -41,7 +41,7 @@
             @csrf
             <div class="form-group">
                 <label for="feedback">Your Feedback</label>
-                <textarea name="feedback" id="feedback" rows="5" class="form-control" placeholder="Enter your feedback here..."></textarea>
+                <textarea name="feedback" style="resize:none;" id="feedback" rows="5" class="form-control" placeholder="Enter your feedback here..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Submit Feedback</button>
         </form>

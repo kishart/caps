@@ -43,12 +43,13 @@
     </style>
 
 
-
-    @if (session('success'))
-        <div style="color: green; margin-bottom: 15px;">
-            {{ session('success') }}
-        </div>
-    @endif
+@if(session('success'))
+<script>
+    window.onload = function() {
+        alert("{{ session('success') }}");
+    };
+</script>
+@endif
 
     <div class="contain" style="display: flex; justify-content: center; align-items: center; min-height: 70vh; ">
         {{-- <div
@@ -64,7 +65,7 @@
                         style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
                     <p>Message</p>
                     <textarea name="message" required placeholder="Message"
-                        style=" font-family: Jost, sans-serif;  margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; height: 100px;"></textarea>
+                        style="resize:none; font-family: Jost, sans-serif;  margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; height: 100px;"></textarea>
                     <button type="submit"
                         style="padding: 10px; background-color: #A36361; color: #fff; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Send
                         Message</button>

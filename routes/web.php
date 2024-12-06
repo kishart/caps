@@ -46,6 +46,7 @@ Route::get('add-calendar', function () {
 });
 
 
+
 Route::delete('/admin/schedules/{id}', [CalendarController::class, 'destroy'])->name('admin.schedules.delete');
 
 

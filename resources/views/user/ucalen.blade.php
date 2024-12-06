@@ -48,7 +48,7 @@
         $('#calendar').fullCalendar({
             height: 'parent',
             events: calendar,
-
+            displayEventTime: false,
             customButtons: {
                 myCustomToday: {
                     text: 'Set Appointment',

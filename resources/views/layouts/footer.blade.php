@@ -9,11 +9,12 @@ footer {
     width: 100%; /* Ensure the footer spans the entire width */
     margin-top: auto; /* Push footer to the bottom of the page */
     color: white; /* Set text color to white for better contrast */
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .footerp {
     font-size: 25px;
-    font-family: Arial, Helvetica, sans-serif;
+   
     margin-bottom: 0 10px;/* Adds spacing between the text and icons */
     color:rgb(238, 204, 140); /* Optional: Adjust text color */
 }
@@ -39,6 +40,7 @@ footer {
 .allrights{
     text-align: center;
     color: white;
+    font-size: 12px;
 }
 </style>
 <footer>

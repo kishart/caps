@@ -109,15 +109,20 @@
                                             </i>
                                         </span>
                                         <p class="p-1 size text-xs text-gray-700"></p>
-                                        <button
-                                            class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
-                                            <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24">
-                                                <path class="pointer-events-none"
-                                                    d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
-                                            </svg>
-                                        </button>
+                                        <form method="POST" action="/delete-item" onsubmit="return confirmDelete(event)">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button
+                                                class="delete ml-auto focus:outline-none hover:bg-gray-300 p-1 rounded-md text-gray-800">
+                                                <svg class="pointer-events-none fill-current w-4 h-4 ml-auto"
+                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24">
+                                                    <path class="pointer-events-none"
+                                                        d="M3 6l3 18h12l3-18h-18zm19-4v2h-20v-2h5.711c.9 0 1.631-1.099 1.631-2h5.316c0 .901.73 2 1.631 2h5.711z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                        
                                     </div>
                                 </section>
                             </article>
@@ -237,13 +242,11 @@
                                         <ion-icon name="create"></ion-icon> Edit
                                     </a>
                                 
-                                    <form action="{{ route('admin.delete-photo', $photo->id) }}" method="POST" class="btn-delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-delete">
+                               
+                                        <button type="submit" class="delete  btn-delete">
                                             <ion-icon name="trash-sharp"></ion-icon> Delete
                                         </button>
-                                    </form>
+                                  
                                 </div>
                                 
                                 
@@ -288,6 +291,19 @@
                 // Close the modal
                 document.getElementById('editPhotoModal').classList.add('hidden');
             }
+            document.addEventListener("DOMContentLoaded", () => {
+    const deleteButtons = document.querySelectorAll(".delete");
+
+    deleteButtons.forEach(button => {
+        button.onclick = event => {
+            const isConfirmed = confirm("Are you sure you want to delete this item?");
+            if (!isConfirmed) {
+                event.preventDefault();
+            }
+        };
+    });
+});
+
         </script>
 
 

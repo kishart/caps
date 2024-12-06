@@ -19,7 +19,9 @@
 </head>
 <body>
     <div id="navbar" class="header {{ (Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint') || Request::is('user/payment/*')) ? 'bg-brown' : '' }}">
+        <a href="{{ url('home') }}" >
         <img src="{{ asset('images/hplogo.jpg') }}" alt="logo" class="logo">
+    </a>
         <nav class="navbar">
             <ul>
                 <li>
