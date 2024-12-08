@@ -350,7 +350,7 @@ input {
         </span>
     @enderror
 
-			<a href="#">Forgot your password?</a>
+		
 			<button  value="Sumbit">Sign In</button>
 		</form>
 	</div>
