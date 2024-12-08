@@ -239,6 +239,28 @@ input {
     }
 }
 
+@media (width: 360px) {
+   .husnie{
+	font-size: 20px;
+	color:white;
+   }
+   .container {
+        width: 330px;
+		height:auto;		
+		min-height: 550px;
+    }
+	h1{
+		font-size:1rem;
+	}
+	input{
+		width: 180%;
+	}
+	
+
+}
+
+/* 360×640 to 414×896 */
+
 </style>
 
 <p class="husnie">Husnie Photography</p>
