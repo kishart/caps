@@ -1,3 +1,4 @@
+<!-- layout.nav -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +19,7 @@
 </head>
 <body>
     <div id="navbar" class="header {{ (Request::is('ucalen') || Request::is('show-photos') || Request::is('contact') || Request::is('setap') || Request::is('profile') || Request::is('myappoint') || Request::is('user/payment/*')) ? 'bg-brown' : '' }}">
-        <a href="{{ url('home') }}" >
         <img src="{{ asset('images/hplogo.jpg') }}" alt="logo" class="logo">
-    </a>
         <nav class="navbar">
             <ul>
                 <li>
@@ -50,40 +49,6 @@
         </form>
     </div>
 
-
-    <div id="navbarVertical" class="navbarVertical hidden">
-        <nav>
-            <ul>
-                <li>
-                    <a href="{{ url('home') }}" class="{{ Request::is('home') ? 'active-link' : '' }}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url('ucalen') }}" class="{{ Request::is('ucalen') ? 'active-link' : '' }}">Calendar</a>
-                </li>
-                <li>
-                    <a href="{{ url('show-photos') }}" class="{{ Request::is('show-photos') ? 'active-link' : '' }}">Photos</a>
-                </li>
-                <li>
-                    <a href="{{ url('contact') }}" class="{{ Request::is('contact') ? 'active-link' : '' }}">Contact</a>
-                </li>
-               <li class="dropdown">
-    <ion-icon name="person-circle-outline" class="icon" style="color: #EECC8C;"></ion-icon>
-    <div class="dropdown-content">
-        <a href="{{ url('profile') }}">Profile</a>
-        <a href="{{ url('myappoint') }}">My Appointments</a>
-        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-    </div>
-</li>
-            </ul>
-        </nav>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-    </div>
-    
-    <ion-icon id="menuIcon" class="menu" name="menu"></ion-icon>
-
-
     <main class="container" style="padding-top: 120px;" >
         @yield('content')
     </main>
@@ -91,39 +56,18 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
-       document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.getElementById("menuIcon");
-    const navbarVertical = document.getElementById("navbarVertical");
+         document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.getElementById("navbar");
 
-    menuIcon.addEventListener("click", () => {
-        navbarVertical.classList.toggle("hidden");
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 0) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
     });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.getElementById("menuIcon");
-    const navbarVertical = document.getElementById("navbarVertical");
-
-    // Toggle the navbar visibility
-    menuIcon.addEventListener("click", () => {
-        navbarVertical.classList.toggle("hidden");
-        navbarVertical.classList.toggle("visible");
-    });
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const menuIcon = document.getElementById("menuIcon");  // Make sure you have a menu icon with this ID
-    const navbarVertical = document.getElementById("navbarVertical");
-
-    menuIcon.addEventListener("click", () => {
-        navbarVertical.classList.toggle("show");
-    });
-});
-
-
-
     </script>
     @stack('scripts') <!-- Allow additional scripts to be added from child views -->
 </body>
-</html> 
+</html>

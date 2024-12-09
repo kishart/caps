@@ -103,11 +103,6 @@ class HomeController extends Controller
         return view('admin.calendartest');
     }
 
-    public function uphotostest(){
-        return view('admin.uphotostest');
-    }
-
-
- 
+  
  
 }

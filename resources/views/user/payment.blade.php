@@ -66,11 +66,11 @@
                 <input type="hidden" name="payment_method" value="in_person">
                 <p>Feel free to contact us through the following methods:</p>
                 <div class="apps">
-                    <a href="https://www.facebook.com/HusniePhotography" target="_blank">
-                        <ion-icon name="logo-facebook"></ion-icon>
+                    <a href="https://www.messenger.com/t/1892858274289569" target="_blank">
+                        <ion-icon class="icon" name="logo-facebook"></ion-icon>
                     </a>
-                    <a href="tel:+1234567890"><ion-icon name="call"></ion-icon></a>
-                    <a href="mailto:itshusnie@gmail.com"><ion-icon name="mail"></ion-icon></a>
+                    <a href="tel:+1234567890"><ion-icon class="icon" name="call"></ion-icon></a>
+                    <a href="mailto:itshusnie@gmail.com"><ion-icon class="icon" name="mail"></ion-icon></a>
                 </div>
             </form>
             <button class="close-danger" onclick="closeModal()">Close</button>
