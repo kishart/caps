@@ -34,7 +34,8 @@ class HomeController extends Controller
                 return view('user.home');
             } elseif ($usertype == 'admin') {
                 // Fetch all appointments for admin users
-                $appointments = Appointment::all();
+                // $appointments = Appointment::all();
+                $appointments = Appointment::orderBy('id', 'desc')->get();
                 return view('admin.ahome', compact('appointments'));
             } else {
                 return redirect()->back();

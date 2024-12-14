@@ -49,8 +49,9 @@
             </thead>
 
             <tbody>
+         
                 @foreach ($appointments as $appointment)
-                    <tr>
+                <tr>
                         <td>
                             <a href="#" class="open-modal"
                                 data-id="{{ $appointment->id }}">{{ $appointment->fname }}</a>
@@ -168,7 +169,7 @@
 
                                                     <div class="flex items-center">
                                                         <!-- Peso Symbol -->
-                                                        <span class="text-gray-900 font-bold text-lg mr-2">₱</span>
+                                                        <span class="text-gray-900 font-bold text-lg mr-2">?</span>
 
                                                         <!-- Input Field -->
                                                         <input type="number" id="downpayment{{ $appointment->id }}"
@@ -362,13 +363,69 @@
                     <p id="noResultsMessage" style="display: none; color: red;">No results found</p>
                 </div>
             </tbody>
+            
         </table>
+       
+        
+
     </div>
+    <div class="pagination-controls">
+        <button id="prevPage" onclick="prevPage()" disabled>Previous</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextPage" onclick="nextPage()">Next</button>
+    </div>
+
+
+
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <script src="{{ asset('js/ahome.js') }}"></script>
     <script>
+        const rowsPerPage = 6; // Limit rows per page
+let currentPage = 1;
+
+function displayTableRows() {
+    const table = document.getElementById('appointmentTable');
+    const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    // Hide all rows initially
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].style.display = 'none';
+    }
+
+    // Show only rows for the current page
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    for (let i = start; i < end && i < rows.length; i++) {
+        rows[i].style.display = '';
+    }
+
+    // Update pagination controls
+    document.getElementById('prevPage').disabled = currentPage === 1;
+    document.getElementById('nextPage').disabled = currentPage === totalPages;
+    document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${totalPages}`;
+}
+
+function nextPage() {
+    currentPage++;
+    displayTableRows();
+}
+
+function prevPage() {
+    currentPage--;
+    displayTableRows();
+}
+
+// Initialize the table display on page load
+document.addEventListener('DOMContentLoaded', () => {
+    displayTableRows();
+});
+
+
+
+
         function showZoomed(image) {
             const modal = document.getElementById("zoom-modal");
             const zoomedImage = document.getElementById("zoomed-image");

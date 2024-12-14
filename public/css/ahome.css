@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 50px; */
+    background-color: white;
 }
 
 .search-container {
@@ -38,6 +39,7 @@
 .search-btn {
     position: relative;
     right: 55px;
+    
     border: none;
     background: none;
     cursor: pointer;
@@ -61,6 +63,7 @@ button.appoint-btn {
     border-collapse: collapse;
     margin: 20px 0;
     overflow: hidden;
+    
 }
 
 .appointment-table th,
@@ -297,5 +300,42 @@ background-color: red;
     border-radius: 5px;
     font-size: 16px;
 }
+
+
+.pagination-controls {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 15px;
+}
+
+
+.pagination-controls button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    background-color: #A36361;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.pagination-controls button:disabled {
+    background-color: #E8B298;
+    color:black;
+    cursor: not-allowed;
+}
+
+.pagination-controls span {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
 
 
