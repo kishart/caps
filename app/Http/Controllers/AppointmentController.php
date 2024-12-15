@@ -15,6 +15,28 @@ class AppointmentController extends Controller
     {
         return view('user.setap');
     }
+   
+    public function archived()
+{
+    $archivedAppointments = Appointment::where('status', 'archived')->get();
+    return view('admin.archived', compact('archivedAppointments'));
+}
+
+    public function moveToArchived(Request $request)
+{
+    $ids = $request->input('ids');
+    
+    if ($ids) {
+        // Update appointments' status to archived
+        Appointment::whereIn('id', $ids)->update(['status' => 'archived']);
+
+        return response()->json(['success' => true]);
+    }
+
+    return response()->json(['success' => false, 'message' => 'No IDs provided.']);
+}
+
+
 
     public function saveAppoint(Request $request)
     {

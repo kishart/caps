@@ -26,6 +26,9 @@
      
         <button class="appoint-btn">
             <a href="{{ asset('setap') }}" style="color: white;">Set Appointment</a></button>
+            <button class="appoint-btn" id="toggleArchivedButton" style="color: white;">
+                Archived
+            </button>
     </div>
 
 <!-- Alert message for no results -->
@@ -38,6 +41,7 @@
         <table class="appointment-table text-black" id="appointmentTable">
             <thead>
                 <tr>
+                    <th class="select-column" style="display: none;">Select</th>
                     <th>Name</th>
                     <th>Date</th>
                     <th>Time</th>
@@ -52,6 +56,9 @@
          
                 @foreach ($appointments as $appointment)
                 <tr>
+                    <td class="select-column" style="display: none;">
+                        <input type="checkbox" class="archive-checkbox" value="{{ $appointment->id }}">
+                    </td>
                         <td>
                             <a href="#" class="open-modal"
                                 data-id="{{ $appointment->id }}">{{ $appointment->fname }}</a>
@@ -369,6 +376,9 @@
         
 
     </div>
+    <button style="background-color: black; color:white; display: none;" id="moveToArchivedButton" disabled>
+        Move it to archived
+    </button>
     <div class="pagination-controls">
         <button id="prevPage" onclick="prevPage()" disabled>Previous</button>
         <span id="pageInfo">Page 1</span>
@@ -382,7 +392,7 @@
 
     <script src="{{ asset('js/ahome.js') }}"></script>
     <script>
-        const rowsPerPage = 6; // Limit rows per page
+        const rowsPerPage = 6; 
 let currentPage = 1;
 
 function displayTableRows() {
@@ -470,5 +480,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const noResultAlert = document.getElementById('noResultAlert');
     noResultAlert.style.display = found ? 'none' : 'block';
 }
+
+
+
+
+
+
+
+
+
+document.getElementById('toggleArchivedButton').addEventListener('click', function () {
+        const selectColumns = document.querySelectorAll('.select-column');
+        const moveToArchivedButton = document.getElementById('moveToArchivedButton');
+
+        // Toggle visibility of the select column
+        selectColumns.forEach(column => {
+            column.style.display = column.style.display === 'none' ? '' : 'none';
+        });
+
+        // Toggle visibility of the "Move it to archived" button
+        moveToArchivedButton.style.display = moveToArchivedButton.style.display === 'none' ? 'inline-block' : 'none';
+    });
+
+    // Enable/Disable "Move it to archived" button
+    document.querySelectorAll('.archive-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const checkedBoxes = document.querySelectorAll('.archive-checkbox:checked');
+            const moveToArchivedButton = document.getElementById('moveToArchivedButton');
+
+            // Enable the button if at least one checkbox is selected
+            moveToArchivedButton.disabled = checkedBoxes.length === 0;
+        });
+    });
+
+    // Move to Archived Functionality
+    document.getElementById('moveToArchivedButton').addEventListener('click', function () {
+        const checkedBoxes = document.querySelectorAll('.archive-checkbox:checked');
+        const selectedIds = Array.from(checkedBoxes).map(box => box.value);
+
+        if (selectedIds.length > 0) {
+            // Send the selected IDs to the server
+            fetch('/move-to-archived', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ ids: selectedIds })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove checked rows from the table
+                    checkedBoxes.forEach(box => box.closest('tr').remove());
+                } else {
+                    alert('Failed to archive items.');
+                }
+            });
+        } else {
+            alert('Please select at least one item to archive.');
+        }
+    });
     </script>
 @endsection

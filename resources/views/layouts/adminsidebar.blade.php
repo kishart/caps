@@ -81,11 +81,11 @@
                                 <span class="flex-1 ms-3 whitespace-nowrap">Calendar</span>
                             </a>
                         </li>
-                        <li class="{{ Request::is('msg') ? 'active-link' : '' }} ">
-                            <a href="{{ asset('msg') }}"
+                        <li class="{{ Request::is('archived') ? 'active-link' : '' }} ">
+                            <a href="{{ asset('archived') }}"
                                 class="font-semibold flex items-center mt-4 p-2 text-white rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <ion-icon name="mail" style="font-size: 30px;"></ion-icon>
-                                <span class="flex-1 ms-3 whitespace-nowrap">Message</span>
+                                <span class="flex-1 ms-3 whitespace-nowrap">Archived</span>
                               </a>
                         </li>
 

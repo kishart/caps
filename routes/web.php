@@ -87,7 +87,9 @@ Route::get('user/payment/{id}', [AppointmentController::class, 'showDownpayment'
 
 
 // Route to show the form
+Route::post('/move-to-archived', [AppointmentController::class, 'moveToArchived']);
 
+Route::middleware(['auth'])->get('archived', [AppointmentController::class, 'archived'])->name('archived');
 Route::middleware(['auth'])->get('setap', [AppointmentController::class, 'setap'])->name('setap');
 Route::middleware(['auth'])->get('payment', [AppointmentController::class, 'payment'])->name('payment');
 
