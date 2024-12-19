@@ -11,16 +11,19 @@
 
 <body>
     
-<div class="table" align="center" style="padding: 70px;">
+<div class="table" align="center" style="padding: 10px;">
     <div >
         <table class="myAppointment-table text-black" id="appointmentTable">
+            <thead>
         <tr align="center">
             <th>Details</th>
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
             <th>Message</th>
+            <th>Payment</th>
         </tr>
+    </thead>
 
         @foreach($appointments as $appointment)
         <tr align="center">
@@ -64,44 +67,61 @@
             </div>
             
 
+
+
+           
+            <td>
+                <button class="trigger-btna" id="viewPaymentBtn-{{ $appointment->id }}">View Payment Details</button>
+            </td>
+            
+            <!-- Modal Structure -->
+            <div id="paymentModal-{{ $appointment->id }}" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <header class="modal-header">
+                        <p style="color:black;">Payment Details</p>
+                        <span style="color:black;" class="close-payment" id="closePaymentBtn-{{ $appointment->id }}">&times;</span>
+                    </header>
+            
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        @if ($appointment->gcash_image)
+                            <img src="{{ asset('storage/' . $appointment->gcash_image) }}"
+                                 alt="Proof of Payment"
+                                 style="max-width: 800px; max-height: 300px; cursor: pointer; transition: transform 0.3s ease;"
+                                 onclick="showZoomed(this)">
+                                 <p style="color: black; margin-top: 10px;">
+                                    <p><strong>Payment Details</strong>   </p>
+                                    <strong>Date:</strong> {{ \Carbon\Carbon::parse($appointment->updated_at)->format('F j, Y') }} <br>
+                                    <strong>Time:</strong> {{ \Carbon\Carbon::parse($appointment->updated_at)->format('g:i A') }}
+                                </p>
+                        @else
+                            <p>No proof of payment uploaded.</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            
+            
         </tr>
         @endforeach
     </table>
 </div>
 
+<button style="background-color: black; color:white; display: none;" id="moveToArchivedButton" disabled>
+    Move it to archived
+</button>
+<div class="pagination-controls">
+    <button id="prevPage" onclick="prevPage()" disabled>Previous</button>
+    <span id="pageInfo">Page 1</span>
+    <button id="nextPage" onclick="nextPage()">Next</button>
+</div>
+
 
 </body>
 
-<script>
-    // Get all buttons and modals
-    const modalButtons = document.querySelectorAll('.trigger-btn');
-    const modals = document.querySelectorAll('.modal');
-    const closeButtons = document.querySelectorAll('.close');
-
-    // Add event listeners to open modals
-    modalButtons.forEach(button => {
-        button.onclick = function() {
-            const modalId = button.id.replace('myBtn-', 'myModal-');
-            document.getElementById(modalId).style.display = 'block';
-        }
-    });
-
-    // Add event listeners to close modals
-    closeButtons.forEach(button => {
-        button.onclick = function() {
-            const modalId = button.id.replace('closeBtn-', 'myModal-');
-            document.getElementById(modalId).style.display = 'none';
-        }
-    });
-
-    // Close modal if clicked outside the modal content
-    window.onclick = function(event) {
-        modals.forEach(modal => {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-    }
-</script>
+<script src="{{ asset('js/myappoint.js') }}"></script>
+   
 
 @endsection

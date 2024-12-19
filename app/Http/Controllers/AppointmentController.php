@@ -215,7 +215,10 @@ class AppointmentController extends Controller
         if (Auth::check()) {
             $userid = Auth::id();
             
-            $appointments = Appointment::where('user_id', $userid)->get();
+            $appointments = Appointment::where('user_id', $userid)
+                ->orderBy('created_at', 'desc')
+                ->get();
+
             return view('user.myappoint', compact('appointments'));
         } else {
             return redirect()->route('login')->with('error', 'You need to log in to view your appointments.');

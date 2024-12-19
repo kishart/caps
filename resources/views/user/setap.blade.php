@@ -15,9 +15,11 @@
     <script>
         window.onload = function() {
             alert("{{ session('success') }}");
+            window.location.href = "{{ url('myappoint') }}"; // Replace 'myappoint' with the actual route URL
         };
     </script>
 @endif
+
 
     
    
