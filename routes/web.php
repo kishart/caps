@@ -8,6 +8,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TestPhotoController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\GmailController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -214,3 +215,6 @@ Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])-
 
 Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])->name('editphotos.get');
 Route::post('admin/editphotos/{id}', [TestPhotoController::class, 'updatePhotos'])->name('editphotos.update');
+
+Route::get('email', [GmailController::class, 'email']);
+Route::post('sendemail', [GmailController::class, 'Send'])->name('sendemail.send');
