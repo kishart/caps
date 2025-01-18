@@ -216,5 +216,5 @@ Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])-
 Route::get('admin/editphotos/{id}', [TestPhotoController::class, 'editPhotos'])->name('editphotos.get');
 Route::post('admin/editphotos/{id}', [TestPhotoController::class, 'updatePhotos'])->name('editphotos.update');
 
-Route::get('email', [GmailController::class, 'email']);
+Route::get('contact', [GmailController::class, 'contact']);
 Route::post('sendemail', [GmailController::class, 'Send'])->name('sendemail.send');

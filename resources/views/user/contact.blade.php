@@ -52,11 +52,16 @@
             <!-- Left Side: Contact Form -->
             <div class="contact-form" style="flex: 3; padding: 20px; background: #fafafa;">
                 <h2 style="margin-bottom: 20px; color: #333;">Contact Us</h2>
-                <form action="{{ route('contact.store') }}" method="POST" style="display: flex; flex-direction: column;">
-
+                <!-- <form action="{{ route('contact.store') }}" method="POST" style="display: flex; flex-direction: column;"> -->
+                <form action="{{ route('sendemail.send') }}" method="POST" style="display: flex; flex-direction: column;">
+               
                     @csrf <!-- Add CSRF token for security -->
-                    <p>Subject</p>
-                    <input type="text" name="subject" required placeholder="Subject"
+                    <p>Name</p>
+                    <input type="text" name="name" required placeholder="Name"
+                        style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
+                    
+                    <p>Email</p>
+                    <input type="text" name="email" required placeholder="Email"
                         style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
                     <p>Message</p>
                     <textarea name="message" required placeholder="Message"

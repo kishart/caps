@@ -9,8 +9,8 @@ use App\Mail\GmailDemo;
 
 class GmailController extends Controller
 {
-    public function email(){
-        return view('emails.email');
+    public function contact(){
+        return view('user.contact');
     }
     public function Send(Request $request){
         $this->validate($request,[
