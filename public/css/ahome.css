@@ -56,6 +56,12 @@ button.appoint-btn {
     border-radius: 10px;
     background-color: #A36361;
     color: white;
+    margin-right: 10px;
+}
+button.appoint-btn:hover {
+    background-color: #E8B298;
+    color: black;
+    font-weight: bold;
 }
 
 .appointment-table {

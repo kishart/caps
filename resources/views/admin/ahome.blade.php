@@ -376,7 +376,7 @@
         
 
     </div>
-    <button style="background-color: black; color:white; display: none;" id="moveToArchivedButton" disabled>
+    <button class="appoint-btn"  id="moveToArchivedButton" disabled>
         Move it to archived
     </button>
     <div class="pagination-controls">
